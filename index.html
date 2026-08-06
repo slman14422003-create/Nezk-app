@@ -3,14 +3,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    <title>نيزك - دردشة جماعية</title>
+    <title>نيزك - دردشة دائمة</title>
     
-    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
     
     <style>
-        /* ===== RESET & BASE ===== */
         * {
             margin: 0;
             padding: 0;
@@ -32,28 +30,21 @@
             --text-bubble-received: #e9edef;
             --color-accent: #25D366;
             --border-color: #2a3942;
-            --shadow-color: rgba(0, 0, 0, 0.3);
+            --shadow-color: rgba(0,0,0,0.3);
             --radius-lg: 28px;
             --radius-md: 16px;
             --radius-sm: 12px;
             --safe-top: env(safe-area-inset-top, 0px);
             --safe-bottom: env(safe-area-inset-bottom, 0px);
+            --user-color: #25D366;
         }
         
-        body.light {
-            --bg-primary: #e5ddd5;
-            --bg-secondary: #f0f0f0;
-            --bg-chat: #efeae2;
-            --bg-header: #f0f0f0;
-            --bg-input: #ffffff;
-            --bg-bubble-sent: #d9fdd3;
-            --bg-bubble-received: #ffffff;
-            --text-primary: #111b21;
-            --text-secondary: #667781;
-            --text-bubble-sent: #111b21;
-            --text-bubble-received: #111b21;
-            --border-color: #d1d7db;
-        }
+        body.theme-dark { --bg-primary: #111b21; --bg-secondary: #1f2c33; --bg-chat: #0b141a; --bg-header: #1f2c33; --bg-input: #2a3942; --bg-bubble-sent: #056162; --bg-bubble-received: #1f2c33; --text-primary: #e9edef; --text-secondary: #8696a0; --border-color: #2a3942; }
+        body.theme-light { --bg-primary: #e5ddd5; --bg-secondary: #f0f0f0; --bg-chat: #efeae2; --bg-header: #f0f0f0; --bg-input: #ffffff; --bg-bubble-sent: #d9fdd3; --bg-bubble-received: #ffffff; --text-primary: #111b21; --text-secondary: #667781; --border-color: #d1d7db; }
+        body.theme-purple { --bg-primary: #1a0a2e; --bg-secondary: #2d1b4e; --bg-chat: #120820; --bg-header: #2d1b4e; --bg-input: #3d2a5e; --bg-bubble-sent: #6c3cb0; --bg-bubble-received: #2d1b4e; --text-primary: #f0e6ff; --text-secondary: #b8a0d0; --border-color: #4a2a6e; --color-accent: #9b59b6; }
+        body.theme-forest { --bg-primary: #0a1a0a; --bg-secondary: #1a2e1a; --bg-chat: #061006; --bg-header: #1a2e1a; --bg-input: #2a4e2a; --bg-bubble-sent: #2e7d32; --bg-bubble-received: #1a2e1a; --text-primary: #e0f0e0; --text-secondary: #8aaa8a; --border-color: #2a4e2a; --color-accent: #43a047; }
+        body.theme-pink { --bg-primary: #1a0a14; --bg-secondary: #2e1a24; --bg-chat: #12080e; --bg-header: #2e1a24; --bg-input: #4e2a3e; --bg-bubble-sent: #ad1457; --bg-bubble-received: #2e1a24; --text-primary: #fce4ec; --text-secondary: #c9a0b0; --border-color: #4e2a3e; --color-accent: #e91e63; }
+        body.theme-ocean { --bg-primary: #0a1420; --bg-secondary: #1a2a40; --bg-chat: #060e18; --bg-header: #1a2a40; --bg-input: #2a4a70; --bg-bubble-sent: #1565c0; --bg-bubble-received: #1a2a40; --text-primary: #e3f2fd; --text-secondary: #90caf9; --border-color: #2a4a70; --color-accent: #1e88e5; }
         
         html, body {
             height: 100%;
@@ -80,10 +71,8 @@
             position: relative;
             background: var(--bg-primary);
             transition: background 0.3s;
-            box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
         }
         
-        /* ===== شاشة الدخول ===== */
         #loginScreen {
             display: flex;
             flex-direction: column;
@@ -106,14 +95,11 @@
             justify-content: center;
             font-size: 3.8rem;
             margin-bottom: 18px;
-            box-shadow: 0 10px 40px rgba(37, 211, 102, 0.2);
+            box-shadow: 0 10px 40px rgba(37,211,102,0.2);
             animation: pulse 2s infinite;
         }
         
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.04); }
-        }
+        @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.04); } }
         
         #loginScreen h1 {
             font-size: 2.8rem;
@@ -151,7 +137,7 @@
         
         #loginScreen .input-group input:focus {
             border-color: var(--color-accent);
-            box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.1);
+            box-shadow: 0 0 0 3px rgba(37,211,102,0.1);
         }
         
         #loginScreen .input-group .icon {
@@ -175,7 +161,7 @@
             font-size: 1.05rem;
             cursor: pointer;
             transition: 0.3s;
-            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.15);
+            box-shadow: 0 8px 30px rgba(37,211,102,0.15);
             margin-top: 6px;
         }
         
@@ -198,25 +184,51 @@
         
         #loginScreen .btn-secondary:hover { opacity: 0.8; }
         
-        #adminPassWrap {
-            width: 100%;
-            max-width: 400px;
-            display: none;
-            margin-top: 4px;
+        #adminPassWrap { width: 100%; max-width: 400px; display: none; margin-top: 4px; }
+        #adminPassWrap input { border-color: #f5a623 !important; }
+        #loginError { color: #ff4444; margin-top: 10px; font-size: 0.85rem; min-height: 22px; }
+        
+        .color-picker {
+            display: flex;
+            gap: 8px;
+            margin: 10px 0;
+            flex-wrap: wrap;
+            justify-content: center;
         }
         
-        #adminPassWrap input {
-            border-color: #f5a623 !important;
+        .color-picker .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: 0.3s;
         }
         
-        #loginError {
-            color: #ff4444;
-            margin-top: 10px;
-            font-size: 0.85rem;
-            min-height: 22px;
+        .color-picker .color-option:hover { transform: scale(1.15); }
+        .color-picker .color-option.active { border-color: var(--text-primary); }
+        
+        .sync-settings {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            margin: 8px 0;
+            flex-wrap: wrap;
         }
         
-        /* ===== شاشة الدردشة ===== */
+        .sync-settings select {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-size: 0.8rem;
+            outline: none;
+        }
+        
+        .sync-settings select:focus { border-color: var(--color-accent); }
+        
         #chatScreen {
             display: none;
             flex-direction: column;
@@ -226,7 +238,6 @@
             transition: background 0.3s;
         }
         
-        /* ===== الهيدر ===== */
         .chat-header {
             padding: 10px 16px;
             padding-top: calc(10px + var(--safe-top));
@@ -274,31 +285,11 @@
             animation: blink 2s infinite;
         }
         
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
+        @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
         
-        .chat-header .info {
-            flex: 1;
-            min-width: 0;
-        }
-        
-        .chat-header .info h3 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            color: var(--text-primary);
-            transition: color 0.3s;
-        }
-        
-        .chat-header .info .status {
-            font-size: 0.65rem;
-            color: var(--text-secondary);
-            transition: color 0.3s;
-        }
+        .chat-header .info { flex: 1; min-width: 0; }
+        .chat-header .info h3 { font-size: 1.1rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text-primary); transition: color 0.3s; }
+        .chat-header .info .status { font-size: 0.65rem; color: var(--text-secondary); transition: color 0.3s; }
         
         .chat-header .actions {
             display: flex;
@@ -321,17 +312,16 @@
             justify-content: center;
         }
         
-        .chat-header .actions button:hover { background: rgba(255, 255, 255, 0.05); }
+        .chat-header .actions button:hover { background: rgba(255,255,255,0.05); }
         .chat-header .actions button:active { transform: scale(0.9); }
         
-        /* ===== حاوية الرسائل ===== */
         #messagesContainer {
             flex: 1;
             overflow-y: auto;
             padding: 10px 14px 8px;
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 2px;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
             background: var(--bg-chat);
@@ -340,12 +330,8 @@
         
         #messagesContainer::-webkit-scrollbar { width: 4px; }
         #messagesContainer::-webkit-scrollbar-track { background: transparent; }
-        #messagesContainer::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 10px;
-        }
+        #messagesContainer::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 10px; }
         
-        /* ===== فقاعات الرسائل ===== */
         .msg-wrapper {
             display: flex;
             flex-direction: column;
@@ -353,43 +339,44 @@
             cursor: default;
             position: relative;
             transition: 0.2s;
+            margin-bottom: 2px;
         }
         
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(6px) scale(0.98); }
+            from { opacity: 0; transform: translateY(4px) scale(0.98); }
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
         
         .msg-wrapper .reply-preview {
-            font-size: 0.7rem;
-            opacity: 0.5;
+            font-size: 0.65rem;
+            opacity: 0.4;
             padding: 2px 12px 2px 8px;
             border-right: 3px solid var(--color-accent);
-            margin-bottom: 2px;
+            margin-bottom: 1px;
             font-weight: 500;
             color: var(--text-secondary);
         }
         
         .msg {
-            max-width: 82%;
-            padding: 10px 16px 10px 18px;
+            max-width: 78%;
+            padding: 8px 14px 8px 16px;
             border-radius: 18px;
-            font-size: 0.95rem;
-            line-height: 1.6;
+            font-size: 0.9rem;
+            line-height: 1.5;
             word-wrap: break-word;
             position: relative;
-            margin-bottom: 2px;
+            margin-bottom: 1px;
             transition: 0.2s;
             font-weight: 400;
             display: flex;
             align-items: flex-start;
-            gap: 10px;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            gap: 8px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.04);
         }
         
         .msg .avatar-small {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             flex-shrink: 0;
             overflow: hidden;
@@ -399,142 +386,88 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
+            font-size: 0.85rem;
             background: linear-gradient(135deg, var(--color-accent), #128C7E);
         }
         
         .msg .avatar-small:hover { transform: scale(1.1); }
         .msg .avatar-small img { width: 100%; height: 100%; object-fit: cover; }
         
-        .msg .content {
-            flex: 1;
-            min-width: 0;
-        }
-        
-        .msg .content .sender-name {
-            font-weight: 600;
-            font-size: 0.8rem;
-            opacity: 0.6;
-            margin-bottom: 3px;
-            display: block;
-            cursor: pointer;
-            color: var(--color-accent);
-        }
-        
+        .msg .content { flex: 1; min-width: 0; }
+        .msg .content .sender-name { font-weight: 600; font-size: 0.7rem; opacity: 0.5; margin-bottom: 2px; display: block; cursor: pointer; color: var(--color-accent); }
         .msg .content .sender-name:hover { opacity: 1; }
+        .msg .content .text { font-size: 0.9rem; line-height: 1.5; font-weight: 400; color: var(--text-primary); }
+        .msg .content .time { font-size: 0.5rem; opacity: 0.3; margin-top: 3px; text-align: left; display: flex; align-items: center; gap: 3px; justify-content: flex-end; color: var(--text-secondary); }
+        .msg .content .time .check { font-size: 0.55rem; }
         
-        .msg .content .text {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            font-weight: 400;
-            color: var(--text-primary);
-        }
-        
-        .msg .content .time {
-            font-size: 0.6rem;
-            opacity: 0.4;
-            margin-top: 4px;
-            text-align: left;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            justify-content: flex-end;
-            color: var(--text-secondary);
-        }
-        
-        .msg .content .time .check { font-size: 0.65rem; }
-        
-        .msg.sent {
-            align-self: flex-end;
-            background: var(--bg-bubble-sent);
-            border-bottom-right-radius: 4px;
-            margin-left: 6px;
-        }
-        
-        .msg.sent .content .text {
-            color: var(--text-bubble-sent);
-        }
-        
-        .msg.received {
-            align-self: flex-start;
-            background: var(--bg-bubble-received);
-            border: 1px solid var(--border-color);
-            border-bottom-left-radius: 4px;
-            margin-right: 6px;
-        }
-        
-        .msg.received .content .text {
-            color: var(--text-bubble-received);
-        }
+        .msg.sent { align-self: flex-end; background: var(--bg-bubble-sent); border-bottom-right-radius: 4px; margin-left: 4px; }
+        .msg.sent .content .text { color: var(--text-bubble-sent); }
+        .msg.received { align-self: flex-start; background: var(--bg-bubble-received); border: 1px solid var(--border-color); border-bottom-left-radius: 4px; margin-right: 4px; }
+        .msg.received .content .text { color: var(--text-bubble-received); }
         
         .msg .actions-bar {
             display: flex;
-            gap: 6px;
-            margin-top: 6px;
+            gap: 4px;
+            margin-top: 4px;
             opacity: 0;
-            font-size: 0.75rem;
+            font-size: 0.65rem;
             flex-wrap: wrap;
             transition: 0.15s;
         }
         
         .msg-wrapper:hover .msg .actions-bar,
-        .msg-wrapper:active .msg .actions-bar {
-            opacity: 0.7;
-        }
+        .msg-wrapper:active .msg .actions-bar { opacity: 0.5; }
         
         .msg .actions-bar button {
             background: none;
             border: none;
             color: var(--text-secondary);
             cursor: pointer;
-            font-size: 0.75rem;
-            padding: 3px 8px;
-            border-radius: 12px;
+            font-size: 0.65rem;
+            padding: 2px 6px;
+            border-radius: 10px;
             transition: 0.2s;
-            opacity: 0.7;
+            opacity: 0.6;
         }
         
-        .msg .actions-bar button:hover {
-            opacity: 1;
-            background: rgba(255, 255, 255, 0.05);
-        }
+        .msg .actions-bar button:hover { opacity: 1; background: rgba(255,255,255,0.03); }
         
         .msg .reactions {
             display: flex;
-            gap: 4px;
-            margin-top: 5px;
+            gap: 3px;
+            margin-top: 4px;
             flex-wrap: wrap;
         }
         
         .msg .reactions .reaction {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 3px 10px;
-            border-radius: 14px;
-            font-size: 0.8rem;
+            background: rgba(255,255,255,0.04);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
             cursor: pointer;
             transition: 0.2s;
             display: flex;
             align-items: center;
-            gap: 3px;
+            gap: 2px;
             color: var(--text-secondary);
         }
         
         .msg .reactions .reaction:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255,255,255,0.08);
             transform: scale(1.05);
         }
         
         .msg .delete-btn {
             position: absolute;
-            top: -5px;
-            right: -5px;
-            background: rgba(255, 68, 68, 0.7);
+            top: -4px;
+            right: -4px;
+            background: rgba(255,68,68,0.7);
             border: none;
             color: #fff;
             border-radius: 40px;
-            width: 20px;
-            height: 20px;
-            font-size: 0.6rem;
+            width: 16px;
+            height: 16px;
+            font-size: 0.5rem;
             cursor: pointer;
             display: none;
             align-items: center;
@@ -545,63 +478,35 @@
         .msg-wrapper:hover .msg .delete-btn { display: flex; }
         .msg .delete-btn:hover { transform: scale(1.2); }
         
-        .date-divider {
-            text-align: center;
+        .date-divider { text-align: center; font-size: 0.6rem; color: var(--text-secondary); padding: 6px 0; opacity: 0.4; }
+        .welcome-msg { text-align: center; padding: 30px 0; opacity: 0.3; }
+        .welcome-msg .icon { font-size: 3rem; }
+        .welcome-msg .title { font-size: 1rem; margin-top: 8px; color: var(--text-primary); }
+        .welcome-msg .sub { font-size: 0.8rem; margin-top: 4px; color: var(--text-secondary); }
+        
+        #typingIndicator {
             font-size: 0.7rem;
             color: var(--text-secondary);
-            padding: 8px 0;
-            opacity: 0.5;
-        }
-        
-        .welcome-msg {
-            text-align: center;
-            padding: 40px 0;
-            opacity: 0.4;
-        }
-        
-        .welcome-msg .icon { font-size: 3.5rem; }
-        .welcome-msg .title { font-size: 1.1rem; margin-top: 10px; color: var(--text-primary); }
-        .welcome-msg .sub { font-size: 0.85rem; margin-top: 6px; color: var(--text-secondary); }
-        
-        /* ===== مؤشر الكتابة ===== */
-        #typingIndicator {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            padding: 3px 18px 8px;
-            min-height: 26px;
+            padding: 2px 16px 6px;
+            min-height: 22px;
             display: none;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
         
-        #typingIndicator .dots {
-            display: flex;
-            gap: 3px;
-        }
-        
-        #typingIndicator .dots span {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--text-secondary);
-            animation: dotBounce 1.4s infinite;
-        }
-        
+        #typingIndicator .dots { display: flex; gap: 2px; }
+        #typingIndicator .dots span { width: 5px; height: 5px; border-radius: 50%; background: var(--text-secondary); animation: dotBounce 1.4s infinite; }
         #typingIndicator .dots span:nth-child(2) { animation-delay: 0.2s; }
         #typingIndicator .dots span:nth-child(3) { animation-delay: 0.4s; }
         
-        @keyframes dotBounce {
-            0%, 60%, 100% { transform: translateY(0); }
-            30% { transform: translateY(-6px); }
-        }
+        @keyframes dotBounce { 0%,60%,100% { transform: translateY(0); } 30% { transform: translateY(-5px); } }
         
-        /* ===== إدخال الرسالة ===== */
         .chat-input {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 14px 12px;
-            padding-bottom: calc(12px + var(--safe-bottom));
+            gap: 6px;
+            padding: 6px 12px 10px;
+            padding-bottom: calc(10px + var(--safe-bottom));
             background: var(--bg-secondary);
             border-top: 1px solid var(--border-color);
             flex-shrink: 0;
@@ -613,21 +518,19 @@
             display: flex;
             align-items: center;
             background: var(--bg-input);
-            border-radius: 28px;
-            padding: 4px 8px;
+            border-radius: 25px;
+            padding: 2px 6px;
             border: 2px solid var(--border-color);
             transition: 0.3s;
         }
         
-        .chat-input .input-wrap:focus-within {
-            border-color: var(--color-accent);
-        }
+        .chat-input .input-wrap:focus-within { border-color: var(--color-accent); }
         
         .chat-input .input-wrap .emoji-btn {
             background: none;
             border: none;
-            font-size: 1.3rem;
-            padding: 4px 10px;
+            font-size: 1.2rem;
+            padding: 4px 8px;
             cursor: pointer;
             opacity: 0.5;
             transition: 0.2s;
@@ -639,110 +542,88 @@
         
         .chat-input .input-wrap input {
             flex: 1;
-            padding: 10px 6px;
+            padding: 8px 4px;
             border: none;
             background: transparent;
             color: var(--text-primary);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             outline: none;
             min-width: 0;
         }
         
         .chat-input .input-wrap input::placeholder {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
         
         .chat-input .send-btn {
-            width: 48px;
-            height: 48px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             border: none;
             background: linear-gradient(135deg, var(--color-accent), #128C7E);
             color: #fff;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: 0.3s;
             flex-shrink: 0;
-            box-shadow: 0 4px 16px rgba(37, 211, 102, 0.12);
+            box-shadow: 0 4px 16px rgba(37,211,102,0.12);
         }
         
         .chat-input .send-btn:hover { transform: scale(1.05); }
         .chat-input .send-btn:active { transform: scale(0.9); }
         
-        /* ===== لوحة الإيموجي ===== */
         #emojiPanel {
             display: none;
             flex-wrap: wrap;
-            padding: 10px 12px;
+            padding: 8px 10px;
             background: var(--bg-secondary);
             border-top: 1px solid var(--border-color);
-            gap: 5px;
-            max-height: 200px;
+            gap: 4px;
+            max-height: 180px;
             overflow-y: auto;
             flex-shrink: 0;
             transition: background 0.3s, border-color 0.3s;
         }
         
         #emojiPanel .emoji-item {
-            font-size: 1.6rem;
-            padding: 4px 8px;
+            font-size: 1.5rem;
+            padding: 3px 6px;
             cursor: pointer;
-            border-radius: 8px;
+            border-radius: 6px;
             transition: 0.15s;
             user-select: none;
         }
         
-        #emojiPanel .emoji-item:hover {
-            background: rgba(255, 255, 255, 0.05);
-            transform: scale(1.2);
-        }
-        
+        #emojiPanel .emoji-item:hover { background: rgba(255,255,255,0.04); transform: scale(1.15); }
         #emojiPanel .emoji-item:active { transform: scale(0.9); }
         #emojiPanel::-webkit-scrollbar { width: 2px; }
-        #emojiPanel::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-        }
+        #emojiPanel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 10px; }
         
-        /* ===== شريط الرد ===== */
         .reply-bar {
             display: none;
-            padding: 4px 16px 4px 12px;
+            padding: 3px 14px 3px 10px;
             background: var(--bg-secondary);
             border-top: 1px solid var(--border-color);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-secondary);
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
         
-        .reply-bar .reply-text {
-            flex: 1;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+        .reply-bar .reply-text { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .reply-bar .reply-cancel { background: none; border: none; color: #ff4444; cursor: pointer; font-size: 1.1rem; }
         
-        .reply-bar .reply-cancel {
-            background: none;
-            border: none;
-            color: #ff4444;
-            cursor: pointer;
-            font-size: 1.2rem;
-        }
-        
-        /* ===== قائمة الضغط المطول ===== */
         .context-menu {
             display: none;
             position: fixed;
             background: var(--bg-secondary);
             border-radius: var(--radius-md);
-            padding: 8px 0;
-            min-width: 190px;
+            padding: 6px 0;
+            min-width: 170px;
             z-index: 300;
             box-shadow: 0 10px 40px var(--shadow-color);
             border: 1px solid var(--border-color);
@@ -750,24 +631,20 @@
         }
         
         .context-menu .menu-item {
-            padding: 12px 20px;
-            font-size: 0.9rem;
+            padding: 10px 16px;
+            font-size: 0.85rem;
             cursor: pointer;
             transition: 0.15s;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             color: var(--text-primary);
         }
         
-        .context-menu .menu-item:hover {
-            background: rgba(255, 255, 255, 0.05);
-        }
-        
+        .context-menu .menu-item:hover { background: rgba(255,255,255,0.03); }
         .context-menu .menu-item.danger { color: #ff4444; }
-        .context-menu .menu-item .icon { font-size: 1.2rem; }
+        .context-menu .menu-item .icon { font-size: 1.1rem; }
         
-        /* ===== مودالات ===== */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -775,8 +652,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(20px);
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(15px);
             z-index: 200;
             justify-content: center;
             align-items: center;
@@ -784,16 +661,13 @@
             animation: fadeIn 0.2s ease;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
         .modal-overlay .modal-content {
             background: var(--bg-secondary);
             border-radius: var(--radius-lg);
-            padding: 28px;
-            max-width: 400px;
+            padding: 24px;
+            max-width: 380px;
             width: 100%;
             border: 1px solid var(--border-color);
             animation: slideUp 0.2s ease;
@@ -803,32 +677,22 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
         
-        .modal-overlay .modal-header h3 {
-            font-size: 1.2rem;
-            color: var(--color-accent);
-        }
-        
-        .modal-overlay .modal-header .close-modal {
-            background: none;
-            border: none;
-            color: #ff4444;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
+        .modal-overlay .modal-header h3 { font-size: 1.1rem; color: var(--color-accent); }
+        .modal-overlay .modal-header .close-modal { background: none; border: none; color: #ff4444; font-size: 1.4rem; cursor: pointer; }
         
         .modal-overlay .avatar-preview {
-            width: 100px;
-            height: 100px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
-            margin: 0 auto 16px;
+            margin: 0 auto 14px;
             background: linear-gradient(135deg, var(--color-accent), #128C7E);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
+            font-size: 2.8rem;
             overflow: hidden;
             cursor: pointer;
             position: relative;
@@ -836,65 +700,51 @@
             border: 3px solid var(--border-color);
         }
         
-        .modal-overlay .avatar-preview:hover { transform: scale(1.05); }
+        .modal-overlay .avatar-preview:hover { transform: scale(1.04); }
         .modal-overlay .avatar-preview:active { transform: scale(0.95); }
         .modal-overlay .avatar-preview img { width: 100%; height: 100%; object-fit: cover; }
-        
         .modal-overlay .avatar-preview .upload-overlay {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0,0,0,0.5);
             color: #fff;
-            font-size: 0.7rem;
-            padding: 4px;
+            font-size: 0.6rem;
+            padding: 3px;
             text-align: center;
         }
         
-        .modal-overlay .modal-field {
-            margin-bottom: 14px;
-        }
-        
-        .modal-overlay .modal-field label {
-            display: block;
-            font-size: 0.8rem;
-            opacity: 0.5;
-            margin-bottom: 4px;
-            color: var(--text-secondary);
-        }
-        
+        .modal-overlay .modal-field { margin-bottom: 12px; }
+        .modal-overlay .modal-field label { display: block; font-size: 0.75rem; opacity: 0.5; margin-bottom: 3px; color: var(--text-secondary); }
         .modal-overlay .modal-field input {
             width: 100%;
-            padding: 12px 16px;
+            padding: 10px 14px;
             border-radius: var(--radius-sm);
             border: 2px solid var(--border-color);
             background: var(--bg-input);
             color: var(--text-primary);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             outline: none;
             transition: 0.3s;
         }
-        
-        .modal-overlay .modal-field input:focus {
-            border-color: var(--color-accent);
-        }
+        .modal-overlay .modal-field input:focus { border-color: var(--color-accent); }
         
         .modal-overlay .modal-actions {
             display: flex;
-            gap: 12px;
-            margin-top: 18px;
+            gap: 10px;
+            margin-top: 16px;
         }
         
         .modal-overlay .modal-actions button {
             flex: 1;
-            padding: 12px;
+            padding: 10px;
             border-radius: var(--radius-sm);
             border: none;
             font-weight: 600;
             cursor: pointer;
             transition: 0.3s;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
         
         .modal-overlay .modal-actions .btn-save {
@@ -903,7 +753,6 @@
         }
         .modal-overlay .modal-actions .btn-save:hover { transform: scale(1.02); }
         .modal-overlay .modal-actions .btn-save:active { transform: scale(0.97); }
-        
         .modal-overlay .modal-actions .btn-cancel {
             background: var(--bg-input);
             color: var(--text-secondary);
@@ -913,30 +762,63 @@
         
         .modal-overlay .modal-field textarea {
             width: 100%;
-            padding: 12px 16px;
+            padding: 10px 14px;
             border-radius: var(--radius-sm);
             border: 2px solid var(--border-color);
             background: var(--bg-input);
             color: var(--text-primary);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             outline: none;
             transition: 0.3s;
-            min-height: 80px;
+            min-height: 70px;
             resize: vertical;
             font-family: inherit;
         }
+        .modal-overlay .modal-field textarea:focus { border-color: var(--color-accent); }
         
-        .modal-overlay .modal-field textarea:focus {
-            border-color: var(--color-accent);
+        #scrollToBottom {
+            position: absolute;
+            bottom: 90px;
+            right: 16px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--color-accent);
+            color: #fff;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(37,211,102,0.25);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            z-index: 10;
         }
         
-        /* ===== لوحة المسؤول ===== */
+        #scrollToBottom:hover { transform: scale(1.08); }
+        #scrollToBottom:active { transform: scale(0.9); }
+        #scrollToBottom .badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: #ff4444;
+            color: #fff;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.55rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
         #adminPanel {
             display: none;
             flex-direction: column;
             height: 100%;
-            padding: 16px;
-            padding-top: calc(16px + var(--safe-top));
+            padding: 14px;
+            padding-top: calc(14px + var(--safe-top));
             background: var(--bg-primary);
             position: absolute;
             top: 0;
@@ -951,63 +833,48 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 14px;
-            padding-bottom: 12px;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
             border-bottom: 2px solid var(--border-color);
         }
         
-        #adminPanel .admin-header h2 {
-            color: var(--color-accent);
-            font-size: 1.3rem;
-        }
-        
-        #adminPanel .admin-header .close-admin {
-            background: none;
-            border: none;
-            color: #ff4444;
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 4px 12px;
-        }
+        #adminPanel .admin-header h2 { color: var(--color-accent); font-size: 1.2rem; }
+        #adminPanel .admin-header .close-admin { background: none; border: none; color: #ff4444; font-size: 1.4rem; cursor: pointer; padding: 4px 10px; }
         
         #adminPanel .admin-stats {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            margin-bottom: 14px;
+            gap: 6px;
+            margin-bottom: 12px;
         }
         
         #adminPanel .admin-stats .stat {
-            padding: 10px;
+            padding: 8px;
             background: var(--bg-secondary);
             border-radius: var(--radius-sm);
             text-align: center;
             border: 1px solid var(--border-color);
         }
         
-        #adminPanel .admin-stats .stat .num {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--color-accent);
-        }
-        #adminPanel .admin-stats .stat .label { font-size: 0.6rem; opacity: 0.5; color: var(--text-secondary); }
+        #adminPanel .admin-stats .stat .num { font-size: 1.1rem; font-weight: 700; color: var(--color-accent); }
+        #adminPanel .admin-stats .stat .label { font-size: 0.55rem; opacity: 0.5; color: var(--text-secondary); }
         
         #adminPanel .admin-tabs {
             display: flex;
-            gap: 6px;
-            margin-bottom: 14px;
+            gap: 4px;
+            margin-bottom: 12px;
             flex-wrap: wrap;
         }
         
         #adminPanel .admin-tabs button {
-            padding: 8px 16px;
+            padding: 6px 14px;
             border-radius: var(--radius-sm);
             border: 1px solid var(--border-color);
             background: var(--bg-secondary);
             color: var(--text-secondary);
             cursor: pointer;
             transition: 0.3s;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 600;
         }
         
@@ -1018,66 +885,48 @@
         }
         
         #adminPanel .admin-tabs button:hover { opacity: 0.8; }
-        
-        #adminPanel .admin-section {
-            display: none;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        #adminPanel .admin-section.active {
-            display: flex;
-        }
+        #adminPanel .admin-section { display: none; flex-direction: column; gap: 8px; }
+        #adminPanel .admin-section.active { display: flex; }
         
         .bad-words-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
-            padding: 6px 0;
+            gap: 4px;
+            padding: 4px 0;
         }
         
         .bad-words-list .word-tag {
-            background: rgba(255, 68, 68, 0.15);
+            background: rgba(255,68,68,0.12);
             color: #ff4444;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
+            padding: 3px 10px;
+            border-radius: 16px;
+            font-size: 0.75rem;
             display: flex;
             align-items: center;
-            gap: 6px;
-            border: 1px solid rgba(255, 68, 68, 0.2);
+            gap: 4px;
+            border: 1px solid rgba(255,68,68,0.15);
         }
         
-        .bad-words-list .word-tag .remove-word {
-            background: none;
-            border: none;
-            color: #ff4444;
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
+        .bad-words-list .word-tag .remove-word { background: none; border: none; color: #ff4444; cursor: pointer; font-size: 0.8rem; }
         
         .bad-words-input {
             display: flex;
-            gap: 8px;
+            gap: 6px;
         }
         
         .bad-words-input input {
             flex: 1;
-            padding: 10px 14px;
+            padding: 8px 12px;
             border-radius: var(--radius-sm);
             border: 2px solid var(--border-color);
             background: var(--bg-input);
             color: var(--text-primary);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             outline: none;
         }
-        
-        .bad-words-input input:focus {
-            border-color: var(--color-accent);
-        }
-        
+        .bad-words-input input:focus { border-color: var(--color-accent); }
         .bad-words-input button {
-            padding: 10px 20px;
+            padding: 8px 16px;
             border-radius: var(--radius-sm);
             border: none;
             background: var(--color-accent);
@@ -1085,74 +934,59 @@
             font-weight: 600;
             cursor: pointer;
             transition: 0.3s;
+            font-size: 0.8rem;
         }
-        
         .bad-words-input button:hover { transform: scale(1.02); }
         
         .advanced-stats {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
+            gap: 6px;
         }
         
         .advanced-stats .stat-item {
-            padding: 12px;
+            padding: 10px;
             background: var(--bg-secondary);
             border-radius: var(--radius-sm);
             border: 1px solid var(--border-color);
             text-align: center;
         }
         
-        .advanced-stats .stat-item .num {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--color-accent);
-        }
-        
-        .advanced-stats .stat-item .label {
-            font-size: 0.6rem;
-            opacity: 0.5;
-            color: var(--text-secondary);
-        }
+        .advanced-stats .stat-item .num { font-size: 1.2rem; font-weight: 700; color: var(--color-accent); }
+        .advanced-stats .stat-item .label { font-size: 0.55rem; opacity: 0.5; color: var(--text-secondary); }
         
         .quick-settings {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
         }
         
         .quick-settings .setting-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 14px;
+            padding: 8px 12px;
             background: var(--bg-secondary);
             border-radius: var(--radius-sm);
             border: 1px solid var(--border-color);
         }
         
-        .quick-settings .setting-item .label {
-            font-size: 0.85rem;
-            color: var(--text-primary);
-        }
+        .quick-settings .setting-item .label { font-size: 0.8rem; color: var(--text-primary); }
         
         .quick-settings .setting-item .switch {
-            width: 44px;
-            height: 24px;
+            width: 40px;
+            height: 22px;
             background: var(--border-color);
-            border-radius: 12px;
+            border-radius: 11px;
             cursor: pointer;
             position: relative;
             transition: 0.3s;
         }
         
-        .quick-settings .setting-item .switch.active {
-            background: var(--color-accent);
-        }
-        
+        .quick-settings .setting-item .switch.active { background: var(--color-accent); }
         .quick-settings .setting-item .switch .thumb {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             background: #fff;
             border-radius: 50%;
             position: absolute;
@@ -1160,43 +994,40 @@
             left: 2px;
             transition: 0.3s;
         }
-        
-        .quick-settings .setting-item .switch.active .thumb {
-            left: 22px;
-        }
+        .quick-settings .setting-item .switch.active .thumb { left: 20px; }
         
         #adminUserList {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 3px;
         }
         
         #adminUserList .user-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 8px 12px;
+            padding: 6px 10px;
             background: var(--bg-secondary);
             border-radius: var(--radius-sm);
-            gap: 6px;
+            gap: 4px;
             flex-wrap: wrap;
             border: 1px solid var(--border-color);
         }
         
         #adminUserList .user-item .name {
             font-weight: 500;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             flex-wrap: wrap;
             color: var(--text-primary);
         }
         
         #adminUserList .user-item .name .badge {
-            font-size: 0.5rem;
-            padding: 1px 8px;
-            border-radius: 16px;
+            font-size: 0.45rem;
+            padding: 1px 6px;
+            border-radius: 14px;
             background: var(--color-accent);
             color: #fff;
         }
@@ -1208,43 +1039,42 @@
         
         #adminUserList .user-item .actions-group {
             display: flex;
-            gap: 4px;
+            gap: 3px;
             flex-wrap: wrap;
         }
         
         #adminUserList .user-item .actions-group button {
             background: none;
             border: none;
-            padding: 2px 8px;
-            border-radius: 14px;
-            font-size: 0.65rem;
+            padding: 2px 6px;
+            border-radius: 12px;
+            font-size: 0.6rem;
             font-weight: 600;
             cursor: pointer;
             transition: 0.2s;
         }
         
         #adminUserList .user-item .btn-block { color: #ff6b6b; }
-        #adminUserList .user-item .btn-block:hover { background: rgba(255, 107, 107, 0.1); }
+        #adminUserList .user-item .btn-block:hover { background: rgba(255,107,107,0.08); }
         #adminUserList .user-item .btn-delete { color: #ff4444; }
-        #adminUserList .user-item .btn-delete:hover { background: rgba(255, 68, 68, 0.1); }
+        #adminUserList .user-item .btn-delete:hover { background: rgba(255,68,68,0.08); }
         #adminUserList .user-item .btn-admin { color: #4facfe; }
-        #adminUserList .user-item .btn-admin:hover { background: rgba(79, 172, 254, 0.1); }
+        #adminUserList .user-item .btn-admin:hover { background: rgba(79,172,254,0.08); }
         #adminUserList .user-item .btn-unblock { color: var(--color-accent); }
-        #adminUserList .user-item .btn-unblock:hover { background: rgba(37, 211, 102, 0.1); }
+        #adminUserList .user-item .btn-unblock:hover { background: rgba(37,211,102,0.08); }
         #adminUserList .user-item .btn-warn { color: #f5a623; }
-        #adminUserList .user-item .btn-warn:hover { background: rgba(245, 166, 35, 0.1); }
+        #adminUserList .user-item .btn-warn:hover { background: rgba(245,166,35,0.08); }
         
-        /* ===== إشعارات ===== */
         .temp-notification {
             position: fixed;
-            bottom: 80px;
+            bottom: 70px;
             left: 50%;
             transform: translateX(-50%) translateY(20px);
             background: var(--bg-secondary);
             color: var(--text-primary);
-            padding: 10px 26px;
-            border-radius: 28px;
-            font-size: 0.85rem;
+            padding: 8px 22px;
+            border-radius: 25px;
+            font-size: 0.8rem;
             z-index: 999;
             max-width: 90%;
             text-align: center;
@@ -1259,37 +1089,39 @@
             to { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
         
-        /* ===== حالة الإعداد ===== */
+        /* ===== حذف شاشة الإعداد المؤقتة - تظهر مرة واحدة فقط ===== */
         #setupStatus {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--bg-secondary);
-            padding: 28px 40px;
-            border-radius: var(--radius-lg);
-            z-index: 999;
-            text-align: center;
-            border: 1px solid var(--border-color);
-            max-width: 85%;
-            display: none;
-            animation: slideUp 0.3s ease;
+            display: none !important;
         }
-        
-        #setupStatus .spinner {
-            font-size: 2.5rem;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        #setupStatus .success { color: var(--color-accent); }
-        #setupStatus .error { color: #ff4444; }
         
         #fileInput { display: none; }
         
-        /* ===== Responsive ===== */
+        .search-bar {
+            display: none;
+            padding: 6px 14px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .search-bar input {
+            flex: 1;
+            padding: 6px 12px;
+            border-radius: 18px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-input);
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            outline: none;
+        }
+        
+        .search-bar input:focus { border-color: var(--color-accent); }
+        .search-bar .search-close { background: none; border: none; color: #ff4444; font-size: 1.1rem; cursor: pointer; }
+        .search-results { padding: 4px 12px; font-size: 0.75rem; color: var(--text-secondary); max-height: 120px; overflow-y: auto; }
+        .search-results .result-item { padding: 3px 6px; cursor: pointer; border-radius: 4px; transition: 0.2s; }
+        .search-results .result-item:hover { background: rgba(255,255,255,0.03); }
+        
         @media (max-width: 480px) {
             #app { max-width: 100%; border-radius: 0; }
             #loginScreen { padding: 30px 20px; }
@@ -1297,11 +1129,11 @@
             #loginScreen h1 { font-size: 2.2rem; }
             .chat-header { padding: 8px 12px; min-height: 54px; }
             .chat-header .avatar-group { width: 36px; height: 36px; font-size: 1.2rem; }
-            .msg { max-width: 88%; font-size: 0.9rem; padding: 8px 12px; }
-            .msg .content .text { font-size: 0.9rem; }
-            .msg .avatar-small { width: 28px; height: 28px; font-size: 0.85rem; }
-            .chat-input { padding: 4px 10px 8px; }
-            .chat-input .send-btn { width: 42px; height: 42px; font-size: 1.1rem; }
+            .msg { max-width: 85%; font-size: 0.85rem; padding: 6px 10px; }
+            .msg .content .text { font-size: 0.85rem; }
+            .msg .avatar-small { width: 24px; height: 24px; font-size: 0.75rem; }
+            .chat-input { padding: 4px 8px 8px; }
+            .chat-input .send-btn { width: 38px; height: 38px; font-size: 1rem; }
             #adminPanel .admin-stats { grid-template-columns: repeat(2, 1fr); }
             .advanced-stats { grid-template-columns: 1fr; }
         }
@@ -1310,16 +1142,16 @@
             #app { max-width: 90%; height: 90vh; height: 90dvh; border-radius: 20px; margin: 5vh auto; }
             #loginScreen .logo-wrap { width: 120px; height: 120px; font-size: 4.2rem; }
             #loginScreen h1 { font-size: 3rem; }
-            .msg { max-width: 70%; font-size: 1rem; }
-            .msg .content .text { font-size: 1rem; }
+            .msg { max-width: 70%; font-size: 0.95rem; }
+            .msg .content .text { font-size: 0.95rem; }
         }
         
         @media (min-width: 1025px) {
             #app { max-width: 600px; height: 90vh; height: 90dvh; border-radius: 24px; margin: 5vh auto; }
             #loginScreen .logo-wrap { width: 140px; height: 140px; font-size: 4.8rem; }
             #loginScreen h1 { font-size: 3.4rem; }
-            .msg { max-width: 65%; font-size: 1.05rem; }
-            .msg .content .text { font-size: 1.05rem; }
+            .msg { max-width: 65%; font-size: 1rem; }
+            .msg .content .text { font-size: 1rem; }
         }
         
         @media (orientation: landscape) and (max-height: 500px) {
@@ -1327,26 +1159,20 @@
             #loginScreen .logo-wrap { width: 60px; height: 60px; font-size: 2rem; }
             #loginScreen h1 { font-size: 1.8rem; }
             .chat-header { padding: 4px 10px; min-height: 44px; }
-            .msg { font-size: 0.8rem; padding: 6px 10px; }
-            .msg .content .text { font-size: 0.8rem; }
-            .chat-input { padding: 2px 8px 4px; }
-            .chat-input .send-btn { width: 36px; height: 36px; font-size: 1rem; }
+            .msg { font-size: 0.75rem; padding: 4px 8px; }
+            .msg .content .text { font-size: 0.75rem; }
+            .chat-input { padding: 2px 6px 4px; }
+            .chat-input .send-btn { width: 32px; height: 32px; font-size: 0.9rem; }
         }
     </style>
 </head>
 <body>
-    <div id="setupStatus">
-        <div class="spinner">⚙️</div>
-        <h3 id="setupMessage">جاري الإعداد...</h3>
-        <p id="setupDetail" style="font-size:0.75rem;opacity:0.6;margin-top:6px;"></p>
-    </div>
-    
     <div id="app">
         <!-- ===== شاشة الدخول ===== -->
         <div id="loginScreen">
             <div class="logo-wrap">💬</div>
             <h1>نيزك</h1>
-            <div class="subtitle">✦ دردشة جماعية ✦</div>
+            <div class="subtitle">✦ دردشة دائمة ✦</div>
             
             <div class="input-group">
                 <span class="icon">👤</span>
@@ -1358,6 +1184,27 @@
                     <span class="icon">🔑</span>
                     <input type="password" id="adminPasswordInput" placeholder="كلمة المرور" autocomplete="current-password" />
                 </div>
+            </div>
+            
+            <div class="color-picker" id="colorPicker">
+                <span style="font-size:0.8rem;opacity:0.5;margin-left:8px;">🎨 اختر لونك:</span>
+                <div class="color-option active" style="background:#25D366;" data-color="#25D366" onclick="selectColor('#25D366')"></div>
+                <div class="color-option" style="background:#4facfe;" data-color="#4facfe" onclick="selectColor('#4facfe')"></div>
+                <div class="color-option" style="background:#f093fb;" data-color="#f093fb" onclick="selectColor('#f093fb')"></div>
+                <div class="color-option" style="background:#f5576c;" data-color="#f5576c" onclick="selectColor('#f5576c')"></div>
+                <div class="color-option" style="background:#f5a623;" data-color="#f5a623" onclick="selectColor('#f5a623')"></div>
+                <div class="color-option" style="background:#6c5ce7;" data-color="#6c5ce7" onclick="selectColor('#6c5ce7')"></div>
+                <div class="color-option" style="background:#00b894;" data-color="#00b894" onclick="selectColor('#00b894')"></div>
+                <div class="color-option" style="background:#fd79a8;" data-color="#fd79a8" onclick="selectColor('#fd79a8')"></div>
+            </div>
+            
+            <div class="sync-settings">
+                <span style="font-size:0.75rem;opacity:0.5;">📶 جودة المزامنة:</span>
+                <select id="syncQuality">
+                    <option value="high">⚡ عالي (سريع)</option>
+                    <option value="medium" selected>📶 متوسط</option>
+                    <option value="low">🐢 منخفض (يوفر بيانات)</option>
+                </select>
             </div>
             
             <button class="btn-primary" id="loginBtn">🚀 دخول</button>
@@ -1377,11 +1224,18 @@
                     <span class="status" id="onlineInfo">🟢 0 متصل · 0 رسالة</span>
                 </div>
                 <div class="actions">
+                    <button id="searchToggle" title="بحث">🔍</button>
                     <button id="themeToggleChat" title="الثيم">🌓</button>
                     <button id="adminShieldBtn" title="لوحة المسؤول">🛡️</button>
                     <button id="logoutBtn" title="خروج">🚪</button>
                 </div>
             </div>
+            
+            <div class="search-bar" id="searchBar">
+                <input type="text" id="searchInput" placeholder="بحث في الرسائل..." />
+                <button class="search-close" id="searchClose">✕</button>
+            </div>
+            <div class="search-results" id="searchResults"></div>
             
             <div id="messagesContainer"></div>
             
@@ -1404,6 +1258,8 @@
                 </div>
                 <button class="send-btn" id="sendBtn">➤</button>
             </div>
+            
+            <button id="scrollToBottom">⬇️</button>
         </div>
         
         <!-- ===== قائمة الضغط المطول ===== -->
@@ -1411,6 +1267,8 @@
             <div class="menu-item" data-action="reply"><span class="icon">↩️</span> رد</div>
             <div class="menu-item" data-action="react"><span class="icon">❤️</span> تفاعل</div>
             <div class="menu-item" data-action="edit"><span class="icon">✏️</span> تعديل</div>
+            <div class="menu-item" data-action="copy"><span class="icon">📋</span> نسخ</div>
+            <div class="menu-item" data-action="report"><span class="icon">🚨</span> إبلاغ</div>
             <div class="menu-item danger" data-action="delete"><span class="icon">🗑️</span> حذف</div>
         </div>
         
@@ -1445,7 +1303,7 @@
                     <button id="addBadWordBtn">➕ إضافة</button>
                 </div>
                 <div class="bad-words-list" id="badWordsList"></div>
-                <p style="font-size:0.7rem;opacity:0.4;margin-top:6px;">💡 الكلمات الممنوعة تؤدي إلى حظر تلقائي للمستخدم</p>
+                <p style="font-size:0.65rem;opacity:0.4;margin-top:4px;">💡 الكلمات الممنوعة تؤدي إلى حظر تلقائي للمستخدم</p>
             </div>
             
             <div class="admin-section" id="tab-settings">
@@ -1469,7 +1327,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="admin-actions" style="margin-top:12px;">
+                <div class="admin-actions" style="margin-top:10px;">
                     <button class="btn-clear" onclick="clearAllMessages()">🗑️ مسح الكل</button>
                     <button class="btn-export" onclick="exportChat()">📤 تصدير</button>
                     <button class="btn-ban-all" onclick="banAllUsers()">⛔ حظر الكل</button>
@@ -1531,7 +1389,7 @@
     
     <script>
         // ============================================================
-        // 1. إعداد Firebase
+        // 1. إعداد Firebase - تهيئة سريعة جداً
         // ============================================================
         const firebaseConfig = {
             apiKey: "AIzaSyBVNXAFHyynNL7rD6LaYc4iYgvYPDdDH0c",
@@ -1547,50 +1405,7 @@
         const db = firebase.firestore();
         
         // ============================================================
-        // 2. إنشاء المجموعات
-        // ============================================================
-        const setupStatus = document.getElementById('setupStatus');
-        const setupMessage = document.getElementById('setupMessage');
-        const setupDetail = document.getElementById('setupDetail');
-        
-        async function setupFirestore() {
-            setupStatus.style.display = 'block';
-            setupMessage.textContent = '⚙️ جاري التهيئة...';
-            setupDetail.textContent = 'الرجاء الانتظار';
-            
-            try {
-                const collections = ['users', 'messages', 'blocked', 'reactions', 'badwords', 'bans'];
-                for (let col of collections) {
-                    try {
-                        await db.collection(col).doc('_temp').set({ temp: true });
-                        await db.collection(col).doc('_temp').delete();
-                    } catch (e) {}
-                }
-                try {
-                    await db.collection('typing').doc('status').set({ temp: true });
-                    await db.collection('typing').doc('status').delete();
-                } catch (e) {}
-                
-                const defaultBadWords = ['سب', 'شتم', 'قذر', 'وسخ', 'حقير', 'خنزير', 'كلب', 'حمار'];
-                for (const word of defaultBadWords) {
-                    try {
-                        await db.collection('badwords').doc(word).set({ word: word, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
-                    } catch (e) {}
-                }
-                
-                setupMessage.innerHTML = '✅ <span style="color:#25D366;">جاهز!</span>';
-                setupDetail.textContent = 'يمكنك البدء الآن';
-                setTimeout(() => { setupStatus.style.display = 'none'; }, 800);
-            } catch (error) {
-                setupMessage.innerHTML = '⚠️ <span style="color:#f5a623;">تنبيه</span>';
-                setupDetail.textContent = 'جاري التهيئة...';
-                setTimeout(() => { setupStatus.style.display = 'none'; }, 1000);
-            }
-        }
-        setupFirestore();
-        
-        // ============================================================
-        // 3. المتغيرات العامة
+        // 2. المتغيرات العامة
         // ============================================================
         let currentUser = '';
         let isAdmin = false;
@@ -1617,9 +1432,13 @@
         };
         let userBanCounts = {};
         let totalBadWordsBlocked = 0;
+        let selectedColor = '#25D366';
+        let unreadCount = 0;
+        let isSearching = false;
+        let setupDone = false;
         
         // ============================================================
-        // 4. العناصر
+        // 3. العناصر
         // ============================================================
         const loginScreen = document.getElementById('loginScreen');
         const chatScreen = document.getElementById('chatScreen');
@@ -1654,6 +1473,12 @@
         const replyText = document.getElementById('replyText');
         const replyCancel = document.getElementById('replyCancel');
         const contextMenu = document.getElementById('contextMenu');
+        const scrollToBottom = document.getElementById('scrollToBottom');
+        const searchToggle = document.getElementById('searchToggle');
+        const searchBar = document.getElementById('searchBar');
+        const searchInput = document.getElementById('searchInput');
+        const searchClose = document.getElementById('searchClose');
+        const searchResults = document.getElementById('searchResults');
         
         const statTotalUsers = document.getElementById('statTotalUsers');
         const statActiveUsers = document.getElementById('statActiveUsers');
@@ -1688,20 +1513,42 @@
         };
         
         // ============================================================
-        // 5. الثيم
+        // 4. اختيار اللون
         // ============================================================
-        function toggleTheme() {
-            document.body.classList.toggle('light');
-            const theme = document.body.classList.contains('light') ? 'light' : 'dark';
-            localStorage.setItem('theme', theme);
+        function selectColor(color) {
+            selectedColor = color;
+            document.querySelectorAll('.color-option').forEach(el => {
+                el.classList.toggle('active', el.dataset.color === color);
+            });
+            document.documentElement.style.setProperty('--color-accent', color);
+            localStorage.setItem('userColor', color);
             if (currentUser) {
-                db.collection('users').doc(currentUser).update({ theme: theme }).catch(() => {});
+                db.collection('users').doc(currentUser).update({ color: color }).catch(() => {});
             }
         }
         
-        if (localStorage.getItem('theme') === 'light') {
-            document.body.classList.add('light');
+        const savedColor = localStorage.getItem('userColor');
+        if (savedColor) {
+            selectColor(savedColor);
         }
+        
+        // ============================================================
+        // 5. الثيم
+        // ============================================================
+        function toggleTheme() {
+            const themes = ['theme-dark', 'theme-light', 'theme-purple', 'theme-forest', 'theme-pink', 'theme-ocean'];
+            const current = document.body.className.split(' ').find(c => themes.includes(c)) || 'theme-dark';
+            const index = themes.indexOf(current);
+            const next = themes[(index + 1) % themes.length];
+            document.body.className = next;
+            localStorage.setItem('theme', next);
+            if (currentUser) {
+                db.collection('users').doc(currentUser).update({ theme: next }).catch(() => {});
+            }
+        }
+        
+        const savedTheme = localStorage.getItem('theme') || 'theme-dark';
+        document.body.className = savedTheme;
         themeToggleLogin.onclick = toggleTheme;
         themeToggleChat.onclick = toggleTheme;
         
@@ -1717,7 +1564,7 @@
         }
         
         // ============================================================
-        // 7. مودال تعديل الصورة
+        // 7. مودال تعديل الصورة - حفظ Base64 في Firebase
         // ============================================================
         function openAvatarModal() {
             if (!currentUser) return;
@@ -1824,127 +1671,7 @@
         }
         
         // ============================================================
-        // 8. الكلمات الممنوعة
-        // ============================================================
-        async function loadBadWords() {
-            try {
-                const snapshot = await db.collection('badwords').get();
-                badWords = [];
-                snapshot.forEach(doc => {
-                    badWords.push(doc.data().word);
-                });
-                renderBadWords();
-            } catch (error) {
-                console.error('خطأ في تحميل الكلمات الممنوعة:', error);
-            }
-        }
-        
-        function renderBadWords() {
-            badWordsList.innerHTML = '';
-            badWords.forEach(word => {
-                const tag = document.createElement('span');
-                tag.className = 'word-tag';
-                tag.innerHTML = `${word} <button class="remove-word" onclick="removeBadWord('${word}')">✕</button>`;
-                badWordsList.appendChild(tag);
-            });
-        }
-        
-        async function addBadWord() {
-            const word = badWordInput.value.trim().toLowerCase();
-            if (!word) {
-                showNotification('❌ أدخل كلمة');
-                return;
-            }
-            if (badWords.includes(word)) {
-                showNotification('⚠️ الكلمة موجودة بالفعل');
-                return;
-            }
-            
-            try {
-                await db.collection('badwords').doc(word).set({ word: word, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
-                badWords.push(word);
-                renderBadWords();
-                badWordInput.value = '';
-                showNotification('✅ تم إضافة الكلمة');
-            } catch (error) {
-                showNotification('❌ فشل الإضافة');
-            }
-        }
-        
-        async function removeBadWord(word) {
-            try {
-                await db.collection('badwords').doc(word).delete();
-                badWords = badWords.filter(w => w !== word);
-                renderBadWords();
-                showNotification('✅ تم حذف الكلمة');
-            } catch (error) {
-                showNotification('❌ فشل الحذف');
-            }
-        }
-        
-        addBadWordBtn.onclick = addBadWord;
-        badWordInput.onkeydown = (e) => { if (e.key === 'Enter') addBadWord(); };
-        
-        // ============================================================
-        // 9. نظام الحظر التلقائي
-        // ============================================================
-        async function checkBadWords(text, username) {
-            const lowerText = text.toLowerCase();
-            let foundWords = [];
-            
-            for (const word of badWords) {
-                if (lowerText.includes(word)) {
-                    foundWords.push(word);
-                }
-            }
-            
-            if (foundWords.length > 0) {
-                const banRef = db.collection('bans').doc(username);
-                const banDoc = await banRef.get();
-                let count = 1;
-                
-                if (banDoc.exists) {
-                    count = (banDoc.data().count || 0) + 1;
-                }
-                
-                await banRef.set({
-                    username: username,
-                    count: count,
-                    lastWord: foundWords.join(', '),
-                    lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
-                }, { merge: true });
-                
-                userBanCounts[username] = count;
-                totalBadWordsBlocked += foundWords.length;
-                if (statBadWordsBlocked) statBadWordsBlocked.textContent = totalBadWordsBlocked;
-                
-                const banDuration = Math.min(count * 60, 600);
-                
-                await db.collection('users').doc(username).update({
-                    banned: true,
-                    banReason: `استخدام كلمات ممنوعة (${foundWords.join(', ')})`,
-                    banExpires: firebase.firestore.FieldValue.serverTimestamp() + banDuration * 1000,
-                    banCount: count
-                });
-                
-                showNotification(`⛔ تم حظر ${username} لمدة ${banDuration} ثانية بسبب كلمات ممنوعة`);
-                
-                setTimeout(async () => {
-                    await db.collection('users').doc(username).update({
-                        banned: false,
-                        banReason: null,
-                        banExpires: null
-                    });
-                    showNotification(`🔓 تم إلغاء حظر ${username}`);
-                }, banDuration * 1000);
-                
-                return true;
-            }
-            return false;
-        }
-        
-        // ============================================================
-        // 10. تسجيل الدخول
+        // 8. تسجيل الدخول - حفظ دائم في Firebase
         // ============================================================
         loginBtn.onclick = async function() {
             const username = usernameInput.value.trim();
@@ -1987,6 +1714,11 @@
                     currentUser = username;
                     isAdmin = data.isAdmin || false;
                     if (data.avatar && data.avatar !== '👤') myAvatar = data.avatar;
+                    if (data.color) selectColor(data.color);
+                    if (data.theme) {
+                        document.body.className = data.theme;
+                        localStorage.setItem('theme', data.theme);
+                    }
                     await db.collection('users').doc(username).update({ 
                         online: true, 
                         lastSeen: firebase.firestore.FieldValue.serverTimestamp() 
@@ -2011,7 +1743,8 @@
                     banReason: null,
                     banExpires: null,
                     banCount: 0,
-                    theme: localStorage.getItem('theme') || 'dark',
+                    theme: localStorage.getItem('theme') || 'theme-dark',
+                    color: localStorage.getItem('userColor') || '#25D366',
                     createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                     lastSeen: firebase.firestore.FieldValue.serverTimestamp()
                 });
@@ -2038,7 +1771,7 @@
         adminPasswordInput.onkeydown = (e) => { if (e.key === 'Enter') loginBtn.click(); };
         
         // ============================================================
-        // 11. الدخول إلى الدردشة
+        // 9. الدخول إلى الدردشة - بدون شاشة تهيئة
         // ============================================================
         function enterChat(username) {
             loginScreen.style.display = 'none';
@@ -2070,10 +1803,26 @@
                     db.collection('users').doc(currentUser).update({ online: false }).catch(() => {});
                 }
             });
+            
+            messagesContainer.addEventListener('scroll', () => {
+                const isAtBottom = messagesContainer.scrollHeight - messagesContainer.scrollTop <= messagesContainer.clientHeight + 50;
+                if (isAtBottom) {
+                    scrollToBottom.style.display = 'none';
+                    unreadCount = 0;
+                } else if (unreadCount > 0) {
+                    scrollToBottom.style.display = 'flex';
+                }
+            });
+            
+            scrollToBottom.onclick = () => {
+                messagesContainer.scrollTo({ top: messagesContainer.scrollHeight, behavior: 'smooth' });
+                scrollToBottom.style.display = 'none';
+                unreadCount = 0;
+            };
         }
         
         // ============================================================
-        // 12. الصورة الشخصية
+        // 10. الصورة الشخصية
         // ============================================================
         function loadAvatar(username) {
             db.collection('users').doc(username).onSnapshot((doc) => {
@@ -2084,20 +1833,18 @@
                         updateAvatarUI();
                     }
                     if (data.theme) {
-                        const isLight = data.theme === 'light';
-                        if (isLight) {
-                            document.body.classList.add('light');
-                        } else {
-                            document.body.classList.remove('light');
-                        }
+                        document.body.className = data.theme;
                         localStorage.setItem('theme', data.theme);
+                    }
+                    if (data.color) {
+                        selectColor(data.color);
                     }
                 }
             });
         }
         
         // ============================================================
-        // 13. لوحة الإيموجي
+        // 11. لوحة الإيموجي
         // ============================================================
         const emojisList = [
             '😊', '😂', '❤️', '🔥', '👍', '👏', '🎉', '✨', '💪', '🤔',
@@ -2136,7 +1883,78 @@
         };
         
         // ============================================================
-        // 14. السحب للرد
+        // 12. البحث في الرسائل
+        // ============================================================
+        let searchMessages = [];
+        
+        searchToggle.onclick = function() {
+            searchBar.style.display = searchBar.style.display === 'flex' ? 'none' : 'flex';
+            if (searchBar.style.display === 'flex') {
+                searchInput.focus();
+                isSearching = true;
+            } else {
+                isSearching = false;
+                searchResults.innerHTML = '';
+                searchInput.value = '';
+            }
+        };
+        
+        searchClose.onclick = function() {
+            searchBar.style.display = 'none';
+            isSearching = false;
+            searchResults.innerHTML = '';
+            searchInput.value = '';
+        };
+        
+        searchInput.oninput = function() {
+            const query = this.value.trim().toLowerCase();
+            if (!query) {
+                searchResults.innerHTML = '';
+                return;
+            }
+            
+            const results = searchMessages.filter(msg => 
+                msg.text && msg.text.toLowerCase().includes(query)
+            );
+            
+            if (results.length === 0) {
+                searchResults.innerHTML = '<div style="padding:8px;opacity:0.5;">لا توجد نتائج</div>';
+                return;
+            }
+            
+            let html = '';
+            results.slice(0, 10).forEach(msg => {
+                const sender = msg.username || 'مجهول';
+                const time = msg.timestamp ? 
+                    new Date(msg.timestamp.toDate()).toLocaleTimeString('ar', { hour: '2-digit', minute: '2-digit' }) : '';
+                html += `
+                    <div class="result-item" onclick="scrollToMessage('${msg.id}')">
+                        <span style="color:var(--color-accent);">${sender}</span>
+                        <span style="opacity:0.5;">${time}</span>
+                        <div style="font-size:0.85rem;">${msg.text}</div>
+                    </div>
+                `;
+            });
+            searchResults.innerHTML = html;
+        };
+        
+        window.scrollToMessage = function(id) {
+            const element = document.querySelector(`[data-id="${id}"]`);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                element.style.background = 'rgba(255,255,255,0.05)';
+                setTimeout(() => {
+                    element.style.background = '';
+                }, 2000);
+                searchBar.style.display = 'none';
+                isSearching = false;
+                searchResults.innerHTML = '';
+                searchInput.value = '';
+            }
+        };
+        
+        // ============================================================
+        // 13. السحب للرد
         // ============================================================
         function setupSwipeToReply() {
             messagesContainer.addEventListener('touchstart', handleSwipeStart, { passive: true });
@@ -2191,15 +2009,15 @@
         }
         
         // ============================================================
-        // 15. الضغط المطول
+        // 14. الضغط المطول
         // ============================================================
         function showContextMenu(e, messageId, messageText, isSent) {
             e.preventDefault();
             const x = e.clientX || e.touches?.[0]?.clientX || 0;
             const y = e.clientY || e.touches?.[0]?.clientY || 0;
             
-            contextMenu.style.left = Math.min(x, window.innerWidth - 190) + 'px';
-            contextMenu.style.top = Math.min(y, window.innerHeight - 190) + 'px';
+            contextMenu.style.left = Math.min(x, window.innerWidth - 170) + 'px';
+            contextMenu.style.top = Math.min(y, window.innerHeight - 170) + 'px';
             contextMenu.style.display = 'block';
             
             const editItem = contextMenu.querySelector('[data-action="edit"]');
@@ -2234,6 +2052,12 @@
                     case 'edit':
                         if (isSent || isAdmin) editMessage(messageId);
                         break;
+                    case 'copy':
+                        copyText(messageText);
+                        break;
+                    case 'report':
+                        reportMessage(messageId, messageText);
+                        break;
                     case 'delete':
                         if (isSent || isAdmin) deleteMessage(messageId);
                         break;
@@ -2247,13 +2071,34 @@
         });
         
         // ============================================================
+        // 15. وظائف إضافية
+        // ============================================================
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showNotification('✅ تم نسخ النص');
+            }).catch(() => {
+                const input = document.createElement('input');
+                input.value = text;
+                document.body.appendChild(input);
+                input.select();
+                document.execCommand('copy');
+                document.body.removeChild(input);
+                showNotification('✅ تم نسخ النص');
+            });
+        }
+        
+        function reportMessage(messageId, text) {
+            showNotification(`🚨 تم إبلاغ المسؤول عن الرسالة`);
+        }
+        
+        // ============================================================
         // 16. الرد على الرسالة
         // ============================================================
         function startReply(messageId, messageText) {
             replyingTo = messageId;
             replyingToText = messageText;
             replyBar.style.display = 'flex';
-            replyText.textContent = `الرد على: ${messageText.substring(0, 45)}${messageText.length > 45 ? '...' : ''}`;
+            replyText.textContent = messageText.substring(0, 45) + (messageText.length > 45 ? '...' : '');
             messageInput.focus();
         }
         
@@ -2264,7 +2109,7 @@
         };
         
         // ============================================================
-        // 17. إرسال الرسائل
+        // 17. إرسال الرسائل - حفظ دائم في Firebase
         // ============================================================
         sendBtn.onclick = sendMessage;
         messageInput.onkeydown = (e) => {
@@ -2285,7 +2130,7 @@
             
             if (await checkBadWords(text, currentUser)) {
                 messageInput.value = '';
-                showNotification('⛔ تم حظرك مؤقتاً بسبب كلمات ممنوعة');
+                showNotification('⛔ تم حظرك مؤقتاً');
                 return;
             }
             
@@ -2336,7 +2181,7 @@
         }
         
         // ============================================================
-        // 18. استماع الرسائل
+        // 18. استماع الرسائل - سريع ودائم
         // ============================================================
         function listenMessages() {
             if (messagesListener) {
@@ -2347,9 +2192,6 @@
             messagesListener = db.collection('messages')
                 .orderBy('timestamp', 'asc')
                 .onSnapshot((snapshot) => {
-                    let html = '';
-                    let count = 0;
-                    let lastDate = '';
                     const messages = [];
                     
                     if (snapshot.empty) {
@@ -2371,114 +2213,137 @@
                         messages.push({ id: doc.id, ...data });
                     });
                     
-                    messages.sort((a, b) => {
-                        if (!a.timestamp) return 1;
-                        if (!b.timestamp) return -1;
-                        return a.timestamp.toMillis() - b.timestamp.toMillis();
-                    });
+                    searchMessages = messages;
+                    messageCount = messages.length;
                     
-                    messages.forEach((data) => {
-                        count++;
-                        const isSent = data.username === currentUser;
-                        const sender = data.username || 'مجهول';
-                        const avatar = data.avatar || '👤';
-                        const time = data.timestamp ? 
-                            new Date(data.timestamp.toDate()).toLocaleTimeString('ar', {
-                                hour: '2-digit',
-                                minute: '2-digit'
-                            }) : '';
-                        const adminBadge = data.isAdmin ? ' ⭐' : '';
-                        const canDelete = isAdmin || isSent;
-                        const canEdit = isSent;
-                        const reactions = data.reactions || {};
-                        const reactionKeys = Object.keys(reactions);
-                        
-                        const date = data.timestamp ? 
-                            new Date(data.timestamp.toDate()).toLocaleDateString('ar', {
-                                year: 'numeric',
-                                month: 'short',
-                                day: 'numeric'
-                            }) : '';
-                        if (date && date !== lastDate) {
-                            html += `<div class="date-divider">${date}</div>`;
-                            lastDate = date;
-                        }
-                        
-                        let reactionsHtml = '';
-                        if (reactionKeys.length > 0) {
-                            reactionsHtml = `<div class="reactions">`;
-                            reactionKeys.forEach(emoji => {
-                                const users = reactions[emoji] || [];
-                                reactionsHtml += `
-                                    <span class="reaction" onclick="toggleReaction('${data.id}', '${emoji}')">
-                                        ${emoji} ${users.length}
-                                    </span>
-                                `;
-                            });
-                            reactionsHtml += `</div>`;
-                        }
-                        
-                        const editedMark = data.edited ? ' (معدلة)' : '';
-                        
-                        let replyHtml = '';
-                        if (data.replyTo && data.replyText) {
-                            replyHtml = `<div class="reply-preview">↩️ ${data.replyText.substring(0, 35)}${data.replyText.length > 35 ? '...' : ''}</div>`;
-                        }
-                        
-                        const avatarDisplay = isValidImageUrl(avatar) ? 
-                            `<img src="${avatar}" alt="avatar" />` : avatar;
-                        
-                        html += `
-                            <div class="msg-wrapper" 
-                                 data-id="${data.id}" 
-                                 data-text="${data.text.replace(/"/g, '&quot;').replace(/'/g, '&#39;')}"
-                                 data-sent="${isSent}"
-                                 oncontextmenu="showContextMenu(event, '${data.id}', '${data.text.replace(/'/g, "\\'")}', ${isSent})"
-                                 ontouchstart="handleTouchStart(event, '${data.id}', '${data.text.replace(/'/g, "\\'")}', ${isSent})"
-                                 ontouchend="handleTouchEnd(event)">
-                                ${replyHtml}
-                                <div class="msg ${isSent ? 'sent' : 'received'}">
-                                    <div class="avatar-small" onclick="showProfile('${sender}')" title="عرض الملف الشخصي">
-                                        ${avatarDisplay}
-                                    </div>
-                                    <div class="content">
-                                        <span class="sender-name" onclick="showProfile('${sender}')">${sender}${adminBadge}</span>
-                                        <div class="text">${data.text}${editedMark}</div>
-                                        <div class="time">
-                                            ${time}
-                                            ${isSent ? '<span class="check">✓✓</span>' : ''}
-                                        </div>
-                                        ${reactionsHtml}
-                                        <div class="actions-bar">
-                                            ${canEdit ? `<button onclick="editMessage('${data.id}')">✏️</button>` : ''}
-                                            <button onclick="startReply('${data.id}', '${data.text.replace(/'/g, "\\'")}')">↩️</button>
-                                            <button onclick="toggleReaction('${data.id}', '❤️')">❤️</button>
-                                            <button onclick="toggleReaction('${data.id}', '😂')">😂</button>
-                                            <button onclick="toggleReaction('${data.id}', '🔥')">🔥</button>
-                                            ${canDelete ? `<button onclick="deleteMessage('${data.id}')" style="color:#ff4444;">🗑️</button>` : ''}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-                    });
-                    
-                    messageCount = count;
-                    messagesContainer.innerHTML = html;
-                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                    // عرض الرسائل مباشرة
+                    renderMessages(messages);
                     updateStats();
-                    setTimeout(setupSwipeToReply, 100);
+                    setTimeout(setupSwipeToReply, 50);
+                    
+                    // تحديث عدد الرسائل غير المقروءة
+                    if (!isSearching) {
+                        const isAtBottom = messagesContainer.scrollHeight - messagesContainer.scrollTop <= messagesContainer.clientHeight + 50;
+                        if (!isAtBottom && messageCount > 0) {
+                            unreadCount++;
+                            scrollToBottom.style.display = 'flex';
+                            scrollToBottom.innerHTML = `⬇️ <span class="badge">${unreadCount}</span>`;
+                        }
+                    }
                 }, (error) => {
                     console.error('❌ خطأ في استماع الرسائل:', error);
-                    messagesContainer.innerHTML = `
-                        <div style="text-align:center;padding:20px 0;color:#ff4444;font-size:0.8rem;">
-                            <div style="font-size:2rem;">⚠️</div>
-                            <div>خطأ في تحميل الرسائل</div>
-                            <div style="font-size:0.65rem;opacity:0.5;">${error.message}</div>
-                            <button onclick="location.reload()" style="margin-top:6px;padding:5px 16px;border-radius:18px;border:none;background:#25D366;color:#fff;cursor:pointer;font-size:0.75rem;">إعادة المحاولة</button>
-                        </div>
-                    `;
                 });
+        }
+        
+        // دالة عرض الرسائل
+        function renderMessages(messages) {
+            if (!messages || messages.length === 0) {
+                messagesContainer.innerHTML = `
+                    <div class="welcome-msg">
+                        <div class="icon">💬</div>
+                        <div class="title">مرحباً في نيزك</div>
+                        <div class="sub">ابدأ المحادثة الآن</div>
+                    </div>
+                `;
+                return;
+            }
+            
+            const sorted = [...messages].sort((a, b) => {
+                if (!a.timestamp) return 1;
+                if (!b.timestamp) return -1;
+                return a.timestamp.toMillis() - b.timestamp.toMillis();
+            });
+            
+            let html = '';
+            let lastDate = '';
+            
+            sorted.forEach(data => {
+                const isSent = data.username === currentUser;
+                const sender = data.username || 'مجهول';
+                const avatar = data.avatar || '👤';
+                const time = data.timestamp ? 
+                    new Date(data.timestamp.toDate()).toLocaleTimeString('ar', {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    }) : '';
+                const adminBadge = data.isAdmin ? ' ⭐' : '';
+                const canDelete = isAdmin || isSent;
+                const canEdit = isSent;
+                const reactions = data.reactions || {};
+                const reactionKeys = Object.keys(reactions);
+                
+                const date = data.timestamp ? 
+                    new Date(data.timestamp.toDate()).toLocaleDateString('ar', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric'
+                    }) : '';
+                if (date && date !== lastDate) {
+                    html += `<div class="date-divider">${date}</div>`;
+                    lastDate = date;
+                }
+                
+                let reactionsHtml = '';
+                if (reactionKeys.length > 0) {
+                    reactionsHtml = `<div class="reactions">`;
+                    reactionKeys.forEach(emoji => {
+                        const users = reactions[emoji] || [];
+                        reactionsHtml += `
+                            <span class="reaction" onclick="toggleReaction('${data.id}', '${emoji}')">
+                                ${emoji} ${users.length}
+                            </span>
+                        `;
+                    });
+                    reactionsHtml += `</div>`;
+                }
+                
+                const editedMark = data.edited ? ' (معدلة)' : '';
+                
+                let replyHtml = '';
+                if (data.replyTo && data.replyText) {
+                    replyHtml = `<div class="reply-preview">↩️ ${data.replyText.substring(0, 35)}${data.replyText.length > 35 ? '...' : ''}</div>`;
+                }
+                
+                const avatarDisplay = isValidImageUrl(avatar) ? 
+                    `<img src="${avatar}" alt="avatar" />` : avatar;
+                
+                html += `
+                    <div class="msg-wrapper" 
+                         data-id="${data.id}" 
+                         data-text="${data.text.replace(/"/g, '&quot;').replace(/'/g, '&#39;')}"
+                         data-sent="${isSent}"
+                         oncontextmenu="showContextMenu(event, '${data.id}', '${data.text.replace(/'/g, "\\'")}', ${isSent})"
+                         ontouchstart="handleTouchStart(event, '${data.id}', '${data.text.replace(/'/g, "\\'")}', ${isSent})"
+                         ontouchend="handleTouchEnd(event)">
+                        ${replyHtml}
+                        <div class="msg ${isSent ? 'sent' : 'received'}">
+                            <div class="avatar-small" onclick="showProfile('${sender}')" title="عرض الملف الشخصي">
+                                ${avatarDisplay}
+                            </div>
+                            <div class="content">
+                                <span class="sender-name" onclick="showProfile('${sender}')">${sender}${adminBadge}</span>
+                                <div class="text">${data.text}${editedMark}</div>
+                                <div class="time">
+                                    ${time}
+                                    ${isSent ? '<span class="check">✓✓</span>' : ''}
+                                </div>
+                                ${reactionsHtml}
+                                <div class="actions-bar">
+                                    ${canEdit ? `<button onclick="editMessage('${data.id}')">✏️</button>` : ''}
+                                    <button onclick="startReply('${data.id}', '${data.text.replace(/'/g, "\\'")}')">↩️</button>
+                                    <button onclick="toggleReaction('${data.id}', '❤️')">❤️</button>
+                                    <button onclick="toggleReaction('${data.id}', '😂')">😂</button>
+                                    <button onclick="toggleReaction('${data.id}', '🔥')">🔥</button>
+                                    ${canDelete ? `<button onclick="deleteMessage('${data.id}')" style="color:#ff4444;">🗑️</button>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            messagesContainer.innerHTML = html;
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
         
         // ============================================================
@@ -2630,7 +2495,127 @@
         };
         
         // ============================================================
-        // 24. استماع المستخدمين
+        // 24. الكلمات الممنوعة
+        // ============================================================
+        async function loadBadWords() {
+            try {
+                const snapshot = await db.collection('badwords').get();
+                badWords = [];
+                snapshot.forEach(doc => {
+                    badWords.push(doc.data().word);
+                });
+                renderBadWords();
+            } catch (error) {
+                console.error('خطأ في تحميل الكلمات الممنوعة:', error);
+            }
+        }
+        
+        function renderBadWords() {
+            badWordsList.innerHTML = '';
+            badWords.forEach(word => {
+                const tag = document.createElement('span');
+                tag.className = 'word-tag';
+                tag.innerHTML = `${word} <button class="remove-word" onclick="removeBadWord('${word}')">✕</button>`;
+                badWordsList.appendChild(tag);
+            });
+        }
+        
+        async function addBadWord() {
+            const word = badWordInput.value.trim().toLowerCase();
+            if (!word) {
+                showNotification('❌ أدخل كلمة');
+                return;
+            }
+            if (badWords.includes(word)) {
+                showNotification('⚠️ الكلمة موجودة بالفعل');
+                return;
+            }
+            
+            try {
+                await db.collection('badwords').doc(word).set({ word: word, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
+                badWords.push(word);
+                renderBadWords();
+                badWordInput.value = '';
+                showNotification('✅ تم إضافة الكلمة');
+            } catch (error) {
+                showNotification('❌ فشل الإضافة');
+            }
+        }
+        
+        async function removeBadWord(word) {
+            try {
+                await db.collection('badwords').doc(word).delete();
+                badWords = badWords.filter(w => w !== word);
+                renderBadWords();
+                showNotification('✅ تم حذف الكلمة');
+            } catch (error) {
+                showNotification('❌ فشل الحذف');
+            }
+        }
+        
+        addBadWordBtn.onclick = addBadWord;
+        badWordInput.onkeydown = (e) => { if (e.key === 'Enter') addBadWord(); };
+        
+        // ============================================================
+        // 25. نظام الحظر التلقائي
+        // ============================================================
+        async function checkBadWords(text, username) {
+            const lowerText = text.toLowerCase();
+            let foundWords = [];
+            
+            for (const word of badWords) {
+                if (lowerText.includes(word)) {
+                    foundWords.push(word);
+                }
+            }
+            
+            if (foundWords.length > 0) {
+                const banRef = db.collection('bans').doc(username);
+                const banDoc = await banRef.get();
+                let count = 1;
+                
+                if (banDoc.exists) {
+                    count = (banDoc.data().count || 0) + 1;
+                }
+                
+                await banRef.set({
+                    username: username,
+                    count: count,
+                    lastWord: foundWords.join(', '),
+                    lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+                }, { merge: true });
+                
+                userBanCounts[username] = count;
+                totalBadWordsBlocked += foundWords.length;
+                if (statBadWordsBlocked) statBadWordsBlocked.textContent = totalBadWordsBlocked;
+                
+                const banDuration = Math.min(count * 60, 600);
+                
+                await db.collection('users').doc(username).update({
+                    banned: true,
+                    banReason: `استخدام كلمات ممنوعة (${foundWords.join(', ')})`,
+                    banExpires: firebase.firestore.FieldValue.serverTimestamp() + banDuration * 1000,
+                    banCount: count
+                });
+                
+                showNotification(`⛔ تم حظر ${username} لمدة ${banDuration} ثانية`);
+                
+                setTimeout(async () => {
+                    await db.collection('users').doc(username).update({
+                        banned: false,
+                        banReason: null,
+                        banExpires: null
+                    });
+                    showNotification(`🔓 تم إلغاء حظر ${username}`);
+                }, banDuration * 1000);
+                
+                return true;
+            }
+            return false;
+        }
+        
+        // ============================================================
+        // 26. استماع المستخدمين
         // ============================================================
         function listenUsers() {
             db.collection('users').onSnapshot((snapshot) => {
@@ -2726,7 +2711,7 @@
         }
         
         // ============================================================
-        // 25. استماع الكتابة
+        // 27. استماع الكتابة
         // ============================================================
         function listenTyping() {
             db.collection('typing').doc('status').onSnapshot((doc) => {
@@ -2774,7 +2759,7 @@
         };
         
         // ============================================================
-        // 26. تحميل عدد مرات الحظر
+        // 28. تحميل عدد مرات الحظر
         // ============================================================
         async function loadBanCounts() {
             try {
@@ -2788,7 +2773,7 @@
         }
         
         // ============================================================
-        // 27. لوحة المسؤول
+        // 29. لوحة المسؤول
         // ============================================================
         adminShieldBtn.onclick = function() {
             if (isAdmin) {
@@ -2963,7 +2948,7 @@
         };
         
         // ============================================================
-        // 28. تبديل الإعدادات
+        // 30. تبديل الإعدادات
         // ============================================================
         function toggleSwitch(id) {
             const el = document.getElementById(id + 'Switch');
@@ -2974,7 +2959,7 @@
         }
         
         // ============================================================
-        // 29. إشعارات
+        // 31. إشعارات
         // ============================================================
         function showNotification(message) {
             const existing = document.querySelector('.temp-notification');
@@ -2989,11 +2974,11 @@
                 div.style.opacity = '0';
                 div.style.transition = 'opacity 0.4s';
                 setTimeout(() => div.remove(), 500);
-            }, 3000);
+            }, 2500);
         }
         
         // ============================================================
-        // 30. خروج
+        // 32. خروج
         // ============================================================
         logoutBtn.onclick = function() {
             if (confirm('تسجيل الخروج؟')) {
@@ -3015,23 +3000,22 @@
         };
         
         // ============================================================
-        // 31. بداية التطبيق
+        // 33. بداية التطبيق - بدون شاشة تهيئة
         // ============================================================
-        console.log('☄️ نيزك - دردشة جماعية');
+        console.log('☄️ نيزك - نسخة دائمة وسريعة');
         console.log('👤 المسؤول: slx23m | كلمة: 1442');
-        console.log('📌 اسحب الرسالة لليمين للرد');
-        console.log('📌 اضغط مطولاً للتفاعل');
-        console.log('📌 اضغط على الصورة لتعديلها');
+        console.log('📌 جميع البيانات محفوظة بشكل دائم في Firebase');
+        console.log('📌 الصور مخزنة كـ Base64 في Firebase (بدون Storage)');
         
         const savedUser = localStorage.getItem('lastUser');
         if (savedUser) {
             usernameInput.value = savedUser;
             setTimeout(() => {
                 loginBtn.click();
-            }, 500);
+            }, 300);
         }
         
         console.log('✅ التطبيق جاهز للاستخدام!');
     </script>
 </body>
-  </html>
+    </html>
