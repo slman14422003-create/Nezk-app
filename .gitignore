@@ -1,1 +1,14 @@
-
+# مستثنيات Git
+.DS_Store
+node_modules/
+*.log
+*.tmp
+*.swp
+.idea/
+.vscode/
+dist/
+build/
+.env
+*.pem
+*.key
+*.crt
