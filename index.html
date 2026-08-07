@@ -3,12 +3,23 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    <title>نيزك - دردشة دائمة</title>
+    <title>نيزك - دردشة إنستا</title>
     
+    <!-- PWA -->
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogItmF2YfYp9mGIC0g2KfZhNmF2LHYr9mG2KkiLAogICJzaG9ydF9uYW1lIjogItmF2YfYp9mGIiwKICAiZGVzY3JpcHRpb24iOiAi2KfZhNmF2LHYr9mG2Kkg2KfZhNmF2KfYqNmF2Ycg2YQg2KfZhNiq2LPYqtix2KfYqiDYp9mE2YUg2KfZhNin2KjZhdmHINin2YTYudin2YUg2KfZhNmF2YciLAogICJzdGFydF91cmwiOiAiaW5kZXguaHRtbCIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzExMWIyMSIsCiAgInRoZW1lX2NvbG9yIjogIiMxMTFiMjEiLAogICJvcmllbnRhdGlvbiI6ICJwb3J0cmFpdCIsCiAgImRpciI6ICJydGwiLAogICJsYW5nIjogImFyIiwKICAiaWNvbnMiOiBbCiAgICB7InNyYyI6ICJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQU1BQUFBQ0NNQUFBQUJMZkEwY0FBQUFCR2RCVFVFQUFHSnRUbFFBQUFBQm5QV05YWlMxZ2FXNXphVzVuYjNKdmRHbGpaU0JoYkd3Z1kyOXRZU0JrWldaaGRXeDBJRkpCSlVFZ0FBR3BCU1VSQlZINHJQY1pJQ0FWaXBhTit4SHZBUkVQekFZUWdZQWlHcWtoZ0NFQnZVRUlKQUpJUndsWlNsZ0NBT1lBSnBBR0ZVYUpnU0tWWkZBQkFjSUVnU0FCSVJ3bFpUQ1hBS0NLYUpvV1NnVmtGd0hDTVJCSVZFa3dsaFVDQUpCbHdaRUpJS1FJZ2l1R2lMa0laaVVBVUJCQ0VnSUVTRGdPQUJCQklFWkU2S1FJRktpa0NBaFlCeHdDQ0NSQklWRWh3c0JRQ0FDUkJSQ0lSQkNTSE1iR0J6VFRRSmhNWWpOMHlVWW5EZlp3UUFBQUFBU1VWT1JLNUNZSUlBQUFBQkpSVTVFcmtKZ2dnPT0iLCAic2l6ZXMiOiAiMTkyeDE5MiIsICJ0eXBlIjogImltYWdlL3BuZyIsICJwdXJwb3NlIjogImFueSBtYXNrYWJsZSIgfQogIF0KfQ==" />
+    <meta name="theme-color" content="#111b21" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6dAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QA/wD/AP+gvaeTAAAAB3RJTUUH5wkIBR4hGj8SWwAAAAl2cEFnAAAAzAAAAOgAAAJkqS8ZAAAAAW9pVFh0Y29tbWVudAAAABEAaAB0AHQAcABzADoALwAvAHcAdwB3AC4AYQBuAGkAbQBhAHQAaQBvAG4ALgBpAG4AZgBvAC8AUgBfAEkAYwBvAG4AcwAAAAOgSURBVHic7Z1Ba9tAFMb/T3HiXFBoHhK7R5XUYHAXEEmhEKRiJbXxwdBAcknBBx/UIIEI4Sq1CsYUQgN2iGIX3B66uZS64IcE3B4LpuB9s/vmzTzzZmRJOX0LAA/9R5dSKBVQBFCsOSB5uSFJkm6AcgC0Z5IkoV7HcUjKcg2g5Sw9oIRUuQDdlRkBFHKwPRcoZZMkSbKN5W+VZPlZSHJfoK0Fp0y4C8h30bG1mwLEj9a5IYNKdKmgyFQhMVGo7QalxgIkvAq03HL5p2vS0j3y+83LeO2rK8uhfW/BPjbhxcb/tk4wXf5dSnW4ePD+Snryj7jzcjsWf92s8Jb+fxXrA31TDP9oig2IIELyJkOUbNR0O+bR2YV0PqsvE3KBV+1MqQHXp2UMBTjVEzJ0K1v38OwiKCjQkAhyv1OWwqSzM7QBYlUOCqk+0YUdKk8gcgBBnAiIBNmLfAJJ0NxFgogCDYlIskcEvx1lixmhaAGigDR/0H96j7ZQBXG9/snP94Pn6B4TkK03Q96C7Q6I/X0kw3zVJN1Gwyz61BMJSF2Z7XaOim9iJp/rjDBFQEQnJ1P8IIS7SXlEP30ui0p5t9tTl6c8eXl7VigVd/l8PpctU9lMKRwOH6LKsZIkIY/Hc3f6cndAqVzKbW5sGuVy+X67vnGO71SDUmW2y1a/A9lCqLt3dHSUnM1mhbfmSwgAQiqVutvd2f1YfCgmyjl/f/8+tbY+SutQIBD4WC6XE7vdDllb6xMXq2TtYHp63W5rR0B6Xe/csmzaW1tb8c3NjTMAQJfL9dm2bdrhyW7MZMoVjFjKQbGSJd6nqI2k7ju5TZeL/RgsrKd3+Q/g9Xp/PhP4RgJCYzXcTqU6v7yODhARmbhcrmgmkwkbhiHWaDQCqVQqWKvVBJdLxgZg5TKPxwPX6/XVYrFotVpYrVYEqVQK3G5iWxqNdgGLxQKuVivYbDaYz+cQn88jb7fbIB9gq2RaQq/XA4/HI7cBmynDbrfDZrMhIgwGAwCE7yP+3Wy7rYHwj/8KZz/MtGuhWcDnGq4RTYJhFkFZgiiJcGggokLg2kQghpDlAIGItaEBRXeFUBFBhAUgLBcRIRKEPzAjIgIVCUIkAAIkAcAiQJhFsCSCUCLGIAFhxUDIMMLAgggUBgmJCPcPAkAFBIvg0SFgiKBE0ChQInBqEGBAsTkgkDDCkKQAsCQRCBgSErg3IDAEIAKCBwBAQCByAiAQIUFAkYyPAAQSDEnQlBZxAgIChDBYxMAAxBgAwzAAxDAgIDgAAAA=" />
+    
+    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
     
     <style>
+        /* ============================================================
+           RESET & BASE
+           ============================================================ */
         * {
             margin: 0;
             padding: 0;
@@ -17,34 +28,43 @@
         }
         
         :root {
-            --bg-primary: #111b21;
-            --bg-secondary: #1f2c33;
-            --bg-chat: #0b141a;
-            --bg-header: #1f2c33;
-            --bg-input: #2a3942;
-            --bg-bubble-sent: #056162;
-            --bg-bubble-received: #1f2c33;
-            --text-primary: #e9edef;
-            --text-secondary: #8696a0;
-            --text-bubble-sent: #e9edef;
-            --text-bubble-received: #e9edef;
-            --color-accent: #25D366;
-            --border-color: #2a3942;
-            --shadow-color: rgba(0,0,0,0.3);
-            --radius-lg: 28px;
-            --radius-md: 16px;
-            --radius-sm: 12px;
+            --bg-primary: #FAFAFA;
+            --bg-secondary: #FFFFFF;
+            --bg-chat: #F5F5F5;
+            --bg-header: #FFFFFF;
+            --bg-input: #F0F0F0;
+            --bg-bubble-sent: #E8F0FE;
+            --bg-bubble-received: #FFFFFF;
+            --text-primary: #262626;
+            --text-secondary: #8E8E8E;
+            --text-bubble-sent: #262626;
+            --text-bubble-received: #262626;
+            --color-accent: #405DE6;
+            --color-accent-gradient: linear-gradient(135deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+            --border-color: #DBDBDB;
+            --shadow-color: rgba(0,0,0,0.05);
+            --radius-lg: 20px;
+            --radius-md: 14px;
+            --radius-sm: 10px;
             --safe-top: env(safe-area-inset-top, 0px);
             --safe-bottom: env(safe-area-inset-bottom, 0px);
-            --user-color: #25D366;
+            --transition-speed: 0.2s;
         }
         
-        body.theme-dark { --bg-primary: #111b21; --bg-secondary: #1f2c33; --bg-chat: #0b141a; --bg-header: #1f2c33; --bg-input: #2a3942; --bg-bubble-sent: #056162; --bg-bubble-received: #1f2c33; --text-primary: #e9edef; --text-secondary: #8696a0; --border-color: #2a3942; }
-        body.theme-light { --bg-primary: #e5ddd5; --bg-secondary: #f0f0f0; --bg-chat: #efeae2; --bg-header: #f0f0f0; --bg-input: #ffffff; --bg-bubble-sent: #d9fdd3; --bg-bubble-received: #ffffff; --text-primary: #111b21; --text-secondary: #667781; --border-color: #d1d7db; }
-        body.theme-purple { --bg-primary: #1a0a2e; --bg-secondary: #2d1b4e; --bg-chat: #120820; --bg-header: #2d1b4e; --bg-input: #3d2a5e; --bg-bubble-sent: #6c3cb0; --bg-bubble-received: #2d1b4e; --text-primary: #f0e6ff; --text-secondary: #b8a0d0; --border-color: #4a2a6e; --color-accent: #9b59b6; }
-        body.theme-forest { --bg-primary: #0a1a0a; --bg-secondary: #1a2e1a; --bg-chat: #061006; --bg-header: #1a2e1a; --bg-input: #2a4e2a; --bg-bubble-sent: #2e7d32; --bg-bubble-received: #1a2e1a; --text-primary: #e0f0e0; --text-secondary: #8aaa8a; --border-color: #2a4e2a; --color-accent: #43a047; }
-        body.theme-pink { --bg-primary: #1a0a14; --bg-secondary: #2e1a24; --bg-chat: #12080e; --bg-header: #2e1a24; --bg-input: #4e2a3e; --bg-bubble-sent: #ad1457; --bg-bubble-received: #2e1a24; --text-primary: #fce4ec; --text-secondary: #c9a0b0; --border-color: #4e2a3e; --color-accent: #e91e63; }
-        body.theme-ocean { --bg-primary: #0a1420; --bg-secondary: #1a2a40; --bg-chat: #060e18; --bg-header: #1a2a40; --bg-input: #2a4a70; --bg-bubble-sent: #1565c0; --bg-bubble-received: #1a2a40; --text-primary: #e3f2fd; --text-secondary: #90caf9; --border-color: #2a4a70; --color-accent: #1e88e5; }
+        body.theme-dark {
+            --bg-primary: #000000;
+            --bg-secondary: #121212;
+            --bg-chat: #0A0A0A;
+            --bg-header: #121212;
+            --bg-input: #262626;
+            --bg-bubble-sent: #262626;
+            --bg-bubble-received: #1A1A1A;
+            --text-primary: #FFFFFF;
+            --text-secondary: #8E8E8E;
+            --text-bubble-sent: #FFFFFF;
+            --text-bubble-received: #FFFFFF;
+            --border-color: #262626;
+        }
         
         html, body {
             height: 100%;
@@ -73,6 +93,9 @@
             transition: background 0.3s;
         }
         
+        /* ============================================================
+           شاشة الدخول - إنستا ستايل
+           ============================================================ */
         #loginScreen {
             display: flex;
             flex-direction: column;
@@ -89,13 +112,13 @@
             width: 100px;
             height: 100px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--color-accent), #128C7E);
+            background: var(--color-accent-gradient);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 3.8rem;
             margin-bottom: 18px;
-            box-shadow: 0 10px 40px rgba(37,211,102,0.2);
+            box-shadow: 0 10px 40px rgba(64, 93, 230, 0.2);
             animation: pulse 2s infinite;
         }
         
@@ -104,7 +127,10 @@
         #loginScreen h1 {
             font-size: 2.8rem;
             font-weight: 700;
-            color: var(--color-accent);
+            background: var(--color-accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 4px;
             letter-spacing: -1px;
         }
@@ -127,7 +153,7 @@
             width: 100%;
             padding: 16px 20px 16px 50px;
             border-radius: 30px;
-            border: 2px solid var(--border-color);
+            border: 1px solid var(--border-color);
             background: var(--bg-secondary);
             color: var(--text-primary);
             font-size: 1rem;
@@ -137,7 +163,7 @@
         
         #loginScreen .input-group input:focus {
             border-color: var(--color-accent);
-            box-shadow: 0 0 0 3px rgba(37,211,102,0.1);
+            box-shadow: 0 0 0 3px rgba(64, 93, 230, 0.05);
         }
         
         #loginScreen .input-group .icon {
@@ -155,13 +181,13 @@
             padding: 16px;
             border-radius: 30px;
             border: none;
-            background: linear-gradient(135deg, var(--color-accent), #128C7E);
+            background: var(--color-accent-gradient);
             color: #fff;
             font-weight: 700;
             font-size: 1.05rem;
             cursor: pointer;
             transition: 0.3s;
-            box-shadow: 0 8px 30px rgba(37,211,102,0.15);
+            box-shadow: 0 8px 30px rgba(64, 93, 230, 0.15);
             margin-top: 6px;
         }
         
@@ -185,8 +211,8 @@
         #loginScreen .btn-secondary:hover { opacity: 0.8; }
         
         #adminPassWrap { width: 100%; max-width: 400px; display: none; margin-top: 4px; }
-        #adminPassWrap input { border-color: #f5a623 !important; }
-        #loginError { color: #ff4444; margin-top: 10px; font-size: 0.85rem; min-height: 22px; }
+        #adminPassWrap input { border-color: #E1306C !important; }
+        #loginError { color: #E1306C; margin-top: 10px; font-size: 0.85rem; min-height: 22px; }
         
         .color-picker {
             display: flex;
@@ -208,27 +234,9 @@
         .color-picker .color-option:hover { transform: scale(1.15); }
         .color-picker .color-option.active { border-color: var(--text-primary); }
         
-        .sync-settings {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            justify-content: center;
-            margin: 8px 0;
-            flex-wrap: wrap;
-        }
-        
-        .sync-settings select {
-            padding: 6px 12px;
-            border-radius: 20px;
-            border: 1px solid var(--border-color);
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            font-size: 0.8rem;
-            outline: none;
-        }
-        
-        .sync-settings select:focus { border-color: var(--color-accent); }
-        
+        /* ============================================================
+           شاشة الدردشة
+           ============================================================ */
         #chatScreen {
             display: none;
             flex-direction: column;
@@ -238,6 +246,7 @@
             transition: background 0.3s;
         }
         
+        /* ===== الهيدر - إنستا ستايل ===== */
         .chat-header {
             padding: 10px 16px;
             padding-top: calc(10px + var(--safe-top));
@@ -247,26 +256,26 @@
             background: var(--bg-header);
             border-bottom: 1px solid var(--border-color);
             flex-shrink: 0;
-            min-height: 60px;
+            min-height: 56px;
             transition: background 0.3s, border-color 0.3s;
         }
         
         .chat-header .avatar-group {
-            width: 42px;
-            height: 42px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--color-accent), #128C7E);
+            background: var(--color-accent-gradient);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             color: #fff;
             flex-shrink: 0;
             overflow: hidden;
             cursor: pointer;
             position: relative;
             transition: 0.3s;
-            border: 2px solid var(--border-color);
+            border: 2px solid transparent;
         }
         
         .chat-header .avatar-group:hover { transform: scale(1.05); }
@@ -280,7 +289,7 @@
             width: 10px;
             height: 10px;
             border-radius: 50%;
-            background: var(--color-accent);
+            background: #25D366;
             border: 2px solid var(--bg-header);
             animation: blink 2s infinite;
         }
@@ -288,58 +297,64 @@
         @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
         
         .chat-header .info { flex: 1; min-width: 0; }
-        .chat-header .info h3 { font-size: 1.1rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text-primary); transition: color 0.3s; }
-        .chat-header .info .status { font-size: 0.65rem; color: var(--text-secondary); transition: color 0.3s; }
+        .chat-header .info h3 { font-size: 1rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text-primary); transition: color 0.3s; }
+        .chat-header .info .status { font-size: 0.6rem; color: var(--text-secondary); transition: color 0.3s; }
         
         .chat-header .actions {
             display: flex;
-            gap: 4px;
+            gap: 2px;
         }
         
         .chat-header .actions button {
             background: none;
             border: none;
             color: var(--text-secondary);
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             cursor: pointer;
-            padding: 6px 8px;
+            padding: 4px 6px;
             border-radius: 40px;
             transition: 0.3s;
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
         
-        .chat-header .actions button:hover { background: rgba(255,255,255,0.05); }
+        .chat-header .actions button:hover { background: rgba(0,0,0,0.02); }
         .chat-header .actions button:active { transform: scale(0.9); }
         
+        /* ============================================================
+           حاوية الرسائل - إنستا ستايل
+           ============================================================ */
         #messagesContainer {
             flex: 1;
             overflow-y: auto;
-            padding: 10px 14px 8px;
+            padding: 8px 12px 4px;
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: 1px;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
             background: var(--bg-chat);
             transition: background 0.3s;
         }
         
-        #messagesContainer::-webkit-scrollbar { width: 4px; }
+        #messagesContainer::-webkit-scrollbar { width: 3px; }
         #messagesContainer::-webkit-scrollbar-track { background: transparent; }
-        #messagesContainer::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 10px; }
+        #messagesContainer::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.06); border-radius: 10px; }
         
+        /* ============================================================
+           فقاعات الرسائل - إنستا ستايل بالكامل
+           ============================================================ */
         .msg-wrapper {
             display: flex;
             flex-direction: column;
-            animation: slideUp 0.15s ease;
+            animation: slideUp 0.12s ease;
             cursor: default;
             position: relative;
             transition: 0.2s;
-            margin-bottom: 2px;
+            margin-bottom: 1px;
         }
         
         @keyframes slideUp {
@@ -348,9 +363,9 @@
         }
         
         .msg-wrapper .reply-preview {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             opacity: 0.4;
-            padding: 2px 12px 2px 8px;
+            padding: 1px 10px 1px 6px;
             border-right: 3px solid var(--color-accent);
             margin-bottom: 1px;
             font-weight: 500;
@@ -358,11 +373,11 @@
         }
         
         .msg {
-            max-width: 78%;
-            padding: 8px 14px 8px 16px;
-            border-radius: 18px;
-            font-size: 0.9rem;
-            line-height: 1.5;
+            max-width: 75%;
+            padding: 6px 12px 6px 14px;
+            border-radius: 16px;
+            font-size: 0.88rem;
+            line-height: 1.4;
             word-wrap: break-word;
             position: relative;
             margin-bottom: 1px;
@@ -371,12 +386,12 @@
             display: flex;
             align-items: flex-start;
             gap: 8px;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+            box-shadow: 0 1px 2px var(--shadow-color);
         }
         
         .msg .avatar-small {
-            width: 28px;
-            height: 28px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             flex-shrink: 0;
             overflow: hidden;
@@ -386,31 +401,68 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.85rem;
-            background: linear-gradient(135deg, var(--color-accent), #128C7E);
+            font-size: 0.8rem;
+            background: var(--color-accent-gradient);
+            color: #fff;
         }
         
-        .msg .avatar-small:hover { transform: scale(1.1); }
+        .msg .avatar-small:hover { transform: scale(1.08); }
         .msg .avatar-small img { width: 100%; height: 100%; object-fit: cover; }
         
         .msg .content { flex: 1; min-width: 0; }
-        .msg .content .sender-name { font-weight: 600; font-size: 0.7rem; opacity: 0.5; margin-bottom: 2px; display: block; cursor: pointer; color: var(--color-accent); }
-        .msg .content .sender-name:hover { opacity: 1; }
-        .msg .content .text { font-size: 0.9rem; line-height: 1.5; font-weight: 400; color: var(--text-primary); }
-        .msg .content .time { font-size: 0.5rem; opacity: 0.3; margin-top: 3px; text-align: left; display: flex; align-items: center; gap: 3px; justify-content: flex-end; color: var(--text-secondary); }
+        .msg .content .sender-name {
+            font-weight: 600;
+            font-size: 0.65rem;
+            opacity: 0.5;
+            margin-bottom: 1px;
+            display: block;
+            cursor: pointer;
+            background: var(--color-accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .msg .content .sender-name:hover { opacity: 0.8; }
+        .msg .content .text { font-size: 0.88rem; line-height: 1.4; font-weight: 400; color: var(--text-primary); }
+        .msg .content .time {
+            font-size: 0.5rem;
+            opacity: 0.3;
+            margin-top: 2px;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            justify-content: flex-end;
+            color: var(--text-secondary);
+        }
         .msg .content .time .check { font-size: 0.55rem; }
         
-        .msg.sent { align-self: flex-end; background: var(--bg-bubble-sent); border-bottom-right-radius: 4px; margin-left: 4px; }
+        /* ===== فقاعة مرسلة ===== */
+        .msg.sent {
+            align-self: flex-end;
+            background: var(--bg-bubble-sent);
+            border-bottom-right-radius: 3px;
+            margin-left: 4px;
+        }
         .msg.sent .content .text { color: var(--text-bubble-sent); }
-        .msg.received { align-self: flex-start; background: var(--bg-bubble-received); border: 1px solid var(--border-color); border-bottom-left-radius: 4px; margin-right: 4px; }
+        
+        /* ===== فقاعة مستقبلة ===== */
+        .msg.received {
+            align-self: flex-start;
+            background: var(--bg-bubble-received);
+            border: 1px solid var(--border-color);
+            border-bottom-left-radius: 3px;
+            margin-right: 4px;
+        }
         .msg.received .content .text { color: var(--text-bubble-received); }
         
+        /* ===== أزرار التفاعل ===== */
         .msg .actions-bar {
             display: flex;
             gap: 4px;
-            margin-top: 4px;
+            margin-top: 3px;
             opacity: 0;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             flex-wrap: wrap;
             transition: 0.15s;
         }
@@ -423,26 +475,27 @@
             border: none;
             color: var(--text-secondary);
             cursor: pointer;
-            font-size: 0.65rem;
-            padding: 2px 6px;
-            border-radius: 10px;
+            font-size: 0.6rem;
+            padding: 1px 5px;
+            border-radius: 8px;
             transition: 0.2s;
             opacity: 0.6;
         }
         
-        .msg .actions-bar button:hover { opacity: 1; background: rgba(255,255,255,0.03); }
+        .msg .actions-bar button:hover { opacity: 1; background: rgba(0,0,0,0.02); }
         
+        /* ===== التفاعلات ===== */
         .msg .reactions {
             display: flex;
-            gap: 3px;
-            margin-top: 4px;
+            gap: 2px;
+            margin-top: 3px;
             flex-wrap: wrap;
         }
         
         .msg .reactions .reaction {
-            background: rgba(255,255,255,0.04);
-            padding: 2px 8px;
-            border-radius: 12px;
+            background: rgba(0,0,0,0.03);
+            padding: 1px 7px;
+            border-radius: 10px;
             font-size: 0.7rem;
             cursor: pointer;
             transition: 0.2s;
@@ -453,15 +506,15 @@
         }
         
         .msg .reactions .reaction:hover {
-            background: rgba(255,255,255,0.08);
+            background: rgba(0,0,0,0.06);
             transform: scale(1.05);
         }
         
         .msg .delete-btn {
             position: absolute;
-            top: -4px;
-            right: -4px;
-            background: rgba(255,68,68,0.7);
+            top: -3px;
+            right: -3px;
+            background: rgba(225, 48, 108, 0.7);
             border: none;
             color: #fff;
             border-radius: 40px;
@@ -476,38 +529,44 @@
         }
         
         .msg-wrapper:hover .msg .delete-btn { display: flex; }
-        .msg .delete-btn:hover { transform: scale(1.2); }
+        .msg .delete-btn:hover { transform: scale(1.15); }
         
-        .date-divider { text-align: center; font-size: 0.6rem; color: var(--text-secondary); padding: 6px 0; opacity: 0.4; }
+        .date-divider { text-align: center; font-size: 0.6rem; color: var(--text-secondary); padding: 4px 0; opacity: 0.3; }
         .welcome-msg { text-align: center; padding: 30px 0; opacity: 0.3; }
         .welcome-msg .icon { font-size: 3rem; }
         .welcome-msg .title { font-size: 1rem; margin-top: 8px; color: var(--text-primary); }
-        .welcome-msg .sub { font-size: 0.8rem; margin-top: 4px; color: var(--text-secondary); }
+        .welcome-msg .sub { font-size: 0.75rem; margin-top: 4px; color: var(--text-secondary); }
         
+        /* ============================================================
+           مؤشر الكتابة
+           ============================================================ */
         #typingIndicator {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: var(--text-secondary);
-            padding: 2px 16px 6px;
-            min-height: 22px;
+            padding: 2px 14px 4px;
+            min-height: 20px;
             display: none;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
         }
         
         #typingIndicator .dots { display: flex; gap: 2px; }
-        #typingIndicator .dots span { width: 5px; height: 5px; border-radius: 50%; background: var(--text-secondary); animation: dotBounce 1.4s infinite; }
+        #typingIndicator .dots span { width: 4px; height: 4px; border-radius: 50%; background: var(--text-secondary); animation: dotBounce 1.4s infinite; }
         #typingIndicator .dots span:nth-child(2) { animation-delay: 0.2s; }
         #typingIndicator .dots span:nth-child(3) { animation-delay: 0.4s; }
         
-        @keyframes dotBounce { 0%,60%,100% { transform: translateY(0); } 30% { transform: translateY(-5px); } }
+        @keyframes dotBounce { 0%,60%,100% { transform: translateY(0); } 30% { transform: translateY(-4px); } }
         
+        /* ============================================================
+           إدخال الرسالة - إنستا ستايل
+           ============================================================ */
         .chat-input {
             display: flex;
-            align-items: center;
+            align-items: flex-end;
             gap: 6px;
-            padding: 6px 12px 10px;
+            padding: 6px 10px 10px;
             padding-bottom: calc(10px + var(--safe-bottom));
-            background: var(--bg-secondary);
+            background: var(--bg-header);
             border-top: 1px solid var(--border-color);
             flex-shrink: 0;
             transition: background 0.3s, border-color 0.3s;
@@ -516,70 +575,125 @@
         .chat-input .input-wrap {
             flex: 1;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             background: var(--bg-input);
-            border-radius: 25px;
-            padding: 2px 6px;
-            border: 2px solid var(--border-color);
+            border-radius: 20px;
+            padding: 4px 8px;
+            border: 1px solid var(--border-color);
             transition: 0.3s;
         }
         
-        .chat-input .input-wrap:focus-within { border-color: var(--color-accent); }
+        .chat-input .input-wrap:focus-within {
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 2px rgba(64, 93, 230, 0.05);
+        }
         
-        .chat-input .input-wrap .emoji-btn {
+        .chat-input .input-wrap .input-row {
+            display: flex;
+            align-items: center;
+        }
+        
+        .chat-input .input-wrap .input-row .emoji-btn {
             background: none;
             border: none;
-            font-size: 1.2rem;
-            padding: 4px 8px;
+            font-size: 1.1rem;
+            padding: 2px 6px;
             cursor: pointer;
             opacity: 0.5;
             transition: 0.2s;
             color: var(--text-secondary);
         }
         
-        .chat-input .input-wrap .emoji-btn:hover { opacity: 1; }
-        .chat-input .input-wrap .emoji-btn:active { transform: scale(0.9); }
+        .chat-input .input-wrap .input-row .emoji-btn:hover { opacity: 1; }
+        .chat-input .input-wrap .input-row .emoji-btn:active { transform: scale(0.9); }
         
-        .chat-input .input-wrap input {
+        .chat-input .input-wrap .input-row .sticker-btn {
+            background: none;
+            border: none;
+            font-size: 1.1rem;
+            padding: 2px 6px;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: 0.2s;
+            color: var(--text-secondary);
+        }
+        
+        .chat-input .input-wrap .input-row .sticker-btn:hover { opacity: 1; }
+        .chat-input .input-wrap .input-row .sticker-btn:active { transform: scale(0.9); }
+        
+        .chat-input .input-wrap .input-row input {
             flex: 1;
-            padding: 8px 4px;
+            padding: 6px 4px;
             border: none;
             background: transparent;
             color: var(--text-primary);
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             outline: none;
             min-width: 0;
         }
         
-        .chat-input .input-wrap input::placeholder {
+        .chat-input .input-wrap .input-row input::placeholder {
             color: var(--text-secondary);
             font-size: 0.85rem;
         }
         
         .chat-input .send-btn {
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             border: none;
-            background: linear-gradient(135deg, var(--color-accent), #128C7E);
+            background: var(--color-accent-gradient);
             color: #fff;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: 0.3s;
             flex-shrink: 0;
-            box-shadow: 0 4px 16px rgba(37,211,102,0.12);
+            box-shadow: 0 4px 16px rgba(64, 93, 230, 0.12);
         }
         
-        .chat-input .send-btn:hover { transform: scale(1.05); }
+        .chat-input .send-btn:hover { transform: scale(1.03); }
         .chat-input .send-btn:active { transform: scale(0.9); }
         
+        /* ============================================================
+           لوحة الإيموجي - كاملة مثل الكيبورد
+           ============================================================ */
         #emojiPanel {
             display: none;
             flex-wrap: wrap;
-            padding: 8px 10px;
+            padding: 6px 8px;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            gap: 2px;
+            max-height: 180px;
+            overflow-y: auto;
+            flex-shrink: 0;
+            transition: background 0.3s, border-color 0.3s;
+        }
+        
+        #emojiPanel .emoji-item {
+            font-size: 1.5rem;
+            padding: 2px 4px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: 0.12s;
+            user-select: none;
+        }
+        
+        #emojiPanel .emoji-item:hover { background: rgba(0,0,0,0.04); transform: scale(1.1); }
+        #emojiPanel .emoji-item:active { transform: scale(0.9); }
+        #emojiPanel::-webkit-scrollbar { width: 2px; }
+        #emojiPanel::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.06); border-radius: 10px; }
+        
+        /* ============================================================
+           لوحة الستيكرات
+           ============================================================ */
+        #stickerPanel {
+            display: none;
+            flex-wrap: wrap;
+            padding: 6px 8px;
             background: var(--bg-secondary);
             border-top: 1px solid var(--border-color);
             gap: 4px;
@@ -589,62 +703,76 @@
             transition: background 0.3s, border-color 0.3s;
         }
         
-        #emojiPanel .emoji-item {
-            font-size: 1.5rem;
-            padding: 3px 6px;
+        #stickerPanel .sticker-item {
+            font-size: 2.2rem;
+            padding: 2px 4px;
             cursor: pointer;
-            border-radius: 6px;
-            transition: 0.15s;
+            border-radius: 8px;
+            transition: 0.12s;
             user-select: none;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
-        #emojiPanel .emoji-item:hover { background: rgba(255,255,255,0.04); transform: scale(1.15); }
-        #emojiPanel .emoji-item:active { transform: scale(0.9); }
-        #emojiPanel::-webkit-scrollbar { width: 2px; }
-        #emojiPanel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 10px; }
+        #stickerPanel .sticker-item:hover { background: rgba(0,0,0,0.04); transform: scale(1.05); }
+        #stickerPanel .sticker-item:active { transform: scale(0.9); }
+        #stickerPanel::-webkit-scrollbar { width: 2px; }
+        #stickerPanel::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.06); border-radius: 10px; }
         
+        /* ============================================================
+           شريط الرد - إنستا ستايل
+           ============================================================ */
         .reply-bar {
             display: none;
-            padding: 3px 14px 3px 10px;
+            padding: 3px 12px 3px 8px;
             background: var(--bg-secondary);
             border-top: 1px solid var(--border-color);
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--text-secondary);
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
         
         .reply-bar .reply-text { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .reply-bar .reply-cancel { background: none; border: none; color: #ff4444; cursor: pointer; font-size: 1.1rem; }
+        .reply-bar .reply-cancel { background: none; border: none; color: #E1306C; cursor: pointer; font-size: 1rem; }
         
+        /* ============================================================
+           قائمة الضغط المطول - إنستا ستايل
+           ============================================================ */
         .context-menu {
             display: none;
             position: fixed;
             background: var(--bg-secondary);
-            border-radius: var(--radius-md);
+            border-radius: 14px;
             padding: 6px 0;
-            min-width: 170px;
+            min-width: 160px;
             z-index: 300;
-            box-shadow: 0 10px 40px var(--shadow-color);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
             border: 1px solid var(--border-color);
-            animation: slideUp 0.12s ease;
+            animation: slideUp 0.1s ease;
         }
         
         .context-menu .menu-item {
-            padding: 10px 16px;
-            font-size: 0.85rem;
+            padding: 8px 14px;
+            font-size: 0.8rem;
             cursor: pointer;
-            transition: 0.15s;
+            transition: 0.12s;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             color: var(--text-primary);
         }
         
-        .context-menu .menu-item:hover { background: rgba(255,255,255,0.03); }
-        .context-menu .menu-item.danger { color: #ff4444; }
-        .context-menu .menu-item .icon { font-size: 1.1rem; }
+        .context-menu .menu-item:hover { background: rgba(0,0,0,0.02); }
+        .context-menu .menu-item.danger { color: #E1306C; }
+        .context-menu .menu-item .icon { font-size: 1rem; }
         
+        /* ============================================================
+           مودالات - إنستا ستايل
+           ============================================================ */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -652,47 +780,47 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(15px);
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
             z-index: 200;
             justify-content: center;
             align-items: center;
             padding: 20px;
-            animation: fadeIn 0.2s ease;
+            animation: fadeIn 0.15s ease;
         }
         
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
         .modal-overlay .modal-content {
             background: var(--bg-secondary);
-            border-radius: var(--radius-lg);
-            padding: 24px;
-            max-width: 380px;
+            border-radius: 20px;
+            padding: 22px;
+            max-width: 360px;
             width: 100%;
             border: 1px solid var(--border-color);
-            animation: slideUp 0.2s ease;
+            animation: slideUp 0.15s ease;
         }
         
         .modal-overlay .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
         
-        .modal-overlay .modal-header h3 { font-size: 1.1rem; color: var(--color-accent); }
-        .modal-overlay .modal-header .close-modal { background: none; border: none; color: #ff4444; font-size: 1.4rem; cursor: pointer; }
+        .modal-overlay .modal-header h3 { font-size: 1.05rem; color: var(--color-accent); }
+        .modal-overlay .modal-header .close-modal { background: none; border: none; color: #E1306C; font-size: 1.3rem; cursor: pointer; }
         
         .modal-overlay .avatar-preview {
-            width: 90px;
-            height: 90px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
-            margin: 0 auto 14px;
-            background: linear-gradient(135deg, var(--color-accent), #128C7E);
+            margin: 0 auto 12px;
+            background: var(--color-accent-gradient);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             overflow: hidden;
             cursor: pointer;
             position: relative;
@@ -700,7 +828,7 @@
             border: 3px solid var(--border-color);
         }
         
-        .modal-overlay .avatar-preview:hover { transform: scale(1.04); }
+        .modal-overlay .avatar-preview:hover { transform: scale(1.03); }
         .modal-overlay .avatar-preview:active { transform: scale(0.95); }
         .modal-overlay .avatar-preview img { width: 100%; height: 100%; object-fit: cover; }
         .modal-overlay .avatar-preview .upload-overlay {
@@ -710,21 +838,21 @@
             right: 0;
             background: rgba(0,0,0,0.5);
             color: #fff;
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             padding: 3px;
             text-align: center;
         }
         
-        .modal-overlay .modal-field { margin-bottom: 12px; }
-        .modal-overlay .modal-field label { display: block; font-size: 0.75rem; opacity: 0.5; margin-bottom: 3px; color: var(--text-secondary); }
+        .modal-overlay .modal-field { margin-bottom: 10px; }
+        .modal-overlay .modal-field label { display: block; font-size: 0.7rem; opacity: 0.5; margin-bottom: 2px; color: var(--text-secondary); }
         .modal-overlay .modal-field input {
             width: 100%;
-            padding: 10px 14px;
+            padding: 8px 12px;
             border-radius: var(--radius-sm);
-            border: 2px solid var(--border-color);
+            border: 1px solid var(--border-color);
             background: var(--bg-input);
             color: var(--text-primary);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             outline: none;
             transition: 0.3s;
         }
@@ -732,23 +860,23 @@
         
         .modal-overlay .modal-actions {
             display: flex;
-            gap: 10px;
-            margin-top: 16px;
+            gap: 8px;
+            margin-top: 14px;
         }
         
         .modal-overlay .modal-actions button {
             flex: 1;
-            padding: 10px;
+            padding: 8px;
             border-radius: var(--radius-sm);
             border: none;
             font-weight: 600;
             cursor: pointer;
             transition: 0.3s;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
         
         .modal-overlay .modal-actions .btn-save {
-            background: linear-gradient(135deg, var(--color-accent), #128C7E);
+            background: var(--color-accent-gradient);
             color: #fff;
         }
         .modal-overlay .modal-actions .btn-save:hover { transform: scale(1.02); }
@@ -762,33 +890,36 @@
         
         .modal-overlay .modal-field textarea {
             width: 100%;
-            padding: 10px 14px;
+            padding: 8px 12px;
             border-radius: var(--radius-sm);
-            border: 2px solid var(--border-color);
+            border: 1px solid var(--border-color);
             background: var(--bg-input);
             color: var(--text-primary);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             outline: none;
             transition: 0.3s;
-            min-height: 70px;
+            min-height: 60px;
             resize: vertical;
             font-family: inherit;
         }
         .modal-overlay .modal-field textarea:focus { border-color: var(--color-accent); }
         
+        /* ============================================================
+           زر التمرير للأسفل
+           ============================================================ */
         #scrollToBottom {
             position: absolute;
-            bottom: 90px;
-            right: 16px;
-            width: 36px;
-            height: 36px;
+            bottom: 80px;
+            right: 12px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
-            background: var(--color-accent);
+            background: var(--color-accent-gradient);
             color: #fff;
             border: none;
-            font-size: 1rem;
+            font-size: 0.9rem;
             cursor: pointer;
-            box-shadow: 0 4px 16px rgba(37,211,102,0.25);
+            box-shadow: 0 4px 16px rgba(64, 93, 230, 0.2);
             display: none;
             align-items: center;
             justify-content: center;
@@ -796,29 +927,32 @@
             z-index: 10;
         }
         
-        #scrollToBottom:hover { transform: scale(1.08); }
+        #scrollToBottom:hover { transform: scale(1.05); }
         #scrollToBottom:active { transform: scale(0.9); }
         #scrollToBottom .badge {
             position: absolute;
-            top: -4px;
-            right: -4px;
-            background: #ff4444;
+            top: -3px;
+            right: -3px;
+            background: #E1306C;
             color: #fff;
             border-radius: 50%;
-            width: 18px;
-            height: 18px;
-            font-size: 0.55rem;
+            width: 16px;
+            height: 16px;
+            font-size: 0.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
         }
         
+        /* ============================================================
+           لوحة المسؤول
+           ============================================================ */
         #adminPanel {
             display: none;
             flex-direction: column;
             height: 100%;
-            padding: 14px;
-            padding-top: calc(14px + var(--safe-top));
+            padding: 12px;
+            padding-top: calc(12px + var(--safe-top));
             background: var(--bg-primary);
             position: absolute;
             top: 0;
@@ -826,55 +960,61 @@
             width: 100%;
             z-index: 100;
             overflow-y: auto;
-            animation: slideUp 0.2s ease;
+            animation: slideUp 0.15s ease;
         }
         
         #adminPanel .admin-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
         }
         
-        #adminPanel .admin-header h2 { color: var(--color-accent); font-size: 1.2rem; }
-        #adminPanel .admin-header .close-admin { background: none; border: none; color: #ff4444; font-size: 1.4rem; cursor: pointer; padding: 4px 10px; }
+        #adminPanel .admin-header h2 {
+            background: var(--color-accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.1rem;
+        }
+        #adminPanel .admin-header .close-admin { background: none; border: none; color: #E1306C; font-size: 1.3rem; cursor: pointer; padding: 4px 8px; }
         
         #adminPanel .admin-stats {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 6px;
-            margin-bottom: 12px;
+            gap: 4px;
+            margin-bottom: 10px;
         }
         
         #adminPanel .admin-stats .stat {
-            padding: 8px;
+            padding: 6px;
             background: var(--bg-secondary);
             border-radius: var(--radius-sm);
             text-align: center;
             border: 1px solid var(--border-color);
         }
         
-        #adminPanel .admin-stats .stat .num { font-size: 1.1rem; font-weight: 700; color: var(--color-accent); }
-        #adminPanel .admin-stats .stat .label { font-size: 0.55rem; opacity: 0.5; color: var(--text-secondary); }
+        #adminPanel .admin-stats .stat .num { font-size: 1rem; font-weight: 700; background: var(--color-accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        #adminPanel .admin-stats .stat .label { font-size: 0.5rem; opacity: 0.5; color: var(--text-secondary); }
         
         #adminPanel .admin-tabs {
             display: flex;
             gap: 4px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             flex-wrap: wrap;
         }
         
         #adminPanel .admin-tabs button {
-            padding: 6px 14px;
+            padding: 4px 12px;
             border-radius: var(--radius-sm);
             border: 1px solid var(--border-color);
             background: var(--bg-secondary);
             color: var(--text-secondary);
             cursor: pointer;
             transition: 0.3s;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 600;
         }
         
@@ -885,7 +1025,7 @@
         }
         
         #adminPanel .admin-tabs button:hover { opacity: 0.8; }
-        #adminPanel .admin-section { display: none; flex-direction: column; gap: 8px; }
+        #adminPanel .admin-section { display: none; flex-direction: column; gap: 6px; }
         #adminPanel .admin-section.active { display: flex; }
         
         .bad-words-list {
@@ -896,88 +1036,88 @@
         }
         
         .bad-words-list .word-tag {
-            background: rgba(255,68,68,0.12);
-            color: #ff4444;
-            padding: 3px 10px;
-            border-radius: 16px;
-            font-size: 0.75rem;
+            background: rgba(225, 48, 108, 0.08);
+            color: #E1306C;
+            padding: 2px 8px;
+            border-radius: 14px;
+            font-size: 0.7rem;
             display: flex;
             align-items: center;
             gap: 4px;
-            border: 1px solid rgba(255,68,68,0.15);
+            border: 1px solid rgba(225, 48, 108, 0.1);
         }
         
-        .bad-words-list .word-tag .remove-word { background: none; border: none; color: #ff4444; cursor: pointer; font-size: 0.8rem; }
+        .bad-words-list .word-tag .remove-word { background: none; border: none; color: #E1306C; cursor: pointer; font-size: 0.7rem; }
         
         .bad-words-input {
             display: flex;
-            gap: 6px;
+            gap: 4px;
         }
         
         .bad-words-input input {
             flex: 1;
-            padding: 8px 12px;
+            padding: 6px 10px;
             border-radius: var(--radius-sm);
-            border: 2px solid var(--border-color);
+            border: 1px solid var(--border-color);
             background: var(--bg-input);
             color: var(--text-primary);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             outline: none;
         }
         .bad-words-input input:focus { border-color: var(--color-accent); }
         .bad-words-input button {
-            padding: 8px 16px;
+            padding: 6px 14px;
             border-radius: var(--radius-sm);
             border: none;
-            background: var(--color-accent);
+            background: var(--color-accent-gradient);
             color: #fff;
             font-weight: 600;
             cursor: pointer;
             transition: 0.3s;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
         }
         .bad-words-input button:hover { transform: scale(1.02); }
         
         .advanced-stats {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 6px;
+            gap: 4px;
         }
         
         .advanced-stats .stat-item {
-            padding: 10px;
+            padding: 8px;
             background: var(--bg-secondary);
             border-radius: var(--radius-sm);
             border: 1px solid var(--border-color);
             text-align: center;
         }
         
-        .advanced-stats .stat-item .num { font-size: 1.2rem; font-weight: 700; color: var(--color-accent); }
-        .advanced-stats .stat-item .label { font-size: 0.55rem; opacity: 0.5; color: var(--text-secondary); }
+        .advanced-stats .stat-item .num { font-size: 1.1rem; font-weight: 700; background: var(--color-accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .advanced-stats .stat-item .label { font-size: 0.5rem; opacity: 0.5; color: var(--text-secondary); }
         
         .quick-settings {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4px;
         }
         
         .quick-settings .setting-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 8px 12px;
+            padding: 6px 10px;
             background: var(--bg-secondary);
             border-radius: var(--radius-sm);
             border: 1px solid var(--border-color);
         }
         
-        .quick-settings .setting-item .label { font-size: 0.8rem; color: var(--text-primary); }
+        .quick-settings .setting-item .label { font-size: 0.75rem; color: var(--text-primary); }
         
         .quick-settings .setting-item .switch {
-            width: 40px;
-            height: 22px;
+            width: 36px;
+            height: 20px;
             background: var(--border-color);
-            border-radius: 11px;
+            border-radius: 10px;
             cursor: pointer;
             position: relative;
             transition: 0.3s;
@@ -985,8 +1125,8 @@
         
         .quick-settings .setting-item .switch.active { background: var(--color-accent); }
         .quick-settings .setting-item .switch .thumb {
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             background: #fff;
             border-radius: 50%;
             position: absolute;
@@ -994,19 +1134,19 @@
             left: 2px;
             transition: 0.3s;
         }
-        .quick-settings .setting-item .switch.active .thumb { left: 20px; }
+        .quick-settings .setting-item .switch.active .thumb { left: 18px; }
         
         #adminUserList {
             display: flex;
             flex-direction: column;
-            gap: 3px;
+            gap: 2px;
         }
         
         #adminUserList .user-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 6px 10px;
+            padding: 4px 8px;
             background: var(--bg-secondary);
             border-radius: var(--radius-sm);
             gap: 4px;
@@ -1016,7 +1156,7 @@
         
         #adminUserList .user-item .name {
             font-weight: 500;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             display: flex;
             align-items: center;
             gap: 4px;
@@ -1025,46 +1165,49 @@
         }
         
         #adminUserList .user-item .name .badge {
-            font-size: 0.45rem;
-            padding: 1px 6px;
-            border-radius: 14px;
+            font-size: 0.4rem;
+            padding: 1px 5px;
+            border-radius: 12px;
             background: var(--color-accent);
             color: #fff;
         }
-        #adminUserList .user-item .name .badge.admin { background: #f5a623; }
-        #adminUserList .user-item .name .badge.blocked { background: #ff4444; }
-        #adminUserList .user-item .name .badge.online { background: var(--color-accent); }
-        #adminUserList .user-item .name .badge.offline { background: #666; }
-        #adminUserList .user-item .name .badge.banned { background: #ff6b6b; }
+        #adminUserList .user-item .name .badge.admin { background: #833AB4; }
+        #adminUserList .user-item .name .badge.blocked { background: #E1306C; }
+        #adminUserList .user-item .name .badge.online { background: #25D366; }
+        #adminUserList .user-item .name .badge.offline { background: #8E8E8E; }
+        #adminUserList .user-item .name .badge.banned { background: #FD1D1D; }
         
         #adminUserList .user-item .actions-group {
             display: flex;
-            gap: 3px;
+            gap: 2px;
             flex-wrap: wrap;
         }
         
         #adminUserList .user-item .actions-group button {
             background: none;
             border: none;
-            padding: 2px 6px;
-            border-radius: 12px;
-            font-size: 0.6rem;
+            padding: 1px 5px;
+            border-radius: 10px;
+            font-size: 0.55rem;
             font-weight: 600;
             cursor: pointer;
             transition: 0.2s;
         }
         
-        #adminUserList .user-item .btn-block { color: #ff6b6b; }
-        #adminUserList .user-item .btn-block:hover { background: rgba(255,107,107,0.08); }
-        #adminUserList .user-item .btn-delete { color: #ff4444; }
-        #adminUserList .user-item .btn-delete:hover { background: rgba(255,68,68,0.08); }
-        #adminUserList .user-item .btn-admin { color: #4facfe; }
-        #adminUserList .user-item .btn-admin:hover { background: rgba(79,172,254,0.08); }
+        #adminUserList .user-item .btn-block { color: #E1306C; }
+        #adminUserList .user-item .btn-block:hover { background: rgba(225, 48, 108, 0.05); }
+        #adminUserList .user-item .btn-delete { color: #FD1D1D; }
+        #adminUserList .user-item .btn-delete:hover { background: rgba(253, 29, 29, 0.05); }
+        #adminUserList .user-item .btn-admin { color: #833AB4; }
+        #adminUserList .user-item .btn-admin:hover { background: rgba(131, 58, 180, 0.05); }
         #adminUserList .user-item .btn-unblock { color: var(--color-accent); }
-        #adminUserList .user-item .btn-unblock:hover { background: rgba(37,211,102,0.08); }
-        #adminUserList .user-item .btn-warn { color: #f5a623; }
-        #adminUserList .user-item .btn-warn:hover { background: rgba(245,166,35,0.08); }
+        #adminUserList .user-item .btn-unblock:hover { background: rgba(64, 93, 230, 0.05); }
+        #adminUserList .user-item .btn-warn { color: #FCAF45; }
+        #adminUserList .user-item .btn-warn:hover { background: rgba(252, 175, 69, 0.05); }
         
+        /* ============================================================
+           إشعارات - إنستا ستايل
+           ============================================================ */
         .temp-notification {
             position: fixed;
             bottom: 70px;
@@ -1072,14 +1215,14 @@
             transform: translateX(-50%) translateY(20px);
             background: var(--bg-secondary);
             color: var(--text-primary);
-            padding: 8px 22px;
-            border-radius: 25px;
-            font-size: 0.8rem;
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 0.75rem;
             z-index: 999;
             max-width: 90%;
             text-align: center;
             border: 1px solid var(--border-color);
-            animation: notificationIn 0.25s ease forwards;
+            animation: notificationIn 0.2s ease forwards;
             opacity: 0;
             box-shadow: 0 4px 20px var(--shadow-color);
         }
@@ -1089,80 +1232,56 @@
             to { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
         
-        /* ===== حذف شاشة الإعداد المؤقتة - تظهر مرة واحدة فقط ===== */
-        #setupStatus {
-            display: none !important;
-        }
-        
         #fileInput { display: none; }
         
-        .search-bar {
-            display: none;
-            padding: 6px 14px;
-            background: var(--bg-secondary);
-            border-bottom: 1px solid var(--border-color);
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .search-bar input {
-            flex: 1;
-            padding: 6px 12px;
-            border-radius: 18px;
-            border: 1px solid var(--border-color);
-            background: var(--bg-input);
-            color: var(--text-primary);
-            font-size: 0.85rem;
-            outline: none;
-        }
-        
-        .search-bar input:focus { border-color: var(--color-accent); }
-        .search-bar .search-close { background: none; border: none; color: #ff4444; font-size: 1.1rem; cursor: pointer; }
-        .search-results { padding: 4px 12px; font-size: 0.75rem; color: var(--text-secondary); max-height: 120px; overflow-y: auto; }
-        .search-results .result-item { padding: 3px 6px; cursor: pointer; border-radius: 4px; transition: 0.2s; }
-        .search-results .result-item:hover { background: rgba(255,255,255,0.03); }
-        
+        /* ============================================================
+           Responsive
+           ============================================================ */
         @media (max-width: 480px) {
             #app { max-width: 100%; border-radius: 0; }
             #loginScreen { padding: 30px 20px; }
             #loginScreen .logo-wrap { width: 80px; height: 80px; font-size: 3rem; }
             #loginScreen h1 { font-size: 2.2rem; }
-            .chat-header { padding: 8px 12px; min-height: 54px; }
-            .chat-header .avatar-group { width: 36px; height: 36px; font-size: 1.2rem; }
-            .msg { max-width: 85%; font-size: 0.85rem; padding: 6px 10px; }
-            .msg .content .text { font-size: 0.85rem; }
-            .msg .avatar-small { width: 24px; height: 24px; font-size: 0.75rem; }
+            .chat-header { padding: 8px 12px; min-height: 48px; }
+            .chat-header .avatar-group { width: 34px; height: 34px; font-size: 1.1rem; }
+            .msg { max-width: 85%; font-size: 0.82rem; padding: 5px 10px; }
+            .msg .content .text { font-size: 0.82rem; }
+            .msg .avatar-small { width: 22px; height: 22px; font-size: 0.7rem; }
             .chat-input { padding: 4px 8px 8px; }
-            .chat-input .send-btn { width: 38px; height: 38px; font-size: 1rem; }
+            .chat-input .send-btn { width: 36px; height: 36px; font-size: 1rem; }
             #adminPanel .admin-stats { grid-template-columns: repeat(2, 1fr); }
             .advanced-stats { grid-template-columns: 1fr; }
+            #emojiPanel .emoji-item { font-size: 1.3rem; }
+            #stickerPanel .sticker-item { font-size: 1.8rem; width: 50px; height: 50px; }
         }
         
         @media (min-width: 481px) and (max-width: 1024px) {
-            #app { max-width: 90%; height: 90vh; height: 90dvh; border-radius: 20px; margin: 5vh auto; }
+            #app { max-width: 90%; height: 90vh; height: 90dvh; border-radius: 16px; margin: 5vh auto; }
             #loginScreen .logo-wrap { width: 120px; height: 120px; font-size: 4.2rem; }
             #loginScreen h1 { font-size: 3rem; }
-            .msg { max-width: 70%; font-size: 0.95rem; }
-            .msg .content .text { font-size: 0.95rem; }
+            .msg { max-width: 70%; font-size: 0.92rem; }
+            .msg .content .text { font-size: 0.92rem; }
         }
         
         @media (min-width: 1025px) {
-            #app { max-width: 600px; height: 90vh; height: 90dvh; border-radius: 24px; margin: 5vh auto; }
+            #app { max-width: 600px; height: 90vh; height: 90dvh; border-radius: 20px; margin: 5vh auto; }
             #loginScreen .logo-wrap { width: 140px; height: 140px; font-size: 4.8rem; }
             #loginScreen h1 { font-size: 3.4rem; }
-            .msg { max-width: 65%; font-size: 1rem; }
-            .msg .content .text { font-size: 1rem; }
+            .msg { max-width: 65%; font-size: 0.95rem; }
+            .msg .content .text { font-size: 0.95rem; }
         }
         
         @media (orientation: landscape) and (max-height: 500px) {
             #loginScreen { flex-direction: row; flex-wrap: wrap; padding: 20px 40px; gap: 20px; }
             #loginScreen .logo-wrap { width: 60px; height: 60px; font-size: 2rem; }
             #loginScreen h1 { font-size: 1.8rem; }
-            .chat-header { padding: 4px 10px; min-height: 44px; }
-            .msg { font-size: 0.75rem; padding: 4px 8px; }
-            .msg .content .text { font-size: 0.75rem; }
+            .chat-header { padding: 4px 10px; min-height: 40px; }
+            .msg { font-size: 0.7rem; padding: 4px 8px; }
+            .msg .content .text { font-size: 0.7rem; }
             .chat-input { padding: 2px 6px 4px; }
-            .chat-input .send-btn { width: 32px; height: 32px; font-size: 0.9rem; }
+            .chat-input .send-btn { width: 30px; height: 30px; font-size: 0.8rem; }
+            #emojiPanel .emoji-item { font-size: 1.1rem; }
+            #stickerPanel .sticker-item { font-size: 1.5rem; width: 40px; height: 40px; }
         }
     </style>
 </head>
@@ -1172,7 +1291,7 @@
         <div id="loginScreen">
             <div class="logo-wrap">💬</div>
             <h1>نيزك</h1>
-            <div class="subtitle">✦ دردشة دائمة ✦</div>
+            <div class="subtitle">✦ دردشة إنستا ✦</div>
             
             <div class="input-group">
                 <span class="icon">👤</span>
@@ -1187,24 +1306,15 @@
             </div>
             
             <div class="color-picker" id="colorPicker">
-                <span style="font-size:0.8rem;opacity:0.5;margin-left:8px;">🎨 اختر لونك:</span>
-                <div class="color-option active" style="background:#25D366;" data-color="#25D366" onclick="selectColor('#25D366')"></div>
-                <div class="color-option" style="background:#4facfe;" data-color="#4facfe" onclick="selectColor('#4facfe')"></div>
+                <span style="font-size:0.7rem;opacity:0.5;margin-left:6px;">🎨 لونك:</span>
+                <div class="color-option active" style="background:#405DE6;" data-color="#405DE6" onclick="selectColor('#405DE6')"></div>
+                <div class="color-option" style="background:#25D366;" data-color="#25D366" onclick="selectColor('#25D366')"></div>
                 <div class="color-option" style="background:#f093fb;" data-color="#f093fb" onclick="selectColor('#f093fb')"></div>
                 <div class="color-option" style="background:#f5576c;" data-color="#f5576c" onclick="selectColor('#f5576c')"></div>
                 <div class="color-option" style="background:#f5a623;" data-color="#f5a623" onclick="selectColor('#f5a623')"></div>
                 <div class="color-option" style="background:#6c5ce7;" data-color="#6c5ce7" onclick="selectColor('#6c5ce7')"></div>
                 <div class="color-option" style="background:#00b894;" data-color="#00b894" onclick="selectColor('#00b894')"></div>
                 <div class="color-option" style="background:#fd79a8;" data-color="#fd79a8" onclick="selectColor('#fd79a8')"></div>
-            </div>
-            
-            <div class="sync-settings">
-                <span style="font-size:0.75rem;opacity:0.5;">📶 جودة المزامنة:</span>
-                <select id="syncQuality">
-                    <option value="high">⚡ عالي (سريع)</option>
-                    <option value="medium" selected>📶 متوسط</option>
-                    <option value="low">🐢 منخفض (يوفر بيانات)</option>
-                </select>
             </div>
             
             <button class="btn-primary" id="loginBtn">🚀 دخول</button>
@@ -1224,18 +1334,11 @@
                     <span class="status" id="onlineInfo">🟢 0 متصل · 0 رسالة</span>
                 </div>
                 <div class="actions">
-                    <button id="searchToggle" title="بحث">🔍</button>
                     <button id="themeToggleChat" title="الثيم">🌓</button>
                     <button id="adminShieldBtn" title="لوحة المسؤول">🛡️</button>
                     <button id="logoutBtn" title="خروج">🚪</button>
                 </div>
             </div>
-            
-            <div class="search-bar" id="searchBar">
-                <input type="text" id="searchInput" placeholder="بحث في الرسائل..." />
-                <button class="search-close" id="searchClose">✕</button>
-            </div>
-            <div class="search-results" id="searchResults"></div>
             
             <div id="messagesContainer"></div>
             
@@ -1249,12 +1352,19 @@
                 <button class="reply-cancel" id="replyCancel">✕</button>
             </div>
             
+            <!-- لوحة الإيموجي -->
             <div id="emojiPanel"></div>
+            
+            <!-- لوحة الستيكرات -->
+            <div id="stickerPanel"></div>
             
             <div class="chat-input">
                 <div class="input-wrap">
-                    <button class="emoji-btn" id="emojiBtn">😊</button>
-                    <input type="text" id="messageInput" placeholder="اكتب رسالة..." maxlength="500" autocomplete="off" />
+                    <div class="input-row">
+                        <button class="emoji-btn" id="emojiBtn">😊</button>
+                        <button class="sticker-btn" id="stickerBtn">🎨</button>
+                        <input type="text" id="messageInput" placeholder="اكتب رسالة..." maxlength="500" autocomplete="off" />
+                    </div>
                 </div>
                 <button class="send-btn" id="sendBtn">➤</button>
             </div>
@@ -1303,7 +1413,7 @@
                     <button id="addBadWordBtn">➕ إضافة</button>
                 </div>
                 <div class="bad-words-list" id="badWordsList"></div>
-                <p style="font-size:0.65rem;opacity:0.4;margin-top:4px;">💡 الكلمات الممنوعة تؤدي إلى حظر تلقائي للمستخدم</p>
+                <p style="font-size:0.6rem;opacity:0.4;margin-top:4px;">💡 الكلمات الممنوعة تؤدي إلى حظر تلقائي للمستخدم</p>
             </div>
             
             <div class="admin-section" id="tab-settings">
@@ -1327,7 +1437,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="admin-actions" style="margin-top:10px;">
+                <div class="admin-actions" style="margin-top:8px;">
                     <button class="btn-clear" onclick="clearAllMessages()">🗑️ مسح الكل</button>
                     <button class="btn-export" onclick="exportChat()">📤 تصدير</button>
                     <button class="btn-ban-all" onclick="banAllUsers()">⛔ حظر الكل</button>
@@ -1389,7 +1499,7 @@
     
     <script>
         // ============================================================
-        // 1. إعداد Firebase - تهيئة سريعة جداً
+        // 1. إعداد Firebase
         // ============================================================
         const firebaseConfig = {
             apiKey: "AIzaSyBVNXAFHyynNL7rD6LaYc4iYgvYPDdDH0c",
@@ -1424,6 +1534,7 @@
         let swipeStartX = 0;
         let swipeTarget = null;
         let emojiPanelOpen = false;
+        let stickerPanelOpen = false;
         let badWords = [];
         let settings = {
             muteAll: false,
@@ -1432,10 +1543,10 @@
         };
         let userBanCounts = {};
         let totalBadWordsBlocked = 0;
-        let selectedColor = '#25D366';
+        let selectedColor = '#405DE6';
         let unreadCount = 0;
         let isSearching = false;
-        let setupDone = false;
+        let firstLoad = true;
         
         // ============================================================
         // 3. العناصر
@@ -1464,6 +1575,8 @@
         const themeToggleChat = document.getElementById('themeToggleChat');
         const emojiBtn = document.getElementById('emojiBtn');
         const emojiPanel = document.getElementById('emojiPanel');
+        const stickerBtn = document.getElementById('stickerBtn');
+        const stickerPanel = document.getElementById('stickerPanel');
         const statUsers = document.getElementById('statUsers');
         const statOnline = document.getElementById('statOnline');
         const statMessages = document.getElementById('statMessages');
@@ -1474,11 +1587,6 @@
         const replyCancel = document.getElementById('replyCancel');
         const contextMenu = document.getElementById('contextMenu');
         const scrollToBottom = document.getElementById('scrollToBottom');
-        const searchToggle = document.getElementById('searchToggle');
-        const searchBar = document.getElementById('searchBar');
-        const searchInput = document.getElementById('searchInput');
-        const searchClose = document.getElementById('searchClose');
-        const searchResults = document.getElementById('searchResults');
         
         const statTotalUsers = document.getElementById('statTotalUsers');
         const statActiveUsers = document.getElementById('statActiveUsers');
@@ -1536,19 +1644,16 @@
         // 5. الثيم
         // ============================================================
         function toggleTheme() {
-            const themes = ['theme-dark', 'theme-light', 'theme-purple', 'theme-forest', 'theme-pink', 'theme-ocean'];
-            const current = document.body.className.split(' ').find(c => themes.includes(c)) || 'theme-dark';
-            const index = themes.indexOf(current);
-            const next = themes[(index + 1) % themes.length];
-            document.body.className = next;
-            localStorage.setItem('theme', next);
+            document.body.classList.toggle('theme-dark');
+            const theme = document.body.classList.contains('theme-dark') ? 'dark' : 'light';
+            localStorage.setItem('theme', theme);
             if (currentUser) {
-                db.collection('users').doc(currentUser).update({ theme: next }).catch(() => {});
+                db.collection('users').doc(currentUser).update({ theme: theme }).catch(() => {});
             }
         }
         
-        const savedTheme = localStorage.getItem('theme') || 'theme-dark';
-        document.body.className = savedTheme;
+        const savedTheme = localStorage.getItem('theme') === 'dark' ? 'theme-dark' : '';
+        if (savedTheme) document.body.classList.add('theme-dark');
         themeToggleLogin.onclick = toggleTheme;
         themeToggleChat.onclick = toggleTheme;
         
@@ -1564,7 +1669,7 @@
         }
         
         // ============================================================
-        // 7. مودال تعديل الصورة - حفظ Base64 في Firebase
+        // 7. مودال تعديل الصورة
         // ============================================================
         function openAvatarModal() {
             if (!currentUser) return;
@@ -1671,7 +1776,93 @@
         }
         
         // ============================================================
-        // 8. تسجيل الدخول - حفظ دائم في Firebase
+        // 8. لوحة الإيموجي - كاملة مثل الكيبورد
+        // ============================================================
+        const emojisList = [
+            '😊', '😂', '❤️', '🔥', '👍', '👏', '🎉', '✨', '💪', '🤔',
+            '😍', '🥰', '😎', '🤩', '👀', '💀', '🙏', '😅', '🤗', '😇',
+            '🥳', '🤯', '😱', '🥺', '😤', '👻', '🎃', '💫', '⭐', '🌈',
+            '🌙', '☀️', '⚡', '🔥', '💧', '❄️', '🌊', '🍕', '🍔', '🌮',
+            '🍣', '🍩', '🍪', '🎂', '🧁', '☕', '🍵', '🍺', '🥂', '🌸',
+            '💐', '🌹', '🌺', '🌻', '🌷', '🌿', '🍀', '🌴', '🌵', '🎄',
+            '🎋', '🎍', '🧧', '🎎', '🎏', '🎐', '🎑', '🎇', '🎆', '✨',
+            '🌟', '💫', '☄️', '🌞', '🌝', '🌛', '🌜', '🌚', '🌕', '🌖',
+            '🌗', '🌘', '🌑', '🌒', '🌓', '🌔', '🌙', '🌎', '🌍', '🌏'
+        ];
+        
+        function initEmojiPanel() {
+            emojiPanel.innerHTML = '';
+            emojisList.forEach(emoji => {
+                const span = document.createElement('span');
+                span.className = 'emoji-item';
+                span.textContent = emoji;
+                span.onclick = () => {
+                    insertAtCursor(emoji);
+                    emojiPanel.style.display = 'none';
+                    emojiPanelOpen = false;
+                };
+                emojiPanel.appendChild(span);
+            });
+        }
+        
+        function insertAtCursor(text) {
+            const cursorPos = messageInput.selectionStart || 0;
+            const value = messageInput.value;
+            messageInput.value = value.slice(0, cursorPos) + text + value.slice(cursorPos);
+            messageInput.focus();
+            const newPos = cursorPos + text.length;
+            messageInput.setSelectionRange(newPos, newPos);
+        }
+        
+        emojiBtn.onclick = function() {
+            emojiPanelOpen = !emojiPanelOpen;
+            stickerPanelOpen = false;
+            stickerPanel.style.display = 'none';
+            emojiPanel.style.display = emojiPanelOpen ? 'flex' : 'none';
+            if (emojiPanelOpen) {
+                emojiPanel.scrollTop = 0;
+            }
+        };
+        
+        // ============================================================
+        // 9. لوحة الستيكرات
+        // ============================================================
+        const stickersList = [
+            '😊', '😂', '❤️', '🔥', '👍', '👏', '🎉', '✨', '💪', '🤔',
+            '😍', '🥰', '😎', '🤩', '👀', '💀', '🙏', '😅', '🤗', '😇',
+            '🥳', '🤯', '😱', '🥺', '😤', '👻', '🎃', '💫', '⭐', '🌈',
+            '🌙', '☀️', '⚡', '🔥', '💧', '❄️', '🌊', '🍕', '🍔', '🌮',
+            '🍣', '🍩', '🍪', '🎂', '🧁', '☕', '🍵', '🍺', '🥂', '🌸',
+            '💐', '🌹', '🌺', '🌻', '🌷', '🌿', '🍀', '🌴', '🌵', '🎄'
+        ];
+        
+        function initStickerPanel() {
+            stickerPanel.innerHTML = '';
+            stickersList.forEach(sticker => {
+                const span = document.createElement('span');
+                span.className = 'sticker-item';
+                span.textContent = sticker;
+                span.onclick = () => {
+                    insertAtCursor(sticker);
+                    stickerPanel.style.display = 'none';
+                    stickerPanelOpen = false;
+                };
+                stickerPanel.appendChild(span);
+            });
+        }
+        
+        stickerBtn.onclick = function() {
+            stickerPanelOpen = !stickerPanelOpen;
+            emojiPanelOpen = false;
+            emojiPanel.style.display = 'none';
+            stickerPanel.style.display = stickerPanelOpen ? 'flex' : 'none';
+            if (stickerPanelOpen) {
+                stickerPanel.scrollTop = 0;
+            }
+        };
+        
+        // ============================================================
+        // 10. تسجيل الدخول
         // ============================================================
         loginBtn.onclick = async function() {
             const username = usernameInput.value.trim();
@@ -1716,7 +1907,8 @@
                     if (data.avatar && data.avatar !== '👤') myAvatar = data.avatar;
                     if (data.color) selectColor(data.color);
                     if (data.theme) {
-                        document.body.className = data.theme;
+                        if (data.theme === 'dark') document.body.classList.add('theme-dark');
+                        else document.body.classList.remove('theme-dark');
                         localStorage.setItem('theme', data.theme);
                     }
                     await db.collection('users').doc(username).update({ 
@@ -1743,8 +1935,8 @@
                     banReason: null,
                     banExpires: null,
                     banCount: 0,
-                    theme: localStorage.getItem('theme') || 'theme-dark',
-                    color: localStorage.getItem('userColor') || '#25D366',
+                    theme: localStorage.getItem('theme') === 'dark' ? 'dark' : 'light',
+                    color: localStorage.getItem('userColor') || '#405DE6',
                     createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                     lastSeen: firebase.firestore.FieldValue.serverTimestamp()
                 });
@@ -1771,7 +1963,7 @@
         adminPasswordInput.onkeydown = (e) => { if (e.key === 'Enter') loginBtn.click(); };
         
         // ============================================================
-        // 9. الدخول إلى الدردشة - بدون شاشة تهيئة
+        // 11. الدخول إلى الدردشة
         // ============================================================
         function enterChat(username) {
             loginScreen.style.display = 'none';
@@ -1785,6 +1977,7 @@
             listenUsers();
             listenTyping();
             initEmojiPanel();
+            initStickerPanel();
             loadBadWords();
             loadBanCounts();
             
@@ -1819,10 +2012,19 @@
                 scrollToBottom.style.display = 'none';
                 unreadCount = 0;
             };
+            
+            // منع ظهور الكيبورد فوق الرسائل
+            document.addEventListener('focusin', function(e) {
+                if (e.target === messageInput) {
+                    setTimeout(() => {
+                        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                    }, 300);
+                }
+            });
         }
         
         // ============================================================
-        // 10. الصورة الشخصية
+        // 12. الصورة الشخصية
         // ============================================================
         function loadAvatar(username) {
             db.collection('users').doc(username).onSnapshot((doc) => {
@@ -1833,7 +2035,8 @@
                         updateAvatarUI();
                     }
                     if (data.theme) {
-                        document.body.className = data.theme;
+                        if (data.theme === 'dark') document.body.classList.add('theme-dark');
+                        else document.body.classList.remove('theme-dark');
                         localStorage.setItem('theme', data.theme);
                     }
                     if (data.color) {
@@ -1844,272 +2047,127 @@
         }
         
         // ============================================================
-        // 11. لوحة الإيموجي
+        // 13. الكلمات الممنوعة
         // ============================================================
-        const emojisList = [
-            '😊', '😂', '❤️', '🔥', '👍', '👏', '🎉', '✨', '💪', '🤔',
-            '😍', '🥰', '😎', '🤩', '👀', '💀', '🙏', '😅', '🤗', '😇',
-            '🥳', '🤯', '😱', '🥺', '😤', '👻', '🎃', '💫', '⭐', '🌈',
-            '🌙', '☀️', '⚡', '🔥', '💧', '❄️', '🌊', '🍕', '🍔', '🌮',
-            '🍣', '🍩', '🍪', '🎂', '🧁', '☕', '🍵', '🍺', '🥂', '🌸'
-        ];
+        async function loadBadWords() {
+            try {
+                const snapshot = await db.collection('badwords').get();
+                badWords = [];
+                snapshot.forEach(doc => {
+                    badWords.push(doc.data().word);
+                });
+                renderBadWords();
+            } catch (error) {
+                console.error('خطأ في تحميل الكلمات الممنوعة:', error);
+            }
+        }
         
-        function initEmojiPanel() {
-            emojiPanel.innerHTML = '';
-            emojisList.forEach(emoji => {
-                const span = document.createElement('span');
-                span.className = 'emoji-item';
-                span.textContent = emoji;
-                span.onclick = () => {
-                    const cursorPos = messageInput.selectionStart || 0;
-                    const text = messageInput.value;
-                    messageInput.value = text.slice(0, cursorPos) + emoji + text.slice(cursorPos);
-                    messageInput.focus();
-                    const newPos = cursorPos + emoji.length;
-                    messageInput.setSelectionRange(newPos, newPos);
-                    emojiPanel.style.display = 'none';
-                    emojiPanelOpen = false;
-                };
-                emojiPanel.appendChild(span);
+        function renderBadWords() {
+            badWordsList.innerHTML = '';
+            badWords.forEach(word => {
+                const tag = document.createElement('span');
+                tag.className = 'word-tag';
+                tag.innerHTML = `${word} <button class="remove-word" onclick="removeBadWord('${word}')">✕</button>`;
+                badWordsList.appendChild(tag);
             });
         }
         
-        emojiBtn.onclick = function() {
-            emojiPanelOpen = !emojiPanelOpen;
-            emojiPanel.style.display = emojiPanelOpen ? 'flex' : 'none';
-            if (emojiPanelOpen) {
-                emojiPanel.scrollTop = 0;
+        async function addBadWord() {
+            const word = badWordInput.value.trim().toLowerCase();
+            if (!word) {
+                showNotification('❌ أدخل كلمة');
+                return;
             }
-        };
-        
-        // ============================================================
-        // 12. البحث في الرسائل
-        // ============================================================
-        let searchMessages = [];
-        
-        searchToggle.onclick = function() {
-            searchBar.style.display = searchBar.style.display === 'flex' ? 'none' : 'flex';
-            if (searchBar.style.display === 'flex') {
-                searchInput.focus();
-                isSearching = true;
-            } else {
-                isSearching = false;
-                searchResults.innerHTML = '';
-                searchInput.value = '';
-            }
-        };
-        
-        searchClose.onclick = function() {
-            searchBar.style.display = 'none';
-            isSearching = false;
-            searchResults.innerHTML = '';
-            searchInput.value = '';
-        };
-        
-        searchInput.oninput = function() {
-            const query = this.value.trim().toLowerCase();
-            if (!query) {
-                searchResults.innerHTML = '';
+            if (badWords.includes(word)) {
+                showNotification('⚠️ الكلمة موجودة بالفعل');
                 return;
             }
             
-            const results = searchMessages.filter(msg => 
-                msg.text && msg.text.toLowerCase().includes(query)
-            );
-            
-            if (results.length === 0) {
-                searchResults.innerHTML = '<div style="padding:8px;opacity:0.5;">لا توجد نتائج</div>';
-                return;
-            }
-            
-            let html = '';
-            results.slice(0, 10).forEach(msg => {
-                const sender = msg.username || 'مجهول';
-                const time = msg.timestamp ? 
-                    new Date(msg.timestamp.toDate()).toLocaleTimeString('ar', { hour: '2-digit', minute: '2-digit' }) : '';
-                html += `
-                    <div class="result-item" onclick="scrollToMessage('${msg.id}')">
-                        <span style="color:var(--color-accent);">${sender}</span>
-                        <span style="opacity:0.5;">${time}</span>
-                        <div style="font-size:0.85rem;">${msg.text}</div>
-                    </div>
-                `;
-            });
-            searchResults.innerHTML = html;
-        };
-        
-        window.scrollToMessage = function(id) {
-            const element = document.querySelector(`[data-id="${id}"]`);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                element.style.background = 'rgba(255,255,255,0.05)';
-                setTimeout(() => {
-                    element.style.background = '';
-                }, 2000);
-                searchBar.style.display = 'none';
-                isSearching = false;
-                searchResults.innerHTML = '';
-                searchInput.value = '';
-            }
-        };
-        
-        // ============================================================
-        // 13. السحب للرد
-        // ============================================================
-        function setupSwipeToReply() {
-            messagesContainer.addEventListener('touchstart', handleSwipeStart, { passive: true });
-            messagesContainer.addEventListener('touchmove', handleSwipeMove, { passive: true });
-            messagesContainer.addEventListener('touchend', handleSwipeEnd, { passive: true });
-        }
-        
-        function handleSwipeStart(e) {
-            const touch = e.touches[0];
-            const target = document.elementFromPoint(touch.clientX, touch.clientY);
-            const wrapper = target?.closest('.msg-wrapper');
-            if (wrapper) {
-                swipeTarget = wrapper;
-                swipeStartX = touch.clientX;
-            } else {
-                swipeTarget = null;
+            try {
+                await db.collection('badwords').doc(word).set({ word: word, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
+                badWords.push(word);
+                renderBadWords();
+                badWordInput.value = '';
+                showNotification('✅ تم إضافة الكلمة');
+            } catch (error) {
+                showNotification('❌ فشل الإضافة');
             }
         }
         
-        function handleSwipeMove(e) {
-            if (!swipeTarget) return;
-            const touch = e.touches[0];
-            const deltaX = touch.clientX - swipeStartX;
-            if (deltaX > 30) {
-                const msg = swipeTarget.querySelector('.msg');
-                if (msg) {
-                    msg.style.transform = `translateX(${Math.min(deltaX, 80)}px)`;
-                    msg.style.opacity = 0.7;
+        async function removeBadWord(word) {
+            try {
+                await db.collection('badwords').doc(word).delete();
+                badWords = badWords.filter(w => w !== word);
+                renderBadWords();
+                showNotification('✅ تم حذف الكلمة');
+            } catch (error) {
+                showNotification('❌ فشل الحذف');
+            }
+        }
+        
+        addBadWordBtn.onclick = addBadWord;
+        badWordInput.onkeydown = (e) => { if (e.key === 'Enter') addBadWord(); };
+        
+        // ============================================================
+        // 14. نظام الحظر التلقائي
+        // ============================================================
+        async function checkBadWords(text, username) {
+            const lowerText = text.toLowerCase();
+            let foundWords = [];
+            
+            for (const word of badWords) {
+                if (lowerText.includes(word)) {
+                    foundWords.push(word);
                 }
             }
-        }
-        
-        function handleSwipeEnd(e) {
-            if (!swipeTarget) return;
-            const msg = swipeTarget.querySelector('.msg');
-            if (msg) {
-                const transform = msg.style.transform || '';
-                const match = transform.match(/translateX\((\d+)px\)/);
-                const deltaX = match ? parseInt(match[1]) : 0;
+            
+            if (foundWords.length > 0) {
+                const banRef = db.collection('bans').doc(username);
+                const banDoc = await banRef.get();
+                let count = 1;
                 
-                if (deltaX > 50) {
-                    const messageId = swipeTarget.dataset.id;
-                    const messageText = swipeTarget.dataset.text || '';
-                    if (messageId) {
-                        startReply(messageId, messageText);
-                    }
+                if (banDoc.exists) {
+                    count = (banDoc.data().count || 0) + 1;
                 }
-                msg.style.transform = '';
-                msg.style.opacity = '';
-            }
-            swipeTarget = null;
-        }
-        
-        // ============================================================
-        // 14. الضغط المطول
-        // ============================================================
-        function showContextMenu(e, messageId, messageText, isSent) {
-            e.preventDefault();
-            const x = e.clientX || e.touches?.[0]?.clientX || 0;
-            const y = e.clientY || e.touches?.[0]?.clientY || 0;
-            
-            contextMenu.style.left = Math.min(x, window.innerWidth - 170) + 'px';
-            contextMenu.style.top = Math.min(y, window.innerHeight - 170) + 'px';
-            contextMenu.style.display = 'block';
-            
-            const editItem = contextMenu.querySelector('[data-action="edit"]');
-            const deleteItem = contextMenu.querySelector('[data-action="delete"]');
-            if (isSent || isAdmin) {
-                editItem.style.display = 'flex';
-                deleteItem.style.display = 'flex';
-            } else {
-                editItem.style.display = 'none';
-                deleteItem.style.display = 'none';
-            }
-            
-            contextMenu.dataset.messageId = messageId;
-            contextMenu.dataset.messageText = messageText;
-            contextMenu.dataset.isSent = isSent;
-        }
-        
-        contextMenu.querySelectorAll('.menu-item').forEach(item => {
-            item.onclick = function() {
-                const action = this.dataset.action;
-                const messageId = contextMenu.dataset.messageId;
-                const messageText = contextMenu.dataset.messageText;
-                const isSent = contextMenu.dataset.isSent === 'true';
                 
-                switch(action) {
-                    case 'reply':
-                        startReply(messageId, messageText);
-                        break;
-                    case 'react':
-                        toggleReaction(messageId, '❤️');
-                        break;
-                    case 'edit':
-                        if (isSent || isAdmin) editMessage(messageId);
-                        break;
-                    case 'copy':
-                        copyText(messageText);
-                        break;
-                    case 'report':
-                        reportMessage(messageId, messageText);
-                        break;
-                    case 'delete':
-                        if (isSent || isAdmin) deleteMessage(messageId);
-                        break;
-                }
-                contextMenu.style.display = 'none';
-            };
-        });
-        
-        document.addEventListener('click', () => {
-            contextMenu.style.display = 'none';
-        });
-        
-        // ============================================================
-        // 15. وظائف إضافية
-        // ============================================================
-        function copyText(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                showNotification('✅ تم نسخ النص');
-            }).catch(() => {
-                const input = document.createElement('input');
-                input.value = text;
-                document.body.appendChild(input);
-                input.select();
-                document.execCommand('copy');
-                document.body.removeChild(input);
-                showNotification('✅ تم نسخ النص');
-            });
-        }
-        
-        function reportMessage(messageId, text) {
-            showNotification(`🚨 تم إبلاغ المسؤول عن الرسالة`);
+                await banRef.set({
+                    username: username,
+                    count: count,
+                    lastWord: foundWords.join(', '),
+                    lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+                }, { merge: true });
+                
+                userBanCounts[username] = count;
+                totalBadWordsBlocked += foundWords.length;
+                if (statBadWordsBlocked) statBadWordsBlocked.textContent = totalBadWordsBlocked;
+                
+                const banDuration = Math.min(count * 60, 600);
+                
+                await db.collection('users').doc(username).update({
+                    banned: true,
+                    banReason: `استخدام كلمات ممنوعة (${foundWords.join(', ')})`,
+                    banExpires: firebase.firestore.FieldValue.serverTimestamp() + banDuration * 1000,
+                    banCount: count
+                });
+                
+                showNotification(`⛔ تم حظر ${username} لمدة ${banDuration} ثانية`);
+                
+                setTimeout(async () => {
+                    await db.collection('users').doc(username).update({
+                        banned: false,
+                        banReason: null,
+                        banExpires: null
+                    });
+                    showNotification(`🔓 تم إلغاء حظر ${username}`);
+                }, banDuration * 1000);
+                
+                return true;
+            }
+            return false;
         }
         
         // ============================================================
-        // 16. الرد على الرسالة
-        // ============================================================
-        function startReply(messageId, messageText) {
-            replyingTo = messageId;
-            replyingToText = messageText;
-            replyBar.style.display = 'flex';
-            replyText.textContent = messageText.substring(0, 45) + (messageText.length > 45 ? '...' : '');
-            messageInput.focus();
-        }
-        
-        replyCancel.onclick = function() {
-            replyingTo = null;
-            replyingToText = '';
-            replyBar.style.display = 'none';
-        };
-        
-        // ============================================================
-        // 17. إرسال الرسائل - حفظ دائم في Firebase
+        // 15. إرسال الرسائل
         // ============================================================
         sendBtn.onclick = sendMessage;
         messageInput.onkeydown = (e) => {
@@ -2167,6 +2225,8 @@
                 replyBar.style.display = 'none';
                 emojiPanel.style.display = 'none';
                 emojiPanelOpen = false;
+                stickerPanel.style.display = 'none';
+                stickerPanelOpen = false;
                 
             } catch (error) {
                 console.error('فشل الإرسال:', error);
@@ -2181,7 +2241,7 @@
         }
         
         // ============================================================
-        // 18. استماع الرسائل - سريع ودائم
+        // 16. استماع الرسائل
         // ============================================================
         function listenMessages() {
             if (messagesListener) {
@@ -2191,19 +2251,23 @@
             
             messagesListener = db.collection('messages')
                 .orderBy('timestamp', 'asc')
+                .limit(100)
                 .onSnapshot((snapshot) => {
                     const messages = [];
                     
                     if (snapshot.empty) {
-                        messagesContainer.innerHTML = `
-                            <div class="welcome-msg">
-                                <div class="icon">💬</div>
-                                <div class="title">مرحباً في نيزك</div>
-                                <div class="sub">ابدأ المحادثة الآن</div>
-                            </div>
-                        `;
+                        if (firstLoad) {
+                            messagesContainer.innerHTML = `
+                                <div class="welcome-msg">
+                                    <div class="icon">💬</div>
+                                    <div class="title">مرحباً في نيزك</div>
+                                    <div class="sub">ابدأ المحادثة الآن</div>
+                                </div>
+                            `;
+                        }
                         messageCount = 0;
                         updateStats();
+                        firstLoad = false;
                         return;
                     }
                     
@@ -2213,15 +2277,11 @@
                         messages.push({ id: doc.id, ...data });
                     });
                     
-                    searchMessages = messages;
                     messageCount = messages.length;
-                    
-                    // عرض الرسائل مباشرة
                     renderMessages(messages);
                     updateStats();
                     setTimeout(setupSwipeToReply, 50);
                     
-                    // تحديث عدد الرسائل غير المقروءة
                     if (!isSearching) {
                         const isAtBottom = messagesContainer.scrollHeight - messagesContainer.scrollTop <= messagesContainer.clientHeight + 50;
                         if (!isAtBottom && messageCount > 0) {
@@ -2230,12 +2290,12 @@
                             scrollToBottom.innerHTML = `⬇️ <span class="badge">${unreadCount}</span>`;
                         }
                     }
+                    firstLoad = false;
                 }, (error) => {
                     console.error('❌ خطأ في استماع الرسائل:', error);
                 });
         }
         
-        // دالة عرض الرسائل
         function renderMessages(messages) {
             if (!messages || messages.length === 0) {
                 messagesContainer.innerHTML = `
@@ -2262,10 +2322,7 @@
                 const sender = data.username || 'مجهول';
                 const avatar = data.avatar || '👤';
                 const time = data.timestamp ? 
-                    new Date(data.timestamp.toDate()).toLocaleTimeString('ar', {
-                        hour: '2-digit',
-                        minute: '2-digit'
-                    }) : '';
+                    new Date(data.timestamp.toDate()).toLocaleTimeString('ar', { hour: '2-digit', minute: '2-digit' }) : '';
                 const adminBadge = data.isAdmin ? ' ⭐' : '';
                 const canDelete = isAdmin || isSent;
                 const canEdit = isSent;
@@ -2273,11 +2330,7 @@
                 const reactionKeys = Object.keys(reactions);
                 
                 const date = data.timestamp ? 
-                    new Date(data.timestamp.toDate()).toLocaleDateString('ar', {
-                        year: 'numeric',
-                        month: 'short',
-                        day: 'numeric'
-                    }) : '';
+                    new Date(data.timestamp.toDate()).toLocaleDateString('ar', { year: 'numeric', month: 'short', day: 'numeric' }) : '';
                 if (date && date !== lastDate) {
                     html += `<div class="date-divider">${date}</div>`;
                     lastDate = date;
@@ -2334,7 +2387,7 @@
                                     <button onclick="toggleReaction('${data.id}', '❤️')">❤️</button>
                                     <button onclick="toggleReaction('${data.id}', '😂')">😂</button>
                                     <button onclick="toggleReaction('${data.id}', '🔥')">🔥</button>
-                                    ${canDelete ? `<button onclick="deleteMessage('${data.id}')" style="color:#ff4444;">🗑️</button>` : ''}
+                                    ${canDelete ? `<button onclick="deleteMessage('${data.id}')" style="color:#E1306C;">🗑️</button>` : ''}
                                 </div>
                             </div>
                         </div>
@@ -2347,44 +2400,159 @@
         }
         
         // ============================================================
-        // 19. عرض البروفايل
+        // 17. السحب للرد
         // ============================================================
-        function showProfile(username) {
-            db.collection('users').doc(username).get().then(doc => {
-                if (doc.exists) {
-                    const data = doc.data();
-                    const avatar = data.avatar || '👤';
-                    const status = data.online ? '🟢 متصل' : '⚫ غير متصل';
-                    const isBanned = data.banned || false;
-                    const banReason = data.banReason || '';
-                    
-                    let msg = `👤 ${username}${data.isAdmin ? ' ⭐' : ''}\n`;
-                    msg += `${status}\n`;
-                    if (isBanned) msg += `⛔ محظور: ${banReason}\n`;
-                    msg += `📅 انضم: ${data.createdAt ? new Date(data.createdAt.toDate()).toLocaleDateString() : 'غير معروف'}`;
-                    
-                    showNotification(msg);
+        function setupSwipeToReply() {
+            messagesContainer.addEventListener('touchstart', handleSwipeStart, { passive: true });
+            messagesContainer.addEventListener('touchmove', handleSwipeMove, { passive: true });
+            messagesContainer.addEventListener('touchend', handleSwipeEnd, { passive: true });
+        }
+        
+        function handleSwipeStart(e) {
+            const touch = e.touches[0];
+            const target = document.elementFromPoint(touch.clientX, touch.clientY);
+            const wrapper = target?.closest('.msg-wrapper');
+            if (wrapper) {
+                swipeTarget = wrapper;
+                swipeStartX = touch.clientX;
+            } else {
+                swipeTarget = null;
+            }
+        }
+        
+        function handleSwipeMove(e) {
+            if (!swipeTarget) return;
+            const touch = e.touches[0];
+            const deltaX = touch.clientX - swipeStartX;
+            if (deltaX > 30) {
+                const msg = swipeTarget.querySelector('.msg');
+                if (msg) {
+                    msg.style.transform = `translateX(${Math.min(deltaX, 80)}px)`;
+                    msg.style.opacity = 0.7;
                 }
+            }
+        }
+        
+        function handleSwipeEnd(e) {
+            if (!swipeTarget) return;
+            const msg = swipeTarget.querySelector('.msg');
+            if (msg) {
+                const transform = msg.style.transform || '';
+                const match = transform.match(/translateX\((\d+)px\)/);
+                const deltaX = match ? parseInt(match[1]) : 0;
+                
+                if (deltaX > 50) {
+                    const messageId = swipeTarget.dataset.id;
+                    const messageText = swipeTarget.dataset.text || '';
+                    if (messageId) {
+                        startReply(messageId, messageText);
+                    }
+                }
+                msg.style.transform = '';
+                msg.style.opacity = '';
+            }
+            swipeTarget = null;
+        }
+        
+        // ============================================================
+        // 18. الضغط المطول
+        // ============================================================
+        function showContextMenu(e, messageId, messageText, isSent) {
+            e.preventDefault();
+            const x = e.clientX || e.touches?.[0]?.clientX || 0;
+            const y = e.clientY || e.touches?.[0]?.clientY || 0;
+            
+            contextMenu.style.left = Math.min(x, window.innerWidth - 160) + 'px';
+            contextMenu.style.top = Math.min(y, window.innerHeight - 160) + 'px';
+            contextMenu.style.display = 'block';
+            
+            const editItem = contextMenu.querySelector('[data-action="edit"]');
+            const deleteItem = contextMenu.querySelector('[data-action="delete"]');
+            if (isSent || isAdmin) {
+                editItem.style.display = 'flex';
+                deleteItem.style.display = 'flex';
+            } else {
+                editItem.style.display = 'none';
+                deleteItem.style.display = 'none';
+            }
+            
+            contextMenu.dataset.messageId = messageId;
+            contextMenu.dataset.messageText = messageText;
+            contextMenu.dataset.isSent = isSent;
+        }
+        
+        contextMenu.querySelectorAll('.menu-item').forEach(item => {
+            item.onclick = function() {
+                const action = this.dataset.action;
+                const messageId = contextMenu.dataset.messageId;
+                const messageText = contextMenu.dataset.messageText;
+                const isSent = contextMenu.dataset.isSent === 'true';
+                
+                switch(action) {
+                    case 'reply':
+                        startReply(messageId, messageText);
+                        break;
+                    case 'react':
+                        toggleReaction(messageId, '❤️');
+                        break;
+                    case 'edit':
+                        if (isSent || isAdmin) editMessage(messageId);
+                        break;
+                    case 'copy':
+                        copyText(messageText);
+                        break;
+                    case 'report':
+                        reportMessage(messageId, messageText);
+                        break;
+                    case 'delete':
+                        if (isSent || isAdmin) deleteMessage(messageId);
+                        break;
+                }
+                contextMenu.style.display = 'none';
+            };
+        });
+        
+        document.addEventListener('click', () => {
+            contextMenu.style.display = 'none';
+        });
+        
+        // ============================================================
+        // 19. وظائف إضافية
+        // ============================================================
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showNotification('✅ تم نسخ النص');
             }).catch(() => {
-                showNotification('❌ فشل تحميل الملف الشخصي');
+                const input = document.createElement('input');
+                input.value = text;
+                document.body.appendChild(input);
+                input.select();
+                document.execCommand('copy');
+                document.body.removeChild(input);
+                showNotification('✅ تم نسخ النص');
             });
         }
         
-        // ============================================================
-        // 20. معالجة اللمس
-        // ============================================================
-        function handleTouchStart(event, messageId, messageText, isSent) {
-            touchTarget = { id: messageId, text: messageText, sent: isSent };
-            touchTimer = setTimeout(() => {
-                showContextMenu(event, messageId, messageText, isSent);
-                touchTarget = null;
-            }, 600);
+        function reportMessage(messageId, text) {
+            showNotification(`🚨 تم إبلاغ المسؤول عن الرسالة`);
         }
         
-        function handleTouchEnd(event) {
-            clearTimeout(touchTimer);
-            touchTarget = null;
+        // ============================================================
+        // 20. الرد على الرسالة
+        // ============================================================
+        function startReply(messageId, messageText) {
+            replyingTo = messageId;
+            replyingToText = messageText;
+            replyBar.style.display = 'flex';
+            replyText.textContent = messageText.substring(0, 45) + (messageText.length > 45 ? '...' : '');
+            messageInput.focus();
         }
+        
+        replyCancel.onclick = function() {
+            replyingTo = null;
+            replyingToText = '';
+            replyBar.style.display = 'none';
+        };
         
         // ============================================================
         // 21. التفاعلات
@@ -2495,127 +2663,7 @@
         };
         
         // ============================================================
-        // 24. الكلمات الممنوعة
-        // ============================================================
-        async function loadBadWords() {
-            try {
-                const snapshot = await db.collection('badwords').get();
-                badWords = [];
-                snapshot.forEach(doc => {
-                    badWords.push(doc.data().word);
-                });
-                renderBadWords();
-            } catch (error) {
-                console.error('خطأ في تحميل الكلمات الممنوعة:', error);
-            }
-        }
-        
-        function renderBadWords() {
-            badWordsList.innerHTML = '';
-            badWords.forEach(word => {
-                const tag = document.createElement('span');
-                tag.className = 'word-tag';
-                tag.innerHTML = `${word} <button class="remove-word" onclick="removeBadWord('${word}')">✕</button>`;
-                badWordsList.appendChild(tag);
-            });
-        }
-        
-        async function addBadWord() {
-            const word = badWordInput.value.trim().toLowerCase();
-            if (!word) {
-                showNotification('❌ أدخل كلمة');
-                return;
-            }
-            if (badWords.includes(word)) {
-                showNotification('⚠️ الكلمة موجودة بالفعل');
-                return;
-            }
-            
-            try {
-                await db.collection('badwords').doc(word).set({ word: word, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
-                badWords.push(word);
-                renderBadWords();
-                badWordInput.value = '';
-                showNotification('✅ تم إضافة الكلمة');
-            } catch (error) {
-                showNotification('❌ فشل الإضافة');
-            }
-        }
-        
-        async function removeBadWord(word) {
-            try {
-                await db.collection('badwords').doc(word).delete();
-                badWords = badWords.filter(w => w !== word);
-                renderBadWords();
-                showNotification('✅ تم حذف الكلمة');
-            } catch (error) {
-                showNotification('❌ فشل الحذف');
-            }
-        }
-        
-        addBadWordBtn.onclick = addBadWord;
-        badWordInput.onkeydown = (e) => { if (e.key === 'Enter') addBadWord(); };
-        
-        // ============================================================
-        // 25. نظام الحظر التلقائي
-        // ============================================================
-        async function checkBadWords(text, username) {
-            const lowerText = text.toLowerCase();
-            let foundWords = [];
-            
-            for (const word of badWords) {
-                if (lowerText.includes(word)) {
-                    foundWords.push(word);
-                }
-            }
-            
-            if (foundWords.length > 0) {
-                const banRef = db.collection('bans').doc(username);
-                const banDoc = await banRef.get();
-                let count = 1;
-                
-                if (banDoc.exists) {
-                    count = (banDoc.data().count || 0) + 1;
-                }
-                
-                await banRef.set({
-                    username: username,
-                    count: count,
-                    lastWord: foundWords.join(', '),
-                    lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
-                }, { merge: true });
-                
-                userBanCounts[username] = count;
-                totalBadWordsBlocked += foundWords.length;
-                if (statBadWordsBlocked) statBadWordsBlocked.textContent = totalBadWordsBlocked;
-                
-                const banDuration = Math.min(count * 60, 600);
-                
-                await db.collection('users').doc(username).update({
-                    banned: true,
-                    banReason: `استخدام كلمات ممنوعة (${foundWords.join(', ')})`,
-                    banExpires: firebase.firestore.FieldValue.serverTimestamp() + banDuration * 1000,
-                    banCount: count
-                });
-                
-                showNotification(`⛔ تم حظر ${username} لمدة ${banDuration} ثانية`);
-                
-                setTimeout(async () => {
-                    await db.collection('users').doc(username).update({
-                        banned: false,
-                        banReason: null,
-                        banExpires: null
-                    });
-                    showNotification(`🔓 تم إلغاء حظر ${username}`);
-                }, banDuration * 1000);
-                
-                return true;
-            }
-            return false;
-        }
-        
-        // ============================================================
-        // 26. استماع المستخدمين
+        // 24. استماع المستخدمين
         // ============================================================
         function listenUsers() {
             db.collection('users').onSnapshot((snapshot) => {
@@ -2689,13 +2737,13 @@
                     const currentData = allUsers[currentUser];
                     if (currentData) {
                         adminListHtml = `
-                            <div class="user-item" style="background:rgba(37,211,102,0.05);border-color:#25D366;">
+                            <div class="user-item" style="background:rgba(64,93,230,0.04);border-color:#405DE6;">
                                 <span class="name">${currentData.avatar || '👤'} ${currentUser} <span class="badge admin">أنت</span> 🟢</span>
-                                <span style="font-size:0.5rem;opacity:0.4;">نشط</span>
+                                <span style="font-size:0.45rem;opacity:0.4;">نشط</span>
                             </div>
                         ` + adminListHtml;
                     }
-                    adminUserList.innerHTML = adminListHtml || '<div style="text-align:center;opacity:0.4;padding:12px 0;font-size:0.75rem;">لا يوجد مستخدمين</div>';
+                    adminUserList.innerHTML = adminListHtml || '<div style="text-align:center;opacity:0.4;padding:10px 0;font-size:0.7rem;">لا يوجد مستخدمين</div>';
                 }
             }, (error) => {
                 console.error('خطأ في استماع المستخدمين:', error);
@@ -2711,7 +2759,7 @@
         }
         
         // ============================================================
-        // 27. استماع الكتابة
+        // 25. استماع الكتابة
         // ============================================================
         function listenTyping() {
             db.collection('typing').doc('status').onSnapshot((doc) => {
@@ -2759,7 +2807,7 @@
         };
         
         // ============================================================
-        // 28. تحميل عدد مرات الحظر
+        // 26. تحميل عدد مرات الحظر
         // ============================================================
         async function loadBanCounts() {
             try {
@@ -2770,6 +2818,46 @@
             } catch (error) {
                 console.error('خطأ في تحميل عدد الحظر:', error);
             }
+        }
+        
+        // ============================================================
+        // 27. عرض البروفايل
+        // ============================================================
+        function showProfile(username) {
+            db.collection('users').doc(username).get().then(doc => {
+                if (doc.exists) {
+                    const data = doc.data();
+                    const avatar = data.avatar || '👤';
+                    const status = data.online ? '🟢 متصل' : '⚫ غير متصل';
+                    const isBanned = data.banned || false;
+                    const banReason = data.banReason || '';
+                    
+                    let msg = `👤 ${username}${data.isAdmin ? ' ⭐' : ''}\n`;
+                    msg += `${status}\n`;
+                    if (isBanned) msg += `⛔ محظور: ${banReason}\n`;
+                    msg += `📅 انضم: ${data.createdAt ? new Date(data.createdAt.toDate()).toLocaleDateString() : 'غير معروف'}`;
+                    
+                    showNotification(msg);
+                }
+            }).catch(() => {
+                showNotification('❌ فشل تحميل الملف الشخصي');
+            });
+        }
+        
+        // ============================================================
+        // 28. معالجة اللمس
+        // ============================================================
+        function handleTouchStart(event, messageId, messageText, isSent) {
+            touchTarget = { id: messageId, text: messageText, sent: isSent };
+            touchTimer = setTimeout(() => {
+                showContextMenu(event, messageId, messageText, isSent);
+                touchTarget = null;
+            }, 600);
+        }
+        
+        function handleTouchEnd(event) {
+            clearTimeout(touchTimer);
+            touchTarget = null;
         }
         
         // ============================================================
@@ -2972,9 +3060,9 @@
             
             setTimeout(() => {
                 div.style.opacity = '0';
-                div.style.transition = 'opacity 0.4s';
+                div.style.transition = 'opacity 0.3s';
                 setTimeout(() => div.remove(), 500);
-            }, 2500);
+            }, 2000);
         }
         
         // ============================================================
@@ -3000,12 +3088,15 @@
         };
         
         // ============================================================
-        // 33. بداية التطبيق - بدون شاشة تهيئة
+        // 33. بداية التطبيق
         // ============================================================
-        console.log('☄️ نيزك - نسخة دائمة وسريعة');
+        console.log('☄️ نيزك - نسخة إنستا النهائية');
         console.log('👤 المسؤول: slx23m | كلمة: 1442');
-        console.log('📌 جميع البيانات محفوظة بشكل دائم في Firebase');
-        console.log('📌 الصور مخزنة كـ Base64 في Firebase (بدون Storage)');
+        console.log('📌 اسحب الرسالة لليمين للرد');
+        console.log('📌 اضغط مطولاً للتفاعل');
+        console.log('📌 اضغط على الصورة لتعديلها');
+        console.log('📌 😊 إيموجي كامل و🎨 ستيكرات');
+        console.log('📌 التطبيق يعمل كـ PWA مستقل');
         
         const savedUser = localStorage.getItem('lastUser');
         if (savedUser) {
