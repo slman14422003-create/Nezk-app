@@ -3,28 +3,75 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    <title>نيزك إنستا - Instagram Clone</title>
-    <!-- PWA Files -->
-<link rel="manifest" href="manifest.json" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<meta name="apple-mobile-web-app-title" content="نيزك إنستا" />
-<link rel="apple-touch-icon" href="icons/icon-192x192.png" />
-
-<!-- PWA Scripts -->
-<script src="pwa-setup.js" defer></script>
-<script src="pwa-install.js" defer></script>
-<script src="notification-helper.js" defer></script>
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogItmF2YfYp9mGIC0g2KfZhNmF2LHYr9mG2KkiLAogICJzaG9ydF9uYW1lIjogItmF2YfYp9mGIiwKICAiZGVzY3JpcHRpb24iOiAi2KfZhNmF2LHYr9mG2Kkg2YQg2KfZhNiq2LPYqtix2KfYqiDYp9mE2YUg2KfZhNin2KjZhdmHINin2YTYudin2YUiLAogICJzdGFydF91cmwiOiAiaW5kZXguaHRtbCIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzExMWIyMSIsCiAgInRoZW1lX2NvbG9yIjogIiMxMTFiMjEiLAogICJvcmllbnRhdGlvbiI6ICJwb3J0cmFpdCIsCiAgImRpciI6ICJydGwiLAogICJsYW5nIjogImFyIiwKICAiaWNvbnMiOiBbCiAgICB7InNyYyI6ICJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQU1BQUFBQ0NNQUFBQUJMZkEwY0FBQUFCR2RCVFVFQUFHSnRUbFFBQUFBQm5QV05YWlMxZ2FXNXphVzVuYjNKdmRHbGpaU0JoYkd3Z1kyOXRZU0JrWldaaGRXeDBJRkpCSlVFZ0FBR3BCU1VSQlZINHJQY1pJQ0FWaXBhTit4SHZBUkVQekFZUWdZQWlHcWtoZ0NFQnZVRUlKQUpJUndsWlNsZ0NBT1lBSnBBR0ZVYUpnU0tWWkZBQkFjSUVnU0FCSVJ3bFpUQ1hBS0NLYUpvV1NnVmtGd0hDTVJCSVZFa3dsaFVDQUpCbHdaRUpJS1FJZ2l1R2lMa0laaVVBVUJCQ0VnSUVTRGdPQUJCQklFWkU2S1FJRktpa0NBaFlCeHdDQ0NSQklWRWh3c0JRQ0FDUkJSQ0lSQkNTSE1iR0J6VFRRSmhNWWpOMHlVWW5EZlp3UUFBQUFBU1VWT1JLNUNZSUlBQUFBQkpSVTVFcmtKZ2dnPT0iLCAic2l6ZXMiOiAiMTkyeDE5MiIsICJ0eXBlIjogImltYWdlL3BuZyIsICJwdXJwb3NlIjogImFueSBtYXNrYWJsZSIgfQogIF0KfQ==" />
-    <meta name="theme-color" content="#111b21" />
+    <title>نيزك - إنستا دردشة</title>
+    
+    <!-- ============================================================
+    PWA - المانيفست والأيقونات
+    ============================================================ -->
+    <link rel="manifest" href="manifest.json" />
+    
+    <!-- أيقونات PWA -->
+    <link rel="icon" type="image/png" sizes="72x72" href="icons/icon-72x72.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="icons/icon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="128x128" href="icons/icon-128x128.png" />
+    <link rel="icon" type="image/png" sizes="144x144" href="icons/icon-144x144.png" />
+    <link rel="icon" type="image/png" sizes="152x152" href="icons/icon-152x152.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png" />
+    <link rel="icon" type="image/png" sizes="384x384" href="icons/icon-384x384.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512x512.png" />
+    
+    <!-- أيقونات Apple Touch -->
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="icons/icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="96x96" href="icons/icon-96x96.png" />
+    <link rel="apple-touch-icon" sizes="128x128" href="icons/icon-128x128.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="icons/icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="icons/icon-192x192.png" />
+    <link rel="apple-touch-icon" sizes="384x384" href="icons/icon-384x384.png" />
+    <link rel="apple-touch-icon" sizes="512x512" href="icons/icon-512x512.png" />
+    
+    <!-- ============================================================
+    ميتا تاغات PWA
+    ============================================================ -->
+    <meta name="theme-color" content="#405DE6" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="نيزك إنستا" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="نيزك إنستا" />
     
-    <!-- Firebase -->
+    <!-- ============================================================
+    Open Graph / Facebook
+    ============================================================ -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="نيزك إنستا - دردشة إنستا" />
+    <meta property="og:description" content="تطبيق دردشة إنستا كامل مع مميزات متقدمة" />
+    <meta property="og:image" content="icons/icon-512x512.png" />
+    <meta property="og:url" content="https://your-domain.com" />
+    <meta property="og:site_name" content="نيزك إنستا" />
+    
+    <!-- ============================================================
+    Twitter Card
+    ============================================================ -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="نيزك إنستا - دردشة إنستا" />
+    <meta name="twitter:description" content="تطبيق دردشة إنستا كامل مع مميزات متقدمة" />
+    <meta name="twitter:image" content="icons/icon-512x512.png" />
+    
+    <!-- ============================================================
+    Firebase
+    ============================================================ -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+    
+    <!-- ============================================================
+    PWA Scripts
+    ============================================================ -->
+    <script src="pwa-setup.js" defer></script>
+    <script src="pwa-install.js" defer></script>
+    <script src="notification-helper.js" defer></script>
     
     <style>
         /* ===== CSS Variables & Reset ===== */
@@ -798,7 +845,7 @@
         .reply-bar .reply-text { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .reply-bar .reply-cancel { background: none; border: none; color: #E1306C; cursor: pointer; font-size: 1rem; }
         
-        /* ===== قائمة الضغط المطول - مصغرة مثل إنستا ===== */
+        /* ===== قائمة الضغط المطول ===== */
         #longPressMenu {
             display: none;
             position: fixed;
@@ -1519,7 +1566,7 @@
             <button id="scrollToBottom">⬇️</button>
         </div>
         
-        <!-- قائمة الضغط المطول - مصغرة -->
+        <!-- قائمة الضغط المطول -->
         <div id="longPressMenu">
             <div class="menu-items" id="longPressItems"></div>
         </div>
@@ -1682,13 +1729,11 @@
         const storage = firebase.storage();
         
         // ============================================================
-        // 2. خوارزميات الذكاء الاصطناعي - تم إزالة الاختصارات
+        // 2. خوارزميات الذكاء الاصطناعي
         // ============================================================
         class AICore {
             static compressText(text) {
                 if (!text || text.length < 10) return text;
-                // تم إزالة اختصارات الكلمات (السلام عليكم -> س.ع)
-                // فقط نضغط النص الطويل جداً
                 let compressed = text.replace(/\s+/g, ' ').trim();
                 if (compressed.length > 200) {
                     const sentences = compressed.split(/[.!?؟،]/);
@@ -1700,8 +1745,6 @@
             }
             
             static decompressText(text) {
-                if (!text) return text;
-                // تم إزالة فك الاختصارات
                 return text;
             }
             
@@ -1759,7 +1802,7 @@
         }
         
         // ============================================================
-        // 3. لوحة الإيموجي الكاملة - كل إيموجي iPhone
+        // 3. لوحة الإيموجي الكاملة
         // ============================================================
         const fullEmojis = {
             '😀': 'وجوه', '😃': 'وجوه', '😄': 'وجوه', '😁': 'وجوه', '😆': 'وجوه', '😅': 'وجوه', '😂': 'وجوه', '🤣': 'وجوه',
@@ -1774,25 +1817,23 @@
             '😮': 'وجوه', '😲': 'وجوه', '🥱': 'وجوه', '😴': 'وجوه', '🤤': 'وجوه', '😪': 'وجوه', '😵': 'وجوه', '🤐': 'وجوه',
             '🥴': 'وجوه', '😷': 'وجوه', '🤒': 'وجوه', '🤕': 'وجوه', '🤢': 'وجوه', '🤮': 'وجوه', '🥳': 'وجوه', '🎉': 'مناسبات',
             '🎊': 'مناسبات', '🎈': 'مناسبات', '🎁': 'مناسبات', '🎀': 'مناسبات', '🎂': 'مناسبات', '🎃': 'مناسبات', '🎄': 'مناسبات',
-            '🎅': 'مناسبات', '🤶': 'مناسبات', '🦌': 'مناسبات', '🕊️': 'طيور', '🦅': 'طيور', '🦉': 'طيور', '🐦': 'طيور', '🐤': 'طيور',
+            '🎅': 'مناسبات', '🤶': 'مناسبات', '🕊️': 'طيور', '🦅': 'طيور', '🦉': 'طيور', '🐦': 'طيور', '🐤': 'طيور',
             '🐥': 'طيور', '🐣': 'طيور', '🐔': 'طيور', '🐧': 'طيور', '🦇': 'حيوانات', '🐺': 'حيوانات', '🦊': 'حيوانات', '🐻': 'حيوانات',
             '🐼': 'حيوانات', '🐨': 'حيوانات', '🐯': 'حيوانات', '🦁': 'حيوانات', '🐮': 'حيوانات', '🐷': 'حيوانات', '🐽': 'حيوانات',
-            '🐸': 'حيوانات', '🐵': 'حيوانات', '🙈': 'حيوانات', '🙉': 'حيوانات', '🙊': 'حيوانات', '🐒': 'حيوانات', '🐔': 'حيوانات',
-            '🐧': 'حيوانات', '🐦': 'حيوانات', '🐤': 'حيوانات', '🐣': 'حيوانات', '🐥': 'حيوانات', '🦆': 'حيوانات', '🦢': 'حيوانات',
-            '🦉': 'حيوانات', '🦇': 'حيوانات', '🐺': 'حيوانات', '🦊': 'حيوانات', '🐻': 'حيوانات', '🐼': 'حيوانات', '🐨': 'حيوانات',
-            '🐯': 'حيوانات', '🦁': 'حيوانات', '🐮': 'حيوانات', '🐷': 'حيوانات', '🐽': 'حيوانات', '🐸': 'حيوانات',
-            '🐵': 'حيوانات', '🐒': 'حيوانات', '🦍': 'حيوانات', '🐶': 'حيوانات', '🐕': 'حيوانات', '🦮': 'حيوانات', '🐩': 'حيوانات',
-            '🐺': 'حيوانات', '🦊': 'حيوانات', '🦝': 'حيوانات', '🐱': 'حيوانات', '🐈': 'حيوانات', '🐆': 'حيوانات', '🐅': 'حيوانات',
-            '🐯': 'حيوانات', '🦁': 'حيوانات', '🐮': 'حيوانات', '🐄': 'حيوانات', '🐃': 'حيوانات', '🐂': 'حيوانات', '🐷': 'حيوانات',
-            '🐖': 'حيوانات', '🐗': 'حيوانات', '🐽': 'حيوانات', '🐏': 'حيوانات', '🐑': 'حيوانات', '🐐': 'حيوانات', '🐪': 'حيوانات',
-            '🐫': 'حيوانات', '🦙': 'حيوانات', '🦒': 'حيوانات', '🐘': 'حيوانات', '🦏': 'حيوانات', '🦛': 'حيوانات', '🐭': 'حيوانات',
-            '🐁': 'حيوانات', '🐀': 'حيوانات', '🐹': 'حيوانات', '🐰': 'حيوانات', '🐇': 'حيوانات', '🐿️': 'حيوانات', '🦔': 'حيوانات',
-            '🦇': 'حيوانات', '🐻': 'حيوانات', '🐨': 'حيوانات', '🐼': 'حيوانات', '🐾': 'حيوانات', '🦃': 'حيوانات', '🐔': 'حيوانات',
-            '🐓': 'حيوانات', '🐣': 'حيوانات', '🐤': 'حيوانات', '🐥': 'حيوانات', '🐦': 'حيوانات', '🐧': 'حيوانات', '🕊️': 'حيوانات',
-            '🦅': 'حيوانات', '🦆': 'حيوانات', '🦢': 'حيوانات', '🦉': 'حيوانات', '🦩': 'حيوانات', '🦚': 'حيوانات', '🦜': 'حيوانات',
-            '🐸': 'حيوانات', '🐊': 'حيوانات', '🐢': 'حيوانات', '🦎': 'حيوانات', '🐍': 'حيوانات', '🐲': 'حيوانات', '🐉': 'حيوانات',
-            '🦕': 'حيوانات', '🦖': 'حيوانات', '🐳': 'حيوانات', '🐋': 'حيوانات', '🐬': 'حيوانات', '🐟': 'حيوانات', '🐠': 'حيوانات',
-            '🐡': 'حيوانات', '🦈': 'حيوانات', '🐙': 'حيوانات', '🐚': 'حيوانات', '🐌': 'حيوانات', '🦋': 'حيوانات', '🐛': 'حيوانات',
+            '🐸': 'حيوانات', '🐵': 'حيوانات', '🙈': 'حيوانات', '🙉': 'حيوانات', '🙊': 'حيوانات', '🐒': 'حيوانات',
+            '🐶': 'حيوانات', '🐕': 'حيوانات', '🦮': 'حيوانات', '🐩': 'حيوانات', '🐱': 'حيوانات', '🐈': 'حيوانات',
+            '🐆': 'حيوانات', '🐅': 'حيوانات', '🐯': 'حيوانات', '🦁': 'حيوانات', '🐮': 'حيوانات', '🐄': 'حيوانات',
+            '🐃': 'حيوانات', '🐂': 'حيوانات', '🐷': 'حيوانات', '🐖': 'حيوانات', '🐗': 'حيوانات', '🐽': 'حيوانات',
+            '🐏': 'حيوانات', '🐑': 'حيوانات', '🐐': 'حيوانات', '🐪': 'حيوانات', '🐫': 'حيوانات', '🦙': 'حيوانات',
+            '🦒': 'حيوانات', '🐘': 'حيوانات', '🦏': 'حيوانات', '🦛': 'حيوانات', '🐭': 'حيوانات', '🐁': 'حيوانات',
+            '🐀': 'حيوانات', '🐹': 'حيوانات', '🐰': 'حيوانات', '🐇': 'حيوانات', '🐿️': 'حيوانات', '🦔': 'حيوانات',
+            '🦇': 'حيوانات', '🐻': 'حيوانات', '🐨': 'حيوانات', '🐼': 'حيوانات', '🐾': 'حيوانات', '🦃': 'حيوانات',
+            '🐔': 'حيوانات', '🐓': 'حيوانات', '🐣': 'حيوانات', '🐤': 'حيوانات', '🐥': 'حيوانات', '🐦': 'حيوانات',
+            '🐧': 'حيوانات', '🕊️': 'حيوانات', '🦅': 'حيوانات', '🦆': 'حيوانات', '🦢': 'حيوانات', '🦉': 'حيوانات',
+            '🦩': 'حيوانات', '🦚': 'حيوانات', '🦜': 'حيوانات', '🐸': 'حيوانات', '🐊': 'حيوانات', '🐢': 'حيوانات',
+            '🦎': 'حيوانات', '🐍': 'حيوانات', '🐲': 'حيوانات', '🐉': 'حيوانات', '🦕': 'حيوانات', '🦖': 'حيوانات',
+            '🐳': 'حيوانات', '🐋': 'حيوانات', '🐬': 'حيوانات', '🐟': 'حيوانات', '🐠': 'حيوانات', '🐡': 'حيوانات',
+            '🦈': 'حيوانات', '🐙': 'حيوانات', '🐚': 'حيوانات', '🐌': 'حيوانات', '🦋': 'حيوانات', '🐛': 'حيوانات',
             '🐜': 'حيوانات', '🐝': 'حيوانات', '🐞': 'حيوانات', '🦗': 'حيوانات', '🦟': 'حيوانات', '🦠': 'حيوانات',
             '❤️': 'قلوب', '🧡': 'قلوب', '💛': 'قلوب', '💚': 'قلوب', '💙': 'قلوب', '💜': 'قلوب', '🖤': 'قلوب', '🤍': 'قلوب',
             '🤎': 'قلوب', '💔': 'قلوب', '❤️‍🔥': 'قلوب', '❤️‍🩹': 'قلوب', '💕': 'قلوب', '💞': 'قلوب', '💓': 'قلوب', '💗': 'قلوب',
@@ -1804,11 +1845,11 @@
             '🌩️': 'الطقس', '🌨️': 'الطقس', '❄️': 'الطقس', '☃️': 'الطقس', '⛄': 'الطقس', '🌬️': 'الطقس', '💨': 'الطقس',
             '🌪️': 'الطقس', '🌫️': 'الطقس', '🌈': 'الطقس', '☂️': 'الطقس', '☔': 'الطقس', '⛱️': 'الطقس', '⚡': 'الطقس',
             '🔥': 'الطقس', '💧': 'الطقس', '🌊': 'الطقس',
-            '👽': 'فضاء', '🛸': 'فضاء', '👾': 'فضاء', '🤖': 'فضاء', '🪐': 'فضاء', '🌌': 'فضاء', '🌠': 'فضاء', '🌠': 'فضاء',
-            '🚀': 'فضاء', '🛸': 'فضاء', '🛰️': 'فضاء', '🌍': 'فضاء', '🌎': 'فضاء', '🌏': 'فضاء', '🌕': 'فضاء', '🌖': 'فضاء',
-            '🌗': 'فضاء', '🌘': 'فضاء', '🌑': 'فضاء', '🌒': 'فضاء', '🌓': 'فضاء', '🌔': 'فضاء', '🌙': 'فضاء', '🌚': 'فضاء',
-            '🌛': 'فضاء', '🌜': 'فضاء', '☀️': 'فضاء', '🌝': 'فضاء', '🌞': 'فضاء', '⭐': 'فضاء', '🌟': 'فضاء', '🌠': 'فضاء',
-            '🌌': 'فضاء', '☄️': 'فضاء', '💫': 'فضاء', '✨': 'فضاء'
+            '👽': 'فضاء', '🛸': 'فضاء', '👾': 'فضاء', '🤖': 'فضاء', '🪐': 'فضاء', '🌌': 'فضاء', '🌠': 'فضاء',
+            '🚀': 'فضاء', '🛸': 'فضاء', '🛰️': 'فضاء', '🌍': 'فضاء', '🌎': 'فضاء', '🌏': 'فضاء', '🌕': 'فضاء',
+            '🌖': 'فضاء', '🌗': 'فضاء', '🌘': 'فضاء', '🌑': 'فضاء', '🌒': 'فضاء', '🌓': 'فضاء', '🌔': 'فضاء',
+            '🌙': 'فضاء', '🌚': 'فضاء', '🌛': 'فضاء', '🌜': 'فضاء', '☀️': 'فضاء', '🌝': 'فضاء', '🌞': 'فضاء',
+            '⭐': 'فضاء', '🌟': 'فضاء', '🌠': 'فضاء', '🌌': 'فضاء', '☄️': 'فضاء', '💫': 'فضاء', '✨': 'فضاء'
         };
         
         function getEmojiCategories() {
@@ -1846,7 +1887,7 @@
         }
         
         // ============================================================
-        // 4. نظام الستيكرات المتقدم
+        // 4. نظام الستيكرات
         // ============================================================
         let allStickers = [];
         let currentStickerTab = 'my_stickers';
@@ -2399,12 +2440,11 @@
         };
         
         // ============================================================
-        // 9. قائمة الضغط المطول - مصغرة مثل إنستا
+        // 9. قائمة الضغط المطول
         // ============================================================
         let longPressTargetId = null;
         let longPressTargetText = '';
         let longPressTargetSent = false;
-        let longPressTimer = null;
         
         const reactionEmojis = ['❤️', '🔥', '😂', '😍', '👏', '🎉', '😢', '😡', '💯', '🙏'];
         
@@ -2417,7 +2457,6 @@
             const items = document.getElementById('longPressItems');
             items.innerHTML = '';
             
-            // إيموجي التفاعل - مصغرة
             reactionEmojis.forEach(emoji => {
                 const btn = document.createElement('button');
                 btn.className = 'menu-item';
@@ -2430,7 +2469,6 @@
                 items.appendChild(btn);
             });
             
-            // خيارات إضافية - مصغرة
             const actions = [
                 { icon: '↩️', label: 'رد', action: () => startReply(messageId, messageText) },
                 { icon: '📋', label: 'نسخ', action: () => { copyText(messageText); hideLongPressMenu(); } },
@@ -3778,17 +3816,17 @@
         // ============================================================
         // 39. بداية التطبيق
         // ============================================================
-        console.log('📸 نيزك إنستا - Instagram Clone');
+        console.log('🌠 نيزك إنستا - الإصدار النهائي');
         console.log('👤 المسؤول: slx23m | كلمة: 1442');
         console.log('📌 اسحب الرسالة لليمين للرد');
-        console.log('📌 اضغط مطولاً لفتح قائمة الإيموجي والخيارات المصغرة');
+        console.log('📌 اضغط مطولاً لفتح قائمة الإيموجي والخيارات');
         console.log('📌 اضغط على الصورة لعرض الملف الشخصي');
         console.log('📌 🔍 بحث فوق الكيبورد');
         console.log('📌 🤖 خوارزميات ذكاء اصطناعي للضغط');
         console.log('📌 🖼️ إدراج صور بتقنية Base64');
         console.log('📌 📦 الستيكرات مشتركة بين جميع المستخدمين');
         console.log('📌 ⌨️ Shift+Enter = سطر جديد, Enter = إرسال');
-        console.log('📌 🎨 لوحة إيموجي كاملة مع 👽 كائن فضائي');
+        console.log('📌 📱 PWA مع إشعارات');
         
         const savedUser = localStorage.getItem('lastUser');
         if (savedUser) {
@@ -3799,4 +3837,5 @@
         console.log('✅ التطبيق جاهز للاستخدام!');
     </script>
 </body>
-    </html>
+</html>
+```
