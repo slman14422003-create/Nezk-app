@@ -3,28 +3,26 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    <title>نيزك - دردشة إنستا</title>
+    <title>نيزك إنستا - Instagram Clone</title>
     
-    <!-- PWA -->
-    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogItmF2YfYp9mGIC0g2KfZhNmF2LHYr9mG2KkiLAogICJzaG9ydF9uYW1lIjogItmF2YfYp9mGIiwKICAiZGVzY3JpcHRpb24iOiAi2KfZhNmF2LHYr9mG2Kkg2KfZhNmF2KfYqNmF2Ycg2YQg2KfZhNiq2LPYqtix2KfYqiDYp9mE2YUg2KfZhNin2KjZhdmHINin2YTYudin2YUg2KfZhNmF2YciLAogICJzdGFydF91cmwiOiAiaW5kZXguaHRtbCIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzExMWIyMSIsCiAgInRoZW1lX2NvbG9yIjogIiMxMTFiMjEiLAogICJvcmllbnRhdGlvbiI6ICJwb3J0cmFpdCIsCiAgImRpciI6ICJydGwiLAogICJsYW5nIjogImFyIiwKICAiaWNvbnMiOiBbCiAgICB7InNyYyI6ICJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQU1BQUFBQ0NNQUFBQUJMZkEwY0FBQUFCR2RCVFVFQUFHSnRUbFFBQUFBQm5QV05YWlMxZ2FXNXphVzVuYjNKdmRHbGpaU0JoYkd3Z1kyOXRZU0JrWldaaGRXeDBJRkpCSlVFZ0FBR3BCU1VSQlZINHJQY1pJQ0FWaXBhTit4SHZBUkVQekFZUWdZQWlHcWtoZ0NFQnZVRUlKQUpJUndsWlNsZ0NBT1lBSnBBR0ZVYUpnU0tWWkZBQkFjSUVnU0FCSVJ3bFpUQ1hBS0NLYUpvV1NnVmtGd0hDTVJCSVZFa3dsaFVDQUpCbHdaRUpJS1FJZ2l1R2lMa0laaVVBVUJCQ0VnSUVTRGdPQUJCQklFWkU2S1FJRktpa0NBaFlCeHdDQ0NSQklWRWh3c0JRQ0FDUkJSQ0lSQkNTSE1iR0J6VFRRSmhNWWpOMHlVWW5EZlp3UUFBQUFBU1VWT1JLNUNZSUlBQUFBQkpSVTVFcmtKZ2dnPT0iLCAic2l6ZXMiOiAiMTkyeDE5MiIsICJ0eXBlIjogImltYWdlL3BuZyIsICJwdXJwb3NlIjogImFueSBtYXNrYWJsZSIgfQogIF0KfQ==" />
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogItmF2YfYp9mGIC0g2KfZhNmF2LHYr9mG2KkiLAogICJzaG9ydF9uYW1lIjogItmF2YfYp9mGIiwKICAiZGVzY3JpcHRpb24iOiAi2KfZhNmF2LHYr9mG2Kkg2YQg2KfZhNiq2LPYqtix2KfYqiDYp9mE2YUg2KfZhNin2KjZhdmHINin2YTYudin2YUiLAogICJzdGFydF91cmwiOiAiaW5kZXguaHRtbCIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzExMWIyMSIsCiAgInRoZW1lX2NvbG9yIjogIiMxMTFiMjEiLAogICJvcmllbnRhdGlvbiI6ICJwb3J0cmFpdCIsCiAgImRpciI6ICJydGwiLAogICJsYW5nIjogImFyIiwKICAiaWNvbnMiOiBbCiAgICB7InNyYyI6ICJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQU1BQUFBQ0NNQUFBQUJMZkEwY0FBQUFCR2RCVFVFQUFHSnRUbFFBQUFBQm5QV05YWlMxZ2FXNXphVzVuYjNKdmRHbGpaU0JoYkd3Z1kyOXRZU0JrWldaaGRXeDBJRkpCSlVFZ0FBR3BCU1VSQlZINHJQY1pJQ0FWaXBhTit4SHZBUkVQekFZUWdZQWlHcWtoZ0NFQnZVRUlKQUpJUndsWlNsZ0NBT1lBSnBBR0ZVYUpnU0tWWkZBQkFjSUVnU0FCSVJ3bFpUQ1hBS0NLYUpvV1NnVmtGd0hDTVJCSVZFa3dsaFVDQUpCbHdaRUpJS1FJZ2l1R2lMa0laaVVBVUJCQ0VnSUVTRGdPQUJCQklFWkU2S1FJRktpa0NBaFlCeHdDQ0NSQklWRWh3c0JRQ0FDUkJSQ0lSQkNTSE1iR0J6VFRRSmhNWWpOMHlVWW5EZlp3UUFBQUFBU1VWT1JLNUNZSUlBQUFBQkpSVTVFcmtKZ2dnPT0iLCAic2l6ZXMiOiAiMTkyeDE5MiIsICJ0eXBlIjogImltYWdlL3BuZyIsICJwdXJwb3NlIjogImFueSBtYXNrYWJsZSIgfQogIF0KfQ==" />
     <meta name="theme-color" content="#111b21" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6dAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QA/wD/AP+gvaeTAAAAB3RJTUUH5wkIBR4hGj8SWwAAAAl2cEFnAAAAzAAAAOgAAAJkqS8ZAAAAAW9pVFh0Y29tbWVudAAAABEAaAB0AHQAcABzADoALwAvAHcAdwB3AC4AYQBuAGkAbQBhAHQAaQBvAG4ALgBpAG4AZgBvAC8AUgBfAEkAYwBvAG4AcwAAAAOgSURBVHic7Z1Ba9tAFMb/T3HiXFBoHhK7R5XUYHAXEEmhEKRiJbXxwdBAcknBBx/UIIEI4Sq1CsYUQgN2iGIX3B66uZS64IcE3B4LpuB9s/vmzTzzZmRJOX0LAA/9R5dSKBVQBFCsOSB5uSFJkm6AcgC0Z5IkoV7HcUjKcg2g5Sw9oIRUuQDdlRkBFHKwPRcoZZMkSbKN5W+VZPlZSHJfoK0Fp0y4C8h30bG1mwLEj9a5IYNKdKmgyFQhMVGo7QalxgIkvAq03HL5p2vS0j3y+83LeO2rK8uhfW/BPjbhxcb/tk4wXf5dSnW4ePD+Snryj7jzcjsWf92s8Jb+fxXrA31TDP9oig2IIELyJkOUbNR0O+bR2YV0PqsvE3KBV+1MqQHXp2UMBTjVEzJ0K1v38OwiKCjQkAhyv1OWwqSzM7QBYlUOCqk+0YUdKk8gcgBBnAiIBNmLfAJJ0NxFgogCDYlIskcEvx1lixmhaAGigDR/0H96j7ZQBXG9/snP94Pn6B4TkK03Q96C7Q6I/X0kw3zVJN1Gwyz61BMJSF2Z7XaOim9iJp/rjDBFQEQnJ1P8IIS7SXlEP30ui0p5t9tTl6c8eXl7VigVd/l8PpctU9lMKRwOH6LKsZIkIY/Hc3f6cndAqVzKbW5sGuVy+X67vnGO71SDUmW2y1a/A9lCqLt3dHSUnM1mhbfmSwgAQiqVutvd2f1YfCgmyjl/f/8+tbY+SutQIBD4WC6XE7vdDllb6xMXq2TtYHp63W5rR0B6Xe/csmzaW1tb8c3NjTMAQJfL9dm2bdrhyW7MZMoVjFjKQbGSJd6nqI2k7ju5TZeL/RgsrKd3+Q/g9Xp/PhP4RgJCYzXcTqU6v7yODhARmbhcrmgmkwkbhiHWaDQCqVQqWKvVBJdLxgZg5TKPxwPX6/XVYrFotVpYrVYEqVQK3G5iWxqNdgGLxQKuVivYbDaYz+cQn88jb7fbIB9gq2RaQq/XA4/HI7cBmynDbrfDZrMhIgwGAwCE7yP+3Wy7rYHwj/8KZz/MtGuhWcDnGq4RTYJhFkFZgiiJcGggokLg2kQghpDlAIGItaEBRXeFUBFBhAUgLBcRIRKEPzAjIgIVCUIkAAIkAcAiQJhFsCSCUCLGIAFhxUDIMMLAgggUBgmJCPcPAkAFBIvg0SFgiKBE0ChQInBqEGBAsTkgkDDCkKQAsCQRCBgSErg3IDAEIAKCBwBAQCByAiAQIUFAkYyPAAQSDEnQlBZxAgIChDBYxMAAxBgAwzAAxDAgIDgAAAA=" />
     
-    <!-- Firebase SDKs -->
+    <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
     
     <style>
-        /* ============================================================
-           RESET & BASE
-           ============================================================ */
+        /* ===== CSS Variables & Reset ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
         
         :root {
@@ -48,7 +46,7 @@
             --radius-sm: 10px;
             --safe-top: env(safe-area-inset-top, 0px);
             --safe-bottom: env(safe-area-inset-bottom, 0px);
-            --transition-speed: 0.2s;
+            --transition-speed: 0.25s;
         }
         
         body.theme-dark {
@@ -93,9 +91,41 @@
             transition: background 0.3s;
         }
         
-        /* ============================================================
-           شاشة الدخول - إنستا ستايل
-           ============================================================ */
+        /* ===== Animations ===== */
+        @keyframes fadeSlideIn {
+            from { opacity: 0; transform: translateY(8px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pop {
+            0% { transform: scale(0.8); opacity: 0; }
+            70% { transform: scale(1.05); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes pulse {
+            0%,100% { transform: scale(1); }
+            50% { transform: scale(1.04); }
+        }
+        @keyframes blink {
+            0%,100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        @keyframes dotBounce {
+            0%,60%,100% { transform: translateY(0); }
+            30% { transform: translateY(-4px); }
+        }
+        
+        .fade-enter { animation: fadeSlideIn 0.25s ease forwards; }
+        .pop-enter { animation: pop 0.2s ease forwards; }
+        
+        /* ===== شاشة الدخول ===== */
         #loginScreen {
             display: flex;
             flex-direction: column;
@@ -121,8 +151,6 @@
             box-shadow: 0 10px 40px rgba(64, 93, 230, 0.2);
             animation: pulse 2s infinite;
         }
-        
-        @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.04); } }
         
         #loginScreen h1 {
             font-size: 2.8rem;
@@ -190,7 +218,6 @@
             box-shadow: 0 8px 30px rgba(64, 93, 230, 0.15);
             margin-top: 6px;
         }
-        
         #loginScreen .btn-primary:hover { transform: scale(1.02); }
         #loginScreen .btn-primary:active { transform: scale(0.97); }
         
@@ -207,7 +234,6 @@
             margin-top: 8px;
             transition: 0.3s;
         }
-        
         #loginScreen .btn-secondary:hover { opacity: 0.8; }
         
         #adminPassWrap { width: 100%; max-width: 400px; display: none; margin-top: 4px; }
@@ -230,13 +256,10 @@
             border: 3px solid transparent;
             transition: 0.3s;
         }
-        
         .color-picker .color-option:hover { transform: scale(1.15); }
         .color-picker .color-option.active { border-color: var(--text-primary); }
         
-        /* ============================================================
-           شاشة الدردشة
-           ============================================================ */
+        /* ===== شاشة الدردشة ===== */
         #chatScreen {
             display: none;
             flex-direction: column;
@@ -246,7 +269,6 @@
             transition: background 0.3s;
         }
         
-        /* ===== الهيدر - إنستا ستايل ===== */
         .chat-header {
             padding: 10px 16px;
             padding-top: calc(10px + var(--safe-top));
@@ -258,6 +280,7 @@
             flex-shrink: 0;
             min-height: 56px;
             transition: background 0.3s, border-color 0.3s;
+            z-index: 20;
         }
         
         .chat-header .avatar-group {
@@ -277,7 +300,6 @@
             transition: 0.3s;
             border: 2px solid transparent;
         }
-        
         .chat-header .avatar-group:hover { transform: scale(1.05); }
         .chat-header .avatar-group:active { transform: scale(0.95); }
         .chat-header .avatar-group img { width: 100%; height: 100%; object-fit: cover; }
@@ -294,11 +316,21 @@
             animation: blink 2s infinite;
         }
         
-        @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
-        
         .chat-header .info { flex: 1; min-width: 0; }
-        .chat-header .info h3 { font-size: 1rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text-primary); transition: color 0.3s; }
-        .chat-header .info .status { font-size: 0.6rem; color: var(--text-secondary); transition: color 0.3s; }
+        .chat-header .info h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: var(--text-primary);
+            transition: color 0.3s;
+        }
+        .chat-header .info .status {
+            font-size: 0.6rem;
+            color: var(--text-secondary);
+            transition: color 0.3s;
+        }
         
         .chat-header .actions {
             display: flex;
@@ -309,57 +341,46 @@
             background: none;
             border: none;
             color: var(--text-secondary);
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             cursor: pointer;
-            padding: 4px 6px;
+            padding: 6px 8px;
             border-radius: 40px;
             transition: 0.3s;
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        
         .chat-header .actions button:hover { background: rgba(0,0,0,0.02); }
         .chat-header .actions button:active { transform: scale(0.9); }
         
-        /* ============================================================
-           حاوية الرسائل - إنستا ستايل
-           ============================================================ */
+        /* ===== حاوية الرسائل ===== */
         #messagesContainer {
             flex: 1;
             overflow-y: auto;
             padding: 8px 12px 4px;
             display: flex;
             flex-direction: column;
-            gap: 1px;
+            gap: 2px;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
             background: var(--bg-chat);
-            transition: background 0.3s;
+            transition: background 0.3s, padding-bottom 0.3s;
         }
-        
         #messagesContainer::-webkit-scrollbar { width: 3px; }
         #messagesContainer::-webkit-scrollbar-track { background: transparent; }
         #messagesContainer::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.06); border-radius: 10px; }
         
-        /* ============================================================
-           فقاعات الرسائل - إنستا ستايل بالكامل
-           ============================================================ */
+        /* ===== فقاعات ===== */
         .msg-wrapper {
             display: flex;
             flex-direction: column;
-            animation: slideUp 0.12s ease;
+            animation: fadeSlideIn 0.15s ease;
             cursor: default;
             position: relative;
             transition: 0.2s;
-            margin-bottom: 1px;
-        }
-        
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(4px) scale(0.98); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+            margin-bottom: 2px;
         }
         
         .msg-wrapper .reply-preview {
@@ -373,8 +394,8 @@
         }
         
         .msg {
-            max-width: 75%;
-            padding: 6px 12px 6px 14px;
+            max-width: 78%;
+            padding: 8px 14px 8px 16px;
             border-radius: 16px;
             font-size: 0.88rem;
             line-height: 1.4;
@@ -390,8 +411,8 @@
         }
         
         .msg .avatar-small {
-            width: 24px;
-            height: 24px;
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
             flex-shrink: 0;
             overflow: hidden;
@@ -405,7 +426,6 @@
             background: var(--color-accent-gradient);
             color: #fff;
         }
-        
         .msg .avatar-small:hover { transform: scale(1.08); }
         .msg .avatar-small img { width: 100%; height: 100%; object-fit: cover; }
         
@@ -414,7 +434,7 @@
             font-weight: 600;
             font-size: 0.65rem;
             opacity: 0.5;
-            margin-bottom: 1px;
+            margin-bottom: 2px;
             display: block;
             cursor: pointer;
             background: var(--color-accent-gradient);
@@ -423,11 +443,16 @@
             background-clip: text;
         }
         .msg .content .sender-name:hover { opacity: 0.8; }
-        .msg .content .text { font-size: 0.88rem; line-height: 1.4; font-weight: 400; color: var(--text-primary); }
+        .msg .content .text {
+            font-size: 0.88rem;
+            line-height: 1.4;
+            font-weight: 400;
+            color: var(--text-primary);
+        }
         .msg .content .time {
             font-size: 0.5rem;
             opacity: 0.3;
-            margin-top: 2px;
+            margin-top: 3px;
             text-align: left;
             display: flex;
             align-items: center;
@@ -436,8 +461,9 @@
             color: var(--text-secondary);
         }
         .msg .content .time .check { font-size: 0.55rem; }
+        .msg .content .sticker { font-size: 2.5rem; margin-top: 2px; display: block; cursor: pointer; transition: 0.2s; }
+        .msg .content .sticker:hover { transform: scale(1.1); }
         
-        /* ===== فقاعة مرسلة ===== */
         .msg.sent {
             align-self: flex-end;
             background: var(--bg-bubble-sent);
@@ -445,8 +471,6 @@
             margin-left: 4px;
         }
         .msg.sent .content .text { color: var(--text-bubble-sent); }
-        
-        /* ===== فقاعة مستقبلة ===== */
         .msg.received {
             align-self: flex-start;
             background: var(--bg-bubble-received);
@@ -456,42 +480,12 @@
         }
         .msg.received .content .text { color: var(--text-bubble-received); }
         
-        /* ===== أزرار التفاعل ===== */
-        .msg .actions-bar {
-            display: flex;
-            gap: 4px;
-            margin-top: 3px;
-            opacity: 0;
-            font-size: 0.6rem;
-            flex-wrap: wrap;
-            transition: 0.15s;
-        }
-        
-        .msg-wrapper:hover .msg .actions-bar,
-        .msg-wrapper:active .msg .actions-bar { opacity: 0.5; }
-        
-        .msg .actions-bar button {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            cursor: pointer;
-            font-size: 0.6rem;
-            padding: 1px 5px;
-            border-radius: 8px;
-            transition: 0.2s;
-            opacity: 0.6;
-        }
-        
-        .msg .actions-bar button:hover { opacity: 1; background: rgba(0,0,0,0.02); }
-        
-        /* ===== التفاعلات ===== */
         .msg .reactions {
             display: flex;
             gap: 2px;
             margin-top: 3px;
             flex-wrap: wrap;
         }
-        
         .msg .reactions .reaction {
             background: rgba(0,0,0,0.03);
             padding: 1px 7px;
@@ -504,42 +498,37 @@
             gap: 2px;
             color: var(--text-secondary);
         }
-        
         .msg .reactions .reaction:hover {
             background: rgba(0,0,0,0.06);
             transform: scale(1.05);
         }
         
-        .msg .delete-btn {
-            position: absolute;
-            top: -3px;
-            right: -3px;
-            background: rgba(225, 48, 108, 0.7);
-            border: none;
-            color: #fff;
-            border-radius: 40px;
-            width: 16px;
-            height: 16px;
-            font-size: 0.5rem;
-            cursor: pointer;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            transition: 0.2s;
+        .date-divider {
+            text-align: center;
+            font-size: 0.6rem;
+            color: var(--text-secondary);
+            padding: 4px 0;
+            opacity: 0.3;
         }
         
-        .msg-wrapper:hover .msg .delete-btn { display: flex; }
-        .msg .delete-btn:hover { transform: scale(1.15); }
-        
-        .date-divider { text-align: center; font-size: 0.6rem; color: var(--text-secondary); padding: 4px 0; opacity: 0.3; }
-        .welcome-msg { text-align: center; padding: 30px 0; opacity: 0.3; }
+        .welcome-msg {
+            text-align: center;
+            padding: 30px 0;
+            opacity: 0.3;
+        }
         .welcome-msg .icon { font-size: 3rem; }
-        .welcome-msg .title { font-size: 1rem; margin-top: 8px; color: var(--text-primary); }
-        .welcome-msg .sub { font-size: 0.75rem; margin-top: 4px; color: var(--text-secondary); }
+        .welcome-msg .title {
+            font-size: 1rem;
+            margin-top: 8px;
+            color: var(--text-primary);
+        }
+        .welcome-msg .sub {
+            font-size: 0.75rem;
+            margin-top: 4px;
+            color: var(--text-secondary);
+        }
         
-        /* ============================================================
-           مؤشر الكتابة
-           ============================================================ */
+        /* ===== مؤشر الكتابة ===== */
         #typingIndicator {
             font-size: 0.65rem;
             color: var(--text-secondary);
@@ -549,17 +538,18 @@
             align-items: center;
             gap: 4px;
         }
-        
         #typingIndicator .dots { display: flex; gap: 2px; }
-        #typingIndicator .dots span { width: 4px; height: 4px; border-radius: 50%; background: var(--text-secondary); animation: dotBounce 1.4s infinite; }
+        #typingIndicator .dots span {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--text-secondary);
+            animation: dotBounce 1.4s infinite;
+        }
         #typingIndicator .dots span:nth-child(2) { animation-delay: 0.2s; }
         #typingIndicator .dots span:nth-child(3) { animation-delay: 0.4s; }
         
-        @keyframes dotBounce { 0%,60%,100% { transform: translateY(0); } 30% { transform: translateY(-4px); } }
-        
-        /* ============================================================
-           إدخال الرسالة - إنستا ستايل
-           ============================================================ */
+        /* ===== إدخال الرسالة ===== */
         .chat-input {
             display: flex;
             align-items: flex-end;
@@ -569,7 +559,8 @@
             background: var(--bg-header);
             border-top: 1px solid var(--border-color);
             flex-shrink: 0;
-            transition: background 0.3s, border-color 0.3s;
+            transition: background 0.3s, border-color 0.3s, padding-bottom 0.3s;
+            z-index: 10;
         }
         
         .chat-input .input-wrap {
@@ -582,7 +573,6 @@
             border: 1px solid var(--border-color);
             transition: 0.3s;
         }
-        
         .chat-input .input-wrap:focus-within {
             border-color: var(--color-accent);
             box-shadow: 0 0 0 2px rgba(64, 93, 230, 0.05);
@@ -591,22 +581,11 @@
         .chat-input .input-wrap .input-row {
             display: flex;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 2px;
         }
         
-        .chat-input .input-wrap .input-row .emoji-btn {
-            background: none;
-            border: none;
-            font-size: 1.1rem;
-            padding: 2px 6px;
-            cursor: pointer;
-            opacity: 0.5;
-            transition: 0.2s;
-            color: var(--text-secondary);
-        }
-        
-        .chat-input .input-wrap .input-row .emoji-btn:hover { opacity: 1; }
-        .chat-input .input-wrap .input-row .emoji-btn:active { transform: scale(0.9); }
-        
+        .chat-input .input-wrap .input-row .emoji-btn,
         .chat-input .input-wrap .input-row .sticker-btn {
             background: none;
             border: none;
@@ -617,8 +596,9 @@
             transition: 0.2s;
             color: var(--text-secondary);
         }
-        
+        .chat-input .input-wrap .input-row .emoji-btn:hover,
         .chat-input .input-wrap .input-row .sticker-btn:hover { opacity: 1; }
+        .chat-input .input-wrap .input-row .emoji-btn:active,
         .chat-input .input-wrap .input-row .sticker-btn:active { transform: scale(0.9); }
         
         .chat-input .input-wrap .input-row input {
@@ -629,9 +609,8 @@
             color: var(--text-primary);
             font-size: 0.88rem;
             outline: none;
-            min-width: 0;
+            min-width: 60px;
         }
-        
         .chat-input .input-wrap .input-row input::placeholder {
             color: var(--text-secondary);
             font-size: 0.85rem;
@@ -653,13 +632,10 @@
             flex-shrink: 0;
             box-shadow: 0 4px 16px rgba(64, 93, 230, 0.12);
         }
-        
         .chat-input .send-btn:hover { transform: scale(1.03); }
         .chat-input .send-btn:active { transform: scale(0.9); }
         
-        /* ============================================================
-           لوحة الإيموجي - كاملة مثل الكيبورد
-           ============================================================ */
+        /* ===== لوحة الإيموجي ===== */
         #emojiPanel {
             display: none;
             flex-wrap: wrap;
@@ -667,45 +643,78 @@
             background: var(--bg-secondary);
             border-top: 1px solid var(--border-color);
             gap: 2px;
-            max-height: 180px;
+            max-height: 160px;
             overflow-y: auto;
             flex-shrink: 0;
             transition: background 0.3s, border-color 0.3s;
+            z-index: 5;
         }
-        
         #emojiPanel .emoji-item {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             padding: 2px 4px;
             cursor: pointer;
             border-radius: 4px;
             transition: 0.12s;
             user-select: none;
         }
-        
-        #emojiPanel .emoji-item:hover { background: rgba(0,0,0,0.04); transform: scale(1.1); }
+        #emojiPanel .emoji-item:hover {
+            background: rgba(0,0,0,0.04);
+            transform: scale(1.1);
+        }
         #emojiPanel .emoji-item:active { transform: scale(0.9); }
         #emojiPanel::-webkit-scrollbar { width: 2px; }
         #emojiPanel::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.06); border-radius: 10px; }
         
-        /* ============================================================
-           لوحة الستيكرات
-           ============================================================ */
+        /* ===== لوحة الستيكرات ===== */
         #stickerPanel {
             display: none;
-            flex-wrap: wrap;
-            padding: 6px 8px;
+            flex-direction: column;
             background: var(--bg-secondary);
             border-top: 1px solid var(--border-color);
-            gap: 4px;
-            max-height: 180px;
-            overflow-y: auto;
             flex-shrink: 0;
+            max-height: 280px;
             transition: background 0.3s, border-color 0.3s;
+            z-index: 5;
         }
         
-        #stickerPanel .sticker-item {
+        #stickerPanel .sticker-tabs {
+            display: flex;
+            gap: 4px;
+            padding: 4px 8px;
+            border-bottom: 1px solid var(--border-color);
+            overflow-x: auto;
+            flex-shrink: 0;
+        }
+        #stickerPanel .sticker-tabs .tab {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: 0.2s;
+            white-space: nowrap;
+            background: var(--bg-input);
+            color: var(--text-secondary);
+            border: 1px solid transparent;
+        }
+        #stickerPanel .sticker-tabs .tab.active {
+            background: var(--color-accent);
+            color: #fff;
+        }
+        #stickerPanel .sticker-tabs .tab:hover { opacity: 0.8; }
+        #stickerPanel .sticker-tabs .tab.download { background: #25D366; color: #fff; }
+        #stickerPanel .sticker-tabs .tab.upload { background: #4facfe; color: #fff; }
+        
+        #stickerPanel .sticker-grid {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 6px 8px;
+            gap: 4px;
+            overflow-y: auto;
+            flex: 1;
+        }
+        #stickerPanel .sticker-grid .sticker-item {
             font-size: 2.2rem;
-            padding: 2px 4px;
+            padding: 4px;
             cursor: pointer;
             border-radius: 8px;
             transition: 0.12s;
@@ -715,16 +724,24 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            background: var(--bg-chat);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
         }
+        #stickerPanel .sticker-grid .sticker-item:hover {
+            background: rgba(0,0,0,0.04);
+            transform: scale(1.05);
+        }
+        #stickerPanel .sticker-grid .sticker-item:active { transform: scale(0.9); }
+        #stickerPanel .sticker-grid .sticker-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        #stickerPanel .sticker-grid::-webkit-scrollbar { width: 2px; }
+        #stickerPanel .sticker-grid::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.06); border-radius: 10px; }
         
-        #stickerPanel .sticker-item:hover { background: rgba(0,0,0,0.04); transform: scale(1.05); }
-        #stickerPanel .sticker-item:active { transform: scale(0.9); }
-        #stickerPanel::-webkit-scrollbar { width: 2px; }
-        #stickerPanel::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.06); border-radius: 10px; }
-        
-        /* ============================================================
-           شريط الرد - إنستا ستايل
-           ============================================================ */
+        /* ===== شريط الرد ===== */
         .reply-bar {
             display: none;
             padding: 3px 12px 3px 8px;
@@ -734,45 +751,121 @@
             color: var(--text-secondary);
             align-items: center;
             gap: 8px;
+            flex-shrink: 0;
+            z-index: 5;
         }
-        
         .reply-bar .reply-text { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .reply-bar .reply-cancel { background: none; border: none; color: #E1306C; cursor: pointer; font-size: 1rem; }
         
-        /* ============================================================
-           قائمة الضغط المطول - إنستا ستايل
-           ============================================================ */
-        .context-menu {
+        /* ===== شريط التفاعل السفلي ===== */
+        #actionBar {
             display: none;
             position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
             background: var(--bg-secondary);
-            border-radius: 14px;
-            padding: 6px 0;
-            min-width: 160px;
-            z-index: 300;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-            border: 1px solid var(--border-color);
-            animation: slideUp 0.1s ease;
+            border-top: 1px solid var(--border-color);
+            padding: 8px 16px;
+            padding-bottom: calc(8px + var(--safe-bottom));
+            z-index: 350;
+            animation: slideUp 0.2s ease;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.05);
         }
-        
-        .context-menu .menu-item {
-            padding: 8px 14px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: 0.12s;
+        #actionBar .action-items {
             display: flex;
+            justify-content: space-around;
             align-items: center;
             gap: 8px;
-            color: var(--text-primary);
         }
+        #actionBar .action-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            padding: 6px 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+            min-width: 50px;
+            border: none;
+            background: none;
+            color: var(--text-secondary);
+        }
+        #actionBar .action-item:hover { background: rgba(0,0,0,0.03); }
+        #actionBar .action-item:active { transform: scale(0.9); }
+        #actionBar .action-item .icon { font-size: 1.3rem; }
+        #actionBar .action-item .label { font-size: 0.55rem; opacity: 0.6; }
+        #actionBar .action-item.danger .icon { color: #E1306C; }
+        #actionBar .action-item.danger .label { color: #E1306C; }
         
-        .context-menu .menu-item:hover { background: rgba(0,0,0,0.02); }
-        .context-menu .menu-item.danger { color: #E1306C; }
-        .context-menu .menu-item .icon { font-size: 1rem; }
+        /* ===== مودال الملف الشخصي ===== */
+        #profileModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(15px);
+            z-index: 250;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            animation: fadeIn 0.2s ease;
+        }
+        #profileModal .modal-content {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 24px;
+            max-width: 380px;
+            width: 100%;
+            border: 1px solid var(--border-color);
+            animation: fadeSlideIn 0.2s ease;
+            text-align: center;
+        }
+        #profileModal .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 12px;
+            background: var(--color-accent-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            overflow: hidden;
+            border: 3px solid var(--border-color);
+        }
+        #profileModal .profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        #profileModal .profile-name { font-size: 1.2rem; font-weight: 700; color: var(--text-primary); }
+        #profileModal .profile-username { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 4px; }
+        #profileModal .profile-bio {
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            padding: 8px 12px;
+            background: var(--bg-input);
+            border-radius: 10px;
+            margin: 8px 0;
+            min-height: 40px;
+        }
+        #profileModal .profile-status { font-size: 0.7rem; color: var(--text-secondary); }
+        #profileModal .profile-close {
+            margin-top: 12px;
+            padding: 8px 24px;
+            border-radius: 20px;
+            border: none;
+            background: var(--color-accent-gradient);
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        #profileModal .profile-close:hover { transform: scale(1.02); }
+        #profileModal .profile-close:active { transform: scale(0.95); }
         
-        /* ============================================================
-           مودالات - إنستا ستايل
-           ============================================================ */
+        /* ===== مودال تعديل الصورة ===== */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -788,9 +881,6 @@
             padding: 20px;
             animation: fadeIn 0.15s ease;
         }
-        
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        
         .modal-overlay .modal-content {
             background: var(--bg-secondary);
             border-radius: 20px;
@@ -798,16 +888,14 @@
             max-width: 360px;
             width: 100%;
             border: 1px solid var(--border-color);
-            animation: slideUp 0.15s ease;
+            animation: fadeSlideIn 0.15s ease;
         }
-        
         .modal-overlay .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 14px;
         }
-        
         .modal-overlay .modal-header h3 { font-size: 1.05rem; color: var(--color-accent); }
         .modal-overlay .modal-header .close-modal { background: none; border: none; color: #E1306C; font-size: 1.3rem; cursor: pointer; }
         
@@ -827,7 +915,6 @@
             transition: 0.3s;
             border: 3px solid var(--border-color);
         }
-        
         .modal-overlay .avatar-preview:hover { transform: scale(1.03); }
         .modal-overlay .avatar-preview:active { transform: scale(0.95); }
         .modal-overlay .avatar-preview img { width: 100%; height: 100%; object-fit: cover; }
@@ -842,10 +929,16 @@
             padding: 3px;
             text-align: center;
         }
-        
         .modal-overlay .modal-field { margin-bottom: 10px; }
-        .modal-overlay .modal-field label { display: block; font-size: 0.7rem; opacity: 0.5; margin-bottom: 2px; color: var(--text-secondary); }
-        .modal-overlay .modal-field input {
+        .modal-overlay .modal-field label {
+            display: block;
+            font-size: 0.7rem;
+            opacity: 0.5;
+            margin-bottom: 2px;
+            color: var(--text-secondary);
+        }
+        .modal-overlay .modal-field input,
+        .modal-overlay .modal-field textarea {
             width: 100%;
             padding: 8px 12px;
             border-radius: var(--radius-sm);
@@ -855,15 +948,17 @@
             font-size: 0.85rem;
             outline: none;
             transition: 0.3s;
+            font-family: inherit;
         }
-        .modal-overlay .modal-field input:focus { border-color: var(--color-accent); }
+        .modal-overlay .modal-field input:focus,
+        .modal-overlay .modal-field textarea:focus { border-color: var(--color-accent); }
+        .modal-overlay .modal-field textarea { min-height: 60px; resize: vertical; }
         
         .modal-overlay .modal-actions {
             display: flex;
             gap: 8px;
             margin-top: 14px;
         }
-        
         .modal-overlay .modal-actions button {
             flex: 1;
             padding: 8px;
@@ -874,7 +969,6 @@
             transition: 0.3s;
             font-size: 0.85rem;
         }
-        
         .modal-overlay .modal-actions .btn-save {
             background: var(--color-accent-gradient);
             color: #fff;
@@ -888,65 +982,7 @@
         }
         .modal-overlay .modal-actions .btn-cancel:hover { opacity: 0.8; }
         
-        .modal-overlay .modal-field textarea {
-            width: 100%;
-            padding: 8px 12px;
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--border-color);
-            background: var(--bg-input);
-            color: var(--text-primary);
-            font-size: 0.85rem;
-            outline: none;
-            transition: 0.3s;
-            min-height: 60px;
-            resize: vertical;
-            font-family: inherit;
-        }
-        .modal-overlay .modal-field textarea:focus { border-color: var(--color-accent); }
-        
-        /* ============================================================
-           زر التمرير للأسفل
-           ============================================================ */
-        #scrollToBottom {
-            position: absolute;
-            bottom: 80px;
-            right: 12px;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: var(--color-accent-gradient);
-            color: #fff;
-            border: none;
-            font-size: 0.9rem;
-            cursor: pointer;
-            box-shadow: 0 4px 16px rgba(64, 93, 230, 0.2);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            transition: 0.3s;
-            z-index: 10;
-        }
-        
-        #scrollToBottom:hover { transform: scale(1.05); }
-        #scrollToBottom:active { transform: scale(0.9); }
-        #scrollToBottom .badge {
-            position: absolute;
-            top: -3px;
-            right: -3px;
-            background: #E1306C;
-            color: #fff;
-            border-radius: 50%;
-            width: 16px;
-            height: 16px;
-            font-size: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        /* ============================================================
-           لوحة المسؤول
-           ============================================================ */
+        /* ===== لوحة المسؤول ===== */
         #adminPanel {
             display: none;
             flex-direction: column;
@@ -960,9 +996,8 @@
             width: 100%;
             z-index: 100;
             overflow-y: auto;
-            animation: slideUp 0.15s ease;
+            animation: fadeSlideIn 0.15s ease;
         }
-        
         #adminPanel .admin-header {
             display: flex;
             justify-content: space-between;
@@ -971,7 +1006,6 @@
             padding-bottom: 8px;
             border-bottom: 1px solid var(--border-color);
         }
-        
         #adminPanel .admin-header h2 {
             background: var(--color-accent-gradient);
             -webkit-background-clip: text;
@@ -981,31 +1015,59 @@
         }
         #adminPanel .admin-header .close-admin { background: none; border: none; color: #E1306C; font-size: 1.3rem; cursor: pointer; padding: 4px 8px; }
         
-        #adminPanel .admin-stats {
+        #adminPanel .server-stats {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 4px;
             margin-bottom: 10px;
         }
-        
-        #adminPanel .admin-stats .stat {
+        #adminPanel .server-stats .stat {
             padding: 6px;
             background: var(--bg-secondary);
             border-radius: var(--radius-sm);
             text-align: center;
             border: 1px solid var(--border-color);
         }
+        #adminPanel .server-stats .stat .num {
+            font-size: 1rem;
+            font-weight: 700;
+            background: var(--color-accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        #adminPanel .server-stats .stat .label { font-size: 0.5rem; opacity: 0.5; color: var(--text-secondary); }
         
-        #adminPanel .admin-stats .stat .num { font-size: 1rem; font-weight: 700; background: var(--color-accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        #adminPanel .admin-stats .stat .label { font-size: 0.5rem; opacity: 0.5; color: var(--text-secondary); }
+        #adminPanel .repair-actions {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+        #adminPanel .repair-actions button {
+            flex: 1;
+            min-width: 60px;
+            padding: 6px 10px;
+            border-radius: var(--radius-sm);
+            border: none;
+            font-weight: 600;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        #adminPanel .repair-actions button:hover { transform: scale(1.02); }
+        #adminPanel .repair-actions button:active { transform: scale(0.97); }
+        #adminPanel .repair-actions .btn-restart { background: #4facfe; color: #fff; }
+        #adminPanel .repair-actions .btn-clear { background: #E1306C; color: #fff; }
+        #adminPanel .repair-actions .btn-sync { background: #25D366; color: #fff; }
+        #adminPanel .repair-actions .btn-repair { background: #f5a623; color: #fff; }
         
         #adminPanel .admin-tabs {
             display: flex;
             gap: 4px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             flex-wrap: wrap;
         }
-        
         #adminPanel .admin-tabs button {
             padding: 4px 12px;
             border-radius: var(--radius-sm);
@@ -1017,16 +1079,77 @@
             font-size: 0.7rem;
             font-weight: 600;
         }
-        
         #adminPanel .admin-tabs button.active {
             border-color: var(--color-accent);
             background: var(--color-accent);
             color: #fff;
         }
-        
         #adminPanel .admin-tabs button:hover { opacity: 0.8; }
         #adminPanel .admin-section { display: none; flex-direction: column; gap: 6px; }
         #adminPanel .admin-section.active { display: flex; }
+        
+        #adminUserList {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        #adminUserList .user-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4px 8px;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-sm);
+            gap: 4px;
+            flex-wrap: wrap;
+            border: 1px solid var(--border-color);
+        }
+        #adminUserList .user-item .name {
+            font-weight: 500;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex-wrap: wrap;
+            color: var(--text-primary);
+        }
+        #adminUserList .user-item .name .badge {
+            font-size: 0.4rem;
+            padding: 1px 5px;
+            border-radius: 12px;
+            background: var(--color-accent);
+            color: #fff;
+        }
+        #adminUserList .user-item .name .badge.admin { background: #833AB4; }
+        #adminUserList .user-item .name .badge.blocked { background: #E1306C; }
+        #adminUserList .user-item .name .badge.online { background: #25D366; }
+        #adminUserList .user-item .name .badge.offline { background: #8E8E8E; }
+        
+        #adminUserList .user-item .actions-group {
+            display: flex;
+            gap: 2px;
+            flex-wrap: wrap;
+        }
+        #adminUserList .user-item .actions-group button {
+            background: none;
+            border: none;
+            padding: 1px 5px;
+            border-radius: 10px;
+            font-size: 0.55rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        #adminUserList .user-item .btn-block { color: #E1306C; }
+        #adminUserList .user-item .btn-block:hover { background: rgba(225, 48, 108, 0.05); }
+        #adminUserList .user-item .btn-delete { color: #FD1D1D; }
+        #adminUserList .user-item .btn-delete:hover { background: rgba(253, 29, 29, 0.05); }
+        #adminUserList .user-item .btn-admin { color: #833AB4; }
+        #adminUserList .user-item .btn-admin:hover { background: rgba(131, 58, 180, 0.05); }
+        #adminUserList .user-item .btn-unblock { color: var(--color-accent); }
+        #adminUserList .user-item .btn-unblock:hover { background: rgba(64, 93, 230, 0.05); }
+        #adminUserList .user-item .btn-warn { color: #FCAF45; }
+        #adminUserList .user-item .btn-warn:hover { background: rgba(252, 175, 69, 0.05); }
         
         .bad-words-list {
             display: flex;
@@ -1034,7 +1157,6 @@
             gap: 4px;
             padding: 4px 0;
         }
-        
         .bad-words-list .word-tag {
             background: rgba(225, 48, 108, 0.08);
             color: #E1306C;
@@ -1046,14 +1168,12 @@
             gap: 4px;
             border: 1px solid rgba(225, 48, 108, 0.1);
         }
-        
         .bad-words-list .word-tag .remove-word { background: none; border: none; color: #E1306C; cursor: pointer; font-size: 0.7rem; }
         
         .bad-words-input {
             display: flex;
             gap: 4px;
         }
-        
         .bad-words-input input {
             flex: 1;
             padding: 6px 10px;
@@ -1078,29 +1198,7 @@
         }
         .bad-words-input button:hover { transform: scale(1.02); }
         
-        .advanced-stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 4px;
-        }
-        
-        .advanced-stats .stat-item {
-            padding: 8px;
-            background: var(--bg-secondary);
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--border-color);
-            text-align: center;
-        }
-        
-        .advanced-stats .stat-item .num { font-size: 1.1rem; font-weight: 700; background: var(--color-accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .advanced-stats .stat-item .label { font-size: 0.5rem; opacity: 0.5; color: var(--text-secondary); }
-        
-        .quick-settings {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-        
+        .quick-settings { display: flex; flex-direction: column; gap: 4px; }
         .quick-settings .setting-item {
             display: flex;
             justify-content: space-between;
@@ -1110,9 +1208,7 @@
             border-radius: var(--radius-sm);
             border: 1px solid var(--border-color);
         }
-        
         .quick-settings .setting-item .label { font-size: 0.75rem; color: var(--text-primary); }
-        
         .quick-settings .setting-item .switch {
             width: 36px;
             height: 20px;
@@ -1122,7 +1218,6 @@
             position: relative;
             transition: 0.3s;
         }
-        
         .quick-settings .setting-item .switch.active { background: var(--color-accent); }
         .quick-settings .setting-item .switch .thumb {
             width: 16px;
@@ -1136,81 +1231,32 @@
         }
         .quick-settings .setting-item .switch.active .thumb { left: 18px; }
         
-        #adminUserList {
+        #adminStickerList {
             display: flex;
-            flex-direction: column;
-            gap: 2px;
+            flex-wrap: wrap;
+            gap: 4px;
+            padding: 4px 0;
         }
-        
-        #adminUserList .user-item {
+        #adminStickerList .sticker-item-admin {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 4px;
             padding: 4px 8px;
             background: var(--bg-secondary);
-            border-radius: var(--radius-sm);
-            gap: 4px;
-            flex-wrap: wrap;
+            border-radius: 8px;
             border: 1px solid var(--border-color);
+            font-size: 0.7rem;
+        }
+        #adminStickerList .sticker-item-admin img {
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+            border-radius: 4px;
         }
         
-        #adminUserList .user-item .name {
-            font-weight: 500;
-            font-size: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            flex-wrap: wrap;
-            color: var(--text-primary);
-        }
-        
-        #adminUserList .user-item .name .badge {
-            font-size: 0.4rem;
-            padding: 1px 5px;
-            border-radius: 12px;
-            background: var(--color-accent);
-            color: #fff;
-        }
-        #adminUserList .user-item .name .badge.admin { background: #833AB4; }
-        #adminUserList .user-item .name .badge.blocked { background: #E1306C; }
-        #adminUserList .user-item .name .badge.online { background: #25D366; }
-        #adminUserList .user-item .name .badge.offline { background: #8E8E8E; }
-        #adminUserList .user-item .name .badge.banned { background: #FD1D1D; }
-        
-        #adminUserList .user-item .actions-group {
-            display: flex;
-            gap: 2px;
-            flex-wrap: wrap;
-        }
-        
-        #adminUserList .user-item .actions-group button {
-            background: none;
-            border: none;
-            padding: 1px 5px;
-            border-radius: 10px;
-            font-size: 0.55rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        
-        #adminUserList .user-item .btn-block { color: #E1306C; }
-        #adminUserList .user-item .btn-block:hover { background: rgba(225, 48, 108, 0.05); }
-        #adminUserList .user-item .btn-delete { color: #FD1D1D; }
-        #adminUserList .user-item .btn-delete:hover { background: rgba(253, 29, 29, 0.05); }
-        #adminUserList .user-item .btn-admin { color: #833AB4; }
-        #adminUserList .user-item .btn-admin:hover { background: rgba(131, 58, 180, 0.05); }
-        #adminUserList .user-item .btn-unblock { color: var(--color-accent); }
-        #adminUserList .user-item .btn-unblock:hover { background: rgba(64, 93, 230, 0.05); }
-        #adminUserList .user-item .btn-warn { color: #FCAF45; }
-        #adminUserList .user-item .btn-warn:hover { background: rgba(252, 175, 69, 0.05); }
-        
-        /* ============================================================
-           إشعارات - إنستا ستايل
-           ============================================================ */
         .temp-notification {
             position: fixed;
-            bottom: 70px;
+            bottom: 80px;
             left: 50%;
             transform: translateX(-50%) translateY(20px);
             background: var(--bg-secondary);
@@ -1226,17 +1272,55 @@
             opacity: 0;
             box-shadow: 0 4px 20px var(--shadow-color);
         }
-        
         @keyframes notificationIn {
             from { opacity: 0; transform: translateX(-50%) translateY(20px); }
             to { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
         
-        #fileInput { display: none; }
+        #fileInput, #stickerFileInput { display: none; }
         
-        /* ============================================================
-           Responsive
-           ============================================================ */
+        /* ===== سكرول للأسفل ===== */
+        #scrollToBottom {
+            position: absolute;
+            bottom: 80px;
+            right: 12px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--color-accent-gradient);
+            color: #fff;
+            border: none;
+            font-size: 0.9rem;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(64, 93, 230, 0.2);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            z-index: 10;
+        }
+        #scrollToBottom:hover { transform: scale(1.05); }
+        #scrollToBottom:active { transform: scale(0.9); }
+        #scrollToBottom .badge {
+            position: absolute;
+            top: -3px;
+            right: -3px;
+            background: #E1306C;
+            color: #fff;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            font-size: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* ===== Responsive ===== */
+        @supports (-webkit-touch-callout: none) {
+            .chat-input { padding-bottom: max(10px, var(--safe-bottom)); }
+        }
+        
         @media (max-width: 480px) {
             #app { max-width: 100%; border-radius: 0; }
             #loginScreen { padding: 30px 20px; }
@@ -1244,15 +1328,18 @@
             #loginScreen h1 { font-size: 2.2rem; }
             .chat-header { padding: 8px 12px; min-height: 48px; }
             .chat-header .avatar-group { width: 34px; height: 34px; font-size: 1.1rem; }
-            .msg { max-width: 85%; font-size: 0.82rem; padding: 5px 10px; }
+            .msg { max-width: 85%; font-size: 0.82rem; padding: 6px 10px; }
             .msg .content .text { font-size: 0.82rem; }
             .msg .avatar-small { width: 22px; height: 22px; font-size: 0.7rem; }
             .chat-input { padding: 4px 8px 8px; }
             .chat-input .send-btn { width: 36px; height: 36px; font-size: 1rem; }
-            #adminPanel .admin-stats { grid-template-columns: repeat(2, 1fr); }
-            .advanced-stats { grid-template-columns: 1fr; }
-            #emojiPanel .emoji-item { font-size: 1.3rem; }
-            #stickerPanel .sticker-item { font-size: 1.8rem; width: 50px; height: 50px; }
+            #adminPanel .server-stats { grid-template-columns: repeat(2, 1fr); }
+            #stickerPanel .sticker-grid .sticker-item { font-size: 1.8rem; width: 50px; height: 50px; }
+            #profileModal .modal-content { padding: 18px; max-width: 320px; }
+            #profileModal .profile-avatar { width: 80px; height: 80px; font-size: 2.5rem; }
+            #actionBar .action-item { padding: 4px 8px; min-width: 40px; }
+            #actionBar .action-item .icon { font-size: 1.1rem; }
+            #actionBar .action-item .label { font-size: 0.5rem; }
         }
         
         @media (min-width: 481px) and (max-width: 1024px) {
@@ -1270,27 +1357,14 @@
             .msg { max-width: 65%; font-size: 0.95rem; }
             .msg .content .text { font-size: 0.95rem; }
         }
-        
-        @media (orientation: landscape) and (max-height: 500px) {
-            #loginScreen { flex-direction: row; flex-wrap: wrap; padding: 20px 40px; gap: 20px; }
-            #loginScreen .logo-wrap { width: 60px; height: 60px; font-size: 2rem; }
-            #loginScreen h1 { font-size: 1.8rem; }
-            .chat-header { padding: 4px 10px; min-height: 40px; }
-            .msg { font-size: 0.7rem; padding: 4px 8px; }
-            .msg .content .text { font-size: 0.7rem; }
-            .chat-input { padding: 2px 6px 4px; }
-            .chat-input .send-btn { width: 30px; height: 30px; font-size: 0.8rem; }
-            #emojiPanel .emoji-item { font-size: 1.1rem; }
-            #stickerPanel .sticker-item { font-size: 1.5rem; width: 40px; height: 40px; }
-        }
     </style>
 </head>
 <body>
     <div id="app">
-        <!-- ===== شاشة الدخول ===== -->
+        <!-- شاشة الدخول -->
         <div id="loginScreen">
-            <div class="logo-wrap">💬</div>
-            <h1>نيزك</h1>
+            <div class="logo-wrap">📸</div>
+            <h1>نيزك إنستا</h1>
             <div class="subtitle">✦ دردشة إنستا ✦</div>
             
             <div class="input-group">
@@ -1322,11 +1396,11 @@
             <div id="loginError"></div>
         </div>
         
-        <!-- ===== شاشة الدردشة ===== -->
+        <!-- شاشة الدردشة -->
         <div id="chatScreen">
             <div class="chat-header">
                 <div class="avatar-group" id="userAvatar" onclick="openAvatarModal()">
-                    👤
+                    📸
                     <span class="online-dot"></span>
                 </div>
                 <div class="info">
@@ -1334,11 +1408,22 @@
                     <span class="status" id="onlineInfo">🟢 0 متصل · 0 رسالة</span>
                 </div>
                 <div class="actions">
-                    <button id="themeToggleChat" title="الثيم">🌓</button>
-                    <button id="adminShieldBtn" title="لوحة المسؤول">🛡️</button>
-                    <button id="logoutBtn" title="خروج">🚪</button>
+                    <button id="searchToggle" title="بحث" style="font-size:1.2rem;">🔍</button>
+                    <button id="themeToggleChat" title="الثيم" style="font-size:1.4rem;">🌓</button>
+                    <button id="adminShieldBtn" title="لوحة المسؤول" style="font-size:1.3rem;">🛡️</button>
+                    <button id="logoutBtn" title="خروج" style="font-size:1.2rem;">🚪</button>
                 </div>
             </div>
+            
+            <div id="searchBar" style="display:none;">
+                <div class="search-wrap">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="searchInput" placeholder="بحث في الرسائل..." />
+                </div>
+                <button class="search-close" id="searchClose">✕</button>
+            </div>
+            
+            <div id="searchResults"></div>
             
             <div id="messagesContainer"></div>
             
@@ -1352,11 +1437,12 @@
                 <button class="reply-cancel" id="replyCancel">✕</button>
             </div>
             
-            <!-- لوحة الإيموجي -->
             <div id="emojiPanel"></div>
             
-            <!-- لوحة الستيكرات -->
-            <div id="stickerPanel"></div>
+            <div id="stickerPanel">
+                <div class="sticker-tabs" id="stickerTabs"></div>
+                <div class="sticker-grid" id="stickerGrid"></div>
+            </div>
             
             <div class="chat-input">
                 <div class="input-wrap">
@@ -1372,35 +1458,76 @@
             <button id="scrollToBottom">⬇️</button>
         </div>
         
-        <!-- ===== قائمة الضغط المطول ===== -->
-        <div class="context-menu" id="contextMenu">
-            <div class="menu-item" data-action="reply"><span class="icon">↩️</span> رد</div>
-            <div class="menu-item" data-action="react"><span class="icon">❤️</span> تفاعل</div>
-            <div class="menu-item" data-action="edit"><span class="icon">✏️</span> تعديل</div>
-            <div class="menu-item" data-action="copy"><span class="icon">📋</span> نسخ</div>
-            <div class="menu-item" data-action="report"><span class="icon">🚨</span> إبلاغ</div>
-            <div class="menu-item danger" data-action="delete"><span class="icon">🗑️</span> حذف</div>
+        <!-- شريط التفاعل السفلي -->
+        <div id="actionBar">
+            <div class="action-items">
+                <button class="action-item" data-action="reply">
+                    <span class="icon">↩️</span>
+                    <span class="label">رد</span>
+                </button>
+                <button class="action-item" data-action="react">
+                    <span class="icon">❤️</span>
+                    <span class="label">تفاعل</span>
+                </button>
+                <button class="action-item" data-action="copy">
+                    <span class="icon">📋</span>
+                    <span class="label">نسخ</span>
+                </button>
+                <button class="action-item" data-action="edit">
+                    <span class="icon">✏️</span>
+                    <span class="label">تعديل</span>
+                </button>
+                <button class="action-item danger" data-action="delete">
+                    <span class="icon">🗑️</span>
+                    <span class="label">حذف</span>
+                </button>
+            </div>
         </div>
         
-        <!-- ===== لوحة المسؤول ===== -->
+        <!-- مودال الملف الشخصي -->
+        <div id="profileModal">
+            <div class="modal-content">
+                <div class="profile-avatar" id="profileAvatarDisplay">📸</div>
+                <div class="profile-name" id="profileNameDisplay">اسم المستخدم</div>
+                <div class="profile-username" id="profileUsernameDisplay">@username</div>
+                <div class="profile-bio" id="profileBioDisplay">📝 نبذة عني...</div>
+                <div class="profile-status" id="profileStatusDisplay">🟢 متصل</div>
+                <button class="profile-close" id="profileCloseBtn">✕ إغلاق</button>
+            </div>
+        </div>
+        
+        <!-- لوحة المسؤول -->
         <div id="adminPanel">
             <div class="admin-header">
                 <h2>🛡️ لوحة التحكم</h2>
                 <button class="close-admin" id="closeAdminBtn">✕</button>
             </div>
             
-            <div class="admin-stats">
+            <div class="server-stats">
                 <div class="stat"><div class="num" id="statUsers">0</div><div class="label">المستخدمين</div></div>
                 <div class="stat"><div class="num" id="statOnline">0</div><div class="label">متصل</div></div>
                 <div class="stat"><div class="num" id="statMessages">0</div><div class="label">الرسائل</div></div>
                 <div class="stat"><div class="num" id="statBlocked">0</div><div class="label">محظورين</div></div>
             </div>
             
+            <div class="connection-status" id="connectionStatus">
+                <span class="indicator online" id="statusIndicator"></span>
+                <span id="statusText">🟢 متصل</span>
+                <span style="font-size:0.6rem;opacity:0.5;margin-right:auto;">آخر مزامنة: <span id="lastSyncTime">الآن</span></span>
+            </div>
+            
+            <div class="repair-actions">
+                <button class="btn-restart" onclick="restartSync()">🔄 إعادة تشغيل المزامنة</button>
+                <button class="btn-sync" onclick="forceSync()">📡 مزامنة فورية</button>
+                <button class="btn-repair" onclick="repairServer()">🔧 إصلاح السيرفر</button>
+                <button class="btn-clear" onclick="clearAllMessages()">🗑️ مسح الكل</button>
+            </div>
+            
             <div class="admin-tabs">
                 <button class="active" data-tab="users">👥 المستخدمين</button>
                 <button data-tab="badwords">🚫 كلمات ممنوعة</button>
                 <button data-tab="settings">⚙️ إعدادات</button>
-                <button data-tab="stats">📊 إحصائيات</button>
+                <button data-tab="stickers">🎨 الستيكرات</button>
             </div>
             
             <div class="admin-section active" id="tab-users">
@@ -1437,40 +1564,39 @@
                         </div>
                     </div>
                 </div>
-                <div class="admin-actions" style="margin-top:8px;">
-                    <button class="btn-clear" onclick="clearAllMessages()">🗑️ مسح الكل</button>
-                    <button class="btn-export" onclick="exportChat()">📤 تصدير</button>
-                    <button class="btn-ban-all" onclick="banAllUsers()">⛔ حظر الكل</button>
-                </div>
             </div>
             
-            <div class="admin-section" id="tab-stats">
-                <div class="advanced-stats">
-                    <div class="stat-item"><div class="num" id="statTotalUsers">0</div><div class="label">إجمالي المستخدمين</div></div>
-                    <div class="stat-item"><div class="num" id="statActiveUsers">0</div><div class="label">نشطاء اليوم</div></div>
-                    <div class="stat-item"><div class="num" id="statBannedUsers">0</div><div class="label">محظورين</div></div>
-                    <div class="stat-item"><div class="num" id="statTotalMessages">0</div><div class="label">إجمالي الرسائل</div></div>
-                    <div class="stat-item"><div class="num" id="statBadWordsBlocked">0</div><div class="label">كلمات ممنوعة تم حظرها</div></div>
-                    <div class="stat-item"><div class="num" id="statAvgMessages">0</div><div class="label">متوسط الرسائل/يوم</div></div>
+            <div class="admin-section" id="tab-stickers">
+                <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px;">
+                    <button onclick="document.getElementById('stickerFileInput').click()" style="padding:6px 14px;border-radius:12px;border:none;background:#4facfe;color:#fff;cursor:pointer;font-size:0.75rem;">📷 رفع ستيكر</button>
+                    <button onclick="uploadStickerPack()" style="padding:6px 14px;border-radius:12px;border:none;background:#833AB4;color:#fff;cursor:pointer;font-size:0.75rem;">📦 رفع حزمة</button>
+                    <button onclick="downloadStickerPack()" style="padding:6px 14px;border-radius:12px;border:none;background:#25D366;color:#fff;cursor:pointer;font-size:0.75rem;">📥 تحميل حزمة</button>
+                    <button onclick="syncStickers()" style="padding:6px 14px;border-radius:12px;border:none;background:#f5a623;color:#fff;cursor:pointer;font-size:0.75rem;">🔄 مزامنة</button>
                 </div>
+                <input type="file" id="stickerFileInput" accept="image/*" multiple />
+                <div id="adminStickerList"></div>
             </div>
         </div>
         
-        <!-- ===== مودال تعديل الصورة ===== -->
+        <!-- مودال تعديل الصورة -->
         <div class="modal-overlay" id="avatarModal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3>👤 تعديل الصورة الشخصية</h3>
+                    <h3>👤 تعديل الملف الشخصي</h3>
                     <button class="close-modal" id="closeAvatarModal">✕</button>
                 </div>
                 <div class="avatar-preview" id="avatarPreview" onclick="document.getElementById('fileInput').click()">
-                    👤
+                    📸
                     <div class="upload-overlay">📷 تغيير</div>
                 </div>
                 <input type="file" id="fileInput" accept="image/*" />
                 <div class="modal-field">
                     <label>👤 اسم المستخدم</label>
                     <input type="text" id="editNameInput" maxlength="20" />
+                </div>
+                <div class="modal-field">
+                    <label>📝 نبذة عنك</label>
+                    <textarea id="editBioInput" maxlength="150" placeholder="اكتب نبذة عنك..."></textarea>
                 </div>
                 <div class="modal-actions">
                     <button class="btn-save" id="saveAvatarBtn">💾 حفظ</button>
@@ -1479,7 +1605,7 @@
             </div>
         </div>
         
-        <!-- ===== مودال تعديل الرسالة ===== -->
+        <!-- مودال تعديل الرسالة -->
         <div class="modal-overlay" id="editMessageModal">
             <div class="modal-content">
                 <div class="modal-header">
@@ -1513,13 +1639,675 @@
         
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
+        const storage = firebase.storage();
         
         // ============================================================
-        // 2. المتغيرات العامة
+        // 2. خوارزميات الذكاء الاصطناعي للضغط والتحسين
+        // ============================================================
+        class AICore {
+            static compressText(text) {
+                if (!text || text.length < 10) return text;
+                const shortcuts = {
+                    'السلام عليكم': 'س.ع',
+                    'وعليكم السلام': 'و.ع.س',
+                    'كيف حالك': 'ك.ح',
+                    'الحمد لله': 'ح.لله',
+                    'إن شاء الله': 'إ.ش.لله',
+                    'ما شاء الله': 'م.ش.لله',
+                    'جزاك الله خير': 'ج.لله خ',
+                    'الله أكبر': 'ل.أكبر',
+                    'سبحان الله': 'س.لله',
+                    'لا إله إلا الله': 'ل.إ.إ.لله'
+                };
+                let compressed = text;
+                for (const [key, value] of Object.entries(shortcuts)) {
+                    compressed = compressed.replace(new RegExp(key, 'g'), value);
+                }
+                compressed = compressed.replace(/\s+/g, ' ').trim();
+                if (compressed.length > 200) {
+                    const sentences = compressed.split(/[.!?؟،]/);
+                    if (sentences.length > 3) {
+                        compressed = sentences.slice(0, 3).join('. ') + '...';
+                    }
+                }
+                return compressed;
+            }
+            
+            static decompressText(text) {
+                if (!text) return text;
+                const shortcuts = {
+                    'س.ع': 'السلام عليكم',
+                    'و.ع.س': 'وعليكم السلام',
+                    'ك.ح': 'كيف حالك',
+                    'ح.لله': 'الحمد لله',
+                    'إ.ش.لله': 'إن شاء الله',
+                    'م.ش.لله': 'ما شاء الله',
+                    'ج.لله خ': 'جزاك الله خير',
+                    'ل.أكبر': 'الله أكبر',
+                    'س.لله': 'سبحان الله',
+                    'ل.إ.إ.لله': 'لا إله إلا الله'
+                };
+                let decompressed = text;
+                for (const [key, value] of Object.entries(shortcuts)) {
+                    decompressed = decompressed.replace(new RegExp(key, 'g'), value);
+                }
+                return decompressed;
+            }
+            
+            static compressImage(dataUrl, quality = 0.6, maxSize = 800) {
+                return new Promise((resolve) => {
+                    const img = new Image();
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        let width = img.width;
+                        let height = img.height;
+                        if (width > maxSize || height > maxSize) {
+                            const ratio = Math.min(maxSize / width, maxSize / height);
+                            width = Math.round(width * ratio);
+                            height = Math.round(height * ratio);
+                        }
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.imageSmoothingEnabled = true;
+                        ctx.imageSmoothingQuality = 'high';
+                        ctx.drawImage(img, 0, 0, width, height);
+                        resolve(canvas.toDataURL('image/jpeg', quality));
+                    };
+                    img.src = dataUrl;
+                });
+            }
+            
+            static getOptimalSyncTime() {
+                const hour = new Date().getHours();
+                const peakHours = (hour >= 10 && hour <= 12) || (hour >= 16 && hour <= 20);
+                return peakHours ? 3000 : 5000;
+            }
+            
+            static analyzeActivity(messages) {
+                if (!messages || messages.length === 0) return { priority: 'low', frequency: 0 };
+                const now = Date.now();
+                const recent = messages.filter(m => {
+                    if (!m.timestamp) return false;
+                    const time = m.timestamp.toDate ? m.timestamp.toDate().getTime() : m.timestamp;
+                    return (now - time) < 60000;
+                });
+                return {
+                    priority: recent.length > 5 ? 'high' : recent.length > 2 ? 'medium' : 'low',
+                    frequency: recent.length
+                };
+            }
+            
+            static classifyContent(text) {
+                const importantKeywords = ['مهم', 'عاجل', 'ضروري', 'help', 'urgent', 'يرجى', 'من فضلك'];
+                const lower = text.toLowerCase();
+                const isImportant = importantKeywords.some(k => lower.includes(k));
+                const isQuestion = text.includes('؟') || text.includes('?');
+                return { isImportant, isQuestion, length: text.length };
+            }
+        }
+        
+        // ============================================================
+        // 3. نظام الستيكرات المتقدم
+        // ============================================================
+        let allStickers = [];
+        let currentStickerTab = 'my_stickers';
+        let stickerPanelOpen = false;
+        
+        async function loadStickersFromFirebase() {
+            try {
+                const doc = await db.collection('stickers').doc('all').get();
+                if (doc.exists) {
+                    const data = doc.data();
+                    if (data.stickers && data.stickers.length > 0) {
+                        allStickers = data.stickers;
+                        try { localStorage.setItem('stickers', JSON.stringify(allStickers)); } catch(e) {}
+                        return allStickers;
+                    }
+                }
+            } catch (e) { console.warn('⚠️ فشل تحميل الستيكرات:', e); }
+            
+            try {
+                const saved = localStorage.getItem('stickers');
+                if (saved) { allStickers = JSON.parse(saved); return allStickers; }
+            } catch(e) {}
+            
+            allStickers = [
+                { id: 'sticker_1', emoji: '😊', type: 'emoji' },
+                { id: 'sticker_2', emoji: '😂', type: 'emoji' },
+                { id: 'sticker_3', emoji: '❤️', type: 'emoji' }
+            ];
+            return allStickers;
+        }
+        
+        async function saveStickersToFirebase(stickers) {
+            try {
+                await db.collection('stickers').doc('all').set({
+                    stickers: stickers,
+                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                }, { merge: true });
+            } catch(e) { console.warn('⚠️ فشل حفظ الستيكرات:', e); }
+        }
+        
+        async function uploadSticker(file) {
+            if (!file) return;
+            if (!file.type.startsWith('image/')) { showNotification('❌ يرجى اختيار صورة'); return; }
+            if (file.size > 2 * 1024 * 1024) { showNotification('❌ حجم الصورة كبير جداً (أقصى 2MB)'); return; }
+            
+            try {
+                showNotification('⏳ جاري رفع الستيكر...');
+                const reader = new FileReader();
+                reader.onload = async function(e) {
+                    const compressed = await AICore.compressImage(e.target.result, 0.5);
+                    const newSticker = {
+                        id: 'sticker_' + Date.now(),
+                        type: 'image',
+                        data: compressed,
+                        name: file.name,
+                        createdAt: new Date().toISOString()
+                    };
+                    allStickers.push(newSticker);
+                    await saveStickersToFirebase(allStickers);
+                    try { localStorage.setItem('stickers', JSON.stringify(allStickers)); } catch(e) {}
+                    showNotification('✅ تم إضافة الستيكر بنجاح');
+                    renderStickerTabs();
+                    renderStickers(currentStickerTab);
+                    renderAdminStickers();
+                };
+                reader.readAsDataURL(file);
+            } catch (error) {
+                console.error(error);
+                showNotification('❌ فشل رفع الستيكر');
+            }
+        }
+        
+        async function uploadStickerPack() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.zip,.json';
+            input.multiple = false;
+            
+            input.onchange = async function(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+                try {
+                    showNotification('⏳ جاري معالجة الحزمة...');
+                    const text = await file.text();
+                    const packData = JSON.parse(text);
+                    if (packData.stickers && Array.isArray(packData.stickers)) {
+                        const newStickers = packData.stickers.map((s, i) => ({
+                            id: 'pack_' + Date.now() + '_' + i,
+                            emoji: s.emoji || s,
+                            type: 'emoji',
+                            pack: packData.name || 'حزمة مرفوعة'
+                        }));
+                        allStickers = [...allStickers, ...newStickers];
+                        await saveStickersToFirebase(allStickers);
+                        try { localStorage.setItem('stickers', JSON.stringify(allStickers)); } catch(e) {}
+                        renderStickerTabs();
+                        renderStickers(currentStickerTab);
+                        renderAdminStickers();
+                        showNotification(`✅ تم رفع ${newStickers.length} ستيكر`);
+                    } else { showNotification('❌ تنسيق الحزمة غير صحيح'); }
+                } catch (e) { showNotification('❌ فشل رفع الحزمة: ' + e.message); }
+            };
+            input.click();
+        }
+        
+        async function downloadStickerPack() {
+            const packName = prompt('أدخل اسم الحزمة:');
+            if (!packName) return;
+            try {
+                showNotification('⏳ جاري تحميل الستيكرات...');
+                const emojis = ['😊', '😂', '❤️', '🔥', '👍', '👏', '🎉', '✨', '💪', '🤔', '😍', '🥰', '😎', '🤩', '👀', '💀', '🙏', '😅', '🤗', '😇', '🥳', '🤯', '😱', '🥺', '😤', '👻', '🎃', '💫', '⭐', '🌈'];
+                const shuffled = emojis.sort(() => Math.random() - 0.5);
+                const selected = shuffled.slice(0, 12);
+                const newStickers = selected.map((emoji, index) => ({
+                    id: 'pack_' + Date.now() + '_' + index,
+                    emoji: emoji,
+                    type: 'emoji',
+                    pack: packName
+                }));
+                allStickers = [...allStickers, ...newStickers];
+                await saveStickersToFirebase(allStickers);
+                try { localStorage.setItem('stickers', JSON.stringify(allStickers)); } catch(e) {}
+                renderStickerTabs();
+                renderStickers(currentStickerTab);
+                renderAdminStickers();
+                showNotification(`✅ تم تحميل ${newStickers.length} ستيكر`);
+            } catch (error) {
+                console.error(error);
+                showNotification('❌ فشل تحميل الستيكرات');
+            }
+        }
+        
+        function renderStickers(tabId) {
+            const grid = document.getElementById('stickerGrid');
+            let stickers = allStickers;
+            if (tabId !== 'my_stickers') {
+                stickers = allStickers.filter(s => s.pack === tabId);
+                if (stickers.length === 0) stickers = allStickers;
+            }
+            if (!stickers || stickers.length === 0) {
+                grid.innerHTML = '<div style="padding:20px;text-align:center;opacity:0.5;width:100%;">لا توجد ستيكرات</div>';
+                return;
+            }
+            grid.innerHTML = '';
+            stickers.forEach(sticker => {
+                const span = document.createElement('span');
+                span.className = 'sticker-item';
+                if (sticker.type === 'image' && sticker.data) {
+                    span.innerHTML = `<img src="${sticker.data}" alt="${sticker.name || 'ستيكر'}" />`;
+                } else {
+                    span.textContent = sticker.emoji || '😊';
+                }
+                span.onclick = () => {
+                    if (sticker.type === 'image' && sticker.data) {
+                        sendStickerMessage(sticker.data);
+                    } else {
+                        insertAtCursor(sticker.emoji || '😊');
+                    }
+                    stickerPanel.style.display = 'none';
+                    stickerPanelOpen = false;
+                };
+                grid.appendChild(span);
+            });
+        }
+        
+        function renderStickerTabs() {
+            const tabs = document.getElementById('stickerTabs');
+            tabs.innerHTML = '';
+            
+            const myTab = document.createElement('span');
+            myTab.className = 'tab' + (currentStickerTab === 'my_stickers' ? ' active' : '');
+            myTab.textContent = '⭐ ستيكراتي';
+            myTab.onclick = () => {
+                currentStickerTab = 'my_stickers';
+                renderStickerTabs();
+                renderStickers(currentStickerTab);
+            };
+            tabs.appendChild(myTab);
+            
+            const packs = {};
+            allStickers.forEach(s => {
+                if (s.pack) {
+                    if (!packs[s.pack]) packs[s.pack] = [];
+                    packs[s.pack].push(s);
+                }
+            });
+            Object.keys(packs).forEach(packName => {
+                const tab = document.createElement('span');
+                tab.className = 'tab' + (currentStickerTab === packName ? ' active' : '');
+                tab.textContent = packName;
+                tab.onclick = () => {
+                    currentStickerTab = packName;
+                    renderStickerTabs();
+                    renderStickers(currentStickerTab);
+                };
+                tabs.appendChild(tab);
+            });
+            
+            const uploadTab = document.createElement('span');
+            uploadTab.className = 'tab upload';
+            uploadTab.textContent = '📷 رفع';
+            uploadTab.onclick = () => document.getElementById('stickerFileInput').click();
+            tabs.appendChild(uploadTab);
+            
+            const downloadTab = document.createElement('span');
+            downloadTab.className = 'tab download';
+            downloadTab.textContent = '📥 تحميل';
+            downloadTab.onclick = downloadStickerPack;
+            tabs.appendChild(downloadTab);
+        }
+        
+        function renderAdminStickers() {
+            const container = document.getElementById('adminStickerList');
+            container.innerHTML = '';
+            allStickers.forEach((sticker) => {
+                const div = document.createElement('div');
+                div.className = 'sticker-item-admin';
+                if (sticker.type === 'image' && sticker.data) {
+                    div.innerHTML = `
+                        <img src="${sticker.data}" />
+                        <span style="font-size:0.6rem;opacity:0.5;">${sticker.name || 'صورة'}</span>
+                        <button onclick="deleteSticker('${sticker.id}')" style="background:none;border:none;color:#E1306C;cursor:pointer;">✕</button>
+                    `;
+                } else {
+                    div.innerHTML = `
+                        <span style="font-size:1.2rem;">${sticker.emoji || '😊'}</span>
+                        <span style="font-size:0.6rem;opacity:0.5;">${sticker.id}</span>
+                        <button onclick="deleteSticker('${sticker.id}')" style="background:none;border:none;color:#E1306C;cursor:pointer;">✕</button>
+                    `;
+                }
+                container.appendChild(div);
+            });
+            if (allStickers.length === 0) {
+                container.innerHTML = '<div style="opacity:0.4;font-size:0.7rem;padding:8px 0;">لا توجد ستيكرات</div>';
+            }
+        }
+        
+        async function deleteSticker(stickerId) {
+            if (!confirm('حذف الستيكر؟')) return;
+            allStickers = allStickers.filter(s => s.id !== stickerId);
+            await saveStickersToFirebase(allStickers);
+            try { localStorage.setItem('stickers', JSON.stringify(allStickers)); } catch(e) {}
+            renderStickerTabs();
+            renderStickers(currentStickerTab);
+            renderAdminStickers();
+            showNotification('✅ تم حذف الستيكر');
+        }
+        
+        async function syncStickers() {
+            showNotification('⏳ جاري المزامنة...');
+            await loadStickersFromFirebase();
+            renderStickerTabs();
+            renderStickers(currentStickerTab);
+            renderAdminStickers();
+            showNotification('✅ تمت المزامنة');
+        }
+        
+        async function sendStickerMessage(stickerData) {
+            try {
+                const msgData = {
+                    username: currentUser,
+                    text: '🎨 ستيكر',
+                    avatar: myAvatar,
+                    isAdmin: isAdmin,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                    deleted: false,
+                    reactions: {},
+                    edited: false,
+                    editedAt: null,
+                    sticker: true,
+                    stickerData: stickerData,
+                    compressed: true
+                };
+                await db.collection('messages').add(msgData);
+            } catch (error) {
+                console.error('فشل إرسال الستيكر:', error);
+                showNotification('❌ فشل الإرسال');
+            }
+        }
+        
+        document.getElementById('stickerFileInput').onchange = async function(e) {
+            const files = e.target.files;
+            if (!files || files.length === 0) return;
+            for (const file of files) { await uploadSticker(file); }
+            this.value = '';
+        };
+        
+        // ============================================================
+        // 4. وظائف السيرفر والمزامنة الذكية
+        // ============================================================
+        let syncInterval = null;
+        let isSyncing = false;
+        let lastSyncTime = Date.now();
+        
+        function restartSync() {
+            if (syncInterval) { clearInterval(syncInterval); syncInterval = null; }
+            startAutoSync();
+            showNotification('✅ تم إعادة تشغيل المزامنة');
+        }
+        
+        async function forceSync() {
+            if (isSyncing) { showNotification('⏳ جاري المزامنة بالفعل'); return; }
+            showNotification('⏳ جاري المزامنة الفورية...');
+            isSyncing = true;
+            try {
+                await syncMessages();
+                showNotification('✅ تمت المزامنة بنجاح');
+            } catch (e) {
+                showNotification('❌ فشل المزامنة');
+                console.error(e);
+            } finally { isSyncing = false; }
+        }
+        
+        async function repairServer() {
+            showNotification('🔧 جاري إصلاح السيرفر...');
+            try {
+                if (messagesListener) { messagesListener(); messagesListener = null; }
+                await db.collection('_').doc('_').get();
+                listenMessages();
+                showNotification('✅ تم إصلاح السيرفر بنجاح');
+                updateConnectionStatus(true);
+            } catch (e) {
+                showNotification('❌ فشل إصلاح السيرفر: ' + e.message);
+                updateConnectionStatus(false);
+            }
+        }
+        
+        function startAutoSync() {
+            if (syncInterval) clearInterval(syncInterval);
+            const interval = AICore.getOptimalSyncTime();
+            syncInterval = setInterval(() => { syncMessages(); }, interval);
+        }
+        
+        async function syncMessages() {
+            if (isSyncing) return;
+            isSyncing = true;
+            try {
+                await db.collection('_').doc('_').get();
+                updateConnectionStatus(true);
+                lastSyncTime = Date.now();
+                document.getElementById('lastSyncTime').textContent = 'منذ لحظات';
+            } catch (e) {
+                console.warn('⚠️ فشل المزامنة:', e);
+                updateConnectionStatus(false);
+            } finally { isSyncing = false; }
+        }
+        
+        function updateConnectionStatus(isOnline) {
+            const indicator = document.getElementById('statusIndicator');
+            const text = document.getElementById('statusText');
+            if (isOnline) {
+                indicator.className = 'indicator online';
+                text.textContent = '🟢 متصل';
+            } else {
+                indicator.className = 'indicator offline';
+                text.textContent = '🔴 غير متصل';
+            }
+        }
+        
+        // ============================================================
+        // 5. الملف الشخصي
+        // ============================================================
+        async function showProfile(username) {
+            try {
+                const doc = await db.collection('users').doc(username).get();
+                if (!doc.exists) { showNotification('❌ المستخدم غير موجود'); return; }
+                const data = doc.data();
+                const avatar = data.avatar || '📸';
+                const bio = data.bio || '📝 لا توجد نبذة';
+                const status = data.online ? '🟢 متصل الآن' : '⚫ غير متصل';
+                
+                document.getElementById('profileAvatarDisplay').innerHTML = isValidImageUrl(avatar) ? 
+                    `<img src="${avatar}" alt="avatar" />` : avatar;
+                document.getElementById('profileNameDisplay').textContent = username + (data.isAdmin ? ' ⭐' : '');
+                document.getElementById('profileUsernameDisplay').textContent = '@' + username;
+                document.getElementById('profileBioDisplay').textContent = bio;
+                document.getElementById('profileStatusDisplay').textContent = status;
+                
+                document.getElementById('profileModal').style.display = 'flex';
+                document.getElementById('profileModal').classList.add('pop-enter');
+            } catch (e) {
+                showNotification('❌ فشل تحميل الملف الشخصي');
+                console.error(e);
+            }
+        }
+        
+        document.getElementById('profileCloseBtn').onclick = () => {
+            document.getElementById('profileModal').style.display = 'none';
+        };
+        document.getElementById('profileModal').onclick = (e) => {
+            if (e.target === e.currentTarget) {
+                document.getElementById('profileModal').style.display = 'none';
+            }
+        };
+        
+        // ============================================================
+        // 6. البحث
+        // ============================================================
+        let searchMessages = [];
+        let isSearching = false;
+        let searchActive = false;
+        
+        document.getElementById('searchToggle').onclick = function() {
+            const bar = document.getElementById('searchBar');
+            const isOpen = bar.style.display === 'flex';
+            bar.style.display = isOpen ? 'none' : 'flex';
+            if (!isOpen) {
+                document.getElementById('searchInput').focus();
+                searchActive = true;
+            } else {
+                searchActive = false;
+                document.getElementById('searchResults').classList.remove('active');
+                document.getElementById('searchResults').innerHTML = '';
+                document.getElementById('searchInput').value = '';
+            }
+        };
+        
+        document.getElementById('searchClose').onclick = function() {
+            document.getElementById('searchBar').style.display = 'none';
+            searchActive = false;
+            document.getElementById('searchResults').classList.remove('active');
+            document.getElementById('searchResults').innerHTML = '';
+            document.getElementById('searchInput').value = '';
+        };
+        
+        document.getElementById('searchInput').oninput = function() {
+            const query = this.value.trim().toLowerCase();
+            const resultsContainer = document.getElementById('searchResults');
+            
+            if (!query) {
+                resultsContainer.classList.remove('active');
+                resultsContainer.innerHTML = '';
+                return;
+            }
+            
+            const results = searchMessages.filter(msg => 
+                msg.text && AICore.decompressText(msg.text).toLowerCase().includes(query)
+            );
+            
+            if (results.length === 0) {
+                resultsContainer.innerHTML = '<div class="no-results">لا توجد نتائج</div>';
+                resultsContainer.classList.add('active');
+                return;
+            }
+            
+            let html = '';
+            results.slice(0, 15).forEach(msg => {
+                const sender = msg.username || 'مجهول';
+                const avatar = msg.avatar || '📸';
+                const time = msg.timestamp ? 
+                    new Date(msg.timestamp.toDate()).toLocaleTimeString('ar', { hour: '2-digit', minute: '2-digit' }) : '';
+                const text = AICore.decompressText(msg.text);
+                const avatarDisplay = isValidImageUrl(avatar) ? 
+                    `<img src="${avatar}" alt="avatar" />` : avatar;
+                
+                html += `
+                    <div class="result-item" onclick="scrollToMessage('${msg.id}')">
+                        <div class="result-avatar">${avatarDisplay}</div>
+                        <div class="result-info">
+                            <div class="result-name">${sender}</div>
+                            <div class="result-text">${text}</div>
+                        </div>
+                        <div class="result-time">${time}</div>
+                    </div>
+                `;
+            });
+            resultsContainer.innerHTML = html;
+            resultsContainer.classList.add('active');
+        };
+        
+        window.scrollToMessage = function(id) {
+            const element = document.querySelector(`[data-id="${id}"]`);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                element.style.background = 'rgba(64,93,230,0.05)';
+                element.style.borderRadius = '8px';
+                setTimeout(() => {
+                    element.style.background = '';
+                    element.style.borderRadius = '';
+                }, 2000);
+                document.getElementById('searchBar').style.display = 'none';
+                searchActive = false;
+                document.getElementById('searchResults').classList.remove('active');
+                document.getElementById('searchResults').innerHTML = '';
+                document.getElementById('searchInput').value = '';
+            }
+        };
+        
+        // ============================================================
+        // 7. شريط التفاعل السفلي
+        // ============================================================
+        let actionTargetId = null;
+        
+        function showActionBar(messageId, isSent) {
+            actionTargetId = messageId;
+            const bar = document.getElementById('actionBar');
+            
+            const editBtn = bar.querySelector('[data-action="edit"]');
+            const deleteBtn = bar.querySelector('[data-action="delete"]');
+            if (isSent || isAdmin) {
+                editBtn.style.display = 'flex';
+                deleteBtn.style.display = 'flex';
+            } else {
+                editBtn.style.display = 'none';
+                deleteBtn.style.display = 'none';
+            }
+            
+            bar.style.display = 'block';
+            bar.classList.add('pop-enter');
+            setTimeout(() => bar.classList.remove('pop-enter'), 200);
+        }
+        
+        document.querySelectorAll('#actionBar .action-item').forEach(btn => {
+            btn.onclick = function() {
+                const action = this.dataset.action;
+                const messageId = actionTargetId;
+                if (!messageId) return;
+                
+                const wrapper = document.querySelector(`[data-id="${messageId}"]`);
+                const text = wrapper ? wrapper.dataset.text || '' : '';
+                const isSent = wrapper ? wrapper.dataset.sent === 'true' : false;
+                
+                switch(action) {
+                    case 'reply':
+                        startReply(messageId, text);
+                        break;
+                    case 'react':
+                        toggleReaction(messageId, '❤️');
+                        break;
+                    case 'copy':
+                        copyText(text);
+                        break;
+                    case 'edit':
+                        if (isSent || isAdmin) editMessage(messageId);
+                        break;
+                    case 'delete':
+                        if (isSent || isAdmin) deleteMessage(messageId);
+                        break;
+                }
+                document.getElementById('actionBar').style.display = 'none';
+                actionTargetId = null;
+            };
+        });
+        
+        document.addEventListener('click', (e) => {
+            const bar = document.getElementById('actionBar');
+            if (bar.style.display === 'block' && !bar.contains(e.target)) {
+                bar.style.display = 'none';
+                actionTargetId = null;
+            }
+        });
+        
+        // ============================================================
+        // 8. المتغيرات العامة
         // ============================================================
         let currentUser = '';
         let isAdmin = false;
-        let myAvatar = '👤';
+        let myAvatar = '📸';
+        let myBio = '📝 مرحباً، أنا في نيزك!';
         let messageCount = 0;
         let onlineUsers = 0;
         let blockedCount = 0;
@@ -1529,12 +2317,7 @@
         let editingMessageId = null;
         let replyingTo = null;
         let replyingToText = '';
-        let touchTimer = null;
-        let touchTarget = null;
-        let swipeStartX = 0;
-        let swipeTarget = null;
         let emojiPanelOpen = false;
-        let stickerPanelOpen = false;
         let badWords = [];
         let settings = {
             muteAll: false,
@@ -1542,14 +2325,13 @@
             confirmDelete: true
         };
         let userBanCounts = {};
-        let totalBadWordsBlocked = 0;
         let selectedColor = '#405DE6';
         let unreadCount = 0;
-        let isSearching = false;
         let firstLoad = true;
+        let allMessages = [];
         
         // ============================================================
-        // 3. العناصر
+        // 9. العناصر
         // ============================================================
         const loginScreen = document.getElementById('loginScreen');
         const chatScreen = document.getElementById('chatScreen');
@@ -1585,23 +2367,16 @@
         const replyBar = document.getElementById('replyBar');
         const replyText = document.getElementById('replyText');
         const replyCancel = document.getElementById('replyCancel');
-        const contextMenu = document.getElementById('contextMenu');
         const scrollToBottom = document.getElementById('scrollToBottom');
-        
-        const statTotalUsers = document.getElementById('statTotalUsers');
-        const statActiveUsers = document.getElementById('statActiveUsers');
-        const statBannedUsers = document.getElementById('statBannedUsers');
-        const statTotalMessages = document.getElementById('statTotalMessages');
-        const statBadWordsBlocked = document.getElementById('statBadWordsBlocked');
-        const statAvgMessages = document.getElementById('statAvgMessages');
-        
         const badWordInput = document.getElementById('badWordInput');
         const addBadWordBtn = document.getElementById('addBadWordBtn');
         const badWordsList = document.getElementById('badWordsList');
+        const actionBar = document.getElementById('actionBar');
         
         const avatarModal = document.getElementById('avatarModal');
         const avatarPreview = document.getElementById('avatarPreview');
         const editNameInput = document.getElementById('editNameInput');
+        const editBioInput = document.getElementById('editBioInput');
         const saveAvatarBtn = document.getElementById('saveAvatarBtn');
         const cancelAvatarBtn = document.getElementById('cancelAvatarBtn');
         const closeAvatarModal = document.getElementById('closeAvatarModal');
@@ -1617,11 +2392,11 @@
             users: document.getElementById('tab-users'),
             badwords: document.getElementById('tab-badwords'),
             settings: document.getElementById('tab-settings'),
-            stats: document.getElementById('tab-stats')
+            stickers: document.getElementById('tab-stickers')
         };
         
         // ============================================================
-        // 4. اختيار اللون
+        // 10. اختيار اللون
         // ============================================================
         function selectColor(color) {
             selectedColor = color;
@@ -1636,12 +2411,10 @@
         }
         
         const savedColor = localStorage.getItem('userColor');
-        if (savedColor) {
-            selectColor(savedColor);
-        }
+        if (savedColor) { selectColor(savedColor); }
         
         // ============================================================
-        // 5. الثيم
+        // 11. الثيم
         // ============================================================
         function toggleTheme() {
             document.body.classList.toggle('theme-dark');
@@ -1658,7 +2431,7 @@
         themeToggleChat.onclick = toggleTheme;
         
         // ============================================================
-        // 6. دوال الصورة
+        // 12. دوال الصورة
         // ============================================================
         function generateAvatarUrl(username) {
             return `https://api.dicebear.com/7.x/avataaars/svg?seed=${username}`;
@@ -1669,12 +2442,13 @@
         }
         
         // ============================================================
-        // 7. مودال تعديل الصورة
+        // 13. مودال تعديل الصورة
         // ============================================================
         function openAvatarModal() {
             if (!currentUser) return;
             avatarModal.style.display = 'flex';
             editNameInput.value = currentUser;
+            editBioInput.value = myBio || '📝 مرحباً، أنا في نيزك!';
             if (isValidImageUrl(myAvatar)) {
                 avatarPreview.innerHTML = `<img src="${myAvatar}" alt="avatar" /><div class="upload-overlay">📷 تغيير</div>`;
             } else {
@@ -1690,23 +2464,16 @@
         fileInput.onchange = async function(e) {
             const file = e.target.files[0];
             if (!file) return;
-            
-            if (!file.type.startsWith('image/')) {
-                showNotification('❌ يرجى اختيار صورة');
-                return;
-            }
-            
-            if (file.size > 5 * 1024 * 1024) {
-                showNotification('❌ حجم الصورة كبير جداً (أقصى 5MB)');
-                return;
-            }
+            if (!file.type.startsWith('image/')) { showNotification('❌ يرجى اختيار صورة'); return; }
+            if (file.size > 5 * 1024 * 1024) { showNotification('❌ حجم الصورة كبير جداً (أقصى 5MB)'); return; }
             
             try {
                 showNotification('⏳ جاري معالجة الصورة...');
                 const reader = new FileReader();
-                reader.onload = function(e) {
-                    const imageUrl = e.target.result;
-                    avatarPreview.innerHTML = `<img src="${imageUrl}" alt="avatar" /><div class="upload-overlay">📷 تغيير</div>`;
+                reader.onload = async function(e) {
+                    const compressed = await AICore.compressImage(e.target.result, 0.6);
+                    avatarPreview.innerHTML = `<img src="${compressed}" alt="avatar" /><div class="upload-overlay">📷 تغيير</div>`;
+                    document.querySelector('#avatarModal .btn-save').dataset.newAvatar = compressed;
                     showNotification('✅ تم تحميل الصورة');
                 };
                 reader.readAsDataURL(file);
@@ -1719,16 +2486,16 @@
         
         saveAvatarBtn.onclick = async function() {
             const newName = editNameInput.value.trim();
-            if (!newName) {
-                showNotification('❌ الاسم مطلوب');
-                return;
-            }
+            const newBio = editBioInput.value.trim();
+            if (!newName) { showNotification('❌ الاسم مطلوب'); return; }
             
             const img = avatarPreview.querySelector('img');
             let newAvatar = myAvatar;
-            if (img) {
-                newAvatar = img.src;
-            }
+            if (img && img.src !== myAvatar) { newAvatar = img.src; }
+            
+            const updates = {};
+            if (newAvatar !== myAvatar) updates.avatar = newAvatar;
+            if (newBio !== myBio) updates.bio = newBio || '📝 مرحباً، أنا في نيزك!';
             
             if (newName !== currentUser) {
                 try {
@@ -1739,6 +2506,7 @@
                             ...data,
                             username: newName,
                             avatar: newAvatar,
+                            bio: newBio || data.bio || '📝 مرحباً، أنا في نيزك!',
                             updatedAt: firebase.firestore.FieldValue.serverTimestamp()
                         });
                         await db.collection('users').doc(currentUser).delete();
@@ -1751,16 +2519,21 @@
                     showNotification('❌ فشل تغيير الاسم');
                     return;
                 }
+            } else {
+                try {
+                    await db.collection('users').doc(currentUser).update(updates);
+                } catch (e) {
+                    showNotification('❌ فشل تحديث البيانات');
+                    return;
+                }
             }
             
             if (newAvatar !== myAvatar) {
-                try {
-                    await db.collection('users').doc(currentUser).update({ avatar: newAvatar });
-                    myAvatar = newAvatar;
-                    updateAvatarUI();
-                } catch (e) {
-                    showNotification('❌ فشل تحديث الصورة');
-                }
+                myAvatar = newAvatar;
+                updateAvatarUI();
+            }
+            if (newBio !== myBio) {
+                myBio = newBio || '📝 مرحباً، أنا في نيزك!';
             }
             
             avatarModal.style.display = 'none';
@@ -1776,18 +2549,11 @@
         }
         
         // ============================================================
-        // 8. لوحة الإيموجي - كاملة مثل الكيبورد
+        // 14. لوحة الإيموجي
         // ============================================================
         const emojisList = [
             '😊', '😂', '❤️', '🔥', '👍', '👏', '🎉', '✨', '💪', '🤔',
-            '😍', '🥰', '😎', '🤩', '👀', '💀', '🙏', '😅', '🤗', '😇',
-            '🥳', '🤯', '😱', '🥺', '😤', '👻', '🎃', '💫', '⭐', '🌈',
-            '🌙', '☀️', '⚡', '🔥', '💧', '❄️', '🌊', '🍕', '🍔', '🌮',
-            '🍣', '🍩', '🍪', '🎂', '🧁', '☕', '🍵', '🍺', '🥂', '🌸',
-            '💐', '🌹', '🌺', '🌻', '🌷', '🌿', '🍀', '🌴', '🌵', '🎄',
-            '🎋', '🎍', '🧧', '🎎', '🎏', '🎐', '🎑', '🎇', '🎆', '✨',
-            '🌟', '💫', '☄️', '🌞', '🌝', '🌛', '🌜', '🌚', '🌕', '🌖',
-            '🌗', '🌘', '🌑', '🌒', '🌓', '🌔', '🌙', '🌎', '🌍', '🌏'
+            '😍', '🥰', '😎', '🤩', '👀', '💀', '🙏', '😅', '🤗', '😇'
         ];
         
         function initEmojiPanel() {
@@ -1819,73 +2585,36 @@
             stickerPanelOpen = false;
             stickerPanel.style.display = 'none';
             emojiPanel.style.display = emojiPanelOpen ? 'flex' : 'none';
-            if (emojiPanelOpen) {
-                emojiPanel.scrollTop = 0;
-            }
+            if (emojiPanelOpen) { emojiPanel.scrollTop = 0; }
         };
         
         // ============================================================
-        // 9. لوحة الستيكرات
+        // 15. لوحة الستيكرات
         // ============================================================
-        const stickersList = [
-            '😊', '😂', '❤️', '🔥', '👍', '👏', '🎉', '✨', '💪', '🤔',
-            '😍', '🥰', '😎', '🤩', '👀', '💀', '🙏', '😅', '🤗', '😇',
-            '🥳', '🤯', '😱', '🥺', '😤', '👻', '🎃', '💫', '⭐', '🌈',
-            '🌙', '☀️', '⚡', '🔥', '💧', '❄️', '🌊', '🍕', '🍔', '🌮',
-            '🍣', '🍩', '🍪', '🎂', '🧁', '☕', '🍵', '🍺', '🥂', '🌸',
-            '💐', '🌹', '🌺', '🌻', '🌷', '🌿', '🍀', '🌴', '🌵', '🎄'
-        ];
-        
-        function initStickerPanel() {
-            stickerPanel.innerHTML = '';
-            stickersList.forEach(sticker => {
-                const span = document.createElement('span');
-                span.className = 'sticker-item';
-                span.textContent = sticker;
-                span.onclick = () => {
-                    insertAtCursor(sticker);
-                    stickerPanel.style.display = 'none';
-                    stickerPanelOpen = false;
-                };
-                stickerPanel.appendChild(span);
-            });
-        }
-        
         stickerBtn.onclick = function() {
             stickerPanelOpen = !stickerPanelOpen;
             emojiPanelOpen = false;
             emojiPanel.style.display = 'none';
             stickerPanel.style.display = stickerPanelOpen ? 'flex' : 'none';
             if (stickerPanelOpen) {
-                stickerPanel.scrollTop = 0;
+                renderStickerTabs();
+                renderStickers(currentStickerTab);
             }
         };
         
         // ============================================================
-        // 10. تسجيل الدخول
+        // 16. تسجيل الدخول
         // ============================================================
         loginBtn.onclick = async function() {
             const username = usernameInput.value.trim();
-            if (!username) {
-                loginError.textContent = '✖ أدخل اسم المستخدم';
-                return;
-            }
-            if (username.length < 2) {
-                loginError.textContent = '✖ الاسم قصير جداً';
-                return;
-            }
-            if (username.length > 20) {
-                loginError.textContent = '✖ الاسم طويل جداً';
-                return;
-            }
+            if (!username) { loginError.textContent = '✖ أدخل اسم المستخدم'; return; }
+            if (username.length < 2) { loginError.textContent = '✖ الاسم قصير جداً'; return; }
+            if (username.length > 20) { loginError.textContent = '✖ الاسم طويل جداً'; return; }
             
             if (username === 'slx23m') {
                 adminPassWrap.style.display = 'block';
                 const pass = adminPasswordInput.value.trim();
-                if (pass !== '1442') {
-                    loginError.textContent = '✖ كلمة مرور المسؤول غير صحيحة';
-                    return;
-                }
+                if (pass !== '1442') { loginError.textContent = '✖ كلمة مرور المسؤول غير صحيحة'; return; }
                 isAdmin = true;
             } else {
                 adminPassWrap.style.display = 'none';
@@ -1896,15 +2625,14 @@
                 const userDoc = await db.collection('users').doc(username).get();
                 if (userDoc.exists) {
                     const data = userDoc.data();
-                    
                     if (data.banned) {
                         loginError.textContent = `⛔ أنت محظور: ${data.banReason || 'استخدام كلمات ممنوعة'}`;
                         return;
                     }
-                    
                     currentUser = username;
                     isAdmin = data.isAdmin || false;
-                    if (data.avatar && data.avatar !== '👤') myAvatar = data.avatar;
+                    if (data.avatar && data.avatar !== '📸') myAvatar = data.avatar;
+                    if (data.bio) myBio = data.bio;
                     if (data.color) selectColor(data.color);
                     if (data.theme) {
                         if (data.theme === 'dark') document.body.classList.add('theme-dark');
@@ -1919,15 +2647,14 @@
                     enterChat(username);
                     return;
                 }
-            } catch (e) {
-                console.warn('خطأ في التحقق:', e);
-            }
+            } catch (e) { console.warn('خطأ في التحقق:', e); }
             
             try {
                 const avatarUrl = generateAvatarUrl(username);
                 await db.collection('users').doc(username).set({
                     username: username,
                     avatar: avatarUrl,
+                    bio: '📝 مرحباً، أنا في نيزك!',
                     isAdmin: isAdmin,
                     online: true,
                     blocked: false,
@@ -1942,6 +2669,7 @@
                 });
                 currentUser = username;
                 myAvatar = avatarUrl;
+                myBio = '📝 مرحباً، أنا في نيزك!';
                 localStorage.setItem('lastUser', username);
                 enterChat(username);
             } catch (error) {
@@ -1963,11 +2691,12 @@
         adminPasswordInput.onkeydown = (e) => { if (e.key === 'Enter') loginBtn.click(); };
         
         // ============================================================
-        // 11. الدخول إلى الدردشة
+        // 17. الدخول إلى الدردشة
         // ============================================================
         function enterChat(username) {
             loginScreen.style.display = 'none';
             chatScreen.style.display = 'flex';
+            chatScreen.classList.add('fade-enter');
             
             currentUserDisplay.textContent = username;
             if (isAdmin) currentUserDisplay.textContent += ' ⭐';
@@ -1977,9 +2706,16 @@
             listenUsers();
             listenTyping();
             initEmojiPanel();
-            initStickerPanel();
+            
+            loadStickersFromFirebase().then(() => {
+                renderStickerTabs();
+                renderStickers(currentStickerTab);
+                renderAdminStickers();
+            });
+            
             loadBadWords();
             loadBanCounts();
+            startAutoSync();
             
             const updateInterval = setInterval(() => {
                 if (currentUser) {
@@ -1995,6 +2731,7 @@
                 if (currentUser) {
                     db.collection('users').doc(currentUser).update({ online: false }).catch(() => {});
                 }
+                if (syncInterval) clearInterval(syncInterval);
             });
             
             messagesContainer.addEventListener('scroll', () => {
@@ -2012,19 +2749,10 @@
                 scrollToBottom.style.display = 'none';
                 unreadCount = 0;
             };
-            
-            // منع ظهور الكيبورد فوق الرسائل
-            document.addEventListener('focusin', function(e) {
-                if (e.target === messageInput) {
-                    setTimeout(() => {
-                        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-                    }, 300);
-                }
-            });
         }
         
         // ============================================================
-        // 12. الصورة الشخصية
+        // 18. الصورة الشخصية
         // ============================================================
         function loadAvatar(username) {
             db.collection('users').doc(username).onSnapshot((doc) => {
@@ -2034,32 +2762,27 @@
                         myAvatar = data.avatar;
                         updateAvatarUI();
                     }
+                    if (data.bio) myBio = data.bio;
                     if (data.theme) {
                         if (data.theme === 'dark') document.body.classList.add('theme-dark');
                         else document.body.classList.remove('theme-dark');
                         localStorage.setItem('theme', data.theme);
                     }
-                    if (data.color) {
-                        selectColor(data.color);
-                    }
+                    if (data.color) { selectColor(data.color); }
                 }
             });
         }
         
         // ============================================================
-        // 13. الكلمات الممنوعة
+        // 19. الكلمات الممنوعة
         // ============================================================
         async function loadBadWords() {
             try {
                 const snapshot = await db.collection('badwords').get();
                 badWords = [];
-                snapshot.forEach(doc => {
-                    badWords.push(doc.data().word);
-                });
+                snapshot.forEach(doc => { badWords.push(doc.data().word); });
                 renderBadWords();
-            } catch (error) {
-                console.error('خطأ في تحميل الكلمات الممنوعة:', error);
-            }
+            } catch (error) { console.error('خطأ في تحميل الكلمات الممنوعة:', error); }
         }
         
         function renderBadWords() {
@@ -2074,24 +2797,15 @@
         
         async function addBadWord() {
             const word = badWordInput.value.trim().toLowerCase();
-            if (!word) {
-                showNotification('❌ أدخل كلمة');
-                return;
-            }
-            if (badWords.includes(word)) {
-                showNotification('⚠️ الكلمة موجودة بالفعل');
-                return;
-            }
-            
+            if (!word) { showNotification('❌ أدخل كلمة'); return; }
+            if (badWords.includes(word)) { showNotification('⚠️ الكلمة موجودة بالفعل'); return; }
             try {
                 await db.collection('badwords').doc(word).set({ word: word, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
                 badWords.push(word);
                 renderBadWords();
                 badWordInput.value = '';
                 showNotification('✅ تم إضافة الكلمة');
-            } catch (error) {
-                showNotification('❌ فشل الإضافة');
-            }
+            } catch (error) { showNotification('❌ فشل الإضافة'); }
         }
         
         async function removeBadWord(word) {
@@ -2100,58 +2814,41 @@
                 badWords = badWords.filter(w => w !== word);
                 renderBadWords();
                 showNotification('✅ تم حذف الكلمة');
-            } catch (error) {
-                showNotification('❌ فشل الحذف');
-            }
+            } catch (error) { showNotification('❌ فشل الحذف'); }
         }
         
         addBadWordBtn.onclick = addBadWord;
         badWordInput.onkeydown = (e) => { if (e.key === 'Enter') addBadWord(); };
         
         // ============================================================
-        // 14. نظام الحظر التلقائي
+        // 20. نظام الحظر التلقائي
         // ============================================================
         async function checkBadWords(text, username) {
             const lowerText = text.toLowerCase();
             let foundWords = [];
-            
             for (const word of badWords) {
-                if (lowerText.includes(word)) {
-                    foundWords.push(word);
-                }
+                if (lowerText.includes(word)) { foundWords.push(word); }
             }
-            
             if (foundWords.length > 0) {
                 const banRef = db.collection('bans').doc(username);
                 const banDoc = await banRef.get();
                 let count = 1;
-                
-                if (banDoc.exists) {
-                    count = (banDoc.data().count || 0) + 1;
-                }
-                
+                if (banDoc.exists) { count = (banDoc.data().count || 0) + 1; }
                 await banRef.set({
                     username: username,
                     count: count,
                     lastWord: foundWords.join(', '),
                     lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
                 }, { merge: true });
-                
                 userBanCounts[username] = count;
-                totalBadWordsBlocked += foundWords.length;
-                if (statBadWordsBlocked) statBadWordsBlocked.textContent = totalBadWordsBlocked;
-                
                 const banDuration = Math.min(count * 60, 600);
-                
                 await db.collection('users').doc(username).update({
                     banned: true,
                     banReason: `استخدام كلمات ممنوعة (${foundWords.join(', ')})`,
                     banExpires: firebase.firestore.FieldValue.serverTimestamp() + banDuration * 1000,
                     banCount: count
                 });
-                
                 showNotification(`⛔ تم حظر ${username} لمدة ${banDuration} ثانية`);
-                
                 setTimeout(async () => {
                     await db.collection('users').doc(username).update({
                         banned: false,
@@ -2160,14 +2857,13 @@
                     });
                     showNotification(`🔓 تم إلغاء حظر ${username}`);
                 }, banDuration * 1000);
-                
                 return true;
             }
             return false;
         }
         
         // ============================================================
-        // 15. إرسال الرسائل
+        // 21. إرسال الرسائل مع ضغط ذكي
         // ============================================================
         sendBtn.onclick = sendMessage;
         messageInput.onkeydown = (e) => {
@@ -2193,29 +2889,30 @@
             }
             
             if (text === '/clear' && isAdmin) {
-                if (confirm('⚠️ هل تريد حذف جميع الرسائل؟')) {
-                    await clearAllMessages();
-                }
+                if (confirm('⚠️ هل تريد حذف جميع الرسائل؟')) { await clearAllMessages(); }
                 messageInput.value = '';
                 return;
             }
             
             try {
+                const compressedText = AICore.compressText(text);
+                
                 const msgData = {
                     username: currentUser,
-                    text: text,
+                    text: compressedText,
                     avatar: myAvatar,
                     isAdmin: isAdmin,
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                     deleted: false,
                     reactions: {},
                     edited: false,
-                    editedAt: null
+                    editedAt: null,
+                    compressed: true
                 };
                 
                 if (replyingTo) {
                     msgData.replyTo = replyingTo;
-                    msgData.replyText = replyingToText;
+                    msgData.replyText = AICore.compressText(replyingToText);
                 }
                 
                 await db.collection('messages').add(msgData);
@@ -2227,7 +2924,6 @@
                 emojiPanelOpen = false;
                 stickerPanel.style.display = 'none';
                 stickerPanelOpen = false;
-                
             } catch (error) {
                 console.error('فشل الإرسال:', error);
                 showNotification('❌ فشل الإرسال');
@@ -2241,26 +2937,21 @@
         }
         
         // ============================================================
-        // 16. استماع الرسائل
+        // 22. استماع الرسائل
         // ============================================================
         function listenMessages() {
-            if (messagesListener) {
-                messagesListener();
-                messagesListener = null;
-            }
+            if (messagesListener) { messagesListener(); messagesListener = null; }
             
             messagesListener = db.collection('messages')
                 .orderBy('timestamp', 'asc')
-                .limit(100)
                 .onSnapshot((snapshot) => {
                     const messages = [];
-                    
                     if (snapshot.empty) {
                         if (firstLoad) {
                             messagesContainer.innerHTML = `
                                 <div class="welcome-msg">
-                                    <div class="icon">💬</div>
-                                    <div class="title">مرحباً في نيزك</div>
+                                    <div class="icon">📸</div>
+                                    <div class="title">مرحباً في نيزك إنستا</div>
                                     <div class="sub">ابدأ المحادثة الآن</div>
                                 </div>
                             `;
@@ -2268,6 +2959,7 @@
                         messageCount = 0;
                         updateStats();
                         firstLoad = false;
+                        allMessages = [];
                         return;
                     }
                     
@@ -2277,6 +2969,8 @@
                         messages.push({ id: doc.id, ...data });
                     });
                     
+                    allMessages = messages;
+                    searchMessages = messages;
                     messageCount = messages.length;
                     renderMessages(messages);
                     updateStats();
@@ -2293,6 +2987,7 @@
                     firstLoad = false;
                 }, (error) => {
                     console.error('❌ خطأ في استماع الرسائل:', error);
+                    updateConnectionStatus(false);
                 });
         }
         
@@ -2300,8 +2995,8 @@
             if (!messages || messages.length === 0) {
                 messagesContainer.innerHTML = `
                     <div class="welcome-msg">
-                        <div class="icon">💬</div>
-                        <div class="title">مرحباً في نيزك</div>
+                        <div class="icon">📸</div>
+                        <div class="title">مرحباً في نيزك إنستا</div>
                         <div class="sub">ابدأ المحادثة الآن</div>
                     </div>
                 `;
@@ -2320,12 +3015,10 @@
             sorted.forEach(data => {
                 const isSent = data.username === currentUser;
                 const sender = data.username || 'مجهول';
-                const avatar = data.avatar || '👤';
+                const avatar = data.avatar || '📸';
                 const time = data.timestamp ? 
                     new Date(data.timestamp.toDate()).toLocaleTimeString('ar', { hour: '2-digit', minute: '2-digit' }) : '';
                 const adminBadge = data.isAdmin ? ' ⭐' : '';
-                const canDelete = isAdmin || isSent;
-                const canEdit = isSent;
                 const reactions = data.reactions || {};
                 const reactionKeys = Object.keys(reactions);
                 
@@ -2351,22 +3044,31 @@
                 }
                 
                 const editedMark = data.edited ? ' (معدلة)' : '';
-                
                 let replyHtml = '';
                 if (data.replyTo && data.replyText) {
-                    replyHtml = `<div class="reply-preview">↩️ ${data.replyText.substring(0, 35)}${data.replyText.length > 35 ? '...' : ''}</div>`;
+                    const replyTextDecompressed = AICore.decompressText(data.replyText);
+                    replyHtml = `<div class="reply-preview">↩️ ${replyTextDecompressed.substring(0, 35)}${replyTextDecompressed.length > 35 ? '...' : ''}</div>`;
                 }
                 
                 const avatarDisplay = isValidImageUrl(avatar) ? 
                     `<img src="${avatar}" alt="avatar" />` : avatar;
                 
+                let stickerHtml = '';
+                if (data.sticker && data.stickerData) {
+                    stickerHtml = `<span class="sticker"><img src="${data.stickerData}" style="width:60px;height:60px;object-fit:contain;" /></span>`;
+                } else if (data.sticker) {
+                    stickerHtml = `<span class="sticker">${data.text}</span>`;
+                }
+                
+                const decompressedText = AICore.decompressText(data.text);
+                
                 html += `
                     <div class="msg-wrapper" 
                          data-id="${data.id}" 
-                         data-text="${data.text.replace(/"/g, '&quot;').replace(/'/g, '&#39;')}"
+                         data-text="${decompressedText.replace(/"/g, '&quot;').replace(/'/g, '&#39;')}"
                          data-sent="${isSent}"
-                         oncontextmenu="showContextMenu(event, '${data.id}', '${data.text.replace(/'/g, "\\'")}', ${isSent})"
-                         ontouchstart="handleTouchStart(event, '${data.id}', '${data.text.replace(/'/g, "\\'")}', ${isSent})"
+                         oncontextmenu="handleLongPress(event, '${data.id}', '${decompressedText.replace(/'/g, "\\'")}', ${isSent})"
+                         ontouchstart="handleTouchStart(event, '${data.id}', '${decompressedText.replace(/'/g, "\\'")}', ${isSent})"
                          ontouchend="handleTouchEnd(event)">
                         ${replyHtml}
                         <div class="msg ${isSent ? 'sent' : 'received'}">
@@ -2375,20 +3077,12 @@
                             </div>
                             <div class="content">
                                 <span class="sender-name" onclick="showProfile('${sender}')">${sender}${adminBadge}</span>
-                                <div class="text">${data.text}${editedMark}</div>
+                                ${stickerHtml || `<div class="text">${decompressedText}${editedMark}</div>`}
                                 <div class="time">
                                     ${time}
                                     ${isSent ? '<span class="check">✓✓</span>' : ''}
                                 </div>
                                 ${reactionsHtml}
-                                <div class="actions-bar">
-                                    ${canEdit ? `<button onclick="editMessage('${data.id}')">✏️</button>` : ''}
-                                    <button onclick="startReply('${data.id}', '${data.text.replace(/'/g, "\\'")}')">↩️</button>
-                                    <button onclick="toggleReaction('${data.id}', '❤️')">❤️</button>
-                                    <button onclick="toggleReaction('${data.id}', '😂')">😂</button>
-                                    <button onclick="toggleReaction('${data.id}', '🔥')">🔥</button>
-                                    ${canDelete ? `<button onclick="deleteMessage('${data.id}')" style="color:#E1306C;">🗑️</button>` : ''}
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -2400,7 +3094,31 @@
         }
         
         // ============================================================
-        // 17. السحب للرد
+        // 23. الضغط المطول
+        // ============================================================
+        function handleLongPress(e, messageId, messageText, isSent) {
+            e.preventDefault();
+            showActionBar(messageId, isSent);
+        }
+        
+        let touchTimerLong = null;
+        let touchTargetLong = null;
+        
+        function handleTouchStart(event, messageId, messageText, isSent) {
+            touchTargetLong = { id: messageId, text: messageText, sent: isSent };
+            touchTimerLong = setTimeout(() => {
+                showActionBar(messageId, isSent);
+                touchTargetLong = null;
+            }, 500);
+        }
+        
+        function handleTouchEnd(event) {
+            clearTimeout(touchTimerLong);
+            touchTargetLong = null;
+        }
+        
+        // ============================================================
+        // 24. السحب للرد
         // ============================================================
         function setupSwipeToReply() {
             messagesContainer.addEventListener('touchstart', handleSwipeStart, { passive: true });
@@ -2415,9 +3133,7 @@
             if (wrapper) {
                 swipeTarget = wrapper;
                 swipeStartX = touch.clientX;
-            } else {
-                swipeTarget = null;
-            }
+            } else { swipeTarget = null; }
         }
         
         function handleSwipeMove(e) {
@@ -2440,13 +3156,10 @@
                 const transform = msg.style.transform || '';
                 const match = transform.match(/translateX\((\d+)px\)/);
                 const deltaX = match ? parseInt(match[1]) : 0;
-                
                 if (deltaX > 50) {
                     const messageId = swipeTarget.dataset.id;
                     const messageText = swipeTarget.dataset.text || '';
-                    if (messageId) {
-                        startReply(messageId, messageText);
-                    }
+                    if (messageId) { startReply(messageId, messageText); }
                 }
                 msg.style.transform = '';
                 msg.style.opacity = '';
@@ -2455,69 +3168,7 @@
         }
         
         // ============================================================
-        // 18. الضغط المطول
-        // ============================================================
-        function showContextMenu(e, messageId, messageText, isSent) {
-            e.preventDefault();
-            const x = e.clientX || e.touches?.[0]?.clientX || 0;
-            const y = e.clientY || e.touches?.[0]?.clientY || 0;
-            
-            contextMenu.style.left = Math.min(x, window.innerWidth - 160) + 'px';
-            contextMenu.style.top = Math.min(y, window.innerHeight - 160) + 'px';
-            contextMenu.style.display = 'block';
-            
-            const editItem = contextMenu.querySelector('[data-action="edit"]');
-            const deleteItem = contextMenu.querySelector('[data-action="delete"]');
-            if (isSent || isAdmin) {
-                editItem.style.display = 'flex';
-                deleteItem.style.display = 'flex';
-            } else {
-                editItem.style.display = 'none';
-                deleteItem.style.display = 'none';
-            }
-            
-            contextMenu.dataset.messageId = messageId;
-            contextMenu.dataset.messageText = messageText;
-            contextMenu.dataset.isSent = isSent;
-        }
-        
-        contextMenu.querySelectorAll('.menu-item').forEach(item => {
-            item.onclick = function() {
-                const action = this.dataset.action;
-                const messageId = contextMenu.dataset.messageId;
-                const messageText = contextMenu.dataset.messageText;
-                const isSent = contextMenu.dataset.isSent === 'true';
-                
-                switch(action) {
-                    case 'reply':
-                        startReply(messageId, messageText);
-                        break;
-                    case 'react':
-                        toggleReaction(messageId, '❤️');
-                        break;
-                    case 'edit':
-                        if (isSent || isAdmin) editMessage(messageId);
-                        break;
-                    case 'copy':
-                        copyText(messageText);
-                        break;
-                    case 'report':
-                        reportMessage(messageId, messageText);
-                        break;
-                    case 'delete':
-                        if (isSent || isAdmin) deleteMessage(messageId);
-                        break;
-                }
-                contextMenu.style.display = 'none';
-            };
-        });
-        
-        document.addEventListener('click', () => {
-            contextMenu.style.display = 'none';
-        });
-        
-        // ============================================================
-        // 19. وظائف إضافية
+        // 25. وظائف إضافية
         // ============================================================
         function copyText(text) {
             navigator.clipboard.writeText(text).then(() => {
@@ -2533,12 +3184,8 @@
             });
         }
         
-        function reportMessage(messageId, text) {
-            showNotification(`🚨 تم إبلاغ المسؤول عن الرسالة`);
-        }
-        
         // ============================================================
-        // 20. الرد على الرسالة
+        // 26. الرد على الرسالة
         // ============================================================
         function startReply(messageId, messageText) {
             replyingTo = messageId;
@@ -2555,7 +3202,7 @@
         };
         
         // ============================================================
-        // 21. التفاعلات
+        // 27. التفاعلات
         // ============================================================
         window.toggleReaction = async function(messageId, emoji) {
             if (!currentUser) return;
@@ -2563,46 +3210,29 @@
                 const docRef = db.collection('messages').doc(messageId);
                 const doc = await docRef.get();
                 if (!doc.exists) return;
-                
                 const data = doc.data();
                 const reactions = data.reactions || {};
                 const users = reactions[emoji] || [];
-                
                 const index = users.indexOf(currentUser);
-                if (index > -1) {
-                    users.splice(index, 1);
-                } else {
-                    users.push(currentUser);
-                }
-                
-                if (users.length === 0) {
-                    delete reactions[emoji];
-                } else {
-                    reactions[emoji] = users;
-                }
-                
+                if (index > -1) { users.splice(index, 1); } else { users.push(currentUser); }
+                if (users.length === 0) { delete reactions[emoji]; } else { reactions[emoji] = users; }
                 await docRef.update({ reactions: reactions });
-            } catch (error) {
-                console.error('خطأ في التفاعل:', error);
-            }
+            } catch (error) { console.error('خطأ في التفاعل:', error); }
         };
         
         // ============================================================
-        // 22. تعديل الرسالة
+        // 28. تعديل الرسالة
         // ============================================================
         window.editMessage = function(messageId) {
             if (!currentUser) return;
             editingMessageId = messageId;
-            
             db.collection('messages').doc(messageId).get().then(doc => {
                 if (doc.exists) {
                     const data = doc.data();
                     if (data.username === currentUser || isAdmin) {
-                        editMessageInput.value = data.text;
+                        editMessageInput.value = AICore.decompressText(data.text);
                         editMessageModal.style.display = 'flex';
-                    } else {
-                        showNotification('❌ لا يمكنك تعديل رسالة أخرى');
-                    }
+                    } else { showNotification('❌ لا يمكنك تعديل رسالة أخرى'); }
                 }
             }).catch(error => {
                 console.error('خطأ:', error);
@@ -2612,15 +3242,11 @@
         
         saveEditMessageBtn.onclick = async function() {
             const newText = editMessageInput.value.trim();
-            if (!newText) {
-                showNotification('❌ لا يمكن أن تكون فارغة');
-                return;
-            }
+            if (!newText) { showNotification('❌ لا يمكن أن تكون فارغة'); return; }
             if (!editingMessageId) return;
-            
             try {
                 await db.collection('messages').doc(editingMessageId).update({
-                    text: newText,
+                    text: AICore.compressText(newText),
                     edited: true,
                     editedAt: firebase.firestore.FieldValue.serverTimestamp()
                 });
@@ -2649,7 +3275,7 @@
         };
         
         // ============================================================
-        // 23. حذف الرسالة
+        // 29. حذف الرسالة
         // ============================================================
         window.deleteMessage = async function(id) {
             if (settings.confirmDelete && !isAdmin && !confirm('حذف الرسالة؟')) return;
@@ -2663,7 +3289,7 @@
         };
         
         // ============================================================
-        // 24. استماع المستخدمين
+        // 30. استماع المستخدمين
         // ============================================================
         function listenUsers() {
             db.collection('users').onSnapshot((snapshot) => {
@@ -2671,34 +3297,22 @@
                 let blocked = 0;
                 let adminListHtml = '';
                 allUsers = {};
-                let activeToday = 0;
-                let totalBanned = 0;
-                
-                const today = new Date().toDateString();
                 
                 snapshot.forEach(doc => {
                     const data = doc.data();
                     allUsers[doc.id] = data;
                     if (data.online) online++;
                     if (data.blocked) blocked++;
-                    if (data.banned) totalBanned++;
-                    
-                    if (data.lastSeen) {
-                        const lastSeen = data.lastSeen.toDate ? data.lastSeen.toDate() : new Date(data.lastSeen);
-                        if (lastSeen.toDateString() === today) activeToday++;
-                    }
-                    
                     if (isAdmin && doc.id !== currentUser) {
                         const status = data.online ? '🟢' : '⚫';
                         const statusBadge = data.online ? 'online' : 'offline';
                         const adminBadge = data.isAdmin ? '<span class="badge admin">مسؤول</span>' : '';
                         const blockedBadge = data.blocked ? '<span class="badge blocked">محظور</span>' : '';
                         const bannedBadge = data.banned ? '<span class="badge banned">⛔ محظور</span>' : '';
-                        
                         adminListHtml += `
                             <div class="user-item">
                                 <span class="name">
-                                    ${data.avatar || '👤'} ${doc.id} 
+                                    ${data.avatar || '📸'} ${doc.id} 
                                     ${adminBadge}
                                     ${blockedBadge}
                                     ${bannedBadge}
@@ -2726,19 +3340,17 @@
                 blockedCount = blocked;
                 updateStats();
                 
-                if (statTotalUsers) statTotalUsers.textContent = Object.keys(allUsers).length;
-                if (statActiveUsers) statActiveUsers.textContent = activeToday;
-                if (statBannedUsers) statBannedUsers.textContent = totalBanned;
-                if (statTotalMessages) statTotalMessages.textContent = messageCount;
-                if (statBadWordsBlocked) statBadWordsBlocked.textContent = totalBadWordsBlocked;
-                if (statAvgMessages) statAvgMessages.textContent = Math.round(messageCount / (Object.keys(allUsers).length || 1));
+                if (statUsers) statUsers.textContent = Object.keys(allUsers).length;
+                if (statOnline) statOnline.textContent = onlineUsers;
+                if (statMessages) statMessages.textContent = messageCount;
+                if (statBlocked) statBlocked.textContent = blockedCount;
                 
                 if (isAdmin) {
                     const currentData = allUsers[currentUser];
                     if (currentData) {
                         adminListHtml = `
                             <div class="user-item" style="background:rgba(64,93,230,0.04);border-color:#405DE6;">
-                                <span class="name">${currentData.avatar || '👤'} ${currentUser} <span class="badge admin">أنت</span> 🟢</span>
+                                <span class="name">${currentData.avatar || '📸'} ${currentUser} <span class="badge admin">أنت</span> 🟢</span>
                                 <span style="font-size:0.45rem;opacity:0.4;">نشط</span>
                             </div>
                         ` + adminListHtml;
@@ -2759,20 +3371,16 @@
         }
         
         // ============================================================
-        // 25. استماع الكتابة
+        // 31. استماع الكتابة
         // ============================================================
         function listenTyping() {
             db.collection('typing').doc('status').onSnapshot((doc) => {
                 if (doc.exists) {
                     const data = doc.data();
                     const typingUsers = [];
-                    
                     for (let key in data) {
-                        if (key !== currentUser && data[key] === true) {
-                            typingUsers.push(key);
-                        }
+                        if (key !== currentUser && data[key] === true) { typingUsers.push(key); }
                     }
-                    
                     if (typingUsers.length > 0) {
                         typingText.textContent = `${typingUsers.join('، ')} يكتب${typingUsers.length > 1 ? 'ون' : ''}...`;
                         typingIndicator.style.display = 'flex';
@@ -2780,9 +3388,7 @@
                         typingText.textContent = '';
                         typingIndicator.style.display = 'none';
                     }
-                } else {
-                    typingIndicator.style.display = 'none';
-                }
+                } else { typingIndicator.style.display = 'none'; }
             }, (error) => {
                 console.error('خطأ في استماع الكتابة:', error);
                 typingIndicator.style.display = 'none';
@@ -2791,11 +3397,9 @@
         
         messageInput.oninput = function() {
             const hasText = this.value.trim().length > 0;
-            
             db.collection('typing').doc('status').set({
                 [currentUser]: hasText
             }, { merge: true }).catch(() => {});
-            
             clearTimeout(typingTimeout);
             if (hasText) {
                 typingTimeout = setTimeout(() => {
@@ -2807,7 +3411,7 @@
         };
         
         // ============================================================
-        // 26. تحميل عدد مرات الحظر
+        // 32. تحميل عدد مرات الحظر
         // ============================================================
         async function loadBanCounts() {
             try {
@@ -2815,62 +3419,20 @@
                 snapshot.forEach(doc => {
                     userBanCounts[doc.id] = doc.data().count || 0;
                 });
-            } catch (error) {
-                console.error('خطأ في تحميل عدد الحظر:', error);
-            }
+            } catch (error) { console.error('خطأ في تحميل عدد الحظر:', error); }
         }
         
         // ============================================================
-        // 27. عرض البروفايل
-        // ============================================================
-        function showProfile(username) {
-            db.collection('users').doc(username).get().then(doc => {
-                if (doc.exists) {
-                    const data = doc.data();
-                    const avatar = data.avatar || '👤';
-                    const status = data.online ? '🟢 متصل' : '⚫ غير متصل';
-                    const isBanned = data.banned || false;
-                    const banReason = data.banReason || '';
-                    
-                    let msg = `👤 ${username}${data.isAdmin ? ' ⭐' : ''}\n`;
-                    msg += `${status}\n`;
-                    if (isBanned) msg += `⛔ محظور: ${banReason}\n`;
-                    msg += `📅 انضم: ${data.createdAt ? new Date(data.createdAt.toDate()).toLocaleDateString() : 'غير معروف'}`;
-                    
-                    showNotification(msg);
-                }
-            }).catch(() => {
-                showNotification('❌ فشل تحميل الملف الشخصي');
-            });
-        }
-        
-        // ============================================================
-        // 28. معالجة اللمس
-        // ============================================================
-        function handleTouchStart(event, messageId, messageText, isSent) {
-            touchTarget = { id: messageId, text: messageText, sent: isSent };
-            touchTimer = setTimeout(() => {
-                showContextMenu(event, messageId, messageText, isSent);
-                touchTarget = null;
-            }, 600);
-        }
-        
-        function handleTouchEnd(event) {
-            clearTimeout(touchTimer);
-            touchTarget = null;
-        }
-        
-        // ============================================================
-        // 29. لوحة المسؤول
+        // 33. لوحة المسؤول
         // ============================================================
         adminShieldBtn.onclick = function() {
             if (isAdmin) {
                 adminPanel.style.display = 'flex';
+                adminPanel.classList.add('fade-enter');
                 updateStats();
                 loadBadWords();
-            } else {
-                showNotification('❌ فقط المسؤول يمكنه الدخول');
-            }
+                renderAdminStickers();
+            } else { showNotification('❌ فقط المسؤول يمكنه الدخول'); }
         };
         
         closeAdminBtn.onclick = () => { adminPanel.style.display = 'none'; };
@@ -2879,7 +3441,6 @@
             tab.onclick = function() {
                 tabs.forEach(t => t.classList.remove('active'));
                 this.classList.add('active');
-                
                 const tabId = this.dataset.tab;
                 Object.keys(sections).forEach(key => {
                     sections[key].classList.toggle('active', key === tabId);
@@ -2901,9 +3462,7 @@
                     blockedAt: firebase.firestore.FieldValue.serverTimestamp()
                 });
                 showNotification(`✅ تم حظر ${username}`);
-            } catch (error) {
-                showNotification('❌ فشل الحظر');
-            }
+            } catch (error) { showNotification('❌ فشل الحظر'); }
         };
         
         window.unblockUser = async function(username) {
@@ -2912,9 +3471,7 @@
                 await db.collection('users').doc(username).update({ blocked: false });
                 await db.collection('blocked').doc(username).delete();
                 showNotification(`✅ تم إلغاء حظر ${username}`);
-            } catch (error) {
-                showNotification('❌ فشل إلغاء الحظر');
-            }
+            } catch (error) { showNotification('❌ فشل إلغاء الحظر'); }
         };
         
         window.unbanUser = async function(username) {
@@ -2927,9 +3484,7 @@
                 });
                 await db.collection('bans').doc(username).delete();
                 showNotification(`✅ تم إلغاء حظر ${username}`);
-            } catch (error) {
-                showNotification('❌ فشل إلغاء الحظر');
-            }
+            } catch (error) { showNotification('❌ فشل إلغاء الحظر'); }
         };
         
         window.deleteUser = async function(username) {
@@ -2945,9 +3500,7 @@
                 msgs.forEach(doc => batch.delete(doc.ref));
                 await batch.commit();
                 showNotification(`✅ تم حذف ${username}`);
-            } catch (error) {
-                showNotification('❌ فشل الحذف');
-            }
+            } catch (error) { showNotification('❌ فشل الحذف'); }
         };
         
         window.makeAdmin = async function(username) {
@@ -2956,9 +3509,7 @@
             try {
                 await db.collection('users').doc(username).update({ isAdmin: true });
                 showNotification(`✅ تم ترقية ${username}`);
-            } catch (error) {
-                showNotification('❌ فشل الترقية');
-            }
+            } catch (error) { showNotification('❌ فشل الترقية'); }
         };
         
         window.warnUser = async function(username) {
@@ -2981,62 +3532,8 @@
             }
         };
         
-        window.exportChat = async function() {
-            if (!isAdmin) return;
-            try {
-                const snapshot = await db.collection('messages')
-                    .where('deleted', '==', false)
-                    .orderBy('timestamp', 'asc')
-                    .get();
-                
-                let text = '📋 تصدير محادثة نيزك\n';
-                text += `📅 التاريخ: ${new Date().toLocaleString('ar')}\n`;
-                text += `👤 عدد الرسائل: ${snapshot.size}\n`;
-                text += '='.repeat(40) + '\n\n';
-                
-                snapshot.forEach(doc => {
-                    const data = doc.data();
-                    const time = data.timestamp ? 
-                        new Date(data.timestamp.toDate()).toLocaleString('ar') : 'وقت غير معروف';
-                    text += `[${time}] ${data.username}: ${data.text}\n`;
-                });
-                
-                const blob = new Blob([text], { type: 'text/plain' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `نيزك_تصدير_${new Date().toISOString().slice(0,10)}.txt`;
-                a.click();
-                URL.revokeObjectURL(url);
-                
-                showNotification('✅ تم تصدير المحادثة');
-            } catch (error) {
-                showNotification('❌ فشل التصدير');
-                console.error(error);
-            }
-        };
-        
-        window.banAllUsers = async function() {
-            if (!isAdmin) return;
-            if (!confirm('⚠️ هل تريد حظر جميع المستخدمين؟')) return;
-            try {
-                const snapshot = await db.collection('users').get();
-                const batch = db.batch();
-                snapshot.forEach(doc => {
-                    if (doc.id !== 'slx23m' && doc.id !== currentUser) {
-                        batch.update(doc.ref, { blocked: true });
-                    }
-                });
-                await batch.commit();
-                showNotification('✅ تم حظر جميع المستخدمين');
-            } catch (error) {
-                showNotification('❌ فشل حظر الكل');
-                console.error(error);
-            }
-        };
-        
         // ============================================================
-        // 30. تبديل الإعدادات
+        // 34. تبديل الإعدادات
         // ============================================================
         function toggleSwitch(id) {
             const el = document.getElementById(id + 'Switch');
@@ -3047,17 +3544,15 @@
         }
         
         // ============================================================
-        // 31. إشعارات
+        // 35. إشعارات
         // ============================================================
         function showNotification(message) {
             const existing = document.querySelector('.temp-notification');
             if (existing) existing.remove();
-            
             const div = document.createElement('div');
             div.className = 'temp-notification';
             div.textContent = message;
             document.body.appendChild(div);
-            
             setTimeout(() => {
                 div.style.opacity = '0';
                 div.style.transition = 'opacity 0.3s';
@@ -3066,7 +3561,7 @@
         }
         
         // ============================================================
-        // 32. خروج
+        // 36. خروج
         // ============================================================
         logoutBtn.onclick = function() {
             if (confirm('تسجيل الخروج؟')) {
@@ -3076,34 +3571,27 @@
                         lastSeen: firebase.firestore.FieldValue.serverTimestamp()
                     }).catch(() => {});
                 }
-                if (messagesListener) {
-                    messagesListener();
-                    messagesListener = null;
-                }
+                if (messagesListener) { messagesListener(); messagesListener = null; }
                 localStorage.setItem('lastUser', currentUser);
-                setTimeout(() => {
-                    location.reload();
-                }, 300);
+                setTimeout(() => { location.reload(); }, 300);
             }
         };
         
         // ============================================================
-        // 33. بداية التطبيق
+        // 37. بداية التطبيق
         // ============================================================
-        console.log('☄️ نيزك - نسخة إنستا النهائية');
+        console.log('📸 نيزك إنستا - Instagram Clone');
         console.log('👤 المسؤول: slx23m | كلمة: 1442');
         console.log('📌 اسحب الرسالة لليمين للرد');
-        console.log('📌 اضغط مطولاً للتفاعل');
-        console.log('📌 اضغط على الصورة لتعديلها');
-        console.log('📌 😊 إيموجي كامل و🎨 ستيكرات');
-        console.log('📌 التطبيق يعمل كـ PWA مستقل');
+        console.log('📌 اضغط مطولاً لفتح شريط التفاعل');
+        console.log('📌 اضغط على الصورة لعرض الملف الشخصي');
+        console.log('📌 🔍 بحث فوق الكيبورد');
+        console.log('📌 🤖 خوارزميات ذكاء اصطناعي للضغط');
         
         const savedUser = localStorage.getItem('lastUser');
         if (savedUser) {
             usernameInput.value = savedUser;
-            setTimeout(() => {
-                loginBtn.click();
-            }, 300);
+            setTimeout(() => { loginBtn.click(); }, 300);
         }
         
         console.log('✅ التطبيق جاهز للاستخدام!');
