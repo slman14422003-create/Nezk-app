@@ -42,25 +42,7 @@
     <meta name="application-name" content="نيزك إنستا" />
     
     <!-- ============================================================
-    Open Graph / Facebook
-    ============================================================ -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="نيزك إنستا - دردشة إنستا" />
-    <meta property="og:description" content="تطبيق دردشة إنستا كامل مع مميزات متقدمة" />
-    <meta property="og:image" content="icons/icon-512x512.png" />
-    <meta property="og:url" content="https://your-domain.com" />
-    <meta property="og:site_name" content="نيزك إنستا" />
-    
-    <!-- ============================================================
-    Twitter Card
-    ============================================================ -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="نيزك إنستا - دردشة إنستا" />
-    <meta name="twitter:description" content="تطبيق دردشة إنستا كامل مع مميزات متقدمة" />
-    <meta name="twitter:image" content="icons/icon-512x512.png" />
-    
-    <!-- ============================================================
-    Firebase
+    Firebase - تحميل خفيف وسريع
     ============================================================ -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
@@ -1712,7 +1694,7 @@
     
     <script>
         // ============================================================
-        // 1. إعداد Firebase
+        // 1. إعداد Firebase مع تحسينات السرعة
         // ============================================================
         const firebaseConfig = {
             apiKey: "AIzaSyBVNXAFHyynNL7rD6LaYc4iYgvYPDdDH0c",
@@ -1728,8 +1710,29 @@
         const db = firebase.firestore();
         const storage = firebase.storage();
         
+        // ✅ تحسين 1: تفعيل الإعدادات المتقدمة لـ Firestore
+        db.settings({
+            merge: true,
+            ignoreUndefinedProperties: true
+        });
+        
+        // ✅ تحسين 2: استخدام `enablePersistence` للتخزين المحلي
+        db.enablePersistence({
+            synchronizeTabs: true
+        }).catch(err => {
+            if (err.code == 'failed-precondition') {
+                console.warn('⚠️ التخزين المحلي غير متاح في هذا التبويب');
+            } else if (err.code == 'unimplemented') {
+                console.warn('⚠️ المتصفح لا يدعم التخزين المحلي');
+            }
+        });
+        
+        // ✅ تحسين 3: إنشاء فهارس مخصصة لتسريع الاستعلامات
+        // يجب إنشاء هذه الفهارس يدوياً في Firebase Console
+        // index: messages → timestamp (تصاعدي), deleted (تصاعدي)
+        
         // ============================================================
-        // 2. خوارزميات الذكاء الاصطناعي
+        // 2. خوارزميات الذكاء الاصطناعي مع تحسينات
         // ============================================================
         class AICore {
             static compressText(text) {
@@ -1802,7 +1805,75 @@
         }
         
         // ============================================================
-        // 3. لوحة الإيموجي الكاملة
+        // 3. إدارة ذاكرة التخزين المؤقت للرسائل (Message Cache)
+        // ============================================================
+        class MessageCache {
+            constructor() {
+                this.cache = new Map();
+                this.maxSize = 100;
+                this.loadFromStorage();
+            }
+            
+            loadFromStorage() {
+                try {
+                    const saved = localStorage.getItem('messageCache');
+                    if (saved) {
+                        const parsed = JSON.parse(saved);
+                        // تحويل إلى Map
+                        Object.keys(parsed).forEach(key => {
+                            this.cache.set(key, parsed[key]);
+                        });
+                        console.log(`📦 تم تحميل ${this.cache.size} رسالة من الكاش`);
+                    }
+                } catch (e) {
+                    console.warn('⚠️ فشل تحميل كاش الرسائل:', e);
+                }
+            }
+            
+            saveToStorage() {
+                try {
+                    const obj = {};
+                    this.cache.forEach((value, key) => {
+                        obj[key] = value;
+                    });
+                    localStorage.setItem('messageCache', JSON.stringify(obj));
+                } catch (e) {
+                    console.warn('⚠️ فشل حفظ كاش الرسائل:', e);
+                }
+            }
+            
+            get(id) {
+                return this.cache.get(id);
+            }
+            
+            set(id, data) {
+                // إذا تجاوز الحجم الحد الأقصى، احذف أقدم الرسائل
+                if (this.cache.size >= this.maxSize) {
+                    const oldestKey = this.cache.keys().next().value;
+                    this.cache.delete(oldestKey);
+                }
+                this.cache.set(id, data);
+                this.saveToStorage();
+            }
+            
+            has(id) {
+                return this.cache.has(id);
+            }
+            
+            clear() {
+                this.cache.clear();
+                this.saveToStorage();
+            }
+            
+            getSize() {
+                return this.cache.size;
+            }
+        }
+        
+        const messageCache = new MessageCache();
+        
+        // ============================================================
+        // 4. لوحة الإيموجي الكاملة
         // ============================================================
         const fullEmojis = {
             '😀': 'وجوه', '😃': 'وجوه', '😄': 'وجوه', '😁': 'وجوه', '😆': 'وجوه', '😅': 'وجوه', '😂': 'وجوه', '🤣': 'وجوه',
@@ -1887,7 +1958,7 @@
         }
         
         // ============================================================
-        // 4. نظام الستيكرات
+        // 5. نظام الستيكرات
         // ============================================================
         let allStickers = [];
         let currentStickerTab = 'my_stickers';
@@ -2195,7 +2266,7 @@
         };
         
         // ============================================================
-        // 5. إدراج صورة بتقنية Base64
+        // 6. إدراج صورة بتقنية Base64
         // ============================================================
         document.getElementById('imageBtn').onclick = function() {
             document.getElementById('imageFileInput').click();
@@ -2240,11 +2311,46 @@
         };
         
         // ============================================================
-        // 6. وظائف السيرفر والمزامنة الذكية
+        // 7. وظائف السيرفر والمزامنة الذكية مع تحسينات السرعة
         // ============================================================
         let syncInterval = null;
         let isSyncing = false;
         let lastSyncTime = Date.now();
+        let pendingMessages = [];
+        let isFirstLoad = true;
+        
+        // ✅ تحسين 4: دمج الرسائل القادمة مع الكاش
+        function mergeMessagesWithCache(newMessages) {
+            const merged = [];
+            const seenIds = new Set();
+            
+            // إضافة الرسائل الجديدة أولاً
+            newMessages.forEach(msg => {
+                if (msg.id) {
+                    seenIds.add(msg.id);
+                    merged.push(msg);
+                    // تحديث الكاش
+                    messageCache.set(msg.id, msg);
+                }
+            });
+            
+            // إضافة الرسائل المخزنة مؤقتاً التي لم تظهر في النتائج الجديدة
+            // (تجنب إضافة رسائل محذوفة)
+            messageCache.cache.forEach((msg, id) => {
+                if (!seenIds.has(id) && !msg.deleted) {
+                    merged.push(msg);
+                }
+            });
+            
+            // ترتيب حسب الوقت
+            merged.sort((a, b) => {
+                const timeA = a.timestamp?.toDate?.()?.getTime() || a.timestamp || 0;
+                const timeB = b.timestamp?.toDate?.()?.getTime() || b.timestamp || 0;
+                return timeA - timeB;
+            });
+            
+            return merged;
+        }
         
         function restartSync() {
             if (syncInterval) { clearInterval(syncInterval); syncInterval = null; }
@@ -2282,7 +2388,11 @@
         function startAutoSync() {
             if (syncInterval) clearInterval(syncInterval);
             const interval = AICore.getOptimalSyncTime();
-            syncInterval = setInterval(() => { syncMessages(); }, interval);
+            syncInterval = setInterval(() => { 
+                if (!isFirstLoad) {
+                    syncMessages(); 
+                }
+            }, interval);
         }
         
         async function syncMessages() {
@@ -2312,7 +2422,7 @@
         }
         
         // ============================================================
-        // 7. الملف الشخصي
+        // 8. الملف الشخصي
         // ============================================================
         async function showProfile(username) {
             try {
@@ -2348,7 +2458,7 @@
         };
         
         // ============================================================
-        // 8. البحث
+        // 9. البحث
         // ============================================================
         let searchMessages = [];
         let searchActive = false;
@@ -2440,7 +2550,7 @@
         };
         
         // ============================================================
-        // 9. قائمة الضغط المطول
+        // 10. قائمة الضغط المطول
         // ============================================================
         let longPressTargetId = null;
         let longPressTargetText = '';
@@ -2517,7 +2627,7 @@
         });
         
         // ============================================================
-        // 10. المتغيرات العامة
+        // 11. المتغيرات العامة
         // ============================================================
         let currentUser = '';
         let isAdmin = false;
@@ -2542,11 +2652,12 @@
         let userBanCounts = {};
         let selectedColor = '#405DE6';
         let unreadCount = 0;
-        let firstLoad = true;
         let allMessages = [];
+        let messageUpdateQueue = [];
+        let isProcessingQueue = false;
         
         // ============================================================
-        // 11. العناصر
+        // 12. العناصر
         // ============================================================
         const loginScreen = document.getElementById('loginScreen');
         const chatScreen = document.getElementById('chatScreen');
@@ -2611,7 +2722,7 @@
         };
         
         // ============================================================
-        // 12. اختيار اللون
+        // 13. اختيار اللون
         // ============================================================
         function selectColor(color) {
             selectedColor = color;
@@ -2629,7 +2740,7 @@
         if (savedColor) { selectColor(savedColor); }
         
         // ============================================================
-        // 13. الثيم
+        // 14. الثيم
         // ============================================================
         function toggleTheme() {
             document.body.classList.toggle('theme-dark');
@@ -2646,7 +2757,7 @@
         themeToggleChat.onclick = toggleTheme;
         
         // ============================================================
-        // 14. دوال الصورة
+        // 15. دوال الصورة
         // ============================================================
         function generateAvatarUrl(username) {
             return `https://api.dicebear.com/7.x/avataaars/svg?seed=${username}`;
@@ -2657,7 +2768,7 @@
         }
         
         // ============================================================
-        // 15. مودال تعديل الصورة
+        // 16. مودال تعديل الصورة
         // ============================================================
         function openAvatarModal() {
             if (!currentUser) return;
@@ -2764,7 +2875,7 @@
         }
         
         // ============================================================
-        // 16. لوحة الإيموجي
+        // 17. لوحة الإيموجي
         // ============================================================
         emojiBtn.onclick = function() {
             emojiPanelOpen = !emojiPanelOpen;
@@ -2787,7 +2898,7 @@
         }
         
         // ============================================================
-        // 17. لوحة الستيكرات
+        // 18. لوحة الستيكرات
         // ============================================================
         stickerBtn.onclick = function() {
             stickerPanelOpen = !stickerPanelOpen;
@@ -2801,7 +2912,7 @@
         };
         
         // ============================================================
-        // 18. تسجيل الدخول
+        // 19. تسجيل الدخول
         // ============================================================
         loginBtn.onclick = async function() {
             const username = usernameInput.value.trim();
@@ -2889,7 +3000,7 @@
         adminPasswordInput.onkeydown = (e) => { if (e.key === 'Enter') loginBtn.click(); };
         
         // ============================================================
-        // 19. الدخول إلى الدردشة
+        // 20. الدخول إلى الدردشة مع تحميل سريع
         // ============================================================
         function enterChat(username) {
             loginScreen.style.display = 'none';
@@ -2900,6 +3011,11 @@
             if (isAdmin) currentUserDisplay.textContent += ' ⭐';
             
             loadAvatar(username);
+            
+            // ✅ تحسين 5: تحميل الرسائل من الكاش أولاً
+            loadMessagesFromCache();
+            
+            // ثم الاستماع للتحديثات المباشرة
             listenMessages();
             listenUsers();
             listenTyping();
@@ -2930,6 +3046,8 @@
                     db.collection('users').doc(currentUser).update({ online: false }).catch(() => {});
                 }
                 if (syncInterval) clearInterval(syncInterval);
+                // حفظ الكاش قبل الخروج
+                messageCache.saveToStorage();
             });
             
             messagesContainer.addEventListener('scroll', () => {
@@ -2947,10 +3065,72 @@
                 scrollToBottom.style.display = 'none';
                 unreadCount = 0;
             };
+            
+            // ✅ تحسين 6: تحميل أولي للرسائل من Firebase بشكل أسرع
+            loadInitialMessages();
+        }
+        
+        // ✅ تحسين 7: تحميل الرسائل من الكاش المحلي
+        function loadMessagesFromCache() {
+            const cachedMessages = [];
+            messageCache.cache.forEach((msg, id) => {
+                if (!msg.deleted) {
+                    cachedMessages.push(msg);
+                }
+            });
+            
+            if (cachedMessages.length > 0) {
+                console.log(`📦 عرض ${cachedMessages.length} رسالة من الكاش`);
+                renderMessages(cachedMessages);
+                messageCount = cachedMessages.length;
+                updateStats();
+            }
+        }
+        
+        // ✅ تحسين 8: تحميل أولي سريع للرسائل
+        async function loadInitialMessages() {
+            try {
+                // ✅ تحسين 9: استخدام `limit` لتقليل كمية البيانات
+                const snapshot = await db.collection('messages')
+                    .where('deleted', '==', false)
+                    .orderBy('timestamp', 'desc')
+                    .limit(50)  // تحميل آخر 50 رسالة فقط
+                    .get();
+                
+                if (!snapshot.empty) {
+                    const messages = [];
+                    snapshot.forEach(doc => {
+                        const data = doc.data();
+                        if (!data.deleted) {
+                            messages.push({ id: doc.id, ...data });
+                            messageCache.set(doc.id, { id: doc.id, ...data });
+                        }
+                    });
+                    
+                    // ترتيب تصاعدي
+                    messages.sort((a, b) => {
+                        const timeA = a.timestamp?.toDate?.()?.getTime() || a.timestamp || 0;
+                        const timeB = b.timestamp?.toDate?.()?.getTime() || b.timestamp || 0;
+                        return timeA - timeB;
+                    });
+                    
+                    if (messages.length > 0) {
+                        console.log(`📥 تحميل ${messages.length} رسالة من Firebase`);
+                        renderMessages(messages);
+                        messageCount = messages.length;
+                        updateStats();
+                    }
+                }
+                
+                isFirstLoad = false;
+            } catch (error) {
+                console.warn('⚠️ فشل التحميل الأولي:', error);
+                isFirstLoad = false;
+            }
         }
         
         // ============================================================
-        // 20. الصورة الشخصية
+        // 21. الصورة الشخصية
         // ============================================================
         function loadAvatar(username) {
             db.collection('users').doc(username).onSnapshot((doc) => {
@@ -2972,7 +3152,7 @@
         }
         
         // ============================================================
-        // 21. الكلمات الممنوعة
+        // 22. الكلمات الممنوعة
         // ============================================================
         async function loadBadWords() {
             try {
@@ -3019,7 +3199,7 @@
         badWordInput.onkeydown = (e) => { if (e.key === 'Enter') addBadWord(); };
         
         // ============================================================
-        // 22. نظام الحظر التلقائي
+        // 23. نظام الحظر التلقائي
         // ============================================================
         async function checkBadWords(text, username) {
             const lowerText = text.toLowerCase();
@@ -3061,7 +3241,7 @@
         }
         
         // ============================================================
-        // 23. إرسال الرسائل
+        // 24. إرسال الرسائل
         // ============================================================
         sendBtn.onclick = sendMessage;
         
@@ -3125,7 +3305,32 @@
                     msgData.replyText = AICore.compressText(replyingToText);
                 }
                 
+                // ✅ تحسين 10: إضافة الرسالة محلياً فوراً
+                const tempId = 'temp_' + Date.now();
+                const tempMsg = {
+                    id: tempId,
+                    ...msgData,
+                    timestamp: new Date(),
+                    _temp: true
+                };
+                
+                // عرض الرسالة فوراً
+                const currentMessages = allMessages || [];
+                currentMessages.push(tempMsg);
+                renderMessages(currentMessages);
+                messageCount = currentMessages.length;
+                updateStats();
+                
+                // إرسال إلى Firebase
                 await db.collection('messages').add(msgData);
+                
+                // إزالة الرسالة المؤقتة
+                const updatedMessages = allMessages.filter(m => m.id !== tempId);
+                allMessages = updatedMessages;
+                messageCount = updatedMessages.length;
+                renderMessages(updatedMessages);
+                updateStats();
+                
                 messageInput.value = '';
                 messageInput.style.height = 'auto';
                 replyingTo = null;
@@ -3148,17 +3353,21 @@
         }
         
         // ============================================================
-        // 24. استماع الرسائل
+        // 25. استماع الرسائل مع تحسينات السرعة
         // ============================================================
         function listenMessages() {
             if (messagesListener) { messagesListener(); messagesListener = null; }
             
+            // ✅ تحسين 11: استخدام `limit` و `where` لتقليل البيانات
             messagesListener = db.collection('messages')
-                .orderBy('timestamp', 'asc')
+                .where('deleted', '==', false)
+                .orderBy('timestamp', 'desc')
+                .limit(100)  // فقط آخر 100 رسالة
                 .onSnapshot((snapshot) => {
                     const messages = [];
+                    
                     if (snapshot.empty) {
-                        if (firstLoad) {
+                        if (allMessages.length === 0) {
                             messagesContainer.innerHTML = `
                                 <div class="welcome-msg">
                                     <div class="icon">📸</div>
@@ -3167,23 +3376,34 @@
                                 </div>
                             `;
                         }
-                        messageCount = 0;
-                        updateStats();
-                        firstLoad = false;
-                        allMessages = [];
                         return;
                     }
                     
                     snapshot.forEach(doc => {
                         const data = doc.data();
-                        if (data.deleted === true) return;
-                        messages.push({ id: doc.id, ...data });
+                        if (!data.deleted) {
+                            const msg = { id: doc.id, ...data };
+                            messages.push(msg);
+                            // تحديث الكاش
+                            messageCache.set(doc.id, msg);
+                        }
                     });
                     
-                    allMessages = messages;
-                    searchMessages = messages;
-                    messageCount = messages.length;
-                    renderMessages(messages);
+                    // ترتيب تصاعدي
+                    messages.sort((a, b) => {
+                        const timeA = a.timestamp?.toDate?.()?.getTime() || a.timestamp || 0;
+                        const timeB = b.timestamp?.toDate?.()?.getTime() || b.timestamp || 0;
+                        return timeA - timeB;
+                    });
+                    
+                    // دمج مع الكاش
+                    const mergedMessages = mergeMessagesWithCache(messages);
+                    
+                    allMessages = mergedMessages;
+                    searchMessages = mergedMessages;
+                    messageCount = mergedMessages.length;
+                    
+                    renderMessages(mergedMessages);
                     updateStats();
                     setTimeout(setupSwipeToReply, 50);
                     
@@ -3195,10 +3415,27 @@
                             scrollToBottom.innerHTML = `⬇️ <span class="badge">${unreadCount}</span>`;
                         }
                     }
-                    firstLoad = false;
+                    
+                    isFirstLoad = false;
                 }, (error) => {
                     console.error('❌ خطأ في استماع الرسائل:', error);
                     updateConnectionStatus(false);
+                    
+                    // ✅ تحسين 12: استخدام الكاش في حالة فشل الشبكة
+                    if (messageCache.getSize() > 0) {
+                        const cached = [];
+                        messageCache.cache.forEach((msg, id) => {
+                            if (!msg.deleted) {
+                                cached.push(msg);
+                            }
+                        });
+                        if (cached.length > 0) {
+                            console.log(`📦 عرض ${cached.length} رسالة من الكاش (حالة عدم اتصال)`);
+                            renderMessages(cached);
+                            messageCount = cached.length;
+                            updateStats();
+                        }
+                    }
                 });
         }
         
@@ -3215,26 +3452,29 @@
             }
             
             const sorted = [...messages].sort((a, b) => {
-                if (!a.timestamp) return 1;
-                if (!b.timestamp) return -1;
-                return a.timestamp.toMillis() - b.timestamp.toMillis();
+                const timeA = a.timestamp?.toDate?.()?.getTime() || a.timestamp || 0;
+                const timeB = b.timestamp?.toDate?.()?.getTime() || b.timestamp || 0;
+                return timeA - timeB;
             });
             
             let html = '';
             let lastDate = '';
             
             sorted.forEach(data => {
+                // تجاهل الرسائل المحذوفة
+                if (data.deleted === true) return;
+                
                 const isSent = data.username === currentUser;
                 const sender = data.username || 'مجهول';
                 const avatar = data.avatar || '📸';
                 const time = data.timestamp ? 
-                    new Date(data.timestamp.toDate()).toLocaleTimeString('ar', { hour: '2-digit', minute: '2-digit' }) : '';
+                    new Date(data.timestamp.toDate ? data.timestamp.toDate() : data.timestamp).toLocaleTimeString('ar', { hour: '2-digit', minute: '2-digit' }) : '';
                 const adminBadge = data.isAdmin ? ' ⭐' : '';
                 const reactions = data.reactions || {};
                 const reactionKeys = Object.keys(reactions);
                 
                 const date = data.timestamp ? 
-                    new Date(data.timestamp.toDate()).toLocaleDateString('ar', { year: 'numeric', month: 'short', day: 'numeric' }) : '';
+                    new Date(data.timestamp.toDate ? data.timestamp.toDate() : data.timestamp).toLocaleDateString('ar', { year: 'numeric', month: 'short', day: 'numeric' }) : '';
                 if (date && date !== lastDate) {
                     html += `<div class="date-divider">${date}</div>`;
                     lastDate = date;
@@ -3277,9 +3517,10 @@
                 }
                 
                 const decompressedText = AICore.decompressText(data.text);
+                const isTemp = data._temp === true;
                 
                 html += `
-                    <div class="msg-wrapper" 
+                    <div class="msg-wrapper ${isTemp ? 'temp-msg' : ''}" 
                          data-id="${data.id}" 
                          data-text="${decompressedText.replace(/"/g, '&quot;').replace(/'/g, '&#39;')}"
                          data-sent="${isSent}"
@@ -3287,13 +3528,13 @@
                          ontouchstart="handleTouchStart(event, '${data.id}', '${decompressedText.replace(/'/g, "\\'")}', ${isSent})"
                          ontouchend="handleTouchEnd(event)">
                         ${replyHtml}
-                        <div class="msg ${isSent ? 'sent' : 'received'}">
+                        <div class="msg ${isSent ? 'sent' : 'received'} ${isTemp ? 'temp-msg' : ''}" style="${isTemp ? 'opacity:0.7;' : ''}">
                             <div class="avatar-small" onclick="showProfile('${sender}')" title="عرض الملف الشخصي">
                                 ${avatarDisplay}
                             </div>
                             <div class="content">
                                 <span class="sender-name" onclick="showProfile('${sender}')">${sender}${adminBadge}</span>
-                                ${stickerHtml || imageHtml || `<div class="text">${decompressedText}${editedMark}</div>`}
+                                ${stickerHtml || imageHtml || `<div class="text">${decompressedText}${editedMark}${isTemp ? ' ⏳' : ''}</div>`}
                                 <div class="time">
                                     ${time}
                                     ${isSent ? '<span class="check">✓✓</span>' : ''}
@@ -3306,7 +3547,12 @@
             });
             
             messagesContainer.innerHTML = html;
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            
+            // التمرير للأسفل فقط إذا كنا في الأسفل
+            const isAtBottom = messagesContainer.scrollHeight - messagesContainer.scrollTop <= messagesContainer.clientHeight + 50;
+            if (isAtBottom || messages.length < 20) {
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }
         }
         
         window.viewImage = function(imageData) {
@@ -3323,7 +3569,7 @@
         };
         
         // ============================================================
-        // 25. الضغط المطول
+        // 26. الضغط المطول
         // ============================================================
         function handleLongPress(e, messageId, messageText, isSent) {
             e.preventDefault();
@@ -3347,7 +3593,7 @@
         }
         
         // ============================================================
-        // 26. السحب للرد
+        // 27. السحب للرد
         // ============================================================
         let swipeTarget = null;
         let swipeStartX = 0;
@@ -3403,7 +3649,7 @@
         }
         
         // ============================================================
-        // 27. وظائف إضافية
+        // 28. وظائف إضافية
         // ============================================================
         function copyText(text) {
             navigator.clipboard.writeText(text).then(() => {
@@ -3420,7 +3666,7 @@
         }
         
         // ============================================================
-        // 28. الرد على الرسالة
+        // 29. الرد على الرسالة
         // ============================================================
         function startReply(messageId, messageText) {
             hideLongPressMenu();
@@ -3438,7 +3684,7 @@
         };
         
         // ============================================================
-        // 29. التفاعلات
+        // 30. التفاعلات
         // ============================================================
         window.toggleReaction = async function(messageId, emoji) {
             if (!currentUser) return;
@@ -3457,7 +3703,7 @@
         };
         
         // ============================================================
-        // 30. تعديل الرسالة
+        // 31. تعديل الرسالة
         // ============================================================
         window.editMessage = function(messageId) {
             if (!currentUser) return;
@@ -3511,12 +3757,15 @@
         };
         
         // ============================================================
-        // 31. حذف الرسالة
+        // 32. حذف الرسالة
         // ============================================================
         window.deleteMessage = async function(id) {
             if (settings.confirmDelete && !isAdmin && !confirm('حذف الرسالة؟')) return;
             try {
                 await db.collection('messages').doc(id).update({ deleted: true });
+                // إزالة من الكاش
+                messageCache.cache.delete(id);
+                messageCache.saveToStorage();
                 showNotification('✅ تم الحذف');
             } catch (error) {
                 console.error(error);
@@ -3525,7 +3774,7 @@
         };
         
         // ============================================================
-        // 32. استماع المستخدمين
+        // 33. استماع المستخدمين
         // ============================================================
         function listenUsers() {
             db.collection('users').onSnapshot((snapshot) => {
@@ -3607,7 +3856,7 @@
         }
         
         // ============================================================
-        // 33. استماع الكتابة
+        // 34. استماع الكتابة
         // ============================================================
         function listenTyping() {
             db.collection('typing').doc('status').onSnapshot((doc) => {
@@ -3647,7 +3896,7 @@
         };
         
         // ============================================================
-        // 34. تحميل عدد مرات الحظر
+        // 35. تحميل عدد مرات الحظر
         // ============================================================
         async function loadBanCounts() {
             try {
@@ -3659,7 +3908,7 @@
         }
         
         // ============================================================
-        // 35. لوحة المسؤول
+        // 36. لوحة المسؤول
         // ============================================================
         adminShieldBtn.onclick = function() {
             if (isAdmin) {
@@ -3761,6 +4010,7 @@
                 const batch = db.batch();
                 snapshot.forEach(doc => batch.delete(doc.ref));
                 await batch.commit();
+                messageCache.clear();
                 showNotification('✅ تم مسح جميع الرسائل');
             } catch (error) {
                 showNotification('❌ فشل المسح');
@@ -3769,7 +4019,7 @@
         };
         
         // ============================================================
-        // 36. تبديل الإعدادات
+        // 37. تبديل الإعدادات
         // ============================================================
         function toggleSwitch(id) {
             const el = document.getElementById(id + 'Switch');
@@ -3780,7 +4030,7 @@
         }
         
         // ============================================================
-        // 37. إشعارات
+        // 38. إشعارات
         // ============================================================
         function showNotification(message) {
             const existing = document.querySelector('.temp-notification');
@@ -3797,7 +4047,7 @@
         }
         
         // ============================================================
-        // 38. خروج
+        // 39. خروج
         // ============================================================
         logoutBtn.onclick = function() {
             if (confirm('تسجيل الخروج؟')) {
@@ -3808,15 +4058,25 @@
                     }).catch(() => {});
                 }
                 if (messagesListener) { messagesListener(); messagesListener = null; }
+                messageCache.saveToStorage();
                 localStorage.setItem('lastUser', currentUser);
                 setTimeout(() => { location.reload(); }, 300);
             }
         };
         
         // ============================================================
-        // 39. بداية التطبيق
+        // 40. بداية التطبيق
         // ============================================================
-        console.log('🌠 نيزك إنستا - الإصدار النهائي');
+        console.log('🌠 نيزك إنستا - الإصدار النهائي مع تحسينات السرعة');
+        console.log('⚡ تحسينات السرعة المطبقة:');
+        console.log('  ✅ استخدام enablePersistence للتخزين المحلي');
+        console.log('  ✅ استخدام limit(100) لتقليل البيانات');
+        console.log('  ✅ نظام كاش متقدم للرسائل');
+        console.log('  ✅ عرض الرسائل من الكاش أولاً');
+        console.log('  ✅ إرسال رسائل مؤقتة (Optimistic UI)');
+        console.log('  ✅ دمج الرسائل مع الكاش');
+        console.log('  ✅ حفظ الكاش في localStorage');
+        console.log('  ✅ تحميل أولي سريع (آخر 50 رسالة)');
         console.log('👤 المسؤول: slx23m | كلمة: 1442');
         console.log('📌 اسحب الرسالة لليمين للرد');
         console.log('📌 اضغط مطولاً لفتح قائمة الإيموجي والخيارات');
@@ -3827,6 +4087,7 @@
         console.log('📌 📦 الستيكرات مشتركة بين جميع المستخدمين');
         console.log('📌 ⌨️ Shift+Enter = سطر جديد, Enter = إرسال');
         console.log('📌 📱 PWA مع إشعارات');
+        console.log('⚡ تحميل سريع جداً للرسائل!');
         
         const savedUser = localStorage.getItem('lastUser');
         if (savedUser) {
@@ -3834,8 +4095,7 @@
             setTimeout(() => { loginBtn.click(); }, 300);
         }
         
-        console.log('✅ التطبيق جاهز للاستخدام!');
+        console.log('✅ التطبيق جاهز للاستخدام مع تحسينات السرعة!');
     </script>
 </body>
-</html>
-```
+    </html>
