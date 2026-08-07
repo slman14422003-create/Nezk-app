@@ -463,6 +463,7 @@
         .msg .content .time .check { font-size: 0.55rem; }
         .msg .content .sticker { font-size: 2.5rem; margin-top: 2px; display: block; cursor: pointer; transition: 0.2s; }
         .msg .content .sticker:hover { transform: scale(1.1); }
+        .msg .content .sticker img { width: 60px; height: 60px; object-fit: contain; border-radius: 8px; }
         
         .msg.sent {
             align-self: flex-end;
@@ -502,6 +503,18 @@
             background: rgba(0,0,0,0.06);
             transform: scale(1.05);
         }
+        
+        .msg .message-image {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 12px;
+            margin-top: 4px;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid var(--border-color);
+        }
+        .msg .message-image:hover { transform: scale(1.02); }
+        .msg .message-image:active { transform: scale(0.98); }
         
         .date-divider {
             text-align: center;
@@ -586,7 +599,8 @@
         }
         
         .chat-input .input-wrap .input-row .emoji-btn,
-        .chat-input .input-wrap .input-row .sticker-btn {
+        .chat-input .input-wrap .input-row .sticker-btn,
+        .chat-input .input-wrap .input-row .image-btn {
             background: none;
             border: none;
             font-size: 1.1rem;
@@ -597,11 +611,13 @@
             color: var(--text-secondary);
         }
         .chat-input .input-wrap .input-row .emoji-btn:hover,
-        .chat-input .input-wrap .input-row .sticker-btn:hover { opacity: 1; }
+        .chat-input .input-wrap .input-row .sticker-btn:hover,
+        .chat-input .input-wrap .input-row .image-btn:hover { opacity: 1; }
         .chat-input .input-wrap .input-row .emoji-btn:active,
-        .chat-input .input-wrap .input-row .sticker-btn:active { transform: scale(0.9); }
+        .chat-input .input-wrap .input-row .sticker-btn:active,
+        .chat-input .input-wrap .input-row .image-btn:active { transform: scale(0.9); }
         
-        .chat-input .input-wrap .input-row input {
+        .chat-input .input-wrap .input-row textarea {
             flex: 1;
             padding: 6px 4px;
             border: none;
@@ -609,9 +625,13 @@
             color: var(--text-primary);
             font-size: 0.88rem;
             outline: none;
-            min-width: 60px;
+            min-height: 24px;
+            max-height: 120px;
+            resize: none;
+            font-family: inherit;
+            line-height: 1.4;
         }
-        .chat-input .input-wrap .input-row input::placeholder {
+        .chat-input .input-wrap .input-row textarea::placeholder {
             color: var(--text-secondary);
             font-size: 0.85rem;
         }
@@ -635,7 +655,7 @@
         .chat-input .send-btn:hover { transform: scale(1.03); }
         .chat-input .send-btn:active { transform: scale(0.9); }
         
-        /* ===== لوحة الإيموجي ===== */
+        /* ===== لوحة الإيموجي الكاملة ===== */
         #emojiPanel {
             display: none;
             flex-wrap: wrap;
@@ -643,27 +663,37 @@
             background: var(--bg-secondary);
             border-top: 1px solid var(--border-color);
             gap: 2px;
-            max-height: 160px;
+            max-height: 200px;
             overflow-y: auto;
             flex-shrink: 0;
             transition: background 0.3s, border-color 0.3s;
             z-index: 5;
         }
         #emojiPanel .emoji-item {
-            font-size: 1.4rem;
-            padding: 2px 4px;
+            font-size: 1.3rem;
+            padding: 2px 3px;
             cursor: pointer;
             border-radius: 4px;
-            transition: 0.12s;
+            transition: 0.1s;
             user-select: none;
+            width: 36px;
+            text-align: center;
         }
         #emojiPanel .emoji-item:hover {
             background: rgba(0,0,0,0.04);
-            transform: scale(1.1);
+            transform: scale(1.15);
         }
-        #emojiPanel .emoji-item:active { transform: scale(0.9); }
+        #emojiPanel .emoji-item:active { transform: scale(0.85); }
         #emojiPanel::-webkit-scrollbar { width: 2px; }
         #emojiPanel::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.06); border-radius: 10px; }
+        #emojiPanel .emoji-category {
+            width: 100%;
+            font-size: 0.6rem;
+            opacity: 0.4;
+            padding: 2px 4px;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
         
         /* ===== لوحة الستيكرات ===== */
         #stickerPanel {
@@ -711,6 +741,7 @@
             gap: 4px;
             overflow-y: auto;
             flex: 1;
+            align-content: flex-start;
         }
         #stickerPanel .sticker-grid .sticker-item {
             font-size: 2.2rem;
@@ -757,47 +788,59 @@
         .reply-bar .reply-text { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .reply-bar .reply-cancel { background: none; border: none; color: #E1306C; cursor: pointer; font-size: 1rem; }
         
-        /* ===== شريط التفاعل السفلي ===== */
-        #actionBar {
+        /* ===== قائمة الضغط المطول - مصغرة مثل إنستا ===== */
+        #longPressMenu {
             display: none;
             position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
             background: var(--bg-secondary);
-            border-top: 1px solid var(--border-color);
-            padding: 8px 16px;
-            padding-bottom: calc(8px + var(--safe-bottom));
+            border-radius: 16px;
+            padding: 8px 12px;
             z-index: 350;
-            animation: slideUp 0.2s ease;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.05);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            border: 1px solid var(--border-color);
+            animation: slideUp 0.15s ease;
+            min-width: 160px;
+            max-width: 90%;
         }
-        #actionBar .action-items {
+        #longPressMenu .menu-items {
             display: flex;
-            justify-content: space-around;
-            align-items: center;
-            gap: 8px;
+            gap: 6px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
-        #actionBar .action-item {
+        #longPressMenu .menu-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 2px;
-            padding: 6px 12px;
-            border-radius: 12px;
+            gap: 1px;
+            padding: 4px 8px;
+            border-radius: 10px;
             cursor: pointer;
-            transition: 0.2s;
-            min-width: 50px;
+            transition: 0.15s;
             border: none;
             background: none;
             color: var(--text-secondary);
+            min-width: 36px;
         }
-        #actionBar .action-item:hover { background: rgba(0,0,0,0.03); }
-        #actionBar .action-item:active { transform: scale(0.9); }
-        #actionBar .action-item .icon { font-size: 1.3rem; }
-        #actionBar .action-item .label { font-size: 0.55rem; opacity: 0.6; }
-        #actionBar .action-item.danger .icon { color: #E1306C; }
-        #actionBar .action-item.danger .label { color: #E1306C; }
+        #longPressMenu .menu-item:hover { background: rgba(0,0,0,0.03); }
+        #longPressMenu .menu-item:active { transform: scale(0.88); }
+        #longPressMenu .menu-item .icon { font-size: 1.1rem; }
+        #longPressMenu .menu-item .label { font-size: 0.45rem; opacity: 0.5; }
+        #longPressMenu .menu-item.danger .icon { color: #E1306C; }
+        #longPressMenu .menu-item.danger .label { color: #E1306C; }
+        #longPressMenu .menu-item .reaction-emoji {
+            font-size: 1.4rem;
+            padding: 1px 4px;
+            border-radius: 6px;
+            transition: 0.15s;
+        }
+        #longPressMenu .menu-item .reaction-emoji:hover {
+            background: rgba(0,0,0,0.05);
+            transform: scale(1.2);
+        }
         
         /* ===== مودال الملف الشخصي ===== */
         #profileModal {
@@ -1277,7 +1320,7 @@
             to { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
         
-        #fileInput, #stickerFileInput { display: none; }
+        #fileInput, #stickerFileInput, #imageFileInput { display: none; }
         
         /* ===== سكرول للأسفل ===== */
         #scrollToBottom {
@@ -1337,9 +1380,14 @@
             #stickerPanel .sticker-grid .sticker-item { font-size: 1.8rem; width: 50px; height: 50px; }
             #profileModal .modal-content { padding: 18px; max-width: 320px; }
             #profileModal .profile-avatar { width: 80px; height: 80px; font-size: 2.5rem; }
-            #actionBar .action-item { padding: 4px 8px; min-width: 40px; }
-            #actionBar .action-item .icon { font-size: 1.1rem; }
-            #actionBar .action-item .label { font-size: 0.5rem; }
+            #longPressMenu { padding: 6px 10px; min-width: 120px; }
+            #longPressMenu .menu-item { padding: 3px 6px; min-width: 30px; }
+            #longPressMenu .menu-item .icon { font-size: 0.9rem; }
+            #longPressMenu .menu-item .label { font-size: 0.4rem; }
+            #longPressMenu .menu-item .reaction-emoji { font-size: 1.1rem; }
+            #emojiPanel .emoji-item { font-size: 1.1rem; width: 30px; }
+            .msg .content .sticker img { width: 40px; height: 40px; }
+            .msg .message-image { max-width: 150px; max-height: 150px; }
         }
         
         @media (min-width: 481px) and (max-width: 1024px) {
@@ -1449,39 +1497,21 @@
                     <div class="input-row">
                         <button class="emoji-btn" id="emojiBtn">😊</button>
                         <button class="sticker-btn" id="stickerBtn">🎨</button>
-                        <input type="text" id="messageInput" placeholder="اكتب رسالة..." maxlength="500" autocomplete="off" />
+                        <button class="image-btn" id="imageBtn" title="إدراج صورة">🖼️</button>
+                        <textarea id="messageInput" placeholder="اكتب رسالة..." maxlength="500" rows="1"></textarea>
                     </div>
                 </div>
                 <button class="send-btn" id="sendBtn">➤</button>
             </div>
             
+            <input type="file" id="imageFileInput" accept="image/*" />
+            
             <button id="scrollToBottom">⬇️</button>
         </div>
         
-        <!-- شريط التفاعل السفلي -->
-        <div id="actionBar">
-            <div class="action-items">
-                <button class="action-item" data-action="reply">
-                    <span class="icon">↩️</span>
-                    <span class="label">رد</span>
-                </button>
-                <button class="action-item" data-action="react">
-                    <span class="icon">❤️</span>
-                    <span class="label">تفاعل</span>
-                </button>
-                <button class="action-item" data-action="copy">
-                    <span class="icon">📋</span>
-                    <span class="label">نسخ</span>
-                </button>
-                <button class="action-item" data-action="edit">
-                    <span class="icon">✏️</span>
-                    <span class="label">تعديل</span>
-                </button>
-                <button class="action-item danger" data-action="delete">
-                    <span class="icon">🗑️</span>
-                    <span class="label">حذف</span>
-                </button>
-            </div>
+        <!-- قائمة الضغط المطول - مصغرة -->
+        <div id="longPressMenu">
+            <div class="menu-items" id="longPressItems"></div>
         </div>
         
         <!-- مودال الملف الشخصي -->
@@ -1642,28 +1672,14 @@
         const storage = firebase.storage();
         
         // ============================================================
-        // 2. خوارزميات الذكاء الاصطناعي للضغط والتحسين
+        // 2. خوارزميات الذكاء الاصطناعي - تم إزالة الاختصارات
         // ============================================================
         class AICore {
             static compressText(text) {
                 if (!text || text.length < 10) return text;
-                const shortcuts = {
-                    'السلام عليكم': 'س.ع',
-                    'وعليكم السلام': 'و.ع.س',
-                    'كيف حالك': 'ك.ح',
-                    'الحمد لله': 'ح.لله',
-                    'إن شاء الله': 'إ.ش.لله',
-                    'ما شاء الله': 'م.ش.لله',
-                    'جزاك الله خير': 'ج.لله خ',
-                    'الله أكبر': 'ل.أكبر',
-                    'سبحان الله': 'س.لله',
-                    'لا إله إلا الله': 'ل.إ.إ.لله'
-                };
-                let compressed = text;
-                for (const [key, value] of Object.entries(shortcuts)) {
-                    compressed = compressed.replace(new RegExp(key, 'g'), value);
-                }
-                compressed = compressed.replace(/\s+/g, ' ').trim();
+                // تم إزالة اختصارات الكلمات (السلام عليكم -> س.ع)
+                // فقط نضغط النص الطويل جداً
+                let compressed = text.replace(/\s+/g, ' ').trim();
                 if (compressed.length > 200) {
                     const sentences = compressed.split(/[.!?؟،]/);
                     if (sentences.length > 3) {
@@ -1675,23 +1691,8 @@
             
             static decompressText(text) {
                 if (!text) return text;
-                const shortcuts = {
-                    'س.ع': 'السلام عليكم',
-                    'و.ع.س': 'وعليكم السلام',
-                    'ك.ح': 'كيف حالك',
-                    'ح.لله': 'الحمد لله',
-                    'إ.ش.لله': 'إن شاء الله',
-                    'م.ش.لله': 'ما شاء الله',
-                    'ج.لله خ': 'جزاك الله خير',
-                    'ل.أكبر': 'الله أكبر',
-                    'س.لله': 'سبحان الله',
-                    'ل.إ.إ.لله': 'لا إله إلا الله'
-                };
-                let decompressed = text;
-                for (const [key, value] of Object.entries(shortcuts)) {
-                    decompressed = decompressed.replace(new RegExp(key, 'g'), value);
-                }
-                return decompressed;
+                // تم إزالة فك الاختصارات
+                return text;
             }
             
             static compressImage(dataUrl, quality = 0.6, maxSize = 800) {
@@ -1748,7 +1749,94 @@
         }
         
         // ============================================================
-        // 3. نظام الستيكرات المتقدم
+        // 3. لوحة الإيموجي الكاملة - كل إيموجي iPhone
+        // ============================================================
+        const fullEmojis = {
+            '😀': 'وجوه', '😃': 'وجوه', '😄': 'وجوه', '😁': 'وجوه', '😆': 'وجوه', '😅': 'وجوه', '😂': 'وجوه', '🤣': 'وجوه',
+            '😊': 'وجوه', '😇': 'وجوه', '🙂': 'وجوه', '🙃': 'وجوه', '😉': 'وجوه', '😌': 'وجوه', '😍': 'وجوه', '🥰': 'وجوه',
+            '😘': 'وجوه', '😗': 'وجوه', '😙': 'وجوه', '😚': 'وجوه', '😋': 'وجوه', '😛': 'وجوه', '😝': 'وجوه', '😜': 'وجوه',
+            '🤪': 'وجوه', '🤨': 'وجوه', '🧐': 'وجوه', '🤓': 'وجوه', '😎': 'وجوه', '🤩': 'وجوه', '🥳': 'وجوه', '😏': 'وجوه',
+            '😒': 'وجوه', '😞': 'وجوه', '😔': 'وجوه', '😟': 'وجوه', '😕': 'وجوه', '🙁': 'وجوه', '☹️': 'وجوه', '😣': 'وجوه',
+            '😖': 'وجوه', '😫': 'وجوه', '😩': 'وجوه', '🥺': 'وجوه', '😢': 'وجوه', '😭': 'وجوه', '😤': 'وجوه', '😠': 'وجوه',
+            '😡': 'وجوه', '🤬': 'وجوه', '🤯': 'وجوه', '😳': 'وجوه', '🥵': 'وجوه', '🥶': 'وجوه', '😱': 'وجوه', '😨': 'وجوه',
+            '😰': 'وجوه', '😥': 'وجوه', '😓': 'وجوه', '🤗': 'وجوه', '🤔': 'وجوه', '🤭': 'وجوه', '🤫': 'وجوه', '🤥': 'وجوه',
+            '😶': 'وجوه', '😐': 'وجوه', '😑': 'وجوه', '😬': 'وجوه', '🙄': 'وجوه', '😯': 'وجوه', '😦': 'وجوه', '😧': 'وجوه',
+            '😮': 'وجوه', '😲': 'وجوه', '🥱': 'وجوه', '😴': 'وجوه', '🤤': 'وجوه', '😪': 'وجوه', '😵': 'وجوه', '🤐': 'وجوه',
+            '🥴': 'وجوه', '😷': 'وجوه', '🤒': 'وجوه', '🤕': 'وجوه', '🤢': 'وجوه', '🤮': 'وجوه', '🥳': 'وجوه', '🎉': 'مناسبات',
+            '🎊': 'مناسبات', '🎈': 'مناسبات', '🎁': 'مناسبات', '🎀': 'مناسبات', '🎂': 'مناسبات', '🎃': 'مناسبات', '🎄': 'مناسبات',
+            '🎅': 'مناسبات', '🤶': 'مناسبات', '🦌': 'مناسبات', '🕊️': 'طيور', '🦅': 'طيور', '🦉': 'طيور', '🐦': 'طيور', '🐤': 'طيور',
+            '🐥': 'طيور', '🐣': 'طيور', '🐔': 'طيور', '🐧': 'طيور', '🦇': 'حيوانات', '🐺': 'حيوانات', '🦊': 'حيوانات', '🐻': 'حيوانات',
+            '🐼': 'حيوانات', '🐨': 'حيوانات', '🐯': 'حيوانات', '🦁': 'حيوانات', '🐮': 'حيوانات', '🐷': 'حيوانات', '🐽': 'حيوانات',
+            '🐸': 'حيوانات', '🐵': 'حيوانات', '🙈': 'حيوانات', '🙉': 'حيوانات', '🙊': 'حيوانات', '🐒': 'حيوانات', '🐔': 'حيوانات',
+            '🐧': 'حيوانات', '🐦': 'حيوانات', '🐤': 'حيوانات', '🐣': 'حيوانات', '🐥': 'حيوانات', '🦆': 'حيوانات', '🦢': 'حيوانات',
+            '🦉': 'حيوانات', '🦇': 'حيوانات', '🐺': 'حيوانات', '🦊': 'حيوانات', '🐻': 'حيوانات', '🐼': 'حيوانات', '🐨': 'حيوانات',
+            '🐯': 'حيوانات', '🦁': 'حيوانات', '🐮': 'حيوانات', '🐷': 'حيوانات', '🐽': 'حيوانات', '🐸': 'حيوانات',
+            '🐵': 'حيوانات', '🐒': 'حيوانات', '🦍': 'حيوانات', '🐶': 'حيوانات', '🐕': 'حيوانات', '🦮': 'حيوانات', '🐩': 'حيوانات',
+            '🐺': 'حيوانات', '🦊': 'حيوانات', '🦝': 'حيوانات', '🐱': 'حيوانات', '🐈': 'حيوانات', '🐆': 'حيوانات', '🐅': 'حيوانات',
+            '🐯': 'حيوانات', '🦁': 'حيوانات', '🐮': 'حيوانات', '🐄': 'حيوانات', '🐃': 'حيوانات', '🐂': 'حيوانات', '🐷': 'حيوانات',
+            '🐖': 'حيوانات', '🐗': 'حيوانات', '🐽': 'حيوانات', '🐏': 'حيوانات', '🐑': 'حيوانات', '🐐': 'حيوانات', '🐪': 'حيوانات',
+            '🐫': 'حيوانات', '🦙': 'حيوانات', '🦒': 'حيوانات', '🐘': 'حيوانات', '🦏': 'حيوانات', '🦛': 'حيوانات', '🐭': 'حيوانات',
+            '🐁': 'حيوانات', '🐀': 'حيوانات', '🐹': 'حيوانات', '🐰': 'حيوانات', '🐇': 'حيوانات', '🐿️': 'حيوانات', '🦔': 'حيوانات',
+            '🦇': 'حيوانات', '🐻': 'حيوانات', '🐨': 'حيوانات', '🐼': 'حيوانات', '🐾': 'حيوانات', '🦃': 'حيوانات', '🐔': 'حيوانات',
+            '🐓': 'حيوانات', '🐣': 'حيوانات', '🐤': 'حيوانات', '🐥': 'حيوانات', '🐦': 'حيوانات', '🐧': 'حيوانات', '🕊️': 'حيوانات',
+            '🦅': 'حيوانات', '🦆': 'حيوانات', '🦢': 'حيوانات', '🦉': 'حيوانات', '🦩': 'حيوانات', '🦚': 'حيوانات', '🦜': 'حيوانات',
+            '🐸': 'حيوانات', '🐊': 'حيوانات', '🐢': 'حيوانات', '🦎': 'حيوانات', '🐍': 'حيوانات', '🐲': 'حيوانات', '🐉': 'حيوانات',
+            '🦕': 'حيوانات', '🦖': 'حيوانات', '🐳': 'حيوانات', '🐋': 'حيوانات', '🐬': 'حيوانات', '🐟': 'حيوانات', '🐠': 'حيوانات',
+            '🐡': 'حيوانات', '🦈': 'حيوانات', '🐙': 'حيوانات', '🐚': 'حيوانات', '🐌': 'حيوانات', '🦋': 'حيوانات', '🐛': 'حيوانات',
+            '🐜': 'حيوانات', '🐝': 'حيوانات', '🐞': 'حيوانات', '🦗': 'حيوانات', '🦟': 'حيوانات', '🦠': 'حيوانات',
+            '❤️': 'قلوب', '🧡': 'قلوب', '💛': 'قلوب', '💚': 'قلوب', '💙': 'قلوب', '💜': 'قلوب', '🖤': 'قلوب', '🤍': 'قلوب',
+            '🤎': 'قلوب', '💔': 'قلوب', '❤️‍🔥': 'قلوب', '❤️‍🩹': 'قلوب', '💕': 'قلوب', '💞': 'قلوب', '💓': 'قلوب', '💗': 'قلوب',
+            '💖': 'قلوب', '💘': 'قلوب', '💝': 'قلوب', '💟': 'قلوب', '☮️': 'رموز', '✝️': 'رموز', '☪️': 'رموز', '🕉️': 'رموز',
+            '☯️': 'رموز', '✡️': 'رموز', '🔯': 'رموز', '🕎': 'رموز', '💟': 'رموز', '☸️': 'رموز', '🪔': 'رموز', '♈': 'الأبراج',
+            '♉': 'الأبراج', '♊': 'الأبراج', '♋': 'الأبراج', '♌': 'الأبراج', '♍': 'الأبراج', '♎': 'الأبراج', '♏': 'الأبراج',
+            '♐': 'الأبراج', '♑': 'الأبراج', '♒': 'الأبراج', '♓': 'الأبراج', '⛎': 'الأبراج', '🪐': 'الفضاء', '☀️': 'الطقس',
+            '🌤️': 'الطقس', '⛅': 'الطقس', '🌥️': 'الطقس', '☁️': 'الطقس', '🌦️': 'الطقس', '🌧️': 'الطقس', '⛈️': 'الطقس',
+            '🌩️': 'الطقس', '🌨️': 'الطقس', '❄️': 'الطقس', '☃️': 'الطقس', '⛄': 'الطقس', '🌬️': 'الطقس', '💨': 'الطقس',
+            '🌪️': 'الطقس', '🌫️': 'الطقس', '🌈': 'الطقس', '☂️': 'الطقس', '☔': 'الطقس', '⛱️': 'الطقس', '⚡': 'الطقس',
+            '🔥': 'الطقس', '💧': 'الطقس', '🌊': 'الطقس',
+            '👽': 'فضاء', '🛸': 'فضاء', '👾': 'فضاء', '🤖': 'فضاء', '🪐': 'فضاء', '🌌': 'فضاء', '🌠': 'فضاء', '🌠': 'فضاء',
+            '🚀': 'فضاء', '🛸': 'فضاء', '🛰️': 'فضاء', '🌍': 'فضاء', '🌎': 'فضاء', '🌏': 'فضاء', '🌕': 'فضاء', '🌖': 'فضاء',
+            '🌗': 'فضاء', '🌘': 'فضاء', '🌑': 'فضاء', '🌒': 'فضاء', '🌓': 'فضاء', '🌔': 'فضاء', '🌙': 'فضاء', '🌚': 'فضاء',
+            '🌛': 'فضاء', '🌜': 'فضاء', '☀️': 'فضاء', '🌝': 'فضاء', '🌞': 'فضاء', '⭐': 'فضاء', '🌟': 'فضاء', '🌠': 'فضاء',
+            '🌌': 'فضاء', '☄️': 'فضاء', '💫': 'فضاء', '✨': 'فضاء'
+        };
+        
+        function getEmojiCategories() {
+            const categories = {};
+            for (const [emoji, category] of Object.entries(fullEmojis)) {
+                if (!categories[category]) categories[category] = [];
+                categories[category].push(emoji);
+            }
+            return categories;
+        }
+        
+        function initFullEmojiPanel() {
+            const panel = document.getElementById('emojiPanel');
+            panel.innerHTML = '';
+            const categories = getEmojiCategories();
+            
+            for (const [category, emojis] of Object.entries(categories)) {
+                const catLabel = document.createElement('div');
+                catLabel.className = 'emoji-category';
+                catLabel.textContent = category;
+                panel.appendChild(catLabel);
+                
+                emojis.forEach(emoji => {
+                    const span = document.createElement('span');
+                    span.className = 'emoji-item';
+                    span.textContent = emoji;
+                    span.onclick = () => {
+                        insertAtCursor(emoji);
+                        emojiPanel.style.display = 'none';
+                        emojiPanelOpen = false;
+                    };
+                    panel.appendChild(span);
+                });
+            }
+        }
+        
+        // ============================================================
+        // 4. نظام الستيكرات المتقدم
         // ============================================================
         let allStickers = [];
         let currentStickerTab = 'my_stickers';
@@ -1804,6 +1892,7 @@
                         type: 'image',
                         data: compressed,
                         name: file.name,
+                        uploadedBy: currentUser,
                         createdAt: new Date().toISOString()
                     };
                     allStickers.push(newSticker);
@@ -1839,7 +1928,8 @@
                             id: 'pack_' + Date.now() + '_' + i,
                             emoji: s.emoji || s,
                             type: 'emoji',
-                            pack: packData.name || 'حزمة مرفوعة'
+                            pack: packData.name || 'حزمة مرفوعة',
+                            uploadedBy: currentUser
                         }));
                         allStickers = [...allStickers, ...newStickers];
                         await saveStickersToFirebase(allStickers);
@@ -1866,7 +1956,8 @@
                     id: 'pack_' + Date.now() + '_' + index,
                     emoji: emoji,
                     type: 'emoji',
-                    pack: packName
+                    pack: packName,
+                    uploadedBy: currentUser
                 }));
                 allStickers = [...allStickers, ...newStickers];
                 await saveStickersToFirebase(allStickers);
@@ -1884,9 +1975,11 @@
         function renderStickers(tabId) {
             const grid = document.getElementById('stickerGrid');
             let stickers = allStickers;
-            if (tabId !== 'my_stickers') {
+            if (tabId !== 'my_stickers' && tabId !== 'all_stickers') {
                 stickers = allStickers.filter(s => s.pack === tabId);
                 if (stickers.length === 0) stickers = allStickers;
+            } else if (tabId === 'all_stickers') {
+                stickers = allStickers;
             }
             if (!stickers || stickers.length === 0) {
                 grid.innerHTML = '<div style="padding:20px;text-align:center;opacity:0.5;width:100%;">لا توجد ستيكرات</div>';
@@ -1897,9 +1990,10 @@
                 const span = document.createElement('span');
                 span.className = 'sticker-item';
                 if (sticker.type === 'image' && sticker.data) {
-                    span.innerHTML = `<img src="${sticker.data}" alt="${sticker.name || 'ستيكر'}" />`;
+                    span.innerHTML = `<img src="${sticker.data}" alt="${sticker.name || 'ستيكر'}" title="بواسطة: ${sticker.uploadedBy || 'غير معروف'}" />`;
                 } else {
                     span.textContent = sticker.emoji || '😊';
+                    span.title = sticker.uploadedBy ? `بواسطة: ${sticker.uploadedBy}` : '';
                 }
                 span.onclick = () => {
                     if (sticker.type === 'image' && sticker.data) {
@@ -1927,6 +2021,16 @@
                 renderStickers(currentStickerTab);
             };
             tabs.appendChild(myTab);
+            
+            const allTab = document.createElement('span');
+            allTab.className = 'tab' + (currentStickerTab === 'all_stickers' ? ' active' : '');
+            allTab.textContent = '📦 الكل';
+            allTab.onclick = () => {
+                currentStickerTab = 'all_stickers';
+                renderStickerTabs();
+                renderStickers(currentStickerTab);
+            };
+            tabs.appendChild(allTab);
             
             const packs = {};
             allStickers.forEach(s => {
@@ -1970,12 +2074,13 @@
                     div.innerHTML = `
                         <img src="${sticker.data}" />
                         <span style="font-size:0.6rem;opacity:0.5;">${sticker.name || 'صورة'}</span>
+                        <span style="font-size:0.5rem;opacity:0.3;">${sticker.uploadedBy || ''}</span>
                         <button onclick="deleteSticker('${sticker.id}')" style="background:none;border:none;color:#E1306C;cursor:pointer;">✕</button>
                     `;
                 } else {
                     div.innerHTML = `
                         <span style="font-size:1.2rem;">${sticker.emoji || '😊'}</span>
-                        <span style="font-size:0.6rem;opacity:0.5;">${sticker.id}</span>
+                        <span style="font-size:0.5rem;opacity:0.3;">${sticker.uploadedBy || ''}</span>
                         <button onclick="deleteSticker('${sticker.id}')" style="background:none;border:none;color:#E1306C;cursor:pointer;">✕</button>
                     `;
                 }
@@ -1987,7 +2092,9 @@
         }
         
         async function deleteSticker(stickerId) {
-            if (!confirm('حذف الستيكر؟')) return;
+            if (!isAdmin && !confirm('حذف الستيكر؟')) return;
+            if (!isAdmin) { showNotification('❌ فقط المسؤول يمكنه الحذف'); return; }
+            if (!confirm('حذف الستيكر نهائياً؟')) return;
             allStickers = allStickers.filter(s => s.id !== stickerId);
             await saveStickersToFirebase(allStickers);
             try { localStorage.setItem('stickers', JSON.stringify(allStickers)); } catch(e) {}
@@ -2037,7 +2144,52 @@
         };
         
         // ============================================================
-        // 4. وظائف السيرفر والمزامنة الذكية
+        // 5. إدراج صورة بتقنية Base64
+        // ============================================================
+        document.getElementById('imageBtn').onclick = function() {
+            document.getElementById('imageFileInput').click();
+        };
+        
+        document.getElementById('imageFileInput').onchange = async function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            if (!file.type.startsWith('image/')) { showNotification('❌ يرجى اختيار صورة'); return; }
+            if (file.size > 10 * 1024 * 1024) { showNotification('❌ حجم الصورة كبير جداً (أقصى 10MB)'); return; }
+            
+            try {
+                showNotification('⏳ جاري معالجة الصورة...');
+                const reader = new FileReader();
+                reader.onload = async function(e) {
+                    const compressed = await AICore.compressImage(e.target.result, 0.5, 600);
+                    
+                    const msgData = {
+                        username: currentUser,
+                        text: '📷 صورة',
+                        avatar: myAvatar,
+                        isAdmin: isAdmin,
+                        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                        deleted: false,
+                        reactions: {},
+                        edited: false,
+                        editedAt: null,
+                        image: true,
+                        imageData: compressed,
+                        compressed: true
+                    };
+                    
+                    await db.collection('messages').add(msgData);
+                    showNotification('✅ تم إرسال الصورة');
+                };
+                reader.readAsDataURL(file);
+            } catch (error) {
+                console.error('فشل إرسال الصورة:', error);
+                showNotification('❌ فشل إرسال الصورة');
+            }
+            this.value = '';
+        };
+        
+        // ============================================================
+        // 6. وظائف السيرفر والمزامنة الذكية
         // ============================================================
         let syncInterval = null;
         let isSyncing = false;
@@ -2109,7 +2261,7 @@
         }
         
         // ============================================================
-        // 5. الملف الشخصي
+        // 7. الملف الشخصي
         // ============================================================
         async function showProfile(username) {
             try {
@@ -2145,10 +2297,9 @@
         };
         
         // ============================================================
-        // 6. البحث
+        // 8. البحث
         // ============================================================
         let searchMessages = [];
-        let isSearching = false;
         let searchActive = false;
         
         document.getElementById('searchToggle').onclick = function() {
@@ -2238,71 +2389,87 @@
         };
         
         // ============================================================
-        // 7. شريط التفاعل السفلي
+        // 9. قائمة الضغط المطول - مصغرة مثل إنستا
         // ============================================================
-        let actionTargetId = null;
+        let longPressTargetId = null;
+        let longPressTargetText = '';
+        let longPressTargetSent = false;
+        let longPressTimer = null;
         
-        function showActionBar(messageId, isSent) {
-            actionTargetId = messageId;
-            const bar = document.getElementById('actionBar');
+        const reactionEmojis = ['❤️', '🔥', '😂', '😍', '👏', '🎉', '😢', '😡', '💯', '🙏'];
+        
+        function showLongPressMenu(messageId, messageText, isSent, event) {
+            longPressTargetId = messageId;
+            longPressTargetText = messageText;
+            longPressTargetSent = isSent;
             
-            const editBtn = bar.querySelector('[data-action="edit"]');
-            const deleteBtn = bar.querySelector('[data-action="delete"]');
+            const menu = document.getElementById('longPressMenu');
+            const items = document.getElementById('longPressItems');
+            items.innerHTML = '';
+            
+            // إيموجي التفاعل - مصغرة
+            reactionEmojis.forEach(emoji => {
+                const btn = document.createElement('button');
+                btn.className = 'menu-item';
+                btn.innerHTML = `<span class="reaction-emoji">${emoji}</span>`;
+                btn.onclick = (e) => {
+                    e.stopPropagation();
+                    toggleReaction(messageId, emoji);
+                    hideLongPressMenu();
+                };
+                items.appendChild(btn);
+            });
+            
+            // خيارات إضافية - مصغرة
+            const actions = [
+                { icon: '↩️', label: 'رد', action: () => startReply(messageId, messageText) },
+                { icon: '📋', label: 'نسخ', action: () => { copyText(messageText); hideLongPressMenu(); } },
+            ];
+            
             if (isSent || isAdmin) {
-                editBtn.style.display = 'flex';
-                deleteBtn.style.display = 'flex';
-            } else {
-                editBtn.style.display = 'none';
-                deleteBtn.style.display = 'none';
+                actions.push(
+                    { icon: '✏️', label: 'تعديل', action: () => { editMessage(messageId); hideLongPressMenu(); } },
+                    { icon: '🗑️', label: 'حذف', action: () => { deleteMessage(messageId); hideLongPressMenu(); } }
+                );
             }
             
-            bar.style.display = 'block';
-            bar.classList.add('pop-enter');
-            setTimeout(() => bar.classList.remove('pop-enter'), 200);
+            actions.forEach(a => {
+                const btn = document.createElement('button');
+                btn.className = 'menu-item' + (a.label === 'حذف' ? ' danger' : '');
+                btn.innerHTML = `<span class="icon">${a.icon}</span><span class="label">${a.label}</span>`;
+                btn.onclick = (e) => {
+                    e.stopPropagation();
+                    a.action();
+                };
+                items.appendChild(btn);
+            });
+            
+            const rect = event ? event.target?.getBoundingClientRect() : null;
+            if (rect) {
+                menu.style.bottom = (window.innerHeight - rect.top + 10) + 'px';
+            } else {
+                menu.style.bottom = '80px';
+            }
+            
+            menu.style.display = 'block';
+            menu.classList.add('pop-enter');
+            setTimeout(() => menu.classList.remove('pop-enter'), 200);
         }
         
-        document.querySelectorAll('#actionBar .action-item').forEach(btn => {
-            btn.onclick = function() {
-                const action = this.dataset.action;
-                const messageId = actionTargetId;
-                if (!messageId) return;
-                
-                const wrapper = document.querySelector(`[data-id="${messageId}"]`);
-                const text = wrapper ? wrapper.dataset.text || '' : '';
-                const isSent = wrapper ? wrapper.dataset.sent === 'true' : false;
-                
-                switch(action) {
-                    case 'reply':
-                        startReply(messageId, text);
-                        break;
-                    case 'react':
-                        toggleReaction(messageId, '❤️');
-                        break;
-                    case 'copy':
-                        copyText(text);
-                        break;
-                    case 'edit':
-                        if (isSent || isAdmin) editMessage(messageId);
-                        break;
-                    case 'delete':
-                        if (isSent || isAdmin) deleteMessage(messageId);
-                        break;
-                }
-                document.getElementById('actionBar').style.display = 'none';
-                actionTargetId = null;
-            };
-        });
+        function hideLongPressMenu() {
+            document.getElementById('longPressMenu').style.display = 'none';
+            longPressTargetId = null;
+        }
         
         document.addEventListener('click', (e) => {
-            const bar = document.getElementById('actionBar');
-            if (bar.style.display === 'block' && !bar.contains(e.target)) {
-                bar.style.display = 'none';
-                actionTargetId = null;
+            const menu = document.getElementById('longPressMenu');
+            if (menu.style.display === 'block' && !menu.contains(e.target)) {
+                hideLongPressMenu();
             }
         });
         
         // ============================================================
-        // 8. المتغيرات العامة
+        // 10. المتغيرات العامة
         // ============================================================
         let currentUser = '';
         let isAdmin = false;
@@ -2331,7 +2498,7 @@
         let allMessages = [];
         
         // ============================================================
-        // 9. العناصر
+        // 11. العناصر
         // ============================================================
         const loginScreen = document.getElementById('loginScreen');
         const chatScreen = document.getElementById('chatScreen');
@@ -2371,7 +2538,7 @@
         const badWordInput = document.getElementById('badWordInput');
         const addBadWordBtn = document.getElementById('addBadWordBtn');
         const badWordsList = document.getElementById('badWordsList');
-        const actionBar = document.getElementById('actionBar');
+        const longPressMenu = document.getElementById('longPressMenu');
         
         const avatarModal = document.getElementById('avatarModal');
         const avatarPreview = document.getElementById('avatarPreview');
@@ -2396,7 +2563,7 @@
         };
         
         // ============================================================
-        // 10. اختيار اللون
+        // 12. اختيار اللون
         // ============================================================
         function selectColor(color) {
             selectedColor = color;
@@ -2414,7 +2581,7 @@
         if (savedColor) { selectColor(savedColor); }
         
         // ============================================================
-        // 11. الثيم
+        // 13. الثيم
         // ============================================================
         function toggleTheme() {
             document.body.classList.toggle('theme-dark');
@@ -2431,7 +2598,7 @@
         themeToggleChat.onclick = toggleTheme;
         
         // ============================================================
-        // 12. دوال الصورة
+        // 14. دوال الصورة
         // ============================================================
         function generateAvatarUrl(username) {
             return `https://api.dicebear.com/7.x/avataaars/svg?seed=${username}`;
@@ -2442,7 +2609,7 @@
         }
         
         // ============================================================
-        // 13. مودال تعديل الصورة
+        // 15. مودال تعديل الصورة
         // ============================================================
         function openAvatarModal() {
             if (!currentUser) return;
@@ -2549,37 +2716,8 @@
         }
         
         // ============================================================
-        // 14. لوحة الإيموجي
+        // 16. لوحة الإيموجي
         // ============================================================
-        const emojisList = [
-            '😊', '😂', '❤️', '🔥', '👍', '👏', '🎉', '✨', '💪', '🤔',
-            '😍', '🥰', '😎', '🤩', '👀', '💀', '🙏', '😅', '🤗', '😇'
-        ];
-        
-        function initEmojiPanel() {
-            emojiPanel.innerHTML = '';
-            emojisList.forEach(emoji => {
-                const span = document.createElement('span');
-                span.className = 'emoji-item';
-                span.textContent = emoji;
-                span.onclick = () => {
-                    insertAtCursor(emoji);
-                    emojiPanel.style.display = 'none';
-                    emojiPanelOpen = false;
-                };
-                emojiPanel.appendChild(span);
-            });
-        }
-        
-        function insertAtCursor(text) {
-            const cursorPos = messageInput.selectionStart || 0;
-            const value = messageInput.value;
-            messageInput.value = value.slice(0, cursorPos) + text + value.slice(cursorPos);
-            messageInput.focus();
-            const newPos = cursorPos + text.length;
-            messageInput.setSelectionRange(newPos, newPos);
-        }
-        
         emojiBtn.onclick = function() {
             emojiPanelOpen = !emojiPanelOpen;
             stickerPanelOpen = false;
@@ -2588,8 +2726,20 @@
             if (emojiPanelOpen) { emojiPanel.scrollTop = 0; }
         };
         
+        function insertAtCursor(text) {
+            const cursorPos = messageInput.selectionStart || 0;
+            const value = messageInput.value;
+            const start = value.slice(0, cursorPos);
+            const end = value.slice(cursorPos);
+            messageInput.value = start + text + end;
+            messageInput.focus();
+            const newPos = cursorPos + text.length;
+            messageInput.setSelectionRange(newPos, newPos);
+            messageInput.dispatchEvent(new Event('input'));
+        }
+        
         // ============================================================
-        // 15. لوحة الستيكرات
+        // 17. لوحة الستيكرات
         // ============================================================
         stickerBtn.onclick = function() {
             stickerPanelOpen = !stickerPanelOpen;
@@ -2603,7 +2753,7 @@
         };
         
         // ============================================================
-        // 16. تسجيل الدخول
+        // 18. تسجيل الدخول
         // ============================================================
         loginBtn.onclick = async function() {
             const username = usernameInput.value.trim();
@@ -2691,7 +2841,7 @@
         adminPasswordInput.onkeydown = (e) => { if (e.key === 'Enter') loginBtn.click(); };
         
         // ============================================================
-        // 17. الدخول إلى الدردشة
+        // 19. الدخول إلى الدردشة
         // ============================================================
         function enterChat(username) {
             loginScreen.style.display = 'none';
@@ -2705,7 +2855,7 @@
             listenMessages();
             listenUsers();
             listenTyping();
-            initEmojiPanel();
+            initFullEmojiPanel();
             
             loadStickersFromFirebase().then(() => {
                 renderStickerTabs();
@@ -2752,7 +2902,7 @@
         }
         
         // ============================================================
-        // 18. الصورة الشخصية
+        // 20. الصورة الشخصية
         // ============================================================
         function loadAvatar(username) {
             db.collection('users').doc(username).onSnapshot((doc) => {
@@ -2774,7 +2924,7 @@
         }
         
         // ============================================================
-        // 19. الكلمات الممنوعة
+        // 21. الكلمات الممنوعة
         // ============================================================
         async function loadBadWords() {
             try {
@@ -2821,7 +2971,7 @@
         badWordInput.onkeydown = (e) => { if (e.key === 'Enter') addBadWord(); };
         
         // ============================================================
-        // 20. نظام الحظر التلقائي
+        // 22. نظام الحظر التلقائي
         // ============================================================
         async function checkBadWords(text, username) {
             const lowerText = text.toLowerCase();
@@ -2863,15 +3013,25 @@
         }
         
         // ============================================================
-        // 21. إرسال الرسائل مع ضغط ذكي
+        // 23. إرسال الرسائل
         // ============================================================
         sendBtn.onclick = sendMessage;
-        messageInput.onkeydown = (e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                sendMessage();
+        
+        messageInput.onkeydown = function(e) {
+            if (e.key === 'Enter') {
+                if (e.shiftKey) {
+                    return;
+                } else {
+                    e.preventDefault();
+                    sendMessage();
+                }
             }
         };
+        
+        messageInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+        });
         
         async function sendMessage() {
             const text = messageInput.value.trim();
@@ -2884,6 +3044,7 @@
             
             if (await checkBadWords(text, currentUser)) {
                 messageInput.value = '';
+                messageInput.style.height = 'auto';
                 showNotification('⛔ تم حظرك مؤقتاً');
                 return;
             }
@@ -2891,6 +3052,7 @@
             if (text === '/clear' && isAdmin) {
                 if (confirm('⚠️ هل تريد حذف جميع الرسائل؟')) { await clearAllMessages(); }
                 messageInput.value = '';
+                messageInput.style.height = 'auto';
                 return;
             }
             
@@ -2917,6 +3079,7 @@
                 
                 await db.collection('messages').add(msgData);
                 messageInput.value = '';
+                messageInput.style.height = 'auto';
                 replyingTo = null;
                 replyingToText = '';
                 replyBar.style.display = 'none';
@@ -2937,7 +3100,7 @@
         }
         
         // ============================================================
-        // 22. استماع الرسائل
+        // 24. استماع الرسائل
         // ============================================================
         function listenMessages() {
             if (messagesListener) { messagesListener(); messagesListener = null; }
@@ -2976,7 +3139,7 @@
                     updateStats();
                     setTimeout(setupSwipeToReply, 50);
                     
-                    if (!isSearching) {
+                    if (!searchActive) {
                         const isAtBottom = messagesContainer.scrollHeight - messagesContainer.scrollTop <= messagesContainer.clientHeight + 50;
                         if (!isAtBottom && messageCount > 0) {
                             unreadCount++;
@@ -3055,9 +3218,14 @@
                 
                 let stickerHtml = '';
                 if (data.sticker && data.stickerData) {
-                    stickerHtml = `<span class="sticker"><img src="${data.stickerData}" style="width:60px;height:60px;object-fit:contain;" /></span>`;
+                    stickerHtml = `<span class="sticker"><img src="${data.stickerData}" /></span>`;
                 } else if (data.sticker) {
                     stickerHtml = `<span class="sticker">${data.text}</span>`;
+                }
+                
+                let imageHtml = '';
+                if (data.image && data.imageData) {
+                    imageHtml = `<img src="${data.imageData}" class="message-image" onclick="viewImage('${data.imageData}')" />`;
                 }
                 
                 const decompressedText = AICore.decompressText(data.text);
@@ -3077,7 +3245,7 @@
                             </div>
                             <div class="content">
                                 <span class="sender-name" onclick="showProfile('${sender}')">${sender}${adminBadge}</span>
-                                ${stickerHtml || `<div class="text">${decompressedText}${editedMark}</div>`}
+                                ${stickerHtml || imageHtml || `<div class="text">${decompressedText}${editedMark}</div>`}
                                 <div class="time">
                                     ${time}
                                     ${isSent ? '<span class="check">✓✓</span>' : ''}
@@ -3093,12 +3261,25 @@
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
         
+        window.viewImage = function(imageData) {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0,0,0,0.85); z-index: 1000;
+                display: flex; align-items: center; justify-content: center;
+                cursor: pointer; animation: fadeIn 0.2s ease;
+            `;
+            modal.innerHTML = `<img src="${imageData}" style="max-width:90%;max-height:90%;border-radius:12px;object-fit:contain;" />`;
+            modal.onclick = () => modal.remove();
+            document.body.appendChild(modal);
+        };
+        
         // ============================================================
-        // 23. الضغط المطول
+        // 25. الضغط المطول
         // ============================================================
         function handleLongPress(e, messageId, messageText, isSent) {
             e.preventDefault();
-            showActionBar(messageId, isSent);
+            showLongPressMenu(messageId, messageText, isSent, e);
         }
         
         let touchTimerLong = null;
@@ -3107,7 +3288,7 @@
         function handleTouchStart(event, messageId, messageText, isSent) {
             touchTargetLong = { id: messageId, text: messageText, sent: isSent };
             touchTimerLong = setTimeout(() => {
-                showActionBar(messageId, isSent);
+                showLongPressMenu(messageId, messageText, isSent, event);
                 touchTargetLong = null;
             }, 500);
         }
@@ -3118,9 +3299,15 @@
         }
         
         // ============================================================
-        // 24. السحب للرد
+        // 26. السحب للرد
         // ============================================================
+        let swipeTarget = null;
+        let swipeStartX = 0;
+        
         function setupSwipeToReply() {
+            messagesContainer.removeEventListener('touchstart', handleSwipeStart);
+            messagesContainer.removeEventListener('touchmove', handleSwipeMove);
+            messagesContainer.removeEventListener('touchend', handleSwipeEnd);
             messagesContainer.addEventListener('touchstart', handleSwipeStart, { passive: true });
             messagesContainer.addEventListener('touchmove', handleSwipeMove, { passive: true });
             messagesContainer.addEventListener('touchend', handleSwipeEnd, { passive: true });
@@ -3168,7 +3355,7 @@
         }
         
         // ============================================================
-        // 25. وظائف إضافية
+        // 27. وظائف إضافية
         // ============================================================
         function copyText(text) {
             navigator.clipboard.writeText(text).then(() => {
@@ -3185,9 +3372,10 @@
         }
         
         // ============================================================
-        // 26. الرد على الرسالة
+        // 28. الرد على الرسالة
         // ============================================================
         function startReply(messageId, messageText) {
+            hideLongPressMenu();
             replyingTo = messageId;
             replyingToText = messageText;
             replyBar.style.display = 'flex';
@@ -3202,7 +3390,7 @@
         };
         
         // ============================================================
-        // 27. التفاعلات
+        // 29. التفاعلات
         // ============================================================
         window.toggleReaction = async function(messageId, emoji) {
             if (!currentUser) return;
@@ -3221,7 +3409,7 @@
         };
         
         // ============================================================
-        // 28. تعديل الرسالة
+        // 30. تعديل الرسالة
         // ============================================================
         window.editMessage = function(messageId) {
             if (!currentUser) return;
@@ -3275,7 +3463,7 @@
         };
         
         // ============================================================
-        // 29. حذف الرسالة
+        // 31. حذف الرسالة
         // ============================================================
         window.deleteMessage = async function(id) {
             if (settings.confirmDelete && !isAdmin && !confirm('حذف الرسالة؟')) return;
@@ -3289,7 +3477,7 @@
         };
         
         // ============================================================
-        // 30. استماع المستخدمين
+        // 32. استماع المستخدمين
         // ============================================================
         function listenUsers() {
             db.collection('users').onSnapshot((snapshot) => {
@@ -3371,7 +3559,7 @@
         }
         
         // ============================================================
-        // 31. استماع الكتابة
+        // 33. استماع الكتابة
         // ============================================================
         function listenTyping() {
             db.collection('typing').doc('status').onSnapshot((doc) => {
@@ -3411,7 +3599,7 @@
         };
         
         // ============================================================
-        // 32. تحميل عدد مرات الحظر
+        // 34. تحميل عدد مرات الحظر
         // ============================================================
         async function loadBanCounts() {
             try {
@@ -3423,7 +3611,7 @@
         }
         
         // ============================================================
-        // 33. لوحة المسؤول
+        // 35. لوحة المسؤول
         // ============================================================
         adminShieldBtn.onclick = function() {
             if (isAdmin) {
@@ -3533,7 +3721,7 @@
         };
         
         // ============================================================
-        // 34. تبديل الإعدادات
+        // 36. تبديل الإعدادات
         // ============================================================
         function toggleSwitch(id) {
             const el = document.getElementById(id + 'Switch');
@@ -3544,7 +3732,7 @@
         }
         
         // ============================================================
-        // 35. إشعارات
+        // 37. إشعارات
         // ============================================================
         function showNotification(message) {
             const existing = document.querySelector('.temp-notification');
@@ -3561,7 +3749,7 @@
         }
         
         // ============================================================
-        // 36. خروج
+        // 38. خروج
         // ============================================================
         logoutBtn.onclick = function() {
             if (confirm('تسجيل الخروج؟')) {
@@ -3578,15 +3766,19 @@
         };
         
         // ============================================================
-        // 37. بداية التطبيق
+        // 39. بداية التطبيق
         // ============================================================
         console.log('📸 نيزك إنستا - Instagram Clone');
         console.log('👤 المسؤول: slx23m | كلمة: 1442');
         console.log('📌 اسحب الرسالة لليمين للرد');
-        console.log('📌 اضغط مطولاً لفتح شريط التفاعل');
+        console.log('📌 اضغط مطولاً لفتح قائمة الإيموجي والخيارات المصغرة');
         console.log('📌 اضغط على الصورة لعرض الملف الشخصي');
         console.log('📌 🔍 بحث فوق الكيبورد');
         console.log('📌 🤖 خوارزميات ذكاء اصطناعي للضغط');
+        console.log('📌 🖼️ إدراج صور بتقنية Base64');
+        console.log('📌 📦 الستيكرات مشتركة بين جميع المستخدمين');
+        console.log('📌 ⌨️ Shift+Enter = سطر جديد, Enter = إرسال');
+        console.log('📌 🎨 لوحة إيموجي كاملة مع 👽 كائن فضائي');
         
         const savedUser = localStorage.getItem('lastUser');
         if (savedUser) {
