@@ -1,1 +1,18 @@
-
+{
+  "name": "nazik-instagram",
+  "version": "2.0.0",
+  "description": "تطبيق نيزك إنستا - دردشة إنستا كاملة مع PWA",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "build": "echo 'بناء التطبيق...'",
+    "test": "echo 'اختبار التطبيق...'"
+  },
+  "keywords": ["chat", "instagram", "pwa", "firebase"],
+  "author": "نيزك إنستا",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/nazik-instagram"
+  }
+}
