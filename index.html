@@ -4097,5 +4097,76 @@
         
         console.log('✅ التطبيق جاهز للاستخدام مع تحسينات السرعة!');
     </script>
+    <!-- ============================================================
+     دعم PWA المتقدم
+     ============================================================ -->
+<script>
+// تسجيل Service Worker يدوياً للتأكد من التحديثات التلقائية
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js', {
+      scope: '/',
+      updateViaCache: 'none'
+    })
+    .then(registration => {
+      console.log('[PWA] Service Worker مسجل بنجاح');
+      
+      // التحقق من التحديثات كل 30 ثانية
+      setInterval(() => {
+        registration.update();
+      }, 30000);
+      
+      // عند وجود تحديث
+      registration.addEventListener('updatefound', () => {
+        const newWorker = registration.installing;
+        console.log('[PWA] تم العثور على تحديث جديد');
+        
+        newWorker.addEventListener('statechange', () => {
+          if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+            console.log('[PWA] تم تثبيت التحديث، جاهز للتفعيل');
+            // إظهار زر التحديث
+            const updateBtn = document.getElementById('updateAppBtn');
+            if (updateBtn) {
+              updateBtn.style.display = 'block';
+              updateBtn.innerHTML = '🔄 تحديث التطبيق';
+              updateBtn.onclick = () => {
+                newWorker.postMessage({ type: 'SKIP_WAITING' });
+                window.location.reload();
+              };
+            }
+          }
+        });
+      });
+    })
+    .catch(error => {
+      console.error('[PWA] فشل تسجيل Service Worker:', error);
+    });
+  });
+}
+
+// التحقق من التحديثات عند العودة إلى التطبيق
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden && 'serviceWorker' in navigator) {
+    navigator.serviceWorker.ready.then(registration => {
+      registration.update();
+    });
+  }
+});
+
+// تحميل مدير التحديثات
+if (typeof UpdateManager !== 'undefined') {
+  window.updateManager = new UpdateManager();
+}
+
+// تحميل مدير الإعدادات
+if (typeof AppSettings !== 'undefined') {
+  window.appSettings = new AppSettings();
+}
+
+console.log('🌠 نيزك إنستا - التطبيق جاهز مع دعم PWA متقدم');
+console.log('📱 نسخة التطبيق: 2.0.0');
+console.log('🔄 التحديثات التلقائية مفعلة');
+console.log('📲 للتثبيت: اضغط على زر التثبيت في المتصفح');
+</script>
 </body>
     </html>
