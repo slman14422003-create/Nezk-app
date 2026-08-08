@@ -1,15 +1,17 @@
 {
-  "name": "نيزك إنستا",
-  "short_name": "نيزك",
-  "description": "تطبيق دردشة إنستا كامل مع مميزات متقدمة",
-  "start_url": "index.html",
+  "name": "نيزك إنستا - دردشة فورية",
+  "short_name": "نيزك إنستا",
+  "description": "تطبيق دردشة فورية ومشاركة صور وملفات",
+  "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#111b21",
   "theme_color": "#405DE6",
-  "dir": "rtl",
+  "prefer_related_applications": false,
+  "categories": ["social", "communication", "messaging"],
   "lang": "ar",
-  "categories": ["social", "communication", "chat"],
+  "dir": "rtl",
+  "scope": "/",
   "icons": [
     {
       "src": "icons/icon-72x72.png",
@@ -60,10 +62,43 @@
       "purpose": "any maskable"
     }
   ],
-  "screenshots": [],
-  "shortcuts": [],
+  "screenshots": [
+    {
+      "src": "screenshots/screenshot1.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "label": "شاشة الدردشة الرئيسية"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "بدء محادثة جديدة",
+      "short_name": "محادثة جديدة",
+      "description": "ابدأ محادثة جديدة",
+      "url": "/?new-chat=true",
+      "icons": [
+        {
+          "src": "icons/icon-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "المستخدمين المتصلين",
+      "short_name": "متصلين",
+      "description": "عرض المستخدمين المتصلين",
+      "url": "/?online-users=true",
+      "icons": [
+        {
+          "src": "icons/icon-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
   "related_applications": [],
-  "prefer_related_applications": false,
-  "scope": "/",
-  "id": "/"
+  "splash_pages": null,
+  "display_override": ["window-controls-overlay", "standalone"]
 }
