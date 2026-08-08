@@ -1,426 +1,556 @@
 // ============================================================
-// نظام تثبيت PWA متطور لنيزك إنستا
+// PWA Install - نيزك إنستا
+// إدارة تثبيت التطبيق
 // ============================================================
 
-class PWAInstaller {
-    constructor() {
-        this.deferredPrompt = null;
-        this.isInstalled = false;
-        this.installButton = null;
-        this.installBanner = null;
-        this.isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-        this.installAttempts = 0;
-        this.maxAttempts = 3;
-        this.init();
-    }
-
-    init() {
-        this.checkInstallation();
-        
-        // الاستماع لأحداث التثبيت
-        window.addEventListener('beforeinstallprompt', this.handleInstallPrompt.bind(this));
-        window.addEventListener('appinstalled', this.handleInstalled.bind(this));
-
-        // التحقق من Service Worker
-        this.checkServiceWorker();
-
-        if (this.isIOS) {
-            this.handleIOSInstall();
-        }
-
-        this.addInstallButton();
-        this.checkManifest();
-
-        console.log('📲 نظام تثبيت PWA جاهز');
-    }
-
-    // التحقق من Service Worker
-    async checkServiceWorker() {
-        if ('serviceWorker' in navigator) {
-            try {
-                const registration = await navigator.serviceWorker.ready;
-                console.log('✅ Service Worker جاهز:', registration);
-                return true;
-            } catch (error) {
-                console.warn('⚠️ Service Worker غير جاهز:', error);
-                return false;
-            }
-        }
-        return false;
-    }
-
-    // التحقق من المانيفست
-    checkManifest() {
-        const link = document.querySelector('link[rel="manifest"]');
-        if (link) {
-            console.log('✅ ملف manifest موجود:', link.href);
-        } else {
-            console.warn('⚠️ ملف manifest غير موجود');
-        }
-    }
-
+class PWAInstallManager {
+  constructor() {
+    this.isInstalled = false;
+    this.isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    this.isAndroid = /Android/.test(navigator.userAgent);
+    this.isPWA = window.matchMedia('(display-mode: standalone)').matches;
+    this.deferredPrompt = null;
+    this.installPromptShown = false;
+    
+    this.init();
+  }
+  
+  async init() {
+    console.log('[PWA Install] تهيئة مدير التثبيت...');
+    
     // التحقق من التثبيت
-    checkInstallation() {
-        if (window.matchMedia('(display-mode: standalone)').matches) {
-            this.isInstalled = true;
-            console.log('✅ التطبيق مثبت ومفتوح كـ PWA');
-            this.hideInstallBanner();
-        }
+    this.checkInstallation();
+    
+    // إعداد زر التثبيت
+    this.setupInstallButton();
+    
+    // إعداد التثبيت التلقائي
+    this.setupAutoInstall();
+    
+    // إعداد دليل التثبيت
+    this.setupInstallGuide();
+    
+    // إعداد التحديثات
+    this.setupUpdates();
+  }
+  
+  // ============================================================
+  // التحقق من التثبيت
+  // ============================================================
+  checkInstallation() {
+    // التحقق من وضع العرض
+    if (this.isPWA) {
+      this.isInstalled = true;
+      console.log('[PWA Install] التطبيق يعمل كـ PWA مثبت');
+      document.documentElement.classList.add('pwa-installed');
+      return;
     }
-
-    // معالجة حدث التثبيت
-    handleInstallPrompt(event) {
-        event.preventDefault();
-        this.deferredPrompt = event;
-        this.showInstallBanner();
-        console.log('📲 عرض زر التثبيت');
+    
+    // التحقق من التثبيت عبر localStorage
+    const installed = localStorage.getItem('pwa_installed');
+    if (installed === 'true') {
+      this.isInstalled = true;
+      console.log('[PWA Install] تم تثبيت التطبيق سابقاً');
     }
-
-    // عرض بنر التثبيت
-    showInstallBanner() {
-        if (this.installBanner) {
-            this.installBanner.style.display = 'flex';
+  }
+  
+  // ============================================================
+  // إعداد زر التثبيت
+  // ============================================================
+  setupInstallButton() {
+    const installBtn = document.getElementById('installAppBtn');
+    if (!installBtn) return;
+    
+    // إظهار الزر إذا لم يكن مثبتاً
+    if (!this.isInstalled && !this.isPWA) {
+      installBtn.style.display = 'flex';
+    }
+    
+    // حدث التثبيت
+    installBtn.addEventListener('click', async () => {
+      await this.installApp();
+    });
+    
+    // إضافة تأثيرات
+    installBtn.addEventListener('mouseenter', () => {
+      installBtn.style.transform = 'scale(1.05)';
+    });
+    
+    installBtn.addEventListener('mouseleave', () => {
+      installBtn.style.transform = 'scale(1)';
+    });
+  }
+  
+  // ============================================================
+  // تثبيت التطبيق
+  // ============================================================
+  async installApp() {
+    // للأندرويد - استخدام قبل تثبيت
+    if (this.deferredPrompt) {
+      try {
+        const result = await this.deferredPrompt.prompt();
+        console.log('[PWA Install] نتيجة التثبيت:', result.outcome);
+        
+        if (result.outcome === 'accepted') {
+          this.isInstalled = true;
+          localStorage.setItem('pwa_installed', 'true');
+          this.hideInstallButtons();
+          this.showToast('✅ تم تثبيت التطبيق بنجاح', 'success');
         } else {
-            this.createInstallBanner();
+          this.showToast('❌ تم إلغاء التثبيت', 'error');
         }
-    }
-
-    // إخفاء بنر التثبيت
-    hideInstallBanner() {
-        if (this.installBanner) {
-            this.installBanner.style.display = 'none';
-        }
-    }
-
-    // إنشاء بنر التثبيت
-    createInstallBanner() {
-        this.installBanner = document.createElement('div');
-        this.installBanner.id = 'installBanner';
-        this.installBanner.style.cssText = `
-            position: fixed;
-            bottom: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--bg-secondary, #fff);
-            color: var(--text-primary, #262626);
-            padding: 14px 20px;
-            border-radius: 16px;
-            z-index: 500;
-            box-shadow: 0 8px 40px rgba(0,0,0,0.2);
-            border: 1px solid var(--border-color, #ddd);
-            display: none;
-            align-items: center;
-            gap: 14px;
-            max-width: 92%;
-            animation: slideUp 0.3s ease;
-            backdrop-filter: blur(10px);
-            direction: rtl;
-        `;
-
-        this.installBanner.innerHTML = `
-            <div style="display:flex;align-items:center;gap:12px;flex:1;">
-                <div style="font-size:2rem;flex-shrink:0;">📲</div>
-                <div style="flex:1;min-width:0;">
-                    <div style="font-weight:700;font-size:0.9rem;">تثبيت نيزك إنستا</div>
-                    <div style="font-size:0.7rem;opacity:0.6;">احصل على تجربة تطبيق كاملة</div>
-                </div>
-            </div>
-            <div style="display:flex;gap:8px;flex-shrink:0;">
-                <button id="installAppBtn" style="
-                    padding: 8px 22px;
-                    border-radius: 20px;
-                    border: none;
-                    background: linear-gradient(135deg, #405DE6, #833AB4, #E1306C);
-                    color: #fff;
-                    font-weight: 700;
-                    font-size: 0.85rem;
-                    cursor: pointer;
-                    transition: 0.3s;
-                    white-space:nowrap;
-                ">تثبيت</button>
-                <button id="dismissInstallBtn" style="
-                    background: none;
-                    border: none;
-                    color: var(--text-secondary, #8e8e8e);
-                    font-size: 1.2rem;
-                    cursor: pointer;
-                    padding: 0 6px;
-                ">✕</button>
-            </div>
-        `;
-
-        document.body.appendChild(this.installBanner);
-
-        // زر التثبيت
-        document.getElementById('installAppBtn').onclick = () => {
-            this.installApp();
-        };
-
-        // زر الإغلاق
-        document.getElementById('dismissInstallBtn').onclick = () => {
-            this.hideInstallBanner();
-            // تذكر أن المستخدم ألغى التثبيت
-            try {
-                localStorage.setItem('pwa-dismissed', 'true');
-            } catch(e) {}
-        };
-
-        this.installBanner.style.display = 'flex';
-    }
-
-    // تثبيت التطبيق
-    async installApp() {
-        if (this.deferredPrompt) {
-            try {
-                this.deferredPrompt.prompt();
-                const result = await this.deferredPrompt.userChoice;
-                
-                if (result.outcome === 'accepted') {
-                    console.log('✅ تم تثبيت التطبيق بنجاح');
-                    this.isInstalled = true;
-                    this.hideInstallBanner();
-                    this.showNotification('✅ تم تثبيت نيزك إنستا بنجاح!');
-                } else {
-                    console.log('❌ المستخدم رفض التثبيت');
-                    this.installAttempts++;
-                    if (this.installAttempts >= this.maxAttempts) {
-                        this.hideInstallBanner();
-                    }
-                }
-                this.deferredPrompt = null;
-            } catch (error) {
-                console.error('❌ خطأ في التثبيت:', error);
-                // محاولة التثبيت عبر الطريقة البديلة
-                this.installAlternative();
-            }
-        } else {
-            // محاولة التثبيت عبر الطريقة البديلة
-            this.installAlternative();
-        }
-    }
-
-    // طريقة تثبيت بديلة
-    installAlternative() {
-        // محاولة فتح صفحة التثبيت
-        const manifestUrl = '/manifest.json';
-        const installUrl = window.location.href;
         
-        // عرض تعليمات التثبيت
-        this.showInstallInstructions();
+        this.deferredPrompt = null;
+        return;
+      } catch (error) {
+        console.error('[PWA Install] فشل التثبيت:', error);
+        this.showToast('❌ فشل تثبيت التطبيق', 'error');
+        return;
+      }
     }
-
-    // عرض تعليمات التثبيت
-    showInstallInstructions() {
-        const instructions = document.createElement('div');
-        instructions.id = 'installInstructions';
-        instructions.style.cssText = `
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--bg-secondary, #fff);
-            color: var(--text-primary, #262626);
-            padding: 30px;
-            border-radius: 20px;
-            z-index: 600;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            border: 1px solid var(--border-color, #ddd);
-            max-width: 400px;
-            width: 90%;
-            text-align: center;
-            animation: pop 0.3s ease;
-            direction: rtl;
-        `;
-
-        instructions.innerHTML = `
-            <div style="font-size:3rem;margin-bottom:10px;">📲</div>
-            <h3 style="font-size:1.2rem;margin-bottom:8px;">تثبيت نيزك إنستا</h3>
-            <p style="color:#8e8e8e;font-size:0.85rem;margin-bottom:15px;line-height:1.6;">
-                لتثبيت التطبيق على جهازك:
-            </p>
-            <div style="text-align:right;font-size:0.8rem;color:#555;margin-bottom:20px;line-height:2;">
-                <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-                    <span style="background:#405DE6;color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;">1</span>
-                    <span>اضغط على زر <strong>⋮</strong> في المتصفح</span>
-                </div>
-                <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-                    <span style="background:#833AB4;color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;">2</span>
-                    <span>اختر <strong>تثبيت التطبيق</strong> أو <strong>إضافة إلى الشاشة الرئيسية</strong></span>
-                </div>
-                <div style="display:flex;align-items:center;gap:8px;">
-                    <span style="background:#E1306C;color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;">3</span>
-                    <span>اضغط <strong>تثبيت</strong> لإكمال العملية</span>
-                </div>
-            </div>
-            <button style="
-                padding: 10px 30px;
-                border-radius: 20px;
-                border: none;
-                background: linear-gradient(135deg, #405DE6, #833AB4, #E1306C);
-                color: #fff;
-                font-weight: 700;
-                font-size: 0.9rem;
-                cursor: pointer;
-                transition: 0.3s;
-                width: 100%;
-            " onclick="this.parentElement.remove()">✅ فهمت</button>
-        `;
-
-        document.body.appendChild(instructions);
-        this.hideInstallBanner();
+    
+    // للأيفون - دليل التثبيت
+    if (this.isIOS) {
+      this.showIOSInstallGuide();
+      return;
     }
-
-    // معالجة التثبيت الناجح
-    handleInstalled(event) {
-        console.log('✅ تم تثبيت التطبيق:', event);
-        this.isInstalled = true;
-        this.hideInstallBanner();
-        this.showNotification('🎉 شكراً لتثبيت نيزك إنستا!');
+    
+    // للأندرويد - دليل التثبيت
+    if (this.isAndroid) {
+      this.showAndroidInstallGuide();
+      return;
     }
-
-    // التثبيت على iOS
-    handleIOSInstall() {
-        if (!navigator.standalone) {
-            setTimeout(() => {
-                this.showIOSInstructions();
-            }, 3000);
-        }
-    }
-
-    // عرض تعليمات iOS
-    showIOSInstructions() {
-        if (document.getElementById('iosInstructions')) return;
-        
-        const instructions = document.createElement('div');
-        instructions.id = 'iosInstructions';
-        instructions.style.cssText = `
-            position: fixed;
-            bottom: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--bg-secondary, #fff);
-            color: var(--text-primary, #262626);
-            padding: 14px 20px;
-            border-radius: 16px;
-            z-index: 500;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-            border: 1px solid var(--border-color, #ddd);
-            max-width: 90%;
-            animation: slideUp 0.3s ease;
-            text-align: center;
-            direction: rtl;
-        `;
-
-        instructions.innerHTML = `
-            <div style="font-size:2rem;margin-bottom:4px;">📱</div>
-            <div style="font-weight:700;font-size:0.9rem;">تثبيت التطبيق على iPhone</div>
-            <div style="font-size:0.7rem;opacity:0.6;margin:6px 0;line-height:1.6;">
-                اضغط على <span style="font-weight:700;background:#f0f0f0;padding:2px 8px;border-radius:4px;">⎙</span> 
-                ثم <span style="font-weight:700;color:#405DE6;">إضافة إلى الشاشة الرئيسية</span>
-            </div>
-            <button style="
-                margin-top:8px;
-                padding: 6px 20px;
-                border-radius: 16px;
-                border: none;
-                background: #405DE6;
-                color: #fff;
-                font-size: 0.75rem;
-                cursor: pointer;
-                font-weight:600;
-            " onclick="this.parentElement.remove()">فهمت</button>
-        `;
-
-        document.body.appendChild(instructions);
-    }
-
-    // إضافة زر التثبيت في واجهة المستخدم
-    addInstallButton() {
-        const actions = document.querySelector('.chat-header .actions');
-        if (actions && !this.isInstalled) {
-            const installBtn = document.createElement('button');
-            installBtn.id = 'installPwaBtn';
-            installBtn.title = 'تثبيت التطبيق';
-            installBtn.style.cssText = 'font-size:1.2rem;';
-            installBtn.textContent = '📲';
-            installBtn.onclick = () => {
-                if (this.deferredPrompt) {
-                    this.installApp();
-                } else if (this.isIOS) {
-                    this.showIOSInstructions();
-                } else {
-                    this.showInstallInstructions();
-                }
-            };
-            actions.appendChild(installBtn);
-            this.installButton = installBtn;
-        }
-    }
-
-    // عرض إشعار
-    showNotification(message) {
-        const existing = document.querySelector('.temp-notification');
-        if (existing) existing.remove();
-        
-        const div = document.createElement('div');
-        div.className = 'temp-notification';
-        div.textContent = message;
-        div.style.cssText = `
-            position: fixed;
-            bottom: 80px;
-            left: 50%;
-            transform: translateX(-50%) translateY(20px);
-            background: var(--bg-secondary, #fff);
-            color: var(--text-primary, #262626);
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            z-index: 999;
-            max-width: 90%;
-            text-align: center;
-            border: 1px solid var(--border-color, #ddd);
-            animation: notificationIn 0.2s ease forwards;
-            opacity: 0;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            direction: rtl;
-        `;
-        document.body.appendChild(div);
-        
+    
+    // للمتصفحات الأخرى
+    this.showInstallGuide();
+  }
+  
+  // ============================================================
+  // إعداد التثبيت التلقائي
+  // ============================================================
+  setupAutoInstall() {
+    // مراقبة حدث beforeinstallprompt
+    window.addEventListener('beforeinstallprompt', (event) => {
+      event.preventDefault();
+      this.deferredPrompt = event;
+      
+      // إظهار زر التثبيت
+      const installBtn = document.getElementById('installAppBtn');
+      if (installBtn && !this.isInstalled && !this.isPWA) {
+        installBtn.style.display = 'flex';
+        installBtn.classList.add('pulse-animation');
+      }
+      
+      console.log('[PWA Install] التطبيق جاهز للتثبيت');
+      
+      // إظهار تنبيه للتثبيت بعد 3 ثواني
+      if (!this.installPromptShown) {
+        this.installPromptShown = true;
         setTimeout(() => {
-            div.style.opacity = '1';
-            div.style.transform = 'translateX(-50%) translateY(0)';
-        }, 50);
-        
-        setTimeout(() => {
-            div.style.opacity = '0';
-            div.style.transform = 'translateX(-50%) translateY(20px)';
-            setTimeout(() => div.remove(), 300);
-        }, 3000);
+          if (!this.isInstalled && !this.isPWA) {
+            this.showInstallPrompt();
+          }
+        }, 5000);
+      }
+    });
+    
+    // مراقبة التثبيت
+    window.addEventListener('appinstalled', () => {
+      this.isInstalled = true;
+      localStorage.setItem('pwa_installed', 'true');
+      this.deferredPrompt = null;
+      this.hideInstallButtons();
+      
+      console.log('[PWA Install] تم تثبيت التطبيق');
+      this.showToast('✅ تم تثبيت التطبيق بنجاح', 'success');
+    });
+  }
+  
+  // ============================================================
+  // إظهار تنبيه التثبيت
+  // ============================================================
+  showInstallPrompt() {
+    if (document.querySelector('.install-banner')) return;
+    
+    const banner = document.createElement('div');
+    banner.className = 'install-banner';
+    banner.style.cssText = `
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg-secondary, #FFFFFF);
+      border: 1px solid var(--border-color, #DBDBDB);
+      border-radius: 16px;
+      padding: 16px 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 280px;
+      max-width: 90%;
+      animation: slideUp 0.3s ease;
+    `;
+    
+    banner.innerHTML = `
+      <span style="font-size: 2rem;">📲</span>
+      <div style="flex:1;">
+        <div style="font-weight:600;font-size:0.9rem;color:var(--text-primary, #262626);">تثبيت التطبيق</div>
+        <div style="font-size:0.7rem;color:var(--text-secondary, #8E8E8E);">أضف التطبيق إلى شاشتك الرئيسية</div>
+      </div>
+      <button id="installBannerBtn" style="
+        padding: 6px 16px;
+        border: none;
+        border-radius: 20px;
+        background: var(--color-accent, #405DE6);
+        color: #fff;
+        font-weight: 600;
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: 0.3s;
+      ">تثبيت</button>
+      <button id="installBannerClose" style="
+        background: none;
+        border: none;
+        color: var(--text-secondary, #8E8E8E);
+        font-size: 1.2rem;
+        cursor: pointer;
+        padding: 0 4px;
+      ">✕</button>
+    `;
+    
+    document.body.appendChild(banner);
+    
+    // زر التثبيت
+    document.getElementById('installBannerBtn').addEventListener('click', async () => {
+      await this.installApp();
+      banner.remove();
+    });
+    
+    // زر الإغلاق
+    document.getElementById('installBannerClose').addEventListener('click', () => {
+      banner.style.opacity = '0';
+      banner.style.transition = 'opacity 0.3s';
+      setTimeout(() => banner.remove(), 300);
+    });
+    
+    // إغلاق تلقائي بعد 15 ثانية
+    setTimeout(() => {
+      if (banner.parentElement) {
+        banner.style.opacity = '0';
+        banner.style.transition = 'opacity 0.3s';
+        setTimeout(() => banner.remove(), 300);
+      }
+    }, 15000);
+  }
+  
+  // ============================================================
+  // دليل التثبيت للأيفون
+  // ============================================================
+  showIOSInstallGuide() {
+    this.showGuideModal(`
+      <div style="text-align:center;padding:8px 0;">
+        <div style="font-size:3rem;margin-bottom:8px;">📱</div>
+        <h3 style="color:var(--text-primary, #262626);margin-bottom:12px;">تثبيت التطبيق على iOS</h3>
+        <div style="text-align:right;font-size:0.85rem;color:var(--text-secondary, #8E8E8E);line-height:1.6;">
+          <div style="display:flex;align-items:center;gap:8px;margin:6px 0;">
+            <span style="background:var(--color-accent, #405DE6);color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:0.7rem;flex-shrink:0;">1</span>
+            <span>اضغط على زر المشاركة <span style="font-size:1.2rem;">⎔</span></span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;margin:6px 0;">
+            <span style="background:var(--color-accent, #405DE6);color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:0.7rem;flex-shrink:0;">2</span>
+            <span>اختر "إضافة إلى الشاشة الرئيسية"</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;margin:6px 0;">
+            <span style="background:var(--color-accent, #405DE6);color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:0.7rem;flex-shrink:0;">3</span>
+            <span>اضغط على "إضافة" في الأعلى</span>
+          </div>
+        </div>
+        <button onclick="document.getElementById('installGuideModal').remove()" style="
+          margin-top:16px;
+          padding:8px 24px;
+          border:none;
+          border-radius:20px;
+          background:var(--color-accent, #405DE6);
+          color:#fff;
+          font-weight:600;
+          font-size:0.85rem;
+          cursor:pointer;
+          transition:0.3s;
+        ">فهمت ✅</button>
+      </div>
+    `);
+  }
+  
+  // ============================================================
+  // دليل التثبيت للأندرويد
+  // ============================================================
+  showAndroidInstallGuide() {
+    this.showGuideModal(`
+      <div style="text-align:center;padding:8px 0;">
+        <div style="font-size:3rem;margin-bottom:8px;">📱</div>
+        <h3 style="color:var(--text-primary, #262626);margin-bottom:12px;">تثبيت التطبيق على Android</h3>
+        <div style="text-align:right;font-size:0.85rem;color:var(--text-secondary, #8E8E8E);line-height:1.6;">
+          <div style="display:flex;align-items:center;gap:8px;margin:6px 0;">
+            <span style="background:var(--color-accent, #405DE6);color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:0.7rem;flex-shrink:0;">1</span>
+            <span>افتح القائمة <span style="font-size:1.2rem;">⋮</span> في المتصفح</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;margin:6px 0;">
+            <span style="background:var(--color-accent, #405DE6);color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:0.7rem;flex-shrink:0;">2</span>
+            <span>اختر "تثبيت التطبيق" أو "إضافة إلى الشاشة الرئيسية"</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;margin:6px 0;">
+            <span style="background:var(--color-accent, #405DE6);color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:0.7rem;flex-shrink:0;">3</span>
+            <span>اضغط على "تثبيت" للتأكيد</span>
+          </div>
+        </div>
+        <button onclick="document.getElementById('installGuideModal').remove()" style="
+          margin-top:16px;
+          padding:8px 24px;
+          border:none;
+          border-radius:20px;
+          background:var(--color-accent, #405DE6);
+          color:#fff;
+          font-weight:600;
+          font-size:0.85rem;
+          cursor:pointer;
+          transition:0.3s;
+        ">فهمت ✅</button>
+      </div>
+    `);
+  }
+  
+  // ============================================================
+  // دليل التثبيت العام
+  // ============================================================
+  showInstallGuide() {
+    this.showGuideModal(`
+      <div style="text-align:center;padding:8px 0;">
+        <div style="font-size:3rem;margin-bottom:8px;">📲</div>
+        <h3 style="color:var(--text-primary, #262626);margin-bottom:12px;">تثبيت التطبيق</h3>
+        <div style="text-align:right;font-size:0.85rem;color:var(--text-secondary, #8E8E8E);line-height:1.6;">
+          <div style="display:flex;align-items:center;gap:8px;margin:6px 0;">
+            <span style="background:var(--color-accent, #405DE6);color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:0.7rem;flex-shrink:0;">1</span>
+            <span>ابحث عن زر التثبيت في شريط العنوان</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;margin:6px 0;">
+            <span style="background:var(--color-accent, #405DE6);color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:0.7rem;flex-shrink:0;">2</span>
+            <span>اضغط على "تثبيت" أو "إضافة إلى الشاشة الرئيسية"</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;margin:6px 0;">
+            <span style="background:var(--color-accent, #405DE6);color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:0.7rem;flex-shrink:0;">3</span>
+            <span>اتبع التعليمات لإكمال التثبيت</span>
+          </div>
+        </div>
+        <button onclick="document.getElementById('installGuideModal').remove()" style="
+          margin-top:16px;
+          padding:8px 24px;
+          border:none;
+          border-radius:20px;
+          background:var(--color-accent, #405DE6);
+          color:#fff;
+          font-weight:600;
+          font-size:0.85rem;
+          cursor:pointer;
+          transition:0.3s;
+        ">فهمت ✅</button>
+      </div>
+    `);
+  }
+  
+  // ============================================================
+  // عرض مودال الدليل
+  // ============================================================
+  showGuideModal(content) {
+    const existing = document.getElementById('installGuideModal');
+    if (existing) existing.remove();
+    
+    const modal = document.createElement('div');
+    modal.id = 'installGuideModal';
+    modal.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(10px);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      animation: fadeIn 0.25s ease;
+    `;
+    
+    const box = document.createElement('div');
+    box.style.cssText = `
+      background: var(--bg-secondary, #FFFFFF);
+      border-radius: 20px;
+      padding: 24px;
+      max-width: 400px;
+      width: 100%;
+      max-height: 80vh;
+      overflow-y: auto;
+      animation: fadeSlideIn 0.25s ease;
+      border: 1px solid var(--border-color, #DBDBDB);
+    `;
+    box.innerHTML = content;
+    
+    modal.appendChild(box);
+    document.body.appendChild(modal);
+    
+    // إغلاق عند النقر خارج المحتوى
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.remove();
+      }
+    });
+  }
+  
+  // ============================================================
+  // إعداد دليل التثبيت
+  // ============================================================
+  setupInstallGuide() {
+    // إضافة زر دليل التثبيت
+    const guideBtn = document.createElement('button');
+    guideBtn.id = 'installGuideBtn';
+    guideBtn.innerHTML = '📲 تثبيت التطبيق';
+    guideBtn.style.cssText = `
+      position: fixed;
+      bottom: 140px;
+      left: 16px;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 10px;
+      background: var(--bg-secondary, #FFFFFF);
+      color: var(--text-primary, #262626);
+      font-size: 0.65rem;
+      font-weight: 500;
+      cursor: pointer;
+      z-index: 998;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: 0.3s;
+      font-family: inherit;
+      border: 1px solid var(--border-color, #DBDBDB);
+      display: none;
+    `;
+    guideBtn.onmouseover = () => guideBtn.style.transform = 'scale(1.04)';
+    guideBtn.onmouseout = () => guideBtn.style.transform = 'scale(1)';
+    guideBtn.onmousedown = () => guideBtn.style.transform = 'scale(0.95)';
+    guideBtn.onclick = () => this.showInstallGuide();
+    
+    document.body.appendChild(guideBtn);
+    
+    // إظهار الزر إذا لم يكن مثبتاً
+    if (!this.isInstalled && !this.isPWA) {
+      setTimeout(() => {
+        guideBtn.style.display = 'block';
+      }, 3000);
     }
+  }
+  
+  // ============================================================
+  // إعداد التحديثات
+  // ============================================================
+  setupUpdates() {
+    // التحقق من التحديثات كل 10 دقائق
+    setInterval(() => {
+      this.checkForUpdates();
+    }, 10 * 60 * 1000);
+    
+    // عند العودة إلى التطبيق
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) {
+        this.checkForUpdates();
+      }
+    });
+  }
+  
+  // ============================================================
+  // التحقق من التحديثات
+  // ============================================================
+  async checkForUpdates() {
+    try {
+      const registration = await navigator.serviceWorker.getRegistration();
+      if (registration) {
+        await registration.update();
+        console.log('[PWA Install] تم التحقق من التحديثات');
+      }
+    } catch (error) {
+      console.error('[PWA Install] فشل التحقق من التحديثات:', error);
+    }
+  }
+  
+  // ============================================================
+  // إخفاء أزرار التثبيت
+  // ============================================================
+  hideInstallButtons() {
+    const btns = ['installAppBtn', 'installGuideBtn'];
+    btns.forEach(id => {
+      const btn = document.getElementById(id);
+      if (btn) {
+        btn.style.display = 'none';
+      }
+    });
+    
+    // إخفاء البانر
+    const banner = document.querySelector('.install-banner');
+    if (banner) {
+      banner.style.opacity = '0';
+      banner.style.transition = 'opacity 0.3s';
+      setTimeout(() => banner.remove(), 300);
+    }
+  }
+  
+  // ============================================================
+  // عرض تنبيه
+  // ============================================================
+  showToast(message, type = 'info') {
+    const existing = document.querySelector('.pwa-toast');
+    if (existing) existing.remove();
+    
+    const toast = document.createElement('div');
+    toast.className = 'pwa-toast';
+    toast.style.cssText = `
+      position: fixed;
+      bottom: 140px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 20px;
+      border-radius: 12px;
+      background: ${type === 'success' ? '#25D366' : type === 'error' ? '#E1306C' : 'var(--bg-secondary, #FFFFFF)'};
+      color: ${type === 'success' || type === 'error' ? '#fff' : 'var(--text-primary, #262626)'};
+      font-size: 0.85rem;
+      font-weight: 500;
+      z-index: 10000;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      animation: slideUp 0.3s ease;
+      max-width: 90%;
+      text-align: center;
+      border: ${type === 'info' ? '1px solid var(--border-color, #DBDBDB)' : 'none'};
+    `;
+    toast.textContent = message;
+    
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transition = 'opacity 0.3s';
+      setTimeout(() => toast.remove(), 300);
+    }, 3000);
+  }
 }
 
 // ============================================================
-// تهيئة التثبيت
+// تصدير المدير
 // ============================================================
-let pwaInstaller = null;
+window.PWAInstallManager = PWAInstallManager;
 
+// إنشاء مدير التثبيت عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', () => {
-    // التحقق من عدم التثبيت سابقاً
-    const dismissed = localStorage.getItem('pwa-dismissed');
-    if (!dismissed || dismissed !== 'true') {
-        pwaInstaller = new PWAInstaller();
-    } else {
-        console.log('📲 المستخدم ألغى التثبيت سابقاً');
-    }
+  window.pwaInstall = new PWAInstallManager();
 });
 
-// إعادة المحاولة عند تغيير الشبكة
-window.addEventListener('online', () => {
-    if (pwaInstaller && !pwaInstaller.isInstalled) {
-        setTimeout(() => {
-            pwaInstaller.checkServiceWorker();
-        }, 1000);
-    }
-});
-
-console.log('📲 نظام تثبيت PWA متطور جاهز');
+console.log('[PWA Install] تم تحميل مدير التثبيت');
